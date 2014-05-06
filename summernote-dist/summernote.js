@@ -6,7 +6,7 @@
  * Copyright 2013 Alan Hong. and outher contributors
  * summernote may be freely distributed under the MIT license./
  *
- * Date: 2014-04-01T14:45Z
+ * Date: 2014-05-06T17:30Z
  */
 (function (factory) {
   /* global define */
@@ -55,7 +55,7 @@
    */
   var agent = {
     bMac: navigator.appVersion.indexOf('Mac') > -1,
-    bMSIE: navigator.userAgent.indexOf('MSIE') > -1,
+    bMSIE: navigator.userAgent.indexOf('MSIE') > -1 || navigator.userAgent.indexOf('Trident') > -1,
     bFF: navigator.userAgent.indexOf('Firefox') > -1,
     jqueryVersion: parseFloat($.fn.jquery),
     bCodeMirror: !!CodeMirror
@@ -93,13 +93,20 @@
       return a;
     };
 
+    var idCounter = 0;
+    var uniqueId = function (prefix) {
+      var id = ++idCounter + '';
+      return prefix ? prefix + id : id;
+    };
+
     return {
       eq: eq,
       eq2: eq2,
       ok: ok,
       fail: fail,
       not: not,
-      self: self
+      self: self,
+      uniqueId: uniqueId
     };
   })();
 
@@ -248,20 +255,40 @@
      * @return {Object}
      */
     var buildLayoutInfo = function ($editor) {
-      var makeFinder = function (sClassName) {
-        return function () { return $editor.find(sClassName); };
-      };
-      return {
-        editor: function () { return $editor; },
-        dropzone: makeFinder('.note-dropzone'),
-        toolbar: makeFinder('.note-toolbar'),
-        editable: makeFinder('.note-editable'),
-        codable: makeFinder('.note-codable'),
-        statusbar: makeFinder('.note-statusbar'),
-        popover: makeFinder('.note-popover'),
-        handle: makeFinder('.note-handle'),
-        dialog: makeFinder('.note-dialog')
-      };
+      var makeFinder;
+
+      // air mode
+      if ($editor.hasClass('note-air-editor')) {
+        var id = list.last($editor.attr('id').split('-'));
+        makeFinder = function (sIdPrefix) {
+          return function () { return $(sIdPrefix + id); };
+        };
+
+        return {
+          editor: function () { return $editor; },
+          editable: function () { return $editor; },
+          popover: makeFinder('#note-popover-'),
+          handle: makeFinder('#note-handle-'),
+          dialog: makeFinder('#note-dialog-')
+        };
+
+      // frame mode
+      } else {
+        makeFinder = function (sClassName) {
+          return function () { return $editor.find(sClassName); };
+        };
+        return {
+          editor: function () { return $editor; },
+          dropzone: makeFinder('.note-dropzone'),
+          toolbar: makeFinder('.note-toolbar'),
+          editable: makeFinder('.note-editable'),
+          codable: makeFinder('.note-codable'),
+          statusbar: makeFinder('.note-statusbar'),
+          popover: makeFinder('.note-popover'),
+          handle: makeFinder('.note-handle'),
+          dialog: makeFinder('.note-dialog')
+        };
+      }
     };
 
     /**
@@ -609,7 +636,7 @@
     version: '0.5.2',
 
     /**
-     * options for init
+     * options
      */
     options: {
       width: null,                  // set editor width
@@ -617,24 +644,27 @@
 
       focus: false,                 // set focus after initilize summernote
 
-      tabsize: null,                // size of tab ex) 2 or 4
-      styleWithSpan: true,          // style with span (Chrome and FF)
+      tabsize: 4,                   // size of tab ex) 2 or 4
+      styleWithSpan: true,          // style with span (Chrome and FF only)
 
       disableLinkTarget: false,     // hide link Target Checkbox
       disableDragAndDrop: false,    // disable drag and drop event
 
-      codemirror: null,             // codemirror options
+      codemirror: {                 // codemirror options
+        mode: 'text/html',
+        lineNumbers: true
+      },
 
       // language
       lang: 'en-US',                // language 'en-US', 'ko-KR', ...
       direction: null,              // text direction, ex) 'rtl'
 
-      // default toolbar
+      // toolbar
       toolbar: [
         ['style', ['style']],
         ['font', ['bold', 'italic', 'underline', 'clear']],
         ['fontname', ['fontname']],
-        // ['fontsize', ['fontsize']], Still buggy
+        // ['fontsize', ['fontsize']], // Still buggy
         ['color', ['color']],
         ['para', ['ul', 'ol', 'paragraph']],
         ['height', ['height']],
@@ -643,6 +673,59 @@
         ['view', ['fullscreen', 'codeview']],
         ['help', ['help']]
       ],
+
+      // air mode: inline editor
+      airMode: false,
+      // airPopover: [
+      //   ['style', ['style']],
+      //   ['font', ['bold', 'italic', 'underline', 'clear']],
+      //   ['fontname', ['fontname']],
+      //   ['fontsize', ['fontsize']], // Still buggy
+      //   ['color', ['color']],
+      //   ['para', ['ul', 'ol', 'paragraph']],
+      //   ['height', ['height']],
+      //   ['table', ['table']],
+      //   ['insert', ['link', 'picture', 'video']],
+      //   ['help', ['help']]
+      // ],
+      airPopover: [
+        ['color', ['color']],
+        ['font', ['bold', 'underline', 'clear']],
+        ['para', ['ul', 'paragraph']],
+        ['table', ['table']],
+        ['insert', ['link', 'picture']]
+      ],
+
+      // style tag
+      styleTags: ['p', 'blockquote', 'pre', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
+
+      // default fontName
+      defaultFontName: 'Arial',
+
+      // fontName
+      fontNames: [
+        'Serif', 'Sans', 'Arial', 'Arial Black', 'Courier',
+        'Courier New', 'Comic Sans MS', 'Helvetica', 'Impact', 'Lucida Grande',
+        'Lucida Sans', 'Tahoma', 'Times', 'Times New Roman', 'Verdana'
+      ],
+
+      // pallete colors(n x n)
+      colors: [
+        ['#000000', '#424242', '#636363', '#9C9C94', '#CEC6CE', '#EFEFEF', '#F7F7F7', '#FFFFFF'],
+        ['#FF0000', '#FF9C00', '#FFFF00', '#00FF00', '#00FFFF', '#0000FF', '#9C00FF', '#FF00FF'],
+        ['#F7C6CE', '#FFE7CE', '#FFEFC6', '#D6EFD6', '#CEDEE7', '#CEE7F7', '#D6D6E7', '#E7D6DE'],
+        ['#E79C9C', '#FFC69C', '#FFE79C', '#B5D6A5', '#A5C6CE', '#9CC6EF', '#B5A5D6', '#D6A5BD'],
+        ['#E76363', '#F7AD6B', '#FFD663', '#94BD7B', '#73A5AD', '#6BADDE', '#8C7BC6', '#C67BA5'],
+        ['#CE0000', '#E79439', '#EFC631', '#6BA54A', '#4A7B8C', '#3984C6', '#634AA5', '#A54A7B'],
+        ['#9C0000', '#B56308', '#BD9400', '#397B21', '#104A5A', '#085294', '#311873', '#731842'],
+        ['#630000', '#7B3900', '#846300', '#295218', '#083139', '#003163', '#21104A', '#4A1031']
+      ],
+
+      // fontSize
+      fontSizes: ['8', '9', '10', '11', '12', '14', '18', '24', '36'],
+
+      // lineHeight
+      lineHeights: ['1.0', '1.2', '1.4', '1.5', '1.6', '1.8', '2.0', '3.0'],
 
       // callbacks
       oninit: null,             // initialize
@@ -960,13 +1043,13 @@
       var properties = ['font-family', 'font-size', 'text-align', 'list-style-type', 'line-height'];
       var oStyle = jQueryCSS($cont, properties) || {};
 
-      oStyle['font-size'] = parseInt(oStyle['font-size']);
-      oStyle['font-strikethrough'] = document.queryCommandState('strikeThrough') ? 'strikethrough' : 'normal';
+      oStyle['font-size'] = parseInt(oStyle['font-size'], 10);
 
       // document.queryCommandState for toggle state
       oStyle['font-bold'] = document.queryCommandState('bold') ? 'bold' : 'normal';
       oStyle['font-italic'] = document.queryCommandState('italic') ? 'italic' : 'normal';
       oStyle['font-underline'] = document.queryCommandState('underline') ? 'underline' : 'normal';
+      oStyle['font-strikethrough'] = document.queryCommandState('strikeThrough') ? 'strikethrough' : 'normal';
 
       // list-style-type to list-style(unordered, ordered)
       if (!rng.isOnList()) {
@@ -981,13 +1064,14 @@
       if (elPara && elPara.style['line-height']) {
         oStyle['line-height'] = elPara.style.lineHeight;
       } else {
-        var lineHeight = parseInt(oStyle['line-height']) / parseInt(oStyle['font-size']);
+        var lineHeight = parseInt(oStyle['line-height'], 10) / parseInt(oStyle['font-size'], 10);
         oStyle['line-height'] = lineHeight.toFixed(1);
       }
 
       oStyle.image = dom.isImg(elTarget) && elTarget;
       oStyle.anchor = rng.isOnAnchor() && dom.ancestor(rng.sc, dom.isAnchor);
       oStyle.aAncestor = dom.listAncestor(rng.sc, dom.isEditable);
+      oStyle.range = rng;
 
       return oStyle;
     };
@@ -1189,12 +1273,24 @@
         return bW3CRangeSupport ? nativeRng.toString() : nativeRng.text;
       };
   
-      // bookmark: offsetPath bookmark
+      /**
+       * create offsetPath bookmark
+       * @param {Element} elEditable
+       */
       this.bookmark = function (elEditable) {
         return {
           s: { path: dom.makeOffsetPath(elEditable, sc), offset: so },
           e: { path: dom.makeOffsetPath(elEditable, ec), offset: eo }
         };
+      };
+
+      /**
+       * getClientRects
+       * @return {Rect[]}
+       */
+      this.getClientRects = function () {
+        var nativeRng = nativeRange();
+        return nativeRng.getClientRects();
       };
     };
   
@@ -1787,17 +1883,16 @@
   };
 
   /**
-   * Toolbar
+   * Button
    */
-  var Toolbar = function () {
+  var Button = function () {
     /**
      * update button status
      *
-     * @param {jQuery} $toolbar
+     * @param {jQuery} $container
      * @param {Object} oStyle
      */
-    this.update = function ($toolbar, oStyle) {
-
+    this.update = function ($container, oStyle) {
       /**
        * handle dropdown's check mark (for fontname, fontsize, lineHeight).
        * @param {jQuery} $btn
@@ -1818,12 +1913,12 @@
        * @param {Function} pred
        */
       var btnState = function (sSelector, pred) {
-        var $btn = $toolbar.find(sSelector);
+        var $btn = $container.find(sSelector);
         $btn.toggleClass('active', pred());
       };
 
       // fontname
-      var $fontname = $toolbar.find('.note-fontname');
+      var $fontname = $container.find('.note-fontname');
       if ($fontname.length > 0) {
         var selectedFont = oStyle['font-family'];
         if (!!selectedFont) {
@@ -1835,16 +1930,12 @@
       }
 
       // fontsize
-      var $fontsize = $toolbar.find('.note-fontsize');
+      var $fontsize = $container.find('.note-fontsize');
       $fontsize.find('.note-current-fontsize').text(oStyle['font-size']);
       checkDropdownMenu($fontsize, parseFloat(oStyle['font-size']));
 
-      btnState('button[data-event="strikethrough"]', function () {
-        return oStyle['font-strikethrough'] === 'strikethrough';
-      });
-
       // lineheight
-      var $lineHeight = $toolbar.find('.note-height');
+      var $lineHeight = $container.find('.note-height');
       checkDropdownMenu($lineHeight, parseFloat(oStyle['line-height']));
 
       btnState('button[data-event="bold"]', function () {
@@ -1855,6 +1946,9 @@
       });
       btnState('button[data-event="underline"]', function () {
         return oStyle['font-underline'] === 'underline';
+      });
+      btnState('button[data-event="strikethrough"]', function () {
+        return oStyle['font-strikethrough'] === 'strikethrough';
       });
       btnState('button[data-event="justifyLeft"]', function () {
         return oStyle['text-align'] === 'left' || oStyle['text-align'] === 'start';
@@ -1893,14 +1987,29 @@
       $recentColor.find('i').css(sKey, sValue);
     };
 
-    this.updateFullscreen = function ($toolbar, bFullscreen) {
-      var $btn = $toolbar.find('button[data-event="fullscreen"]');
+    this.updateFullscreen = function ($container, bFullscreen) {
+      var $btn = $container.find('button[data-event="fullscreen"]');
       $btn.toggleClass('active', bFullscreen);
     };
 
-    this.updateCodeview = function ($toolbar, bCodeview) {
-      var $btn = $toolbar.find('button[data-event="codeview"]');
+    this.updateCodeview = function ($container, bCodeview) {
+      var $btn = $container.find('button[data-event="codeview"]');
       $btn.toggleClass('active', bCodeview);
+    };
+  };
+
+  /**
+   * Toolbar
+   */
+  var Toolbar = function () {
+    var button = new Button();
+
+    this.update = function ($toolbar, oStyle) {
+      button.update($toolbar, oStyle);
+    };
+
+    this.updateRecentColor = function (elBtn, sEvent, sValue) {
+      button.updateRecentColor(elBtn, sEvent, sValue);
     };
 
     /**
@@ -1924,6 +2033,8 @@
    * Popover (http://getbootstrap.com/javascript/#popovers)
    */
   var Popover = function () {
+    var button = new Button();
+
     /**
      * show popover
      * @param {jQuery} popover
@@ -1931,7 +2042,10 @@
      */
     var showPopover = function ($popover, elPlaceholder) {
       var $placeholder = $(elPlaceholder);
-      var pos = $placeholder.position(), height = $placeholder.height();
+      var pos = $placeholder.position();
+
+      // include margin
+      var height = $placeholder.outerHeight(true);
 
       // display popover below placeholder.
       $popover.css({
@@ -1945,8 +2059,11 @@
      * update current state
      * @param {jQuery} $popover - popover container
      * @param {Object} oStyle - style object
+     * @param {Boolean} isAirMode
      */
-    this.update = function ($popover, oStyle) {
+    this.update = function ($popover, oStyle, isAirMode) {
+      button.update($popover, oStyle);
+
       var $linkPopover = $popover.find('.note-link-popover');
 
       if (oStyle.anchor) {
@@ -1963,6 +2080,25 @@
       } else {
         $imagePopover.hide();
       }
+
+      if (isAirMode) {
+        var $airPopover = $popover.find('.note-air-popover');
+        if (!oStyle.range.isCollapsed()) {
+          var $document = $(document);
+          var rect = list.last(oStyle.range.getClientRects());
+          $airPopover.css({
+            display: 'block',
+            left: Math.max($document.scrollLeft() + rect.left + rect.width / 2 - 20, 0),
+            top: $document.scrollTop() + rect.top + rect.height
+          });
+        } else {
+          $airPopover.hide();
+        }
+      }
+    };
+
+    this.updateRecentColor = function (elBtn, sEvent, sValue) {
+      button.updateRecentColor(elBtn, sEvent, sValue);
     };
 
     /**
@@ -1988,7 +2124,13 @@
       if (oStyle.image) {
         var $image = $(oStyle.image);
         var pos = $image.position();
-        var szImage = {w: $image.width(), h: $image.height()};
+
+        // include margin
+        var szImage = {
+          w: $image.outerWidth(true),
+          h: $image.outerHeight(true)
+        };
+
         $selection.css({
           display: 'block',
           left: pos.left,
@@ -2041,9 +2183,7 @@
             $imageUrl = $dialog.find('.note-image-url'),
             $imageBtn = $dialog.find('.note-image-btn');
 
-        $imageDialog.one('shown.bs.modal', function (event) {
-          event.stopPropagation();
-
+        $imageDialog.one('shown.bs.modal', function () {
           // Cloning imageInput to clear element.
           $imageInput.replaceWith($imageInput.clone()
             .on('change', function () {
@@ -2062,9 +2202,7 @@
           $imageUrl.keyup(function () {
             toggleBtn($imageBtn, $imageUrl.val());
           }).val('').focus();
-        }).one('hidden.bs.modal', function (event) {
-          event.stopPropagation();
-
+        }).one('hidden.bs.modal', function () {
           $editable.focus();
           $imageInput.off('change');
           $imageUrl.off('keyup');
@@ -2086,9 +2224,7 @@
         var $videoUrl = $videoDialog.find('.note-video-url'),
             $videoBtn = $videoDialog.find('.note-video-btn');
 
-        $videoDialog.one('shown.bs.modal', function (event) {
-          event.stopPropagation();
-
+        $videoDialog.one('shown.bs.modal', function () {
           $videoUrl.val(videoInfo.text).keyup(function () {
             toggleBtn($videoBtn, $videoUrl.val());
           }).trigger('keyup').trigger('focus');
@@ -2099,9 +2235,7 @@
             $videoDialog.modal('hide');
             deferred.resolve($videoUrl.val());
           });
-        }).one('hidden.bs.modal', function (event) {
-          event.stopPropagation();
-
+        }).one('hidden.bs.modal', function () {
           $editable.focus();
           $videoUrl.off('keyup');
           $videoBtn.off('click');
@@ -2125,9 +2259,7 @@
         $linkBtn = $linkDialog.find('.note-link-btn'),
         $openInNewWindow = $linkDialog.find('input[type=checkbox]');
 
-        $linkDialog.one('shown.bs.modal', function (event) {
-          event.stopPropagation();
-
+        $linkDialog.one('shown.bs.modal', function () {
           $linkText.val(linkInfo.text);
 
           $linkUrl.keyup(function () {
@@ -2147,9 +2279,7 @@
             $linkDialog.modal('hide');
             deferred.resolve($linkUrl.val(), $openInNewWindow.is(':checked'));
           });
-        }).one('hidden.bs.modal', function (event) {
-          event.stopPropagation();
-
+        }).one('hidden.bs.modal', function () {
           $editable.focus();
           $linkUrl.off('keyup');
         }).modal('show');
@@ -2164,8 +2294,7 @@
     this.showHelpDialog = function ($editable, $dialog) {
       var $helpDialog = $dialog.find('.note-help-dialog');
 
-      $helpDialog.one('hidden.bs.modal', function (event) {
-        event.stopPropagation();
+      $helpDialog.one('hidden.bs.modal', function () {
         $editable.focus();
       }).modal('show');
     };
@@ -2175,6 +2304,8 @@
    * EventHandler
    */
   var EventHandler = function () {
+    var $document = $(document);
+
     var editor = new Editor();
     var toolbar = new Toolbar(), popover = new Popover();
     var handle = new Handle(), dialog = new Dialog();
@@ -2186,8 +2317,18 @@
      * @returns {Object}
      */
     var makeLayoutInfo = function (descendant) {
-      var $editor = $(descendant).closest('.note-editor');
-      return $editor.length > 0 && dom.buildLayoutInfo($editor);
+      var $target = $(descendant).closest('.note-editor, .note-air-editor, .note-air-layout');
+
+      if ($target.length === 0) { return null; }
+
+      var $editor;
+      if ($target.is('.note-editor, .note-air-editor')) {
+        $editor = $target;
+      } else {
+        $editor = $('#note-editor-' + list.last($target.attr('id').split('-')));
+      }
+
+      return dom.buildLayoutInfo($editor);
     };
 
     /**
@@ -2219,16 +2360,26 @@
 
     var hMousedown = function (event) {
       //preventDefault Selection for FF, IE8+
-      if (dom.isImg(event.target)) { event.preventDefault(); }
+      if (dom.isImg(event.target)) {
+        event.preventDefault();
+      }
     };
 
     var hToolbarAndPopoverUpdate = function (event) {
-      var oLayoutInfo = makeLayoutInfo(event.currentTarget || event.target);
-      var oStyle = editor.currentStyle(event.target);
-      if (!oStyle) { return; }
-      toolbar.update(oLayoutInfo.toolbar(), oStyle);
-      popover.update(oLayoutInfo.popover(), oStyle);
-      handle.update(oLayoutInfo.handle(), oStyle);
+      // delay for range after mouseup
+      setTimeout(function () {
+        var oLayoutInfo = makeLayoutInfo(event.currentTarget || event.target);
+        var oStyle = editor.currentStyle(event.target);
+        if (!oStyle) { return; }
+
+        var isAirMode = oLayoutInfo.editor().data('options').airMode;
+        if (!isAirMode) {
+          toolbar.update(oLayoutInfo.toolbar(), oStyle);
+        }
+
+        popover.update(oLayoutInfo.popover(), oStyle, isAirMode);
+        handle.update(oLayoutInfo.handle(), oStyle);
+      }, 0);
     };
 
     var hScroll = function (event) {
@@ -2239,6 +2390,28 @@
     };
 
     /**
+     * paste clipboard image
+     *
+     * @param {Event} event
+     */
+    var hPasteClipboardImage = function (event) {
+      var originalEvent = event.originalEvent;
+      if (!originalEvent.clipboardData ||
+            !originalEvent.clipboardData.items ||
+            !originalEvent.clipboardData.items.length) {
+        return;
+      }
+
+      var oLayoutInfo = makeLayoutInfo(event.currentTarget || event.target);
+      var item = list.head(originalEvent.clipboardData.items);
+      var bClipboardImage = item.kind === 'file' && item.type.indexOf('image/') !== -1;
+
+      if (bClipboardImage) {
+        insertImages(oLayoutInfo.editable(), [item.getAsFile()]);
+      }
+    };
+
+    /**
      * `mousedown` event handler on $handle
      *  - controlSizing: resize image
      *
@@ -2246,17 +2419,18 @@
      */
     var hHandleMousedown = function (event) {
       if (dom.isControlSizing(event.target)) {
+        event.preventDefault();
+        event.stopPropagation();
+
         var oLayoutInfo = makeLayoutInfo(event.target),
             $handle = oLayoutInfo.handle(), $popover = oLayoutInfo.popover(),
-            $editable = oLayoutInfo.editable(), $editor = oLayoutInfo.editor();
+            $editable = oLayoutInfo.editable();
 
         var elTarget = $handle.find('.note-control-selection').data('target'),
-            $target = $(elTarget);
-        var posStart = $target.offset(),
-            scrollTop = $(document).scrollTop();
+            $target = $(elTarget), posStart = $target.offset(),
+            scrollTop = $document.scrollTop();
 
-        $editor.on('mousemove', function (event) {
-          
+        $document.on('mousemove', function (event) {
           editor.resizeTo({
             x: event.clientX - posStart.left,
             y: event.clientY - (posStart.top - scrollTop)
@@ -2265,7 +2439,7 @@
           handle.update($handle, {image: elTarget});
           popover.update($popover, {image: elTarget});
         }).one('mouseup', function () {
-          $editor.off('mousemove');
+          $document.off('mousemove');
         });
 
         if (!$target.data('ratio')) { // original ratio.
@@ -2273,41 +2447,136 @@
         }
 
         editor.recordUndo($editable);
-        event.stopPropagation();
-        event.preventDefault();
       }
     };
 
     var hToolbarAndPopoverMousedown = function (event) {
       // prevent default event when insertTable (FF, Webkit)
       var $btn = $(event.target).closest('[data-event]');
-      if ($btn.length > 0) { event.preventDefault(); }
+      if ($btn.length > 0) {
+        event.preventDefault();
+      }
+    };
+
+    var toggleFullscreen = function (oLayoutInfo) {
+      var $editor = oLayoutInfo.editor(),
+          $toolbar = oLayoutInfo.toolbar(),
+          $editable = oLayoutInfo.editable(),
+          $codable = oLayoutInfo.codable();
+
+      var options = $editor.data('options');
+
+      var $scrollbar = $('html, body');
+
+      var resize = function (size) {
+        $editor.css('width', size.w);
+        $editable.css('height', size.h);
+        $codable.css('height', size.h);
+        if ($codable.data('cmEditor')) {
+          $codable.data('cmEditor').setSize(null, size.h);
+        }
+      };
+
+      $editor.toggleClass('fullscreen');
+      var isFullscreen = $editor.hasClass('fullscreen');
+      if (isFullscreen) {
+        $editable.data('orgHeight', $editable.css('height'));
+
+        $(window).on('resize', function () {
+          resize({
+            w: $(window).width(),
+            h: $(window).height() - $toolbar.outerHeight()
+          });
+        }).trigger('resize');
+
+        $scrollbar.css('overflow', 'hidden');
+      } else {
+        $(window).off('resize');
+        resize({
+          w: options.width || '',
+          h: $editable.data('orgHeight')
+        });
+        $scrollbar.css('overflow', 'auto');
+      }
+
+      toolbar.updateFullscreen($toolbar, isFullscreen);
+    };
+
+    var toggleCodeView = function (oLayoutInfo) {
+      var $editor = oLayoutInfo.editor(),
+          $toolbar = oLayoutInfo.toolbar(),
+          $editable = oLayoutInfo.editable(),
+          $codable = oLayoutInfo.codable();
+
+      var options = $editor.data('options');
+
+      var cmEditor, server;
+
+      $editor.toggleClass('codeview');
+
+      var bCodeview = $editor.hasClass('codeview');
+      if (bCodeview) {
+        $codable.val($editable.html());
+        $codable.height($editable.height());
+        toolbar.deactivate($toolbar);
+        $codable.focus();
+
+        // activate CodeMirror as codable
+        if (agent.bCodeMirror) {
+          cmEditor = CodeMirror.fromTextArea($codable[0], options.codemirror);
+
+          // CodeMirror TernServer
+          if (options.codemirror.tern) {
+            server = new CodeMirror.TernServer(options.codemirror.tern);
+            cmEditor.ternServer = server;
+            cmEditor.on('cursorActivity', function (cm) {
+              server.updateArgHints(cm);
+            });
+          }
+
+          // CodeMirror hasn't Padding.
+          cmEditor.setSize(null, $editable.outerHeight());
+          // autoFormatRange If formatting included
+          if (cmEditor.autoFormatRange) {
+            cmEditor.autoFormatRange({line: 0, ch: 0}, {
+              line: cmEditor.lineCount(),
+              ch: cmEditor.getTextArea().value.length
+            });
+          }
+          $codable.data('cmEditor', cmEditor);
+        }
+      } else {
+        // deactivate CodeMirror as codable
+        if (agent.bCodeMirror) {
+          cmEditor = $codable.data('cmEditor');
+          $codable.val(cmEditor.getValue());
+          cmEditor.toTextArea();
+        }
+
+        $editable.html($codable.val() || dom.emptyPara);
+        $editable.height(options.height ? $codable.height() : 'auto');
+
+        toolbar.activate($toolbar);
+        $editable.focus();
+      }
+
+      toolbar.updateCodeview(oLayoutInfo.toolbar(), bCodeview);
     };
 
     var hToolbarAndPopoverClick = function (event) {
       var $btn = $(event.target).closest('[data-event]');
 
       if ($btn.length > 0) {
-        var sEvent = $btn.attr('data-event'),
-            sValue = $btn.attr('data-value');
+        var sEvent = $btn.attr('data-event'), sValue = $btn.attr('data-value');
 
         var oLayoutInfo = makeLayoutInfo(event.target);
-        var $editor = oLayoutInfo.editor(),
-            $toolbar = oLayoutInfo.toolbar(),
-            $dialog = oLayoutInfo.dialog(),
-            $editable = oLayoutInfo.editable(),
-            $codable = oLayoutInfo.codable();
-
-        var server;
-        var cmEditor;
-
-        var options = $editor.data('options');
+        var $dialog = oLayoutInfo.dialog(),
+            $editable = oLayoutInfo.editable();
 
         // before command: detect control selection element($target)
         var $target;
         if ($.inArray(sEvent, ['resize', 'floatMe', 'removeMedia']) !== -1) {
-          var $handle = oLayoutInfo.handle();
-          var $selection = $handle.find('.note-control-selection');
+          var $selection = oLayoutInfo.handle().find('.note-control-selection');
           $target = $($selection.data('target'));
         }
 
@@ -2318,7 +2587,9 @@
 
         // after command
         if ($.inArray(sEvent, ['backColor', 'foreColor']) !== -1) {
-          toolbar.updateRecentColor($btn[0], sEvent, sValue);
+          var options = oLayoutInfo.editor().data('options', options);
+          var module = options.airMode ? popover : toolbar;
+          module.updateRecentColor(list.head($btn), sEvent, sValue);
         } else if (sEvent === 'showLinkDialog') { // popover to dialog
           $editable.focus();
           var linkInfo = editor.getLinkInfo();
@@ -2351,91 +2622,9 @@
         } else if (sEvent === 'showHelpDialog') {
           dialog.showHelpDialog($editable, $dialog);
         } else if (sEvent === 'fullscreen') {
-          var $scrollbar = $('html, body');
-
-          var resize = function (size) {
-            $editor.css('width', size.w);
-            $editable.css('height', size.h);
-            $codable.css('height', size.h);
-            if ($codable.data('cmEditor')) {
-              $codable.data('cmEditor').setSize(null, size.h);
-            }
-          };
-
-          $editor.toggleClass('fullscreen');
-          var isFullscreen = $editor.hasClass('fullscreen');
-          if (isFullscreen) {
-            $editable.data('orgHeight', $editable.css('height'));
-
-            $(window).on('resize', function () {
-              resize({
-                w: $(window).width(),
-                h: $(window).height() - $toolbar.outerHeight()
-              });
-            }).trigger('resize');
-
-            $scrollbar.css('overflow', 'hidden');
-          } else {
-            $(window).off('resize');
-            resize({
-              w: options.width || '',
-              h: $editable.data('orgHeight')
-            });
-            $scrollbar.css('overflow', 'auto');
-          }
-          toolbar.updateFullscreen($toolbar, isFullscreen);
+          toggleFullscreen(oLayoutInfo);
         } else if (sEvent === 'codeview') {
-          $editor.toggleClass('codeview');
-
-          var bCodeview = $editor.hasClass('codeview');
-          if (bCodeview) {
-            $codable.val($editable.html());
-            $codable.height($editable.height());
-            toolbar.deactivate($toolbar);
-            $codable.focus();
-
-            // activate CodeMirror as codable
-            if (agent.bCodeMirror) {
-              cmEditor = CodeMirror.fromTextArea($codable[0], $.extend({
-                mode: 'text/html',
-                lineNumbers: true
-              }, options.codemirror));
-              var tern = $editor.data('options').codemirror.tern || false;
-              if (tern) {
-                server = new CodeMirror.TernServer(tern);
-                cmEditor.ternServer = server;
-                cmEditor.on('cursorActivity', function (cm) {
-                  server.updateArgHints(cm);
-                });
-              }
-
-              // CodeMirror hasn't Padding.
-              cmEditor.setSize(null, $editable.outerHeight());
-              // autoFormatRange If formatting included
-              if (cmEditor.autoFormatRange) {
-                cmEditor.autoFormatRange({line: 0, ch: 0}, {
-                  line: cmEditor.lineCount(),
-                  ch: cmEditor.getTextArea().value.length
-                });
-              }
-              $codable.data('cmEditor', cmEditor);
-            }
-          } else {
-            // deactivate CodeMirror as codable
-            if (agent.bCodeMirror) {
-              cmEditor = $codable.data('cmEditor');
-              $codable.val(cmEditor.getValue());
-              cmEditor.toTextArea();
-            }
-
-            $editable.html($codable.val() || dom.emptyPara);
-            $editable.height(options.height ? $codable.height() : 'auto');
-
-            toolbar.activate($toolbar);
-            $editable.focus();
-          }
-
-          toolbar.updateCodeview(oLayoutInfo.toolbar(), bCodeview);
+          toggleCodeView(oLayoutInfo);
         }
 
         hToolbarAndPopoverUpdate(event);
@@ -2449,7 +2638,9 @@
      * @param {MouseEvent} event
      */
     var hStatusbarMousedown = function (event) {
-      var $document = $(document);
+      event.preventDefault();
+      event.stopPropagation();
+
       var $editable = makeLayoutInfo(event.target).editable();
       var nEditableTop = $editable.offset().top - $document.scrollTop();
 
@@ -2459,9 +2650,6 @@
       }).one('mouseup', function () {
         $document.off('mousemove');
       });
-
-      event.stopPropagation();
-      event.preventDefault();
     };
 
     var PX_PER_EM = 18;
@@ -2516,7 +2704,7 @@
           $dropzoneMessage = oLayoutInfo.dropzone.find('.note-dropzone-message');
 
       // show dropzone on dragenter when dragging a object to document.
-      $(document).on('dragenter', function (e) {
+      $document.on('dragenter', function (e) {
         var bCodeview = oLayoutInfo.editor.hasClass('codeview');
         if (!bCodeview && collection.length === 0) {
           oLayoutInfo.editor.addClass('dragover');
@@ -2546,13 +2734,14 @@
 
       // attach dropImage
       $dropzone.on('drop', function (event) {
+        event.preventDefault();
+
         var dataTransfer = event.originalEvent.dataTransfer;
         if (dataTransfer && dataTransfer.files) {
           var oLayoutInfo = makeLayoutInfo(event.currentTarget || event.target);
           oLayoutInfo.editable().focus();
           insertImages(oLayoutInfo.editable(), dataTransfer.files);
         }
-        event.preventDefault();
       }).on('dragover', false); // prevent default dragover event
     };
 
@@ -2598,29 +2787,37 @@
      * @param {Function} options.enter - enter key handler
      */
     this.attach = function (oLayoutInfo, options) {
-      var keyMap = options.keyMap[agent.bMac ? 'mac' : 'pc'];
-      this.bindKeyMap(oLayoutInfo, keyMap);
-
+      // handlers for editable
+      this.bindKeyMap(oLayoutInfo, options.keyMap[agent.bMac ? 'mac' : 'pc']);
       oLayoutInfo.editable.on('mousedown', hMousedown);
       oLayoutInfo.editable.on('keyup mouseup', hToolbarAndPopoverUpdate);
       oLayoutInfo.editable.on('scroll', hScroll);
+      oLayoutInfo.editable.on('paste', hPasteClipboardImage);
 
-      // Doesn't attach `dragAndDrop` event when `options.disableDragAndDrop` is true
-      if (!options.disableDragAndDrop) {
-        attachDragAndDropEvent(oLayoutInfo);
+      // handler for handle and popover
+      oLayoutInfo.handle.on('mousedown', hHandleMousedown);
+      oLayoutInfo.popover.on('click', hToolbarAndPopoverClick);
+      oLayoutInfo.popover.on('mousedown', hToolbarAndPopoverMousedown);
+
+      // handlers for frame mode (toolbar, statusbar)
+      if (!options.airMode) {
+        // handler for drag and drop
+        if (!options.disableDragAndDrop) {
+          attachDragAndDropEvent(oLayoutInfo);
+        }
+
+        // handler for toolbar
+        oLayoutInfo.toolbar.on('click', hToolbarAndPopoverClick);
+        oLayoutInfo.toolbar.on('mousedown', hToolbarAndPopoverMousedown);
+
+        // handler for statusbar
+        oLayoutInfo.statusbar.on('mousedown', hStatusbarMousedown);
       }
 
-      oLayoutInfo.handle.on('mousedown', hHandleMousedown);
-
-      oLayoutInfo.toolbar.on('click', hToolbarAndPopoverClick);
-      oLayoutInfo.popover.on('click', hToolbarAndPopoverClick);
-      oLayoutInfo.toolbar.on('mousedown', hToolbarAndPopoverMousedown);
-      oLayoutInfo.popover.on('mousedown', hToolbarAndPopoverMousedown);
-      oLayoutInfo.statusbar.on('mousedown', hStatusbarMousedown);
-
-      //toolbar table dimension
-      var $toolbar = oLayoutInfo.toolbar;
-      var $catcher = $toolbar.find('.note-dimension-picker-mousecatcher');
+      // handler for table dimension
+      var $catcherContainer = options.airMode ? oLayoutInfo.popover :
+                                                oLayoutInfo.toolbar;
+      var $catcher = $catcherContainer.find('.note-dimension-picker-mousecatcher');
       $catcher.on('mousemove', hDimensionPickerMove);
 
       // save selection when focusout
@@ -2636,7 +2833,7 @@
         // protect FF Error: NS_ERROR_FAILURE: Failure
         setTimeout(function () {
           document.execCommand('styleWithCSS', 0, true);
-        });
+        }, 0);
       }
 
       // History
@@ -2649,18 +2846,31 @@
           if (event.keyCode === key.ENTER) { options.onenter(event); }
         });
       }
+
       if (options.onfocus) { oLayoutInfo.editable.focus(options.onfocus); }
       if (options.onblur) { oLayoutInfo.editable.blur(options.onblur); }
       if (options.onkeyup) { oLayoutInfo.editable.keyup(options.onkeyup); }
       if (options.onkeydown) { oLayoutInfo.editable.keydown(options.onkeydown); }
       if (options.onpaste) { oLayoutInfo.editable.on('paste', options.onpaste); }
-      if (options.onToolbarClick) { oLayoutInfo.toolbar.click(options.onToolbarClick); }
 
       // callbacks for advanced features (camel)
+      if (options.onToolbarClick) { oLayoutInfo.toolbar.click(options.onToolbarClick); }
+      if (options.onChange) {
+        var hChange = function () {
+          options.onChange(oLayoutInfo.editable, oLayoutInfo.editable.html());
+        };
+
+        if (agent.bMSIE) {
+          var sDomEvents = 'DOMCharacterDataModified, DOMSubtreeModified, DOMNodeInserted';
+          oLayoutInfo.editable.on(sDomEvents, hChange);
+        } else {
+          oLayoutInfo.editable.on('input', hChange);
+        }
+      }
+
       // All editor status will be saved on editable with jquery's data
       // for support multiple editor with singleton object.
       oLayoutInfo.editable.data('callbacks', {
-        onChange: options.onChange,
         onAutoSave: options.onAutoSave,
         onImageUpload: options.onImageUpload,
         onImageUploadError: options.onImageUploadError,
@@ -2671,9 +2881,16 @@
 
     this.dettach = function (oLayoutInfo) {
       oLayoutInfo.editable.off();
-      oLayoutInfo.toolbar.off();
-      oLayoutInfo.handle.off();
+
       oLayoutInfo.popover.off();
+      oLayoutInfo.handle.off();
+      oLayoutInfo.dialog.off();
+
+      if (oLayoutInfo.editor.data('options').airMode) {
+        oLayoutInfo.dropzone.off();
+        oLayoutInfo.toolbar.off();
+        oLayoutInfo.statusbar.off();
+      }
     };
   };
 
@@ -2683,193 +2900,424 @@
    * rendering toolbar and editable
    */
   var Renderer = function () {
-    var tplToolbarInfo, tplPopover, tplHandle, tplDialog, tplStatusbar;
 
-    /* jshint ignore:start */
-    tplToolbarInfo = {
+    /**
+     * bootstrap button template
+     *
+     * @param {String} sLabel
+     * @param {Object} [options]
+     * @param {String} [options.event]
+     * @param {String} [options.value]
+     * @param {String} [options.title]
+     * @param {String} [options.dropdown]
+     */
+    var tplButton = function (sLabel, options) {
+      var event = options.event;
+      var value = options.value;
+      var title = options.title;
+      var className = options.className;
+      var dropdown = options.dropdown;
+
+      return '<button type="button"' +
+                 ' class="btn btn-default btn-sm btn-small' +
+                   (className ? ' ' + className : '') +
+                   (dropdown ? ' dropdown-toggle' : '') +
+                 '"' +
+                 (dropdown ? ' data-toggle="dropdown"' : '') +
+                 (title ? ' title="' + title + '"' : '') +
+                 (event ? ' data-event="' + event + '"' : '') +
+                 (value ? ' data-value=\'' + value + '\'' : '') +
+                 ' tabindex="-1">' +
+               sLabel +
+               (dropdown ? ' <span class="caret"></span>' : '') +
+             '</button>' +
+             (dropdown || '');
+    };
+
+    /**
+     * bootstrap icon button template
+     *
+     * @param {String} sIconClass
+     * @param {Object} [options]
+     * @param {String} [options.event]
+     * @param {String} [options.value]
+     * @param {String} [options.title]
+     * @param {String} [options.dropdown]
+     */
+    var tplIconButton = function (sIconClass, options) {
+      var sLabel = '<i class="' + sIconClass + '"></i>';
+      return tplButton(sLabel, options);
+    };
+
+    /**
+     * bootstrap popover template
+     *
+     * @param {String} className
+     * @param {String} content
+     */
+    var tplPopover = function (className, content) {
+      return '<div class="' + className + ' popover bottom in" style="display: none;">' +
+               '<div class="arrow"></div>' +
+               '<div class="popover-content">' +
+                 content +
+               '</div>' +
+             '</div>';
+    };
+
+    /**
+     * bootstrap dialog template
+     *
+     * @param {String} className
+     * @param {String} [title]
+     * @param {String} body
+     * @param {String} [footer]
+     */
+    var tplDialog = function (className, title, body, footer) {
+      return '<div class="' + className + ' modal" aria-hidden="false">' +
+               '<div class="modal-dialog">' +
+                 '<div class="modal-content">' +
+                   (title ?
+                   '<div class="modal-header">' +
+                     '<button type="button" class="close" aria-hidden="true" tabindex="-1">&times;</button>' +
+                     '<h4>' + title + '</h4>' +
+                   '</div>' : ''
+                   ) +
+                   '<div class="modal-body">' +
+                     '<div class="row-fluid">' + body + '</div>' +
+                   '</div>' +
+                   (footer ?
+                   '<div class="modal-footer">' + footer + '</div>' : ''
+                   ) +
+                 '</div>' +
+               '</div>' +
+             '</div>';
+    };
+
+    var tplButtonInfo = {
       picture: function (lang) {
-        return '<button type="button" class="btn btn-default btn-sm btn-small" title="' + lang.image.image + '" data-event="showImageDialog" tabindex="-1"><i class="fa fa-picture-o icon-picture"></i></button>';
+        return tplIconButton('fa fa-picture-o icon-picture', {
+          event: 'showImageDialog',
+          title: lang.image.image
+        });
       },
       link: function (lang) {
-        return '<button type="button" class="btn btn-default btn-sm btn-small" title="' + lang.link.link + '" data-event="showLinkDialog" tabindex="-1"><i class="fa fa-link icon-link"></i></button>';
+        return tplIconButton('fa fa-link icon-link', {
+          event: 'showLinkDialog',
+          title: lang.link.link
+        });
       },
       video: function (lang) {
-        return '<button type="button" class="btn btn-default btn-sm btn-small" title="' + lang.video.video + '" data-event="showVideoDialog" tabindex="-1"><i class="fa fa-youtube-play icon-play"></i></button>';
+        return tplIconButton('fa fa-youtube-play icon-play', {
+          event: 'showVideoDialog',
+          title: lang.video.video
+        });
       },
       table: function (lang) {
-        return '<button type="button" class="btn btn-default btn-sm btn-small dropdown-toggle" title="' + lang.table.table + '" data-toggle="dropdown" tabindex="-1"><i class="fa fa-table icon-table"></i> <span class="caret"></span></button>' +
-                 '<ul class="dropdown-menu">' +
-                   '<div class="note-dimension-picker">' +
-                     '<div class="note-dimension-picker-mousecatcher" data-event="insertTable" data-value="1x1"></div>' +
-                     '<div class="note-dimension-picker-highlighted"></div>' +
-                     '<div class="note-dimension-picker-unhighlighted"></div>' +
-                   '</div>' +
-                   '<div class="note-dimension-display"> 1 x 1 </div>' +
-                 '</ul>';
+        var dropdown = '<ul class="dropdown-menu">' +
+                         '<div class="note-dimension-picker">' +
+                           '<div class="note-dimension-picker-mousecatcher" data-event="insertTable" data-value="1x1"></div>' +
+                           '<div class="note-dimension-picker-highlighted"></div>' +
+                           '<div class="note-dimension-picker-unhighlighted"></div>' +
+                         '</div>' +
+                         '<div class="note-dimension-display"> 1 x 1 </div>' +
+                       '</ul>';
+        return tplIconButton('fa fa-table icon-table', {
+          title: lang.table.table,
+          dropdown: dropdown
+        });
       },
-      style: function (lang) {
-        return '<button type="button" class="btn btn-default btn-sm btn-small dropdown-toggle" title="' + lang.style.style + '" data-toggle="dropdown" tabindex="-1"><i class="fa fa-magic icon-magic"></i> <span class="caret"></span></button>' +
-               '<ul class="dropdown-menu">' +
-                 '<li><a data-event="formatBlock" data-value="p">' + lang.style.normal + '</a></li>' +
-                 '<li><a data-event="formatBlock" data-value="blockquote"><blockquote>' + lang.style.blockquote + '</blockquote></a></li>' +
-                 '<li><a data-event="formatBlock" data-value="pre">' + lang.style.pre + '</a></li>' +
-                 '<li><a data-event="formatBlock" data-value="h1"><h1>' + lang.style.h1 + '</h1></a></li>' +
-                 '<li><a data-event="formatBlock" data-value="h2"><h2>' + lang.style.h2 + '</h2></a></li>' +
-                 '<li><a data-event="formatBlock" data-value="h3"><h3>' + lang.style.h3 + '</h3></a></li>' +
-                 '<li><a data-event="formatBlock" data-value="h4"><h4>' + lang.style.h4 + '</h4></a></li>' +
-                 '<li><a data-event="formatBlock" data-value="h5"><h5>' + lang.style.h5 + '</h5></a></li>' +
-                 '<li><a data-event="formatBlock" data-value="h6"><h6>' + lang.style.h6 + '</h6></a></li>' +
-               '</ul>';
-      },
-      fontname: function(lang) {
-        var aFont = [
-          'Serif', 'Sans', 'Arial', 'Arial Black', 'Courier',
-          'Courier New', 'Comic Sans MS', 'Helvetica', 'Impact', 'Lucida Grande',
-          'Lucida Sans', 'Tahoma', 'Times', 'Times New Roman', 'Verdana'
-        ];
+      style: function (lang, options) {
+        var items = options.styleTags.reduce(function (memo, v) {
+          var label = lang.style[v === 'p' ? 'normal' : v];
+          return memo + '<li><a data-event="formatBlock" data-value="' + v + '">' +
+                   (
+                     (v === 'p' || v === 'pre') ? label :
+                     '<' + v + '>' + label + '</' + v + '>'
+                   ) +
+                 '</a></li>';
+        }, '');
 
-        var sMarkup = '<button type="button" class="btn btn-default btn-sm btn-small dropdown-toggle" data-toggle="dropdown" title="' + lang.font.name + '" tabindex="-1"><span class="note-current-fontname">Arial</span> <b class="caret"></b></button>';
-        sMarkup += '<ul class="dropdown-menu">';
-        for (var idx = 0; idx < aFont.length; idx++ ) {
-          sMarkup += '<li><a data-event="fontName" data-value="' + aFont[idx] + '"><i class="fa fa-check icon-ok"></i> ' + aFont[idx] + '</a></li>';
-        }
-        sMarkup += '</ul>';
+        return tplIconButton('fa fa-magic icon-magic', {
+          title: lang.style.style,
+          dropdown: '<ul class="dropdown-menu">' + items + '</ul>'
+        });
+      },
+      fontname: function (lang, options) {
+        var items = options.fontNames.reduce(function (memo, v) {
+          return memo + '<li><a data-event="fontName" data-value="' + v + '">' +
+                          '<i class="fa fa-check icon-ok"></i> ' + v +
+                        '</a></li>';
+        }, '');
+        var sLabel = '<span class="note-current-fontname">' +
+                       options.defaultFontName +
+                     '</span>';
+        return tplButton(sLabel, {
+          title: lang.font.name,
+          dropdown: '<ul class="dropdown-menu">' + items + '</ul>'
+        });
+      },
+      fontsize: function (lang, options) {
+        var items = options.fontSizes.reduce(function (memo, v) {
+          return memo + '<li><a data-event="fontSize" data-value="' + v + '">' +
+                          '<i class="fa fa-check icon-ok"></i> ' + v +
+                        '</a></li>';
+        }, '');
 
-        return sMarkup;
+        var sLabel = '<span class="note-current-fontsize">11</span>';
+        return tplButton(sLabel, {
+          title: lang.font.size,
+          dropdown: '<ul class="dropdown-menu">' + items + '</ul>'
+        });
       },
-      fontsize: function (lang) {
-        return '<button type="button" class="btn btn-default btn-sm btn-small dropdown-toggle" data-toggle="dropdown" title="' + lang.font.size + '" tabindex="-1"><span class="note-current-fontsize">11</span> <b class="caret"></b></button>' +
-               '<ul class="dropdown-menu">' +
-                 '<li><a data-event="fontSize" data-value="8"><i class="fa fa-check icon-ok"></i> 8</a></li>' +
-                 '<li><a data-event="fontSize" data-value="9"><i class="fa fa-check icon-ok"></i> 9</a></li>' +
-                 '<li><a data-event="fontSize" data-value="10"><i class="fa fa-check icon-ok"></i> 10</a></li>' +
-                 '<li><a data-event="fontSize" data-value="11"><i class="fa fa-check icon-ok"></i> 11</a></li>' +
-                 '<li><a data-event="fontSize" data-value="12"><i class="fa fa-check icon-ok"></i> 12</a></li>' +
-                 '<li><a data-event="fontSize" data-value="14"><i class="fa fa-check icon-ok"></i> 14</a></li>' +
-                 '<li><a data-event="fontSize" data-value="18"><i class="fa fa-check icon-ok"></i> 18</a></li>' +
-                 '<li><a data-event="fontSize" data-value="24"><i class="fa fa-check icon-ok"></i> 24</a></li>' +
-                 '<li><a data-event="fontSize" data-value="36"><i class="fa fa-check icon-ok"></i> 36</a></li>' +
-               '</ul>';
-      },
+
       color: function (lang) {
-        return '<button type="button" class="btn btn-default btn-sm btn-small note-recent-color" title="' + lang.color.recent + '" data-event="color" data-value=\'{"backColor":"yellow"}\' tabindex="-1"><i class="fa fa-font icon-font" style="color:black;background-color:yellow;"></i></button>' +
-               '<button type="button" class="btn btn-default btn-sm btn-small dropdown-toggle" title="' + lang.color.more + '" data-toggle="dropdown" tabindex="-1">' +
-                 '<span class="caret"></span>' +
-               '</button>' +
-               '<ul class="dropdown-menu">' +
-                 '<li>' +
-                   '<div class="btn-group">' +
-                     '<div class="note-palette-title">' + lang.color.background + '</div>' +
-                     '<div class="note-color-reset" data-event="backColor" data-value="inherit" title="' + lang.color.transparent + '">' + lang.color.setTransparent + '</div>' +
-                     '<div class="note-color-palette" data-target-event="backColor"></div>' +
-                   '</div>' +
-                   '<div class="btn-group">' +
-                     '<div class="note-palette-title">' + lang.color.foreground + '</div>' +
-                     '<div class="note-color-reset" data-event="foreColor" data-value="inherit" title="' + lang.color.reset + '">' + lang.color.resetToDefault + '</div>' +
-                     '<div class="note-color-palette" data-target-event="foreColor"></div>' +
-                   '</div>' +
-                 '</li>' +
-               '</ul>';
+        var colorButtonLabel = '<i class="fa fa-font icon-font" style="color:black;background-color:yellow;"></i>';
+        var colorButton = tplButton(colorButtonLabel, {
+          className: 'note-recent-color',
+          title: lang.color.recent,
+          event: 'color',
+          value: '{"backColor":"yellow"}'
+        });
+
+        var dropdown = '<ul class="dropdown-menu">' +
+                         '<li>' +
+                           '<div class="btn-group">' +
+                             '<div class="note-palette-title">' + lang.color.background + '</div>' +
+                             '<div class="note-color-reset" data-event="backColor"' +
+                               ' data-value="inherit" title="' + lang.color.transparent + '">' +
+                               lang.color.setTransparent +
+                             '</div>' +
+                             '<div class="note-color-palette" data-target-event="backColor"></div>' +
+                           '</div>' +
+                           '<div class="btn-group">' +
+                             '<div class="note-palette-title">' + lang.color.foreground + '</div>' +
+                             '<div class="note-color-reset" data-event="foreColor" data-value="inherit" title="' + lang.color.reset + '">' +
+                               lang.color.resetToDefault +
+                             '</div>' +
+                             '<div class="note-color-palette" data-target-event="foreColor"></div>' +
+                           '</div>' +
+                         '</li>' +
+                       '</ul>';
+
+        var moreButton = tplButton('', {
+          title: lang.color.more,
+          dropdown: dropdown
+        });
+
+        return colorButton + moreButton;
       },
       bold: function (lang) {
-        return '<button type="button" class="btn btn-default btn-sm btn-small" title="' + lang.font.bold + '" data-shortcut="Ctrl+B" data-mac-shortcut="⌘+B" data-event="bold" tabindex="-1"><i class="fa fa-bold icon-bold"></i></button>';
+        return tplIconButton('fa fa-bold icon-bold', {
+          event: 'bold',
+          title: lang.font.bold
+        });
       },
       italic: function (lang) {
-        return '<button type="button" class="btn btn-default btn-sm btn-small" title="' + lang.font.italic + '" data-shortcut="Ctrl+I" data-mac-shortcut="⌘+I" data-event="italic" tabindex="-1"><i class="fa fa-italic icon-italic"></i></button>';
+        return tplIconButton('fa fa-italic icon-italic', {
+          event: 'italic',
+          title: lang.font.italic
+        });
       },
       underline: function (lang) {
-        return '<button type="button" class="btn btn-default btn-sm btn-small" title="' + lang.font.underline + '" data-shortcut="Ctrl+U" data-mac-shortcut="⌘+U" data-event="underline" tabindex="-1"><i class="fa fa-underline icon-underline"></i></button>';
-      },
-      clear: function (lang) {
-        return '<button type="button" class="btn btn-default btn-sm btn-small" title="' + lang.font.clear + '" data-shortcut="Ctrl+\\" data-mac-shortcut="⌘+\\" data-event="removeFormat" tabindex="-1"><i class="fa fa-eraser icon-eraser"></i></button>';
+        return tplIconButton('fa fa-underline icon-underline', {
+          event: 'underline',
+          title: lang.font.underline
+        });
       },
       strike: function (lang) {
-        return '<button type="button" class="btn btn-default btn-sm btn-small" title="' + lang.font.strike + '" data-event="strikethrough" tabindex="-1"><i class="fa fa-strikethrough icon-strikethrough"></i></button>';
+        return tplIconButton('fa fa-strikethrough icon-strikethrough', {
+          event: 'strikethrough',
+          title: lang.font.strike
+        });
+      },
+      clear: function (lang) {
+        return tplIconButton('fa fa-eraser icon-eraser', {
+          event: 'removeFormat',
+          title: lang.font.clear
+        });
       },
       ul: function (lang) {
-        return '<button type="button" class="btn btn-default btn-sm btn-small" title="' + lang.lists.unordered + '" data-shortcut="Ctrl+Shift+8" data-mac-shortcut="⌘+⇧+7" data-event="insertUnorderedList" tabindex="-1"><i class="fa fa-list-ul icon-list-ul"></i></button>';
+        return tplIconButton('fa fa-list-ul icon-list-ul', {
+          event: 'insertUnorderedList',
+          title: lang.lists.unordered
+        });
       },
       ol: function (lang) {
-        return '<button type="button" class="btn btn-default btn-sm btn-small" title="' + lang.lists.ordered + '" data-shortcut="Ctrl+Shift+7" data-mac-shortcut="⌘+⇧+8" data-event="insertOrderedList" tabindex="-1"><i class="fa fa-list-ol icon-list-ol"></i></button>';
+        return tplIconButton('fa fa-list-ol icon-list-ol', {
+          event: 'insertOrderedList',
+          title: lang.lists.ordered
+        });
       },
       paragraph: function (lang) {
-        return '<button type="button" class="btn btn-default btn-sm btn-small dropdown-toggle" title="' + lang.paragraph.paragraph + '" data-toggle="dropdown" tabindex="-1"><i class="fa fa-align-left icon-align-left"></i>  <span class="caret"></span></button>' +
-        '<div class="dropdown-menu">' +
-          '<div class="note-align btn-group">' +
-            '<button type="button" class="btn btn-default btn-sm btn-small" title="' + lang.paragraph.left + '" data-shortcut="Ctrl+Shift+L" data-mac-shortcut="⌘+⇧+L" data-event="justifyLeft" tabindex="-1"><i class="fa fa-align-left icon-align-left"></i></button>' +
-            '<button type="button" class="btn btn-default btn-sm btn-small" title="' + lang.paragraph.center + '" data-shortcut="Ctrl+Shift+E" data-mac-shortcut="⌘+⇧+E" data-event="justifyCenter" tabindex="-1"><i class="fa fa-align-center icon-align-center"></i></button>' +
-            '<button type="button" class="btn btn-default btn-sm btn-small" title="' + lang.paragraph.right + '" data-shortcut="Ctrl+Shift+R" data-mac-shortcut="⌘+⇧+R" data-event="justifyRight" tabindex="-1"><i class="fa fa-align-right icon-align-right"></i></button>' +
-            '<button type="button" class="btn btn-default btn-sm btn-small" title="' + lang.paragraph.justify + '" data-shortcut="Ctrl+Shift+J" data-mac-shortcut="⌘+⇧+J" data-event="justifyFull" tabindex="-1"><i class="fa fa-align-justify icon-align-justify"></i></button>' +
-          '</div>' +
-          '<div class="note-list btn-group">' +
-            '<button type="button" class="btn btn-default btn-sm btn-small" title="' + lang.paragraph.outdent + '" data-shortcut="Ctrl+[" data-mac-shortcut="⌘+[" data-event="outdent" tabindex="-1"><i class="fa fa-outdent icon-indent-left"></i></button>' +
-            '<button type="button" class="btn btn-default btn-sm btn-small" title="' + lang.paragraph.indent + '" data-shortcut="Ctrl+]" data-mac-shortcut="⌘+]" data-event="indent" tabindex="-1"><i class="fa fa-indent icon-indent-right"></i></button>' +
-          '</div>' +
-        '</div>';
+        var leftButton = tplIconButton('fa fa-align-left icon-align-left', {
+          title: lang.paragraph.left,
+          event: 'justifyLeft'
+        });
+        var centerButton = tplIconButton('fa fa-align-center icon-align-center', {
+          title: lang.paragraph.center,
+          event: 'justifyCenter'
+        });
+        var rightButton = tplIconButton('fa fa-align-right icon-align-right', {
+          title: lang.paragraph.right,
+          event: 'justifyRight'
+        });
+        var justifyButton = tplIconButton('fa fa-align-justify icon-align-justify', {
+          title: lang.paragraph.justify,
+          event: 'justifyFull'
+        });
+
+        var outdentButton = tplIconButton('fa fa-outdent icon-indent-left', {
+          title: lang.paragraph.outdent,
+          event: 'outdent'
+        });
+        var indentButton = tplIconButton('fa fa-indent icon-indent-right', {
+          title: lang.paragraph.indent,
+          event: 'indent'
+        });
+
+        var dropdown = '<div class="dropdown-menu">' +
+                         '<div class="note-align btn-group">' +
+                           leftButton + centerButton + rightButton + justifyButton +
+                         '</div>' +
+                         '<div class="note-list btn-group">' +
+                           indentButton + outdentButton +
+                         '</div>' +
+                       '</div>';
+
+        return tplIconButton('fa fa-align-left icon-align-left', {
+          title: lang.paragraph.paragraph,
+          dropdown: dropdown
+        });
       },
-      height: function (lang) {
-        return '<button type="button" class="btn btn-default btn-sm btn-small dropdown-toggle" data-toggle="dropdown" title="' + lang.font.height + '" tabindex="-1"><i class="fa fa-text-height icon-text-height"></i>&nbsp; <b class="caret"></b></button>' +
-        '<ul class="dropdown-menu">' +
-          '<li><a data-event="lineHeight" data-value="1.0"><i class="fa fa-check icon-ok"></i> 1.0</a></li>' +
-          '<li><a data-event="lineHeight" data-value="1.2"><i class="fa fa-check icon-ok"></i> 1.2</a></li>' +
-          '<li><a data-event="lineHeight" data-value="1.4"><i class="fa fa-check icon-ok"></i> 1.4</a></li>' +
-          '<li><a data-event="lineHeight" data-value="1.5"><i class="fa fa-check icon-ok"></i> 1.5</a></li>' +
-          '<li><a data-event="lineHeight" data-value="1.6"><i class="fa fa-check icon-ok"></i> 1.6</a></li>' +
-          '<li><a data-event="lineHeight" data-value="1.8"><i class="fa fa-check icon-ok"></i> 1.8</a></li>' +
-          '<li><a data-event="lineHeight" data-value="2.0"><i class="fa fa-check icon-ok"></i> 2.0</a></li>' +
-          '<li><a data-event="lineHeight" data-value="3.0"><i class="fa fa-check icon-ok"></i> 3.0</a></li>' +
-        '</ul>';
+      height: function (lang, options) {
+        var items = options.lineHeights.reduce(function (memo, v) {
+          return memo + '<li><a data-event="lineHeight" data-value="' + v + '">' +
+                          '<i class="fa fa-check icon-ok"></i> ' + v +
+                        '</a></li>';
+        }, '');
+
+        return tplIconButton('fa fa-text-height icon-text-height', {
+          title: lang.font.height,
+          dropdown: '<ul class="dropdown-menu">' + items + '</ul>'
+        });
+
       },
       help: function (lang) {
-        return '<button type="button" class="btn btn-default btn-sm btn-small" title="' + lang.options.help + '" data-event="showHelpDialog" tabindex="-1"><i class="fa fa-question icon-question"></i></button>';
+        return tplIconButton('fa fa-question icon-question', {
+          event: 'showHelpDialog',
+          title: lang.options.help
+        });
       },
       fullscreen: function (lang) {
-        return '<button type="button" class="btn btn-default btn-sm btn-small" title="' + lang.options.fullscreen + '" data-event="fullscreen" tabindex="-1"><i class="fa fa-arrows-alt icon-fullscreen"></i></button>';
+        return tplIconButton('fa fa-arrows-alt icon-fullscreen', {
+          event: 'fullscreen',
+          title: lang.options.fullscreen
+        });
       },
       codeview: function (lang) {
-        return '<button type="button" class="btn btn-default btn-sm btn-small" title="' + lang.options.codeview + '" data-event="codeview" tabindex="-1"><i class="fa fa-code icon-code"></i></button>';
+        return tplIconButton('fa fa-code icon-code', {
+          event: 'codeview',
+          title: lang.options.codeview
+        });
       },
       undo: function (lang) {
-        return '<button type="button" class="btn btn-default btn-sm btn-small" title="' + lang.history.undo + '" data-event="undo" tabindex="-1"><i class="fa fa-undo icon-undo"></i></button>';
+        return tplIconButton('fa fa-undo icon-undo', {
+          event: 'undo',
+          title: lang.history.undo
+        });
       },
       redo: function (lang) {
-        return '<button type="button" class="btn btn-default btn-sm btn-small" title="' + lang.history.redo + '" data-event="redo" tabindex="-1"><i class="fa fa-repeat icon-repeat"></i></button>';
+        return tplIconButton('fa fa-repeat icon-repeat', {
+          event: 'redo',
+          title: lang.history.redo
+        });
       }
     };
-    tplPopover = function (lang) {
+
+    var tplPopovers = function (lang, options) {
+      var tplLinkPopover = function () {
+        var linkButton = tplIconButton('fa fa-edit icon-edit', {
+          title: lang.link.edit,
+          event: 'showLinkDialog'
+        });
+        var unlinkButton = tplIconButton('fa fa-unlink icon-unlink', {
+          title: lang.link.unlink,
+          event: 'unlink'
+        });
+        var content = '<a href="http://www.google.com" target="_blank">www.google.com</a>&nbsp;&nbsp;' +
+                      '<div class="note-insert btn-group">' +
+                        linkButton + unlinkButton +
+                      '</div>';
+        return tplPopover('note-link-popover', content);
+      };
+
+      var tplImagePopover = function () {
+        var fullButton = tplButton('<span class="note-fontsize-10">100%</span>', {
+          title: lang.image.resizeFull,
+          event: 'resize',
+          value: '1'
+        });
+        var halfButton = tplButton('<span class="note-fontsize-10">50%</span>', {
+          title: lang.image.resizeHalf,
+          event: 'resize',
+          value: '0.5'
+        });
+        var quarterButton = tplButton('<span class="note-fontsize-10">25%</span>', {
+          title: lang.image.resizeQuarter,
+          event: 'resize',
+          value: '0.25'
+        });
+
+        var leftButton = tplIconButton('fa fa-align-left icon-align-left', {
+          title: lang.image.floatLeft,
+          event: 'floatMe',
+          value: 'left'
+        });
+        var rightButton = tplIconButton('fa fa-align-right icon-align-right', {
+          title: lang.image.floatRight,
+          event: 'floatMe',
+          value: 'right'
+        });
+        var justifyButton = tplIconButton('fa fa-align-justify icon-align-justify', {
+          title: lang.image.floatNone,
+          event: 'floatMe',
+          value: 'none'
+        });
+
+        var removeButton = tplIconButton('fa fa-trash-o icon-trash', {
+          title: lang.image.remove,
+          event: 'removeMedia',
+          value: 'none'
+        });
+
+        var content = '<div class="btn-group">' + fullButton + halfButton + quarterButton + '</div>' +
+                      '<div class="btn-group">' + leftButton + rightButton + justifyButton + '</div>' +
+                      '<div class="btn-group">' + removeButton + '</div>';
+        return tplPopover('note-image-popover', content);
+      };
+
+      var tplAirPopover = function () {
+        var content = '';
+        for (var idx = 0, sz = options.airPopover.length; idx < sz; idx ++) {
+          var group = options.airPopover[idx];
+          content += '<div class="note-' + group[0] + ' btn-group">';
+          for (var i = 0, szGroup = group[1].length; i < szGroup; i++) {
+            content += tplButtonInfo[group[1][i]](lang, options);
+          }
+          content += '</div>';
+        }
+
+        return tplPopover('note-air-popover', content);
+      };
+
       return '<div class="note-popover">' +
-                '<div class="note-link-popover popover bottom in" style="display: none;">' +
-                  '<div class="arrow"></div>' +
-                  '<div class="popover-content note-link-content">' +
-                    '<a href="http://www.google.com" target="_blank">www.google.com</a>&nbsp;&nbsp;' +
-                    '<div class="note-insert btn-group">' +
-                    '<button type="button" class="btn btn-default btn-sm btn-small" title="' + lang.link.edit + '" data-event="showLinkDialog" tabindex="-1"><i class="fa fa-edit icon-edit"></i></button>' +
-                    '<button type="button" class="btn btn-default btn-sm btn-small" title="' + lang.link.unlink + '" data-event="unlink" tabindex="-1"><i class="fa fa-unlink icon-unlink"></i></button>' +
-                    '</div>' +
-                  '</div>' +
-                '</div>' +
-                '<div class="note-image-popover popover bottom in" style="display: none;">' +
-                  '<div class="arrow"></div>' +
-                  '<div class="popover-content note-image-content">' +
-                    '<div class="btn-group">' +
-                      '<button type="button" class="btn btn-default btn-sm btn-small" title="' + lang.image.resizeFull + '" data-event="resize" data-value="1" tabindex="-1"><span class="note-fontsize-10">100%</span> </button>' +
-                      '<button type="button" class="btn btn-default btn-sm btn-small" title="' + lang.image.resizeHalf + '" data-event="resize" data-value="0.5" tabindex="-1"><span class="note-fontsize-10">50%</span> </button>' +
-                      '<button type="button" class="btn btn-default btn-sm btn-small" title="' + lang.image.resizeQuarter + '" data-event="resize" data-value="0.25" tabindex="-1"><span class="note-fontsize-10">25%</span> </button>' +
-                    '</div>' +
-                    '<div class="btn-group">' +
-                      '<button type="button" class="btn btn-default btn-sm btn-small" title="' + lang.image.floatLeft + '" data-event="floatMe" data-value="left" tabindex="-1"><i class="fa fa-align-left icon-align-left"></i></button>' +
-                      '<button type="button" class="btn btn-default btn-sm btn-small" title="' + lang.image.floatRight + '" data-event="floatMe" data-value="right" tabindex="-1"><i class="fa fa-align-right icon-align-right"></i></button>' +
-                      '<button type="button" class="btn btn-default btn-sm btn-small" title="' + lang.image.floatNone + '" data-event="floatMe" data-value="none" tabindex="-1"><i class="fa fa-align-justify icon-align-justify"></i></button>' +
-                    '</div>' +
-                    '<div class="btn-group">' +
-                      '<button type="button" class="btn btn-default btn-sm btn-small" title="' + lang.image.remove + '" data-event="removeMedia" data-value="none" tabindex="-1"><i class="fa fa-trash-o icon-trash"></i></button>' +
-                    '</div>' +
-                  '</div>' +
-                '</div>' +
-              '</div>';
+               tplLinkPopover() +
+               tplImagePopover() +
+               (options.airMode ?  tplAirPopover() : '') +
+             '</div>';
     };
 
-    var tplHandle = function () {
+    var tplHandles = function () {
       return '<div class="note-handle">' +
                '<div class="note-control-selection">' +
                  '<div class="note-control-selection-bg"></div>' +
@@ -2882,94 +3330,82 @@
              '</div>';
     };
 
-    var tplShortcutText = function (lang, options) {
+    /**
+     * shortcut table template
+     * @param {String} title
+     * @param {String} body
+     */
+    var tplShortcut = function (title, body) {
       return '<table class="note-shortcut">' +
                '<thead>' +
-                 '<tr><th></th><th>' + lang.shortcut.textFormatting + '</th></tr>' +
+                 '<tr><th></th><th>' + title + '</th></tr>' +
                '</thead>' +
-               '<tbody>' +
-                 '<tr><td>⌘ + B</td><td>' + lang.font.bold + '</td></tr>' +
+               '<tbody>' + body + '</tbody>' +
+             '</table>';
+    };
+
+    var tplShortcutText = function (lang) {
+      var body = '<tr><td>⌘ + B</td><td>' + lang.font.bold + '</td></tr>' +
                  '<tr><td>⌘ + I</td><td>' + lang.font.italic + '</td></tr>' +
                  '<tr><td>⌘ + U</td><td>' + lang.font.underline + '</td></tr>' +
                  '<tr><td>⌘ + ⇧ + S</td><td>' + lang.font.strike + '</td></tr>' +
-                 '<tr><td>⌘ + \\</td><td>' + lang.font.clear + '</td></tr>' +
-                 '</tr>' +
-               '</tbody>' +
-             '</table>';
+                 '<tr><td>⌘ + \\</td><td>' + lang.font.clear + '</td></tr>';
+
+      return tplShortcut(lang.shortcut.textFormatting, body);
     };
 
-    var tplShortcutAction = function (lang, options) {
-      return '<table class="note-shortcut">' +
-               '<thead>' +
-                 '<tr><th></th><th>' + lang.shortcut.action + '</th></tr>' +
-               '</thead>' +
-               '<tbody>' +
-                 '<tr><td>⌘ + Z</td><td>' + lang.history.undo + '</td></tr>' +
+    var tplShortcutAction = function (lang) {
+      var body = '<tr><td>⌘ + Z</td><td>' + lang.history.undo + '</td></tr>' +
                  '<tr><td>⌘ + ⇧ + Z</td><td>' + lang.history.redo + '</td></tr>' +
                  '<tr><td>⌘ + ]</td><td>' + lang.paragraph.indent + '</td></tr>' +
                  '<tr><td>⌘ + [</td><td>' + lang.paragraph.outdent + '</td></tr>' +
-                 '<tr><td>⌘ + ENTER</td><td>' + lang.hr.insert + '</td></tr>' +
-               '</tbody>' +
-             '</table>';
+                 '<tr><td>⌘ + ENTER</td><td>' + lang.hr.insert + '</td></tr>';
+
+      return tplShortcut(lang.shortcut.action, body);
     };
 
-    var tplExtraShortcuts = function(lang, options) {
-      var template =
-             '<table class="note-shortcut">' +
-               '<thead>' +
-                 '<tr><th></th><th>' + lang.shortcut.extraKeys + '</th></tr>' +
-               '</thead>' +
-               '<tbody>';
-      for (var key in options.extraKeys) {
-          if (!options.extraKeys.hasOwnProperty(key)) {
-              continue;
-          }
-          template += '<tr><td>' + key + '</td><td>' + options.extraKeys[key] + '</td></tr>';
-      }
-      template +='</tbody></table>';
-      return template;
+    var tplShortcutPara = function (lang) {
+      var body = '<tr><td>⌘ + ⇧ + L</td><td>' + lang.paragraph.left + '</td></tr>' +
+                 '<tr><td>⌘ + ⇧ + E</td><td>' + lang.paragraph.center + '</td></tr>' +
+                 '<tr><td>⌘ + ⇧ + R</td><td>' + lang.paragraph.right + '</td></tr>' +
+                 '<tr><td>⌘ + ⇧ + J</td><td>' + lang.paragraph.justify + '</td></tr>' +
+                 '<tr><td>⌘ + ⇧ + NUM7</td><td>' + lang.lists.ordered + '</td></tr>' +
+                 '<tr><td>⌘ + ⇧ + NUM8</td><td>' + lang.lists.unordered + '</td></tr>';
+
+      return tplShortcut(lang.shortcut.paragraphFormatting, body);
     };
 
-    var tplShortcutPara = function (lang, options) {
-      return '<table class="note-shortcut">' +
-                '<thead>' +
-                  '<tr><th></th><th>' + lang.shortcut.paragraphFormatting + '</th></tr>' +
-                '</thead>' +
-                '<tbody>' +
-                  '<tr><td>⌘ + ⇧ + L</td><td>' + lang.paragraph.left + '</td></tr>' +
-                  '<tr><td>⌘ + ⇧ + E</td><td>' + lang.paragraph.center + '</td></tr>' +
-                  '<tr><td>⌘ + ⇧ + R</td><td>' + lang.paragraph.right + '</td></tr>' +
-                  '<tr><td>⌘ + ⇧ + J</td><td>' + lang.paragraph.justify + '</td></tr>' +
-                  '<tr><td>⌘ + ⇧ + NUM7</td><td>' + lang.lists.ordered + '</td></tr>' +
-                  '<tr><td>⌘ + ⇧ + NUM8</td><td>' + lang.lists.unordered + '</td></tr>' +
-                '</tbody>' +
-              '</table>';
-    };
-
-    var tplShortcutStyle = function (lang, options) {
-      return '<table class="note-shortcut">' +
-               '<thead>' +
-                 '<tr><th></th><th>' + lang.shortcut.documentStyle + '</th></tr>' +
-               '</thead>' +
-               '<tbody>' +
-                 '<tr><td>⌘ + NUM0</td><td>' + lang.style.normal + '</td></tr>' +
+    var tplShortcutStyle = function (lang) {
+      var body = '<tr><td>⌘ + NUM0</td><td>' + lang.style.normal + '</td></tr>' +
                  '<tr><td>⌘ + NUM1</td><td>' + lang.style.h1 + '</td></tr>' +
                  '<tr><td>⌘ + NUM2</td><td>' + lang.style.h2 + '</td></tr>' +
                  '<tr><td>⌘ + NUM3</td><td>' + lang.style.h3 + '</td></tr>' +
                  '<tr><td>⌘ + NUM4</td><td>' + lang.style.h4 + '</td></tr>' +
                  '<tr><td>⌘ + NUM5</td><td>' + lang.style.h5 + '</td></tr>' +
-                 '<tr><td>⌘ + NUM6</td><td>' + lang.style.h6 + '</td></tr>' +
-               '</tbody>' +
-             '</table>';
+                 '<tr><td>⌘ + NUM6</td><td>' + lang.style.h6 + '</td></tr>';
+
+      return tplShortcut(lang.shortcut.documentStyle, body);
+    };
+
+    var tplExtraShortcuts = function (lang, options) {
+      var extraKeys = options.extraKeys;
+      var body = '';
+      for (var key in extraKeys) {
+        if (extraKeys.hasOwnProperty(key)) {
+          body += '<tr><td>' + key + '</td><td>' + extraKeys[key] + '</td></tr>';
+        }
+      }
+
+      return tplShortcut(lang.shortcut.extraKeys, body);
     };
 
     var tplShortcutTable = function (lang, options) {
       var template = '<table class="note-shortcut-layout">' +
-               '<tbody>' +
-                 '<tr><td>' + tplShortcutAction(lang, options) + '</td><td>' + tplShortcutText(lang, options) + '</td></tr>' +
-                 '<tr><td>' + tplShortcutStyle(lang, options) + '</td><td>' + tplShortcutPara(lang, options) + '</td></tr>';
+                       '<tbody>' +
+                         '<tr><td>' + tplShortcutAction(lang, options) + '</td><td>' + tplShortcutText(lang, options) + '</td></tr>' +
+                         '<tr><td>' + tplShortcutStyle(lang, options) + '</td><td>' + tplShortcutPara(lang, options) + '</td></tr>';
       if (options.extraKeys) {
-          template += '<tr><td colspan="2">' + tplExtraShortcuts(lang, options) + '</td></tr>';
+        template += '<tr><td colspan="2">' + tplExtraShortcuts(lang, options) + '</td></tr>';
       }
       template += '</tbody</table>';
       return template;
@@ -2979,104 +3415,55 @@
       return sHtml.replace(/⌘/g, 'Ctrl').replace(/⇧/g, 'Shift');
     };
 
-    tplDialog = function (lang, options) {
+    var tplDialogs = function (lang, options) {
       var tplImageDialog = function () {
-        return '<div class="note-image-dialog modal" aria-hidden="false">' +
-                 '<div class="modal-dialog">' +
-                   '<div class="modal-content">' +
-                     '<div class="modal-header">' +
-                       '<button type="button" class="close" aria-hidden="true" tabindex="-1">&times;</button>' +
-                       '<h4>' + lang.image.insert + '</h4>' +
-                     '</div>' +
-                     '<div class="modal-body">' +
-                       '<div class="row-fluid">' +
-                         '<h5>' + lang.image.selectFromFiles + '</h5>' +
-                         '<input class="note-image-input" type="file" name="files" accept="image/*" />' +
-                         '<h5>' + lang.image.url + '</h5>' +
-                         '<input class="note-image-url form-control span12" type="text" />' +
-                       '</div>' +
-                     '</div>' +
-                     '<div class="modal-footer">' +
-                       '<button href="#" class="btn btn-primary note-image-btn disabled" disabled="disabled">' + lang.image.insert + '</button>' +
-                     '</div>' +
-                   '</div>' +
-                 '</div>' +
-               '</div>';
+        var body = '<h5>' + lang.image.selectFromFiles + '</h5>' +
+                   '<input class="note-image-input" type="file" name="files" accept="image/*" />' +
+                   '<h5>' + lang.image.url + '</h5>' +
+                   '<input class="note-image-url form-control span12" type="text" />';
+        var footer = '<button href="#" class="btn btn-primary note-image-btn disabled" disabled>' + lang.image.insert + '</button>';
+        return tplDialog('note-image-dialog', lang.image.insert, body, footer);
       };
 
       var tplLinkDialog = function () {
-        return '<div class="note-link-dialog modal" aria-hidden="false">' +
-                 '<div class="modal-dialog">' +
-                   '<div class="modal-content">' +
-                     '<div class="modal-header">' +
-                       '<button type="button" class="close" aria-hidden="true" tabindex="-1">&times;</button>' +
-                       '<h4>' + lang.link.insert + '</h4>' +
-                     '</div>' +
-                     '<div class="modal-body">' +
-                       '<div class="row-fluid">' +
-                         '<div class="form-group">' +
-                           '<label>' + lang.link.textToDisplay + '</label>' +
-                           '<input class="note-link-text form-control span12" disabled type="text" />' +
-                         '</div>' +
-                         '<div class="form-group">' +
-                           '<label>' + lang.link.url + '</label>' +
-                           '<input class="note-link-url form-control span12" type="text" />' +
-                         '</div>' +
-                         (!options.disableLinkTarget ?
-                           '<div class="checkbox">' +
-                             '<label>' + '<input type="checkbox" checked> ' +
-                               lang.link.openInNewWindow +
-                             '</label>' +
-                           '</div>' : ''
-                         ) +
-                       '</div>' +
-                     '</div>' +
-                     '<div class="modal-footer">' +
-                       '<button href="#" class="btn btn-primary note-link-btn disabled" disabled="disabled">' + lang.link.insert + '</button>' +
-                     '</div>' +
+        var body = '<div class="form-group">' +
+                     '<label>' + lang.link.textToDisplay + '</label>' +
+                     '<input class="note-link-text form-control span12" type="text" disabled />' +
                    '</div>' +
-                 '</div>' +
-               '</div>';
+                   '<div class="form-group">' +
+                     '<label>' + lang.link.url + '</label>' +
+                     '<input class="note-link-url form-control span12" type="text" />' +
+                   '</div>' +
+                   (!options.disableLinkTarget ?
+                     '<div class="checkbox">' +
+                       '<label>' + '<input type="checkbox" checked> ' +
+                         lang.link.openInNewWindow +
+                       '</label>' +
+                     '</div>' : ''
+                   );
+        var footer = '<button href="#" class="btn btn-primary note-link-btn disabled" disabled>' + lang.link.insert + '</button>';
+        return tplDialog('note-link-dialog', lang.link.insert, body, footer);
       };
 
       var tplVideoDialog = function () {
-        return '<div class="note-video-dialog modal" aria-hidden="false">' +
-                 '<div class="modal-dialog">' +
-                   '<div class="modal-content">' +
-                     '<div class="modal-header">' +
-                       '<button type="button" class="close" aria-hidden="true" tabindex="-1">&times;</button>' +
-                       '<h4>' + lang.video.insert + '</h4>' +
-                     '</div>' +
-                     '<div class="modal-body">' +
-                       '<div class="row-fluid">' +
-
-                       '<div class="form-group">' +
-                         '<label>' + lang.video.url + '</label>&nbsp;<small class="text-muted">' + lang.video.providers + '</small>' +
-                         '<input class="note-video-url form-control span12" type="text" />' +
-                       '</div>' +
-                       '</div>' +
-                     '</div>' +
-                     '<div class="modal-footer">' +
-                       '<button href="#" class="btn btn-primary note-video-btn disabled" disabled="disabled">' + lang.video.insert + '</button>' +
-                     '</div>' +
-                   '</div>' +
-                 '</div>' +
-               '</div>';
+        var body = '<div class="form-group">' +
+                     '<label>' + lang.video.url + '</label>&nbsp;<small class="text-muted">' + lang.video.providers + '</small>' +
+                     '<input class="note-video-url form-control span12" type="text" />' +
+                   '</div>';
+        var footer = '<button href="#" class="btn btn-primary note-video-btn disabled" disabled>' + lang.video.insert + '</button>';
+        return tplDialog('note-video-dialog', lang.video.insert, body, footer);
       };
 
       var tplHelpDialog = function () {
-        return '<div class="note-help-dialog modal" aria-hidden="false">' +
-                 '<div class="modal-dialog">' +
-                   '<div class="modal-content">' +
-                     '<div class="modal-body">' +
-                       '<a class="modal-close pull-right" aria-hidden="true" tabindex="-1">' + lang.shortcut.close + '</a>' +
-                       '<div class="title">' + lang.shortcut.shortcuts + '</div>' +
-                       (agent.bMac ? tplShortcutTable(lang, options) : replaceMacKeys(tplShortcutTable(lang, options))) +
-                       '<p class="text-center"><a href="//hackerwins.github.io/summernote/" target="_blank">Summernote 0.5.2</a> · <a href="//github.com/HackerWins/summernote" target="_blank">Project</a> · <a href="//github.com/HackerWins/summernote/issues" target="_blank">Issues</a></p>' +
-                     '</div>' +
-                   '</div>' +
-                 '</div>' +
-               '</div>';
+        var body = '<a class="modal-close pull-right" aria-hidden="true" tabindex="-1">' + lang.shortcut.close + '</a>' +
+                   '<div class="title">' + lang.shortcut.shortcuts + '</div>' +
+                   (agent.bMac ? tplShortcutTable(lang, options) : replaceMacKeys(tplShortcutTable(lang, options))) +
+                   '<p class="text-center">' +
+                     '<a href="//hackerwins.github.io/summernote/" target="_blank">Summernote 0.5.2</a> · ' +
+                     '<a href="//github.com/HackerWins/summernote" target="_blank">Project</a> · ' +
+                     '<a href="//github.com/HackerWins/summernote/issues" target="_blank">Issues</a>' +
+                   '</p>';
+        return tplDialog('note-help-dialog', '', body, '');
       };
 
       return '<div class="note-dialog">' +
@@ -3087,36 +3474,68 @@
              '</div>';
     };
 
-    tplStatusbar = function () {
-      return '<div class="note-resizebar"><div class="note-icon-bar"></div><div class="note-icon-bar"></div><div class="note-icon-bar"></div></div>';
+    var tplStatusbar = function () {
+      return '<div class="note-resizebar">' +
+               '<div class="note-icon-bar"></div>' +
+               '<div class="note-icon-bar"></div>' +
+               '<div class="note-icon-bar"></div>' +
+             '</div>';
     };
-    /* jshint ignore:end */
 
-    // createTooltip
-    var createTooltip = function ($container, sPlacement) {
-      $container.find('button').each(function (i, elBtn) {
+    var invertObject = function (obj) {
+      var inverted = {};
+      for (var key in obj) {
+        if (obj.hasOwnProperty(key)) {
+          inverted[obj[key]] = key;
+        }
+      }
+      return inverted;
+    };
+
+    var representShortcut = function (str) {
+      if (agent.bMac) {
+        str = str.replace('CMD', '⌘').replace('SHIFT', '⇧');
+      }
+
+      return str.replace('BACKSLASH', '\\')
+                .replace('SLASH', '/')
+                .replace('LEFTBRACKET', '[')
+                .replace('RIGHTBRACKET', ']');
+    };
+
+    /**
+     * createTooltip
+     *
+     * @param {jQuery} $container
+     * @param {Object} keyMap
+     * @param {String} [sPlacement]
+     */
+    var createTooltip = function ($container, keyMap, sPlacement) {
+      var invertedKeyMap = invertObject(keyMap);
+      var $buttons = $container.find('button');
+
+      $buttons.each(function (i, elBtn) {
         var $btn = $(elBtn);
-        var tplShortcut = $btn.attr(agent.bMac ? 'data-mac-shortcut': 'data-shortcut');
-        if (tplShortcut) { $btn.attr('title', function (i, v) { return v + ' (' + tplShortcut + ')'; }); }
-      // bootstrap tooltip on btn-group bug: https://github.com/twitter/bootstrap/issues/5687
-      }).tooltip({container: 'body', trigger: 'hover', placement: sPlacement || 'top'})
-        .on('click', function () {$(this).tooltip('hide'); });
+        var sShortcut = invertedKeyMap[$btn.data('event')];
+        if (sShortcut) {
+          $btn.attr('title', function (i, v) {
+            return v + ' (' + representShortcut(sShortcut) + ')';
+          });
+        }
+      // bootstrap tooltip on btn-group bug
+      // https://github.com/twitter/bootstrap/issues/5687
+      }).tooltip({
+        container: 'body',
+        trigger: 'hover',
+        placement: sPlacement || 'top'
+      }).on('click', function () {
+        $(this).tooltip('hide');
+      });
     };
-
-    // pallete colors
-    var aaColor = [
-      ['#000000', '#424242', '#636363', '#9C9C94', '#CEC6CE', '#EFEFEF', '#F7F7F7', '#FFFFFF'],
-      ['#FF0000', '#FF9C00', '#FFFF00', '#00FF00', '#00FFFF', '#0000FF', '#9C00FF', '#FF00FF'],
-      ['#F7C6CE', '#FFE7CE', '#FFEFC6', '#D6EFD6', '#CEDEE7', '#CEE7F7', '#D6D6E7', '#E7D6DE'],
-      ['#E79C9C', '#FFC69C', '#FFE79C', '#B5D6A5', '#A5C6CE', '#9CC6EF', '#B5A5D6', '#D6A5BD'],
-      ['#E76363', '#F7AD6B', '#FFD663', '#94BD7B', '#73A5AD', '#6BADDE', '#8C7BC6', '#C67BA5'],
-      ['#CE0000', '#E79439', '#EFC631', '#6BA54A', '#4A7B8C', '#3984C6', '#634AA5', '#A54A7B'],
-      ['#9C0000', '#B56308', '#BD9400', '#397B21', '#104A5A', '#085294', '#311873', '#731842'],
-      ['#630000', '#7B3900', '#846300', '#295218', '#083139', '#003163', '#21104A', '#4A1031']
-    ];
 
     // createPalette
-    var createPalette = function ($container) {
+    var createPalette = function ($container, options) {
+      var aaColor = options.colors;
       $container.find('.note-color-palette').each(function () {
         var $palette = $(this), sEvent = $palette.attr('data-target-event');
         var aPaletteContents = [];
@@ -3138,16 +3557,56 @@
     };
 
     /**
-     * create summernote layout
+     * create summernote layout (air mode)
      *
      * @param {jQuery} $holder
      * @param {Object} options
      */
-    this.createLayout = function ($holder, options) {
-      //already created
-      var next = $holder.next();
-      if (next && next.hasClass('note-editor')) { return; }
+    this.createLayoutByAirMode = function ($holder, options) {
+      var keyMap = options.keyMap[agent.bMac ? 'mac' : 'pc'];
+      var langInfo = $.summernote.lang[options.lang];
 
+      var id = func.uniqueId();
+
+      $holder.addClass('note-air-editor note-editable');
+      $holder.attr({
+        'id': 'note-editor-' + id,
+        'contentEditable': true
+      });
+
+      var body = document.body;
+
+      // create Popover
+      var $popover = $(tplPopovers(langInfo, options));
+      $popover.addClass('note-air-layout');
+      $popover.attr('id', 'note-popover-' + id);
+      $popover.appendTo(body);
+      createTooltip($popover, keyMap);
+      createPalette($popover, options);
+
+      // create Handle
+      var $handle = $(tplHandles());
+      $handle.addClass('note-air-layout');
+      $handle.attr('id', 'note-handle-' + id);
+      $handle.appendTo(body);
+
+      // create Dialog
+      var $dialog = $(tplDialogs(langInfo, options));
+      $dialog.addClass('note-air-layout');
+      $dialog.attr('id', 'note-dialog-' + id);
+      $dialog.find('button.close, a.modal-close').click(function () {
+        $(this).closest('.modal').modal('hide');
+      });
+      $dialog.appendTo(body);
+    };
+
+    /**
+     * create summernote layout (normal mode)
+     *
+     * @param {jQuery} $holder
+     * @param {Object} options
+     */
+    this.createLayoutByFrame = function ($holder, options) {
       //01. create Editor
       var $editor = $('<div class="note-editor"></div>');
       if (options.width) {
@@ -3183,7 +3642,7 @@
         var group = options.toolbar[idx];
         sToolbar += '<div class="note-' + group[0] + ' btn-group">';
         for (var i = 0, szGroup = group[1].length; i < szGroup; i++) {
-          sToolbar += tplToolbarInfo[group[1][i]](langInfo);
+          sToolbar += tplButtonInfo[group[1][i]](langInfo, options);
         }
         sToolbar += '</div>';
       }
@@ -3191,18 +3650,20 @@
       sToolbar = '<div class="note-toolbar btn-toolbar">' + sToolbar + '</div>';
 
       var $toolbar = $(sToolbar).prependTo($editor);
-      createPalette($toolbar);
-      createTooltip($toolbar, 'bottom');
+      var keyMap = options.keyMap[agent.bMac ? 'mac' : 'pc'];
+      createPalette($toolbar, options);
+      createTooltip($toolbar, keyMap, 'bottom');
 
       //05. create Popover
-      var $popover = $(tplPopover(langInfo)).prependTo($editor);
-      createTooltip($popover);
+      var $popover = $(tplPopovers(langInfo, options)).prependTo($editor);
+      createPalette($popover, options);
+      createTooltip($popover, keyMap);
 
       //06. handle(control selection, ...)
-      $(tplHandle()).prependTo($editor);
+      $(tplHandles()).prependTo($editor);
 
       //07. create Dialog
-      var $dialog = $(tplDialog(langInfo, options)).prependTo($editor);
+      var $dialog = $(tplDialogs(langInfo, options)).prependTo($editor);
       $dialog.find('button.close, a.modal-close').click(function () {
         $(this).closest('.modal').modal('hide');
       });
@@ -3215,6 +3676,34 @@
       $holder.hide();
     };
 
+    this.noteEditorFromHolder = function ($holder) {
+      if ($holder.hasClass('note-air-editor')) {
+        return $holder;
+      } else if ($holder.next().hasClass('note-editor')) {
+        return $holder.next();
+      } else {
+        return $();
+      }
+    };
+
+    /**
+     * create summernote layout
+     *
+     * @param {jQuery} $holder
+     * @param {Object} options
+     */
+    this.createLayout = function ($holder, options) {
+      if (this.noteEditorFromHolder($holder).length > 0) {
+        return;
+      }
+
+      if (options.airMode) {
+        this.createLayoutByAirMode($holder, options);
+      } else {
+        this.createLayoutByFrame($holder, options);
+      }
+    };
+
     /**
      * returns layoutInfo from holder
      *
@@ -3222,8 +3711,8 @@
      * @returns {Object}
      */
     this.layoutInfoFromHolder = function ($holder) {
-      var $editor = $holder.next();
-      if (!$editor.hasClass('note-editor')) { return; }
+      var $editor = this.noteEditorFromHolder($holder);
+      if (!$editor.length) { return; }
 
       var layoutInfo = dom.buildLayoutInfo($editor);
       // cache all properties.
@@ -3292,7 +3781,7 @@
       });
 
       // focus on first editable element
-      if (this.first() && options.focus) {
+      if (this.first().length && options.focus) {
         var info = renderer.layoutInfoFromHolder(this.first());
         info.editable.focus();
       }
