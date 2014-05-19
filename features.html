@@ -87,6 +87,7 @@
                 <ul class="nav">
                   <li><a href="#heightandfocus">Height and Focus</a></li>
                   <li><a href="#customtoolbar">Custom toolbar</a></li>
+                  <li><a href="#customairpopover">Custom popover for Air-mode</a></li>
                 </ul>
               </li>
               <li><a href="#api-destory">destory</a></li>
@@ -328,6 +329,17 @@
             </tr>
           </tbody>
         </table>
+        <h4 id="customairpopover">Custom Popover for Air-mode</h4>
+        <p>Air-mode has its own popover, not toolbar. You can customize it with <code>airPopover</code> option.</p>
+        <pre><code class="javascript">$('.summernote').summernote({
+  airPopover: [
+    ['color', ['color']],
+    ['font', ['bold', 'underline', 'clear']],
+    ['para', ['ul', 'paragraph']],
+    ['table', ['table']],
+    ['insert', ['link', 'picture']]
+  ]
+});</code></pre>
         <h3 id="api-destory">Destroy</h3>
         <p>Destroy Summernote.</p>
         <pre><code class="javascript">$('.summernote').destroy();</code></pre>
