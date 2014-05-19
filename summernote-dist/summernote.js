@@ -6,7 +6,7 @@
  * Copyright 2013 Alan Hong. and outher contributors
  * summernote may be freely distributed under the MIT license./
  *
- * Date: 2014-05-06T17:30Z
+ * Date: 2014-05-19T02:06Z
  */
 (function (factory) {
   /* global define */
@@ -94,9 +94,53 @@
     };
 
     var idCounter = 0;
+
+    /**
+     * generate a globally-unique id
+     *
+     * @param {String} [prefix]
+     */
     var uniqueId = function (prefix) {
       var id = ++idCounter + '';
       return prefix ? prefix + id : id;
+    };
+
+    /**
+     * returns bnd (bounds) from rect
+     *
+     * - IE Compatability Issue: http://goo.gl/sRLOAo
+     * - Scroll Issue: http://goo.gl/sNjUc
+     *
+     * @param {Rect} rect
+     * @return {Object} bounds
+     * @return {Number} bounds.top
+     * @return {Number} bounds.left
+     * @return {Number} bounds.width
+     * @return {Number} bounds.height
+     */
+    var rect2bnd = function (rect) {
+      var $document = $(document);
+      return {
+        top: rect.top + $document.scrollTop(),
+        left: rect.left + $document.scrollLeft(),
+        width: rect.right - rect.left,
+        height: rect.bottom - rect.top
+      };
+    };
+
+    /**
+     * returns a copy of the object where the keys have become the values and the values the keys.
+     * @param {Object} obj
+     * @return {Object}
+     */
+    var invertObject = function (obj) {
+      var inverted = {};
+      for (var key in obj) {
+        if (obj.hasOwnProperty(key)) {
+          inverted[obj[key]] = key;
+        }
+      }
+      return inverted;
     };
 
     return {
@@ -106,7 +150,9 @@
       fail: fail,
       not: not,
       self: self,
-      uniqueId: uniqueId
+      uniqueId: uniqueId,
+      rect2bnd: rect2bnd,
+      invertObject: invertObject
     };
   })();
 
@@ -662,7 +708,7 @@
       // toolbar
       toolbar: [
         ['style', ['style']],
-        ['font', ['bold', 'italic', 'underline', 'clear']],
+        ['font', ['bold', 'italic', 'underline', 'superscript', 'subscript', 'strikethrough', 'clear']],
         ['fontname', ['fontname']],
         // ['fontsize', ['fontsize']], // Still buggy
         ['color', ['color']],
@@ -804,7 +850,7 @@
           bold: 'Bold',
           italic: 'Italic',
           underline: 'Underline',
-          strike: 'Strike',
+          strikethrough: 'Strikethrough',
           clear: 'Remove Font Style',
           height: 'Line Height',
           name: 'Font Family',
@@ -1050,6 +1096,8 @@
       oStyle['font-italic'] = document.queryCommandState('italic') ? 'italic' : 'normal';
       oStyle['font-underline'] = document.queryCommandState('underline') ? 'underline' : 'normal';
       oStyle['font-strikethrough'] = document.queryCommandState('strikeThrough') ? 'strikethrough' : 'normal';
+      oStyle['font-superscript'] = document.queryCommandState('superscript') ? 'superscript' : 'normal';
+      oStyle['font-subscript'] = document.queryCommandState('subscript') ? 'subscript' : 'normal';
 
       // list-style-type to list-style(unordered, ordered)
       if (!rng.isOnList()) {
@@ -1472,7 +1520,7 @@
 
     /* jshint ignore:start */
     // native commands(with execCommand), generate function for execCommand
-    var aCmd = ['bold', 'italic', 'underline', 'strikethrough',
+    var aCmd = ['bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript',
                 'justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull',
                 'insertOrderedList', 'insertUnorderedList',
                 'indent', 'outdent', 'formatBlock', 'removeFormat',
@@ -1688,7 +1736,7 @@
      * @param {String} sLinkUrl
      * @param {Boolean} bNewWindow
      */
-    this.createLink = function ($editable, sLinkUrl, bNewWindow) {
+    this.createLink = function ($editable, sLinkText, sLinkUrl, bNewWindow) {
       var rng = range.create();
       recordUndo($editable);
 
@@ -1702,17 +1750,18 @@
 
       // createLink when range collapsed (IE, Firefox).
       if ((agent.bMSIE || agent.bFF) && rng.isCollapsed()) {
-        rng.insertNode($('<A id="linkAnchor">' + sLinkUrl + '</A>')[0]);
+        rng.insertNode($('<A id="linkAnchor">' + sLinkText + '</A>')[0]);
         var $anchor = $('#linkAnchor').attr('href', sLinkUrlWithProtocol).removeAttr('id');
         rng = range.createFromNode($anchor[0]);
         rng.select();
       } else {
         document.execCommand('createlink', false, sLinkUrlWithProtocol);
-        rng = range.create();
       }
 
       // target
       $.each(rng.nodes(dom.isAnchor), function (idx, elAnchor) {
+        // update link text
+        $(elAnchor).html(sLinkText);
         if (bNewWindow) {
           $(elAnchor).attr('target', '_blank');
         } else {
@@ -1950,6 +1999,12 @@
       btnState('button[data-event="strikethrough"]', function () {
         return oStyle['font-strikethrough'] === 'strikethrough';
       });
+      btnState('button[data-event="superscript"]', function () {
+        return oStyle['font-superscript'] === 'superscript';
+      });
+      btnState('button[data-event="subscript"]', function () {
+        return oStyle['font-subscript'] === 'subscript';
+      });
       btnState('button[data-event="justifyLeft"]', function () {
         return oStyle['text-align'] === 'left' || oStyle['text-align'] === 'start';
       });
@@ -1986,16 +2041,6 @@
       var sKey = sEvent === 'backColor' ? 'background-color' : 'color';
       $recentColor.find('i').css(sKey, sValue);
     };
-
-    this.updateFullscreen = function ($container, bFullscreen) {
-      var $btn = $container.find('button[data-event="fullscreen"]');
-      $btn.toggleClass('active', bFullscreen);
-    };
-
-    this.updateCodeview = function ($container, bCodeview) {
-      var $btn = $container.find('button[data-event="codeview"]');
-      $btn.toggleClass('active', bCodeview);
-    };
   };
 
   /**
@@ -2027,6 +2072,16 @@
     this.deactivate = function ($toolbar) {
       $toolbar.find('button').not('button[data-event="codeview"]').addClass('disabled');
     };
+
+    this.updateFullscreen = function ($container, bFullscreen) {
+      var $btn = $container.find('button[data-event="fullscreen"]');
+      $btn.toggleClass('active', bFullscreen);
+    };
+
+    this.updateCodeview = function ($container, bCodeview) {
+      var $btn = $container.find('button[data-event="codeview"]');
+      $btn.toggleClass('active', bCodeview);
+    };
   };
 
   /**
@@ -2054,6 +2109,8 @@
         top: pos.top + height
       });
     };
+
+    var PX_POPOVER_ARROW_OFFSET_X = 20;
 
     /**
      * update current state
@@ -2084,12 +2141,11 @@
       if (isAirMode) {
         var $airPopover = $popover.find('.note-air-popover');
         if (!oStyle.range.isCollapsed()) {
-          var $document = $(document);
-          var rect = list.last(oStyle.range.getClientRects());
+          var bnd = func.rect2bnd(list.last(oStyle.range.getClientRects()));
           $airPopover.css({
             display: 'block',
-            left: Math.max($document.scrollLeft() + rect.left + rect.width / 2 - 20, 0),
-            top: $document.scrollTop() + rect.top + rect.height
+            left: Math.max(bnd.left + bnd.width / 2 - PX_POPOVER_ARROW_OFFSET_X, 0),
+            top: bnd.top + bnd.height
           });
         } else {
           $airPopover.hide();
@@ -2262,6 +2318,18 @@
         $linkDialog.one('shown.bs.modal', function () {
           $linkText.val(linkInfo.text);
 
+          $linkText.keyup(function () {
+            // if linktext was modified by keyup,
+            // stop cloning text from linkUrl
+            linkInfo.text = $linkText.val();
+          });
+
+          // if no url was given, copy text to url
+          if (!linkInfo.url) {
+            linkInfo.url = linkInfo.text;
+            toggleBtn($linkBtn, linkInfo.text);
+          }
+
           $linkUrl.keyup(function () {
             toggleBtn($linkBtn, $linkUrl.val());
             // display same link on `Text to display` input
@@ -2269,7 +2337,7 @@
             if (!linkInfo.text) {
               $linkText.val($linkUrl.val());
             }
-          }).val(linkInfo.url).trigger('focus');
+          }).val(linkInfo.url).trigger('focus').trigger('select');
 
           $openInNewWindow.prop('checked', linkInfo.newWindow);
 
@@ -2277,7 +2345,7 @@
             event.preventDefault();
 
             $linkDialog.modal('hide');
-            deferred.resolve($linkUrl.val(), $openInNewWindow.is(':checked'));
+            deferred.resolve($linkText.val(), $linkUrl.val(), $openInNewWindow.is(':checked'));
           });
         }).one('hidden.bs.modal', function () {
           $editable.focus();
@@ -2496,7 +2564,7 @@
           w: options.width || '',
           h: $editable.data('orgHeight')
         });
-        $scrollbar.css('overflow', 'auto');
+        $scrollbar.css('overflow', 'visible');
       }
 
       toolbar.updateFullscreen($toolbar, isFullscreen);
@@ -2506,7 +2574,8 @@
       var $editor = oLayoutInfo.editor(),
           $toolbar = oLayoutInfo.toolbar(),
           $editable = oLayoutInfo.editable(),
-          $codable = oLayoutInfo.codable();
+          $codable = oLayoutInfo.codable(),
+          $popover = oLayoutInfo.popover();
 
       var options = $editor.data('options');
 
@@ -2519,6 +2588,7 @@
         $codable.val($editable.html());
         $codable.height($editable.height());
         toolbar.deactivate($toolbar);
+        popover.hide($popover);
         $codable.focus();
 
         // activate CodeMirror as codable
@@ -2595,9 +2665,11 @@
           var linkInfo = editor.getLinkInfo();
 
           editor.saveRange($editable);
-          dialog.showLinkDialog($editable, $dialog, linkInfo).then(function (sLinkUrl, bNewWindow) {
+          dialog.showLinkDialog($editable, $dialog, linkInfo).then(function (sLinkText, sLinkUrl, bNewWindow) {
             editor.restoreRange($editable);
-            editor.createLink($editable, sLinkUrl, bNewWindow);
+            editor.createLink($editable, sLinkText, sLinkUrl, bNewWindow);
+            // hide popover after creating link
+            popover.hide(oLayoutInfo.popover());
           });
         } else if (sEvent === 'showImageDialog') {
           $editable.focus();
@@ -2982,12 +3054,14 @@
                      '<h4>' + title + '</h4>' +
                    '</div>' : ''
                    ) +
-                   '<div class="modal-body">' +
-                     '<div class="row-fluid">' + body + '</div>' +
-                   '</div>' +
-                   (footer ?
-                   '<div class="modal-footer">' + footer + '</div>' : ''
-                   ) +
+                   '<form class="note-modal-form">' +
+                     '<div class="modal-body">' +
+                       '<div class="row-fluid">' + body + '</div>' +
+                     '</div>' +
+                     (footer ?
+                     '<div class="modal-footer">' + footer + '</div>' : ''
+                     ) +
+                   '</form>' +
                  '</div>' +
                '</div>' +
              '</div>';
@@ -3124,10 +3198,22 @@
           title: lang.font.underline
         });
       },
-      strike: function (lang) {
+      strikethrough: function (lang) {
         return tplIconButton('fa fa-strikethrough icon-strikethrough', {
           event: 'strikethrough',
-          title: lang.font.strike
+          title: lang.font.strikethrough
+        });
+      },
+      superscript: function (lang) {
+        return tplIconButton('fa fa-superscript icon-superscript', {
+          event: 'superscript',
+          title: lang.font.superscript
+        });
+      },
+      subscript: function (lang) {
+        return tplIconButton('fa fa-subscript icon-subscript', {
+          event: 'subscript',
+          title: lang.font.subscript
         });
       },
       clear: function (lang) {
@@ -3191,7 +3277,7 @@
       },
       height: function (lang, options) {
         var items = options.lineHeights.reduce(function (memo, v) {
-          return memo + '<li><a data-event="lineHeight" data-value="' + v + '">' +
+          return memo + '<li><a data-event="lineHeight" data-value="' + parseFloat(v) + '">' +
                           '<i class="fa fa-check icon-ok"></i> ' + v +
                         '</a></li>';
         }, '');
@@ -3348,7 +3434,7 @@
       var body = '<tr><td>⌘ + B</td><td>' + lang.font.bold + '</td></tr>' +
                  '<tr><td>⌘ + I</td><td>' + lang.font.italic + '</td></tr>' +
                  '<tr><td>⌘ + U</td><td>' + lang.font.underline + '</td></tr>' +
-                 '<tr><td>⌘ + ⇧ + S</td><td>' + lang.font.strike + '</td></tr>' +
+                 '<tr><td>⌘ + ⇧ + S</td><td>' + lang.font.strikethrough + '</td></tr>' +
                  '<tr><td>⌘ + \\</td><td>' + lang.font.clear + '</td></tr>';
 
       return tplShortcut(lang.shortcut.textFormatting, body);
@@ -3428,7 +3514,7 @@
       var tplLinkDialog = function () {
         var body = '<div class="form-group">' +
                      '<label>' + lang.link.textToDisplay + '</label>' +
-                     '<input class="note-link-text form-control span12" type="text" disabled />' +
+                     '<input class="note-link-text form-control span12" type="text" />' +
                    '</div>' +
                    '<div class="form-group">' +
                      '<label>' + lang.link.url + '</label>' +
@@ -3482,16 +3568,6 @@
              '</div>';
     };
 
-    var invertObject = function (obj) {
-      var inverted = {};
-      for (var key in obj) {
-        if (obj.hasOwnProperty(key)) {
-          inverted[obj[key]] = key;
-        }
-      }
-      return inverted;
-    };
-
     var representShortcut = function (str) {
       if (agent.bMac) {
         str = str.replace('CMD', '⌘').replace('SHIFT', '⇧');
@@ -3511,7 +3587,7 @@
      * @param {String} [sPlacement]
      */
     var createTooltip = function ($container, keyMap, sPlacement) {
-      var invertedKeyMap = invertObject(keyMap);
+      var invertedKeyMap = func.invertObject(keyMap);
       var $buttons = $container.find('button');
 
       $buttons.each(function (i, elBtn) {
