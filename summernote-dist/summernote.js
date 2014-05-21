@@ -6,7 +6,7 @@
  * Copyright 2013 Alan Hong. and outher contributors
  * summernote may be freely distributed under the MIT license./
  *
- * Date: 2014-05-21T01:58Z
+ * Date: 2014-05-21T06:50Z
  */
 (function (factory) {
   /* global define */
@@ -686,15 +686,19 @@
      */
     options: {
       width: null,                  // set editor width
-      height: null,                 // set editable height, ex) 300
+      height: null,                 // set editor height, ex) 300
 
-      focus: false,                 // set focus after initilize summernote
+      minHeight: null,              // set minimum height of editor
+      maxHeight: null,              // set maximum height of editor
+
+      focus: false,                 // set focus to editable area after initializing summernote
 
       tabsize: 4,                   // size of tab ex) 2 or 4
       styleWithSpan: true,          // style with span (Chrome and FF only)
 
       disableLinkTarget: false,     // hide link Target Checkbox
       disableDragAndDrop: false,    // disable drag and drop event
+      disableResizeEditor: false,   // disable resizing editor
 
       codemirror: {                 // codemirror options
         mode: 'text/html',
@@ -2716,8 +2720,15 @@
       var $editable = makeLayoutInfo(event.target).editable();
       var nEditableTop = $editable.offset().top - $document.scrollTop();
 
+      var oLayoutInfo = makeLayoutInfo(event.currentTarget || event.target);
+      var options = oLayoutInfo.editor().data('options');
+
       $document.on('mousemove', function (event) {
         var nHeight = event.clientY - (nEditableTop + EDITABLE_PADDING);
+
+        nHeight = (options.minHeight > 0) ? Math.max(nHeight, options.minHeight) : nHeight;
+        nHeight = (options.maxHeight > 0) ? Math.min(nHeight, options.maxHeight) : nHeight;
+
         $editable.height(nHeight);
       }).one('mouseup', function () {
         $document.off('mousemove');
@@ -2883,7 +2894,9 @@
         oLayoutInfo.toolbar.on('mousedown', hToolbarAndPopoverMousedown);
 
         // handler for statusbar
-        oLayoutInfo.statusbar.on('mousedown', hStatusbarMousedown);
+        if (!options.disableResizeEditor) {
+          oLayoutInfo.statusbar.on('mousedown', hStatusbarMousedown);
+        }
       }
 
       // handler for table dimension
@@ -3697,7 +3710,7 @@
 
       //02. statusbar (resizebar)
       if (options.height > 0) {
-        $('<div class="note-statusbar">' + tplStatusbar() + '</div>').prependTo($editor);
+        $('<div class="note-statusbar">' + (options.disableResizeEditor ? '' : tplStatusbar()) + '</div>').prependTo($editor);
       }
 
       //03. create Editable
