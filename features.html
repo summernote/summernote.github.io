@@ -101,10 +101,11 @@
               <li><a href="#callbacks-onenter">onenter</a></li>
               <li><a href="#callbacks-onfocus">onfocus</a></li>
               <li><a href="#callbacks-onblur">onblur</a></li>
-              <li><a href="#callbacks-onpaste">onpaste</a></li>
               <li><a href="#callbacks-onkeyup">onkeyup</a></li>
               <li><a href="#callbacks-onkeydown">onkeydown</a></li>
+              <li><a href="#callbacks-onpaste">onpaste</a></li>
               <li><a href="#callbacks-onImageUpload">onImageUpload</a></li>
+              <li><a href="#callbacks-onChange">onChange</a></li>
             </ul>
           </li>
           <li>
@@ -389,12 +390,6 @@
     console.log('Editable area loses focus');
   }
 });</code></pre>
-        <h3 id="callbacks-onpaste">onpaste</h3>
-        <pre><code class="javascript">$('#summernote').summernote({
-  onpaste: function(e) {
-    console.log('Called event paste');
-  }
-});</code></pre>
         <h3 id="callbacks-onkeyup">onkeyup</h3>
         <pre><code class="javascript">$('#summernote').summernote({
   onkeyup: function(e) {
@@ -407,12 +402,28 @@
     console.log('Key is pressed:', e.keyCode);
   }
 });</code></pre>
+        <h3 id="callbacks-onpaste">onpaste</h3>
+        <pre><code class="javascript">$('#summernote').summernote({
+  onpaste: function(e) {
+    console.log('Called event paste');
+  }
+});</code></pre>
         <h3 id="callbacks-onImageUpload">onImageUpload</h3>
         <p>Override image upload handler(default: base64 dataURL on `IMG` tag).</p>
         <p>You can upload image to server or AWS S3: <a href="https://github.com/HackerWins/summernote/issues/72" target="_blank">More...</a>.</p>
         <pre><code class="javascript">$('#summernote').summernote({
-  onImageUpload: function(files, editor, welEditable) {
-    console.log('image upload:', files, editor, welEditable);
+  onImageUpload: function(files, editor, $editable) {
+    console.log('image upload:', files, editor, $editable);
+  }
+});</code></pre>
+        <h3 id="callbacks-onChange">onChange</h3>
+        <ul>
+          <li>IE9-10: DOMCharacterDataModified, DOMSubtreeModified, DOMNodeInserted</li>
+          <li>Chrome, FF: input</li>
+        </ul>
+        <pre><code class="javascript">$('#summernote').summernote({
+  onChange: function(contents, $editable) {
+    console.log('onChange:', contents, $editable);
   }
 });</code></pre>
       </section>
