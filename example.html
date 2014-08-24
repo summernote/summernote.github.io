@@ -169,6 +169,9 @@ var save = function() {
             $('.codemirror').summernote({
               height: 150,
               codemirror: { // codemirror options
+                mode: 'text/html',
+                htmlMode: true,
+                lineNumbers: true,
                 theme: 'monokai'
               }
             });

@@ -77,7 +77,7 @@
   </p>
   <!-- Summernote -->
   <div class="summernote container">
-    <div id="summernote" class="span12"><p></p></div>
+    <div id="summernote" class="span12"></div>
   </div>
   <div class="download"><a href="https://github.com/HackerWins/summernote/archive/master.zip" class="btn btn-primary btn-large">Summernote Master <i class="fa fa-download"></i></a></div>
 </div>
@@ -149,8 +149,14 @@
 </footer>
 <script type="text/javascript">
 $(document).ready(function() {
-  $('#summernote').summernote({height: 300, codemirror: {
-    theme: 'monokai'}
+  $('#summernote').summernote({
+    height: 300,
+    codemirror: {
+      mode: 'text/html',
+      htmlMode: true,
+      lineNumbers: true,
+      theme: 'monokai'
+    }
   });
 });
 </script>
