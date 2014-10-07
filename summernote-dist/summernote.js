@@ -1,12 +1,12 @@
 /**
- * Super simple wysiwyg editor on Bootstrap v0.5.9
+ * Super simple wysiwyg editor on Bootstrap v0.5.10
  * http://hackerwins.github.io/summernote/
  *
  * summernote.js
  * Copyright 2013-2014 Alan Hong. and other contributors
  * summernote may be freely distributed under the MIT license./
  *
- * Date: 2014-09-21T04:14Z
+ * Date: 2014-10-03T06:12Z
  */
 (function (factory) {
   /* global define */
@@ -292,7 +292,7 @@
      * returns true if the value is present in the list.
      */
     var contains = function (array, item) {
-      return array.indexOf(item) !== -1;
+      return $.inArray(item, array) !== -1;
     };
 
     /**
@@ -364,7 +364,7 @@
       var results = [];
 
       for (var idx = 0, len = array.length; idx < len; idx ++) {
-        if (results.indexOf(array[idx]) === -1) {
+        if (!contains(results, array[idx])) {
           results.push(array[idx]);
         }
       }
@@ -1237,7 +1237,7 @@
 
   var settings = {
     // version
-    version: '0.5.9',
+    version: '0.5.10',
 
     /**
      * options
@@ -1455,6 +1455,10 @@
           floatLeft: 'Float Left',
           floatRight: 'Float Right',
           floatNone: 'Float None',
+          shapeRounded: 'Shape: Rounded',
+          shapeCircle: 'Shape: Circle',
+          shapeThumbnail: 'Shape: Thumbnail',
+          shapeNone: 'Shape: None',
           dragImageHere: 'Drag an image here',
           selectFromFiles: 'Select from files',
           url: 'Image URL',
@@ -1593,7 +1597,7 @@
    */
   var key = {
     isEdit: function (keyCode) {
-      return [8, 9, 13, 32].indexOf(keyCode) !== -1;
+      return list.contains([8, 9, 13, 32], keyCode);
     },
     nameFromCode: {
       '8': 'BACKSPACE',
@@ -2150,9 +2154,9 @@
        * @return {WrappedRange}
        */
       this.wrapBodyInlineWithPara = function () {
-        // startContainer on bodyContainer
-        if (dom.isEditable(sc) && !sc.childNodes[so]) {
-          return new WrappedRange(sc.appendChild($(dom.emptyPara)[0]), 0);
+        if (dom.isBodyContainer(sc) && dom.isEmpty(sc)) {
+          sc.innerHTML = dom.emptyPara;
+          return new WrappedRange(sc.firstChild, 0);
         } else if (!dom.isInline(sc) || dom.isParaInline(sc)) {
           return this;
         }
@@ -2286,7 +2290,14 @@
   
             var startPoint = textRangeToPoint(textRangeStart, true),
             endPoint = textRangeToPoint(textRangeEnd, false);
-  
+
+            // same visible point case: range was collapsed.
+            if (dom.isText(startPoint.node) && dom.isLeftEdgePoint(startPoint) &&
+                dom.isTextNode(endPoint.node) && dom.isRightEdgePoint(endPoint) &&
+                endPoint.node.nextSibling === startPoint.node) {
+              startPoint = endPoint;
+            }
+
             sc = startPoint.cont;
             so = startPoint.offset;
             ec = endPoint.cont;
@@ -2352,18 +2363,33 @@
       // deleteContents on range.
       rng = rng.deleteContents();
 
+      // Wrap range if it needs to be wrapped by paragraph
       rng = rng.wrapBodyInlineWithPara();
 
-      // find split root node: block level node
+      // finding paragraph
       var splitRoot = dom.ancestor(rng.sc, dom.isPara);
-      var nextPara = dom.splitTree(splitRoot, rng.getStartPoint());
 
-      var emptyAnchors = dom.listDescendant(splitRoot, dom.isEmptyAnchor);
-      emptyAnchors = emptyAnchors.concat(dom.listDescendant(nextPara, dom.isEmptyAnchor));
+      var nextPara;
+      // on paragraph: split paragraph
+      if (splitRoot) {
+        nextPara = dom.splitTree(splitRoot, rng.getStartPoint());
 
-      $.each(emptyAnchors, function (idx, anchor) {
-        dom.remove(anchor);
-      });
+        var emptyAnchors = dom.listDescendant(splitRoot, dom.isEmptyAnchor);
+        emptyAnchors = emptyAnchors.concat(dom.listDescendant(nextPara, dom.isEmptyAnchor));
+
+        $.each(emptyAnchors, function (idx, anchor) {
+          dom.remove(anchor);
+        });
+      // no paragraph: insert empty paragraph
+      } else {
+        var next = rng.sc.childNodes[rng.so];
+        nextPara = $(dom.emptyPara)[0];
+        if (next) {
+          rng.sc.insertBefore(nextPara, next);
+        } else {
+          rng.sc.appendChild(nextPara);
+        }
+      }
 
       range.create(nextPara, 0).normalize().select();
     };
@@ -3043,6 +3069,14 @@
       afterCommand($editable);
     };
 
+    this.imageShape = function ($editable, value, $target) {
+      $target.removeClass('img-rounded img-circle img-thumbnail');
+
+      if (value) {
+        $target.addClass(value);
+      }
+    };
+
     /**
      * resize overlay element
      * @param {jQuery} $editable
@@ -3051,7 +3085,7 @@
      */
     this.resize = function ($editable, value, $target) {
       $target.css({
-        width: $editable.width() * value + 'px',
+        width: value * 100 + '%',
         height: ''
       });
 
@@ -3101,7 +3135,7 @@
    * @class
    */
   var History = function ($editable) {
-    var stack = [], stackOffset = 0;
+    var stack = [], stackOffset = -1;
     var editable = $editable[0];
 
     var makeSnapshot = function () {
@@ -3138,6 +3172,8 @@
     };
 
     this.recordUndo = function () {
+      stackOffset++;
+
       // Wash out stack after stackOffset
       if (stack.length > stackOffset) {
         stack = stack.slice(0, stackOffset);
@@ -3145,7 +3181,6 @@
 
       // Create new snapshot and push it to the end
       stack.push(makeSnapshot());
-      stackOffset++;
     };
 
     // Create first undo stack
@@ -3692,7 +3727,6 @@
      * @param {File[]} files
      */
     var insertImages = function ($editable, files) {
-      editor.restoreRange($editable);
       var callbacks = $editable.data('callbacks');
 
       // If onImageUpload options setted
@@ -3930,13 +3964,17 @@
         return;
       }
 
-      var layoutInfo = makeLayoutInfo(event.currentTarget || event.target);
+      var layoutInfo = makeLayoutInfo(event.currentTarget || event.target),
+          $editable = layoutInfo.editable();
+
       var item = list.head(clipboardData.items);
       var isClipboardImage = item.kind === 'file' && item.type.indexOf('image/') !== -1;
 
       if (isClipboardImage) {
-        insertImages(layoutInfo.editable(), [item.getAsFile()]);
+        insertImages($editable, [item.getAsFile()]);
       }
+
+      editor.afterCommand($editable);
     };
 
     /**
@@ -4003,7 +4041,7 @@
 
         // before command: detect control selection element($target)
         var $target;
-        if ($.inArray(eventName, ['resize', 'floatMe', 'removeMedia']) !== -1) {
+        if ($.inArray(eventName, ['resize', 'floatMe', 'removeMedia', 'imageShape']) !== -1) {
           var $selection = layoutInfo.handle().find('.note-control-selection');
           $target = $($selection.data('target'));
         }
@@ -4748,6 +4786,27 @@
           value: 'none'
         });
 
+        var roundedButton = tplIconButton('fa fa-square icon-unchecked', {
+          title: lang.image.shapeRounded,
+          event: 'imageShape',
+          value: 'img-rounded'
+        });
+        var circleButton = tplIconButton('fa fa-circle-o icon-circle-blank', {
+          title: lang.image.shapeCircle,
+          event: 'imageShape',
+          value: 'img-circle'
+        });
+        var thumbnailButton = tplIconButton('fa fa-picture-o icon-picture', {
+          title: lang.image.shapeThumbnail,
+          event: 'imageShape',
+          value: 'img-thumbnail'
+        });
+        var noneButton = tplIconButton('fa fa-times icon-times', {
+          title: lang.image.shapeNone,
+          event: 'imageShape',
+          value: ''
+        });
+
         var removeButton = tplIconButton('fa fa-trash-o icon-trash', {
           title: lang.image.remove,
           event: 'removeMedia',
@@ -4756,6 +4815,7 @@
 
         var content = '<div class="btn-group">' + fullButton + halfButton + quarterButton + '</div>' +
                       '<div class="btn-group">' + leftButton + rightButton + justifyButton + '</div>' +
+                      '<div class="btn-group">' + roundedButton + circleButton + thumbnailButton + noneButton + '</div>' +
                       '<div class="btn-group">' + removeButton + '</div>';
         return tplPopover('note-image-popover', content);
       };
@@ -4926,7 +4986,7 @@
                    '<div class="title">' + lang.shortcut.shortcuts + '</div>' +
                    (agent.isMac ? tplShortcutTable(lang, options) : replaceMacKeys(tplShortcutTable(lang, options))) +
                    '<p class="text-center">' +
-                     '<a href="//hackerwins.github.io/summernote/" target="_blank">Summernote 0.5.9</a> · ' +
+                     '<a href="//hackerwins.github.io/summernote/" target="_blank">Summernote 0.5.10</a> · ' +
                      '<a href="//github.com/HackerWins/summernote" target="_blank">Project</a> · ' +
                      '<a href="//github.com/HackerWins/summernote/issues" target="_blank">Issues</a>' +
                    '</p>';
@@ -5021,7 +5081,7 @@
      */
     this.createLayoutByAirMode = function ($holder, options) {
       var keyMap = options.keyMap[agent.isMac ? 'mac' : 'pc'];
-      var langInfo = $.summernote.lang[options.lang];
+      var langInfo = $.extend($.summernote.lang['en-US'], $.summernote.lang[options.lang]);
 
       var id = func.uniqueId();
 
@@ -5091,7 +5151,7 @@
       //031. create codable
       $('<textarea class="note-codable"></textarea>').prependTo($editor);
 
-      var langInfo = $.summernote.lang[options.lang];
+      var langInfo = $.extend($.summernote.lang['en-US'], $.summernote.lang[options.lang]);
 
       //04. create Toolbar
       var toolbarHTML = '';
