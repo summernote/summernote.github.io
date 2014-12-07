@@ -2,19 +2,19 @@
 -------------------------------------------------- */
 body { padding-top: 50px; }
 
-.navbar-fixed-top {
+.navbar-default.navbar-fixed-top {
   opacity: 0.90;
   background-image: linear-gradient(rgb(4, 81, 155), rgb(4, 70, 135) 60%, rgb(3, 55, 105));
 }
-.navbar-fixed-top .navbar-brand,
-.navbar-fixed-top .navbar-brand:hover,
-.navbar-fixed-top .navbar-nav>li>a,
-.navbar-fixed-top .navbar-nav>li>a:hover {
+.navbar-default.navbar-fixed-top .navbar-brand,
+.navbar-default.navbar-fixed-top .navbar-brand:hover,
+.navbar-default.navbar-fixed-top .navbar-nav>li>a,
+.navbar-default.navbar-fixed-top .navbar-nav>li>a:hover {
   color: white;
 }
 
-.navbar-fixed-top .navbar-brand:hover,
-.navbar-fixed-top .navbar-nav>li>a:hover {
+.navbar-default.navbar-fixed-top .navbar-brand:hover,
+.navbar-default.navbar-fixed-top .navbar-nav>li>a:hover {
   background-color: rgb(2, 47, 90);
 }
 
