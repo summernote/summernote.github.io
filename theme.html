@@ -7,20 +7,21 @@
   <meta name="author" content="https://github.com/HackerWins">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
-  <!-- include jquery -->
-  <script src="//code.jquery.com/jquery-1.9.1.min.js"></script> 
 
-  <!-- include libraries BS3 -->
+  <!-- jquery, bootstrap, font-awesome -->
+  <script src="bower_components/jquery/dist/jquery.js"></script>
+  <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
   <link id="bsTheme" rel="stylesheet"/>
-  <script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" />
+  <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+  <link href="bower_components/fontawesome/css/font-awesome.css" rel="stylesheet">
 
   <!-- include summernote -->
-  <link rel="stylesheet" type="text/css" href="summernote-dist/summernote.css" /> 
-  <script type="text/javascript" src="summernote-dist/summernote.min.js"></script>
+  <link href="bower_components/summernote/dist/summernote.css" rel="stylesheet">
+  <script src="bower_components/summernote/dist/summernote.js"></script>
 
   <script type="text/javascript">
-    $("#bsTheme").attr("href", "//netdna.bootstrapcdn.com/bootswatch/3.0.0/" + location.hash.substring(1) + "/bootstrap.min.css");
+    var theme = location.hash.substring(1);
+    $("#bsTheme").attr("href", "//netdna.bootstrapcdn.com/bootswatch/3.0.0/" + theme + "/bootstrap.min.css");
     $(document).ready(function() {
       $('.summernote').summernote({tabsize: 2});
     });
