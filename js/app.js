@@ -34,17 +34,17 @@ page.config(['$routeProvider', '$locationProvider',
             function ($routeProvider, $locationProvider) {
 
   $routeProvider.when('/', {
-    templateUrl: '/html/main.html'
+    templateUrl: 'html/main.html'
   }).when('/features', {
-    templateUrl: '/html/features.html',
+    templateUrl: 'html/features.html',
     controller: 'PageController'
   }).when('/example', {
-    templateUrl: '/html/example.html',
+    templateUrl: 'html/example.html',
     controller: 'PageController'
   }).when('/history', {
-    templateUrl: '/html/history.html',
+    templateUrl: 'html/history.html',
     controller: 'PageController'
   }).when('/about', {
-    templateUrl: '/html/about.html'
+    templateUrl: 'html/about.html'
   }).otherwise({redirectTo: '/'});
 }]);
