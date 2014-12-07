@@ -47,6 +47,4 @@ page.config(['$routeProvider', '$locationProvider',
   }).when('/about', {
     templateUrl: '/html/about.html'
   }).otherwise({redirectTo: '/'});
-
-  $locationProvider.html5Mode(true);
 }]);
