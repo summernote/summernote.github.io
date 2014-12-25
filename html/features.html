@@ -8,66 +8,66 @@
       <div class="bs-page-sidebar" role="complementary">
         <ul class="nav">
           <li>
-            <a href="#download">Download Summernote</a>
+            <a data-target="#download" ng-click="scrollTo('download')">Download Summernote</a>
             <ul class="nav">
-              <li><a href="#download-compiled">Compiled CSS, JS</a></li>
-              <li><a href="#download-additional">Additional downloads</a></li>
+              <li><a data-target="#download-compiled" ng-click="scrollTo('download-compiled')">Compiled CSS, JS</a></li>
+              <li><a data-target="#download-additional" ng-click="scrollTo('download-additional')">Additional downloads</a></li>
             </ul>
           </li>
           <li>
-            <a href="#installation">Installation</a>
+            <a data-target="#installation" ng-click="scrollTo('installation')">Installation</a>
             <ul class="nav">
-              <li><a href="#installation-doctype">Require html5 doctype</a></li>
-              <li><a href="#installation-include">Include js/css</a></li>
-              <li><a href="#installation-target">Target element</a></li>
-              <li><a href="#installation-summernote">Run summernote</a></li>
+              <li><a data-target="#installation-doctype" ng-click="scrollTo('installation-doctype')">Require html5 doctype</a></li>
+              <li><a data-target="#installation-include" ng-click="scrollTo('installation-include')">Include js/css</a></li>
+              <li><a data-target="#installation-target" ng-click="scrollTo('installation-target')">Target element</a></li>
+              <li><a data-target="#installation-summernote" ng-click="scrollTo('installation-summernote')">Run summernote</a></li>
             </ul>
           </li>
           <li>
-            <a href="#api">API</a>
+            <a data-target="#api" ng-click="scrollTo('api')">API</a>
             <ul class="nav">
               <li>
-                <a href="#api-summernote">summernote</a>
+                <a data-target="#api-summernote" ng-click="scrollTo('api-summernote')">summernote</a>
                 <ul class="nav">
-                  <li><a href="#heightandfocus">Height and Focus</a></li>
-                  <li><a href="#customtoolbar">Custom toolbar</a></li>
-                  <li><a href="#customairpopover">Custom popover for Air-mode</a></li>
+                  <li><a data-target="#heightandfocus" ng-click="scrollTo('heightandfocus')">Height and Focus</a></li>
+                  <li><a data-target="#customtoolbar" ng-click="scrollTo('customtoolbar')">Custom toolbar</a></li>
+                  <li><a data-target="#customairpopover" ng-click="scrollTo('customairpopover')">Custom popover for Air-mode</a></li>
                 </ul>
               </li>
-              <li><a href="#api-destroy">destroy</a></li>
-              <li><a href="#api-code">code</a></li>
+              <li><a data-target="#api-destroy" ng-click="scrollTo('api-destroy')">destroy</a></li>
+              <li><a data-target="#api-code" ng-click="scrollTo('api-code')">code</a></li>
             </ul>
           </li>
           <li>
-            <a href="#callbacks">Callbacks</a>
+            <a data-target="#callbacks" ng-click="scrollTo('callbacks')">Callbacks</a>
             <ul class="nav">
-              <li><a href="#callbacks-oninit">oninit</a></li>
-              <li><a href="#callbacks-onenter">onenter</a></li>
-              <li><a href="#callbacks-onfocus">onfocus</a></li>
-              <li><a href="#callbacks-onblur">onblur</a></li>
-              <li><a href="#callbacks-onkeyup">onkeyup</a></li>
-              <li><a href="#callbacks-onkeydown">onkeydown</a></li>
-              <li><a href="#callbacks-onpaste">onpaste</a></li>
-              <li><a href="#callbacks-onImageUpload">onImageUpload</a></li>
-              <li><a href="#callbacks-onChange">onChange</a></li>
+              <li><a data-target="#callbacks-oninit" ng-click="scrollTo('callbacks-oninit')">oninit</a></li>
+              <li><a data-target="#callbacks-onenter" ng-click="scrollTo('callbacks-onenter')">onenter</a></li>
+              <li><a data-target="#callbacks-onfocus" ng-click="scrollTo('callbacks-onfocus')">onfocus</a></li>
+              <li><a data-target="#callbacks-onblur" ng-click="scrollTo('callbacks-onblur')">onblur</a></li>
+              <li><a data-target="#callbacks-onkeyup" ng-click="scrollTo('callbacks-onkeyup')">onkeyup</a></li>
+              <li><a data-target="#callbacks-onkeydown" ng-click="scrollTo('callbacks-onkeydown')">onkeydown</a></li>
+              <li><a data-target="#callbacks-onpaste" ng-click="scrollTo('callbacks-onpaste')">onpaste</a></li>
+              <li><a data-target="#callbacks-onImageUpload" ng-click="scrollTo('callbacks-onImageUpload')">onImageUpload</a></li>
+              <li><a data-target="#callbacks-onChange" ng-click="scrollTo('callbacks-onChange')">onChange</a></li>
             </ul>
           </li>
           <li>
-            <a href="#i18n">I18n Support</a>
+            <a data-target="#i18n" ng-click="scrollTo('i18n')">I18n Support</a>
             <ul class="nav">
-              <li><a href="#i18n-language">Language</a></li>
+              <li><a data-target="#i18n-language" ng-click="scrollTo('i18n-language')">Language</a></li>
             </ul>
           </li>
           <li>
-            <a href="#integration">Server Integration</a>
+            <a data-target="#integration" ng-click="scrollTo('integration')">Server Integration</a>
             <ul class="nav">
-              <li><a href="#integration-php">php example</a></li>
-              <li><a href="#integration-nodejs">node.js example</a></li>
-              <li><a href="#integration-django">Django-summernote</a></li>
-              <li><a href="#integration-rails">summernote-rails</a></li>
+              <li><a data-target="#integration-php" ng-click="scrollTo('integration-php')">php example</a></li>
+              <li><a data-target="#integration-nodejs" ng-click="scrollTo('integration-nodejs')">node.js example</a></li>
+              <li><a data-target="#integration-django" ng-click="scrollTo('integration-django')">Django-summernote</a></li>
+              <li><a data-target="#integration-rails" ng-click="scrollTo('integration-rails')">summernote-rails</a></li>
             </ul>
           </li>
-          <li><a href="#keyboard">Keyboard shortcuts</a></li>
+          <li><a data-target="#keyboard" ng-click="scrollTo('keyboard')">Keyboard shortcuts</a></li>
         </ul>
       </div>
     </div>

@@ -175,6 +175,7 @@ hr.soften {
   display: block;
   color: #716b7a;
   padding: 5px 20px;
+  cursor: pointer;
 }
 .bs-page-sidebar .nav > li > a:hover,
 .bs-page-sidebar .nav > li > a:focus {
