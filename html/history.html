@@ -7,9 +7,9 @@
     <div class="col-md-3">
       <div class="bs-page-sidebar" role="complementary">
         <ul class="nav">
-          <li><a href="#history">Version History</a></li>
-          <li><a href="#blog2">Ideas</a></li>
-          <li><a href="#blog1">Why summernote?</a></li>
+          <li><a data-target="#history" ng-click="scrollTo('history')">Version History</a></li>
+          <li><a data-target="#ideas" ng-click="scrollTo('ideas')">Ideas</a></li>
+          <li><a data-target="#why" ng-click="scrollTo('why')">Why summernote?</a></li>
         </ul>
       </div>
     </div>
@@ -82,7 +82,7 @@
         </ul>
       </section>
       <section>
-        <h2 id="blog2">Ideas</h2>
+        <h2 id="ideas">Ideas</h2>
         <p>I tried many bootstrap wysiwyg editors. They suck! We surely made a better one. Alan's code is much more efficient than others.</p>
         <p>We made simple implementations.</p>
         <ul>
@@ -95,7 +95,7 @@
           and now some nice guys help us for debug, quality, idea</p>
       </section>
       <section>
-        <h2 id="blog1">Why summernote?</h2>
+        <h2 id="why">Why summernote?</h2>
         <p>Alan made a documentation tool similar to google docs for his company’s project. Then he spent time to make his own simple editor on bootstrap. When I heard the news, I needed to see Alan. I know all web developers have thirst for their own customized web editors.</p>
         <p>So he exposed summernote in github.</p>
       </section>

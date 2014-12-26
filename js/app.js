@@ -1,8 +1,8 @@
 var page = angular.module('summernote-page', ['ngRoute']);
 
-page.controller('PageController', function ($scope) {
+page.controller('PageController', function ($scope, $location, $anchorScroll) {
   var $body = $(document.body);
-  var $navbar = $('.bs-page-navbar');
+  var $navbar = $('.navbar');
 
   $scope.$on('$routeChangeSuccess', function () {
     var $sidebar = $('.bs-page-sidebar');
@@ -28,6 +28,11 @@ page.controller('PageController', function ($scope) {
       hljs.highlightBlock(block);
     });
   });
+
+  $scope.scrollTo = function(id) {
+    $location.hash(id);
+    $anchorScroll();
+  };
 });
 
 page.config(['$routeProvider', '$locationProvider',
