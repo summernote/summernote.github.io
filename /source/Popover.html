@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">define([
+  'summernote/core/func',
+  'summernote/core/list',
+  'summernote/module/Button'
+], function (func, list, Button) {
+<span id='Popover'>  /**
+</span>   * Popover (http://getbootstrap.com/javascript/#popovers)
+   */
+  var Popover = function () {
+    var button = new Button();
+
+<span id='Popover-method-posFromPlaceholder'>    /**
+</span>     * returns position from placeholder
+     * @param {Node} placeholder
+     * @param {Boolean} isAirMode
+     */
+    var posFromPlaceholder = function (placeholder, isAirMode) {
+      var $placeholder = $(placeholder);
+      var pos = isAirMode ? $placeholder.offset() : $placeholder.position();
+      var height = $placeholder.outerHeight(true); // include margin
+
+      // popover below placeholder.
+      return {
+        left: pos.left,
+        top: pos.top + height
+      };
+    };
+
+<span id='Popover-method-showPopover'>    /**
+</span>     * show popover
+     * @param {jQuery} popover
+     * @param {Position} pos
+     */
+    var showPopover = function ($popover, pos) {
+      $popover.css({
+        display: 'block',
+        left: pos.left,
+        top: pos.top
+      });
+    };
+
+    var PX_POPOVER_ARROW_OFFSET_X = 20;
+
+<span id='Popover-method-update'>    /**
+</span>     * update current state
+     * @param {jQuery} $popover - popover container
+     * @param {Object} styleInfo - style object
+     * @param {Boolean} isAirMode
+     */
+    this.update = function ($popover, styleInfo, isAirMode) {
+      button.update($popover, styleInfo);
+
+      var $linkPopover = $popover.find('.note-link-popover');
+      if (styleInfo.anchor) {
+        var $anchor = $linkPopover.find('a');
+        var href = $(styleInfo.anchor).attr('href');
+        $anchor.attr('href', href).html(href);
+        showPopover($linkPopover, posFromPlaceholder(styleInfo.anchor, isAirMode));
+      } else {
+        $linkPopover.hide();
+      }
+
+      var $imagePopover = $popover.find('.note-image-popover');
+      if (styleInfo.image) {
+        showPopover($imagePopover, posFromPlaceholder(styleInfo.image, isAirMode));
+      } else {
+        $imagePopover.hide();
+      }
+
+      var $airPopover = $popover.find('.note-air-popover');
+      if (isAirMode &amp;&amp; !styleInfo.range.isCollapsed()) {
+        var bnd = func.rect2bnd(list.last(styleInfo.range.getClientRects()));
+        showPopover($airPopover, {
+          left: Math.max(bnd.left + bnd.width / 2 - PX_POPOVER_ARROW_OFFSET_X, 0),
+          top: bnd.top + bnd.height
+        });
+      } else {
+        $airPopover.hide();
+      }
+    };
+
+<span id='Popover-method-updateRecentColor'>    /**
+</span>     * @param {Node} button
+     * @param {String} eventName
+     * @param {String} value
+     */
+    this.updateRecentColor = function (button, eventName, value) {
+      button.updateRecentColor(button, eventName, value);
+    };
+
+<span id='Popover-method-hide'>    /**
+</span>     * hide all popovers
+     * @param {jQuery} $popover - popover container
+     */
+    this.hide = function ($popover) {
+      $popover.children().hide();
+    };
+  };
+
+  return Popover;
+});
+</pre>
+</body>
+</html>

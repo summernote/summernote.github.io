@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">define([
+  'summernote/core/agent',
+  'summernote/core/dom'
+], function (agent, dom) {
+<span id='Style'>  /**
+</span>   * Style
+   * @class
+   */
+  var Style = function () {
+<span id='Style-method-jQueryCSS'>    /**
+</span>     * passing an array of style properties to .css()
+     * will result in an object of property-value pairs.
+     * (compability with version &lt; 1.9)
+     *
+     * @param  {jQuery} $obj
+     * @param  {Array} propertyNames - An array of one or more CSS properties.
+     * @returns {Object}
+     */
+    var jQueryCSS = function ($obj, propertyNames) {
+      if (agent.jqueryVersion &lt; 1.9) {
+        var result = {};
+        $.each(propertyNames, function (idx, propertyName) {
+          result[propertyName] = $obj.css(propertyName);
+        });
+        return result;
+      }
+      return $obj.css.call($obj, propertyNames);
+    };
+
+<span id='Style-method-stylePara'>    /**
+</span>     * paragraph level style
+     *
+     * @param {WrappedRange} rng
+     * @param {Object} styleInfo
+     */
+    this.stylePara = function (rng, styleInfo) {
+      $.each(rng.nodes(dom.isPara, {
+        includeAncestor: true
+      }), function (idx, para) {
+        $(para).css(styleInfo);
+      });
+    };
+
+<span id='Style-method-current'>    /**
+</span>     * get current style on cursor
+     *
+     * @param {WrappedRange} rng
+     * @param {Node} target - target element on event
+     * @return {Object} - object contains style properties.
+     */
+    this.current = function (rng, target) {
+      var $cont = $(dom.isText(rng.sc) ? rng.sc.parentNode : rng.sc);
+      var properties = ['font-family', 'font-size', 'text-align', 'list-style-type', 'line-height'];
+      var styleInfo = jQueryCSS($cont, properties) || {};
+
+      styleInfo['font-size'] = parseInt(styleInfo['font-size'], 10);
+
+      // document.queryCommandState for toggle state
+      styleInfo['font-bold'] = document.queryCommandState('bold') ? 'bold' : 'normal';
+      styleInfo['font-italic'] = document.queryCommandState('italic') ? 'italic' : 'normal';
+      styleInfo['font-underline'] = document.queryCommandState('underline') ? 'underline' : 'normal';
+      styleInfo['font-strikethrough'] = document.queryCommandState('strikeThrough') ? 'strikethrough' : 'normal';
+      styleInfo['font-superscript'] = document.queryCommandState('superscript') ? 'superscript' : 'normal';
+      styleInfo['font-subscript'] = document.queryCommandState('subscript') ? 'subscript' : 'normal';
+
+      // list-style-type to list-style(unordered, ordered)
+      if (!rng.isOnList()) {
+        styleInfo['list-style'] = 'none';
+      } else {
+        var aOrderedType = ['circle', 'disc', 'disc-leading-zero', 'square'];
+        var isUnordered = $.inArray(styleInfo['list-style-type'], aOrderedType) &gt; -1;
+        styleInfo['list-style'] = isUnordered ? 'unordered' : 'ordered';
+      }
+
+      var para = dom.ancestor(rng.sc, dom.isPara);
+      if (para &amp;&amp; para.style['line-height']) {
+        styleInfo['line-height'] = para.style.lineHeight;
+      } else {
+        var lineHeight = parseInt(styleInfo['line-height'], 10) / parseInt(styleInfo['font-size'], 10);
+        styleInfo['line-height'] = lineHeight.toFixed(1);
+      }
+
+      styleInfo.image = dom.isImg(target) &amp;&amp; target;
+      styleInfo.anchor = rng.isOnAnchor() &amp;&amp; dom.ancestor(rng.sc, dom.isAnchor);
+      styleInfo.ancestors = dom.listAncestor(rng.sc, dom.isEditable);
+      styleInfo.range = rng;
+
+      return styleInfo;
+    };
+  };
+
+  return Style;
+});
+</pre>
+</body>
+</html>

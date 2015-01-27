@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">define([
+  'summernote/core/dom', 'summernote/core/range', 'summernote/core/list'
+], function (dom, range, list) {
+<span id='Table'>  /**
+</span>   * Table
+   * @class
+   */
+  var Table = function () {
+<span id='Table-method-tab'>    /**
+</span>     * handle tab key
+     *
+     * @param {WrappedRange} rng
+     * @param {Boolean} isShift
+     */
+    this.tab = function (rng, isShift) {
+      var cell = dom.ancestor(rng.commonAncestor(), dom.isCell);
+      var table = dom.ancestor(cell, dom.isTable);
+      var cells = dom.listDescendant(table, dom.isCell);
+
+      var nextCell = list[isShift ? 'prev' : 'next'](cells, cell);
+      if (nextCell) {
+        range.create(nextCell, 0).select();
+      }
+    };
+
+<span id='Table-method-createTable'>    /**
+</span>     * create empty table element
+     *
+     * @param {Number} rowCount
+     * @param {Number} colCount
+     * @return {Node}
+     */
+    this.createTable = function (colCount, rowCount) {
+      var tds = [], tdHTML;
+      for (var idxCol = 0; idxCol &lt; colCount; idxCol++) {
+        tds.push('&lt;td&gt;' + dom.blank + '&lt;/td&gt;');
+      }
+      tdHTML = tds.join('');
+
+      var trs = [], trHTML;
+      for (var idxRow = 0; idxRow &lt; rowCount; idxRow++) {
+        trs.push('&lt;tr&gt;' + tdHTML + '&lt;/tr&gt;');
+      }
+      trHTML = trs.join('');
+      return $('&lt;table class=&quot;table table-bordered&quot;&gt;' + trHTML + '&lt;/table&gt;')[0];
+    };
+  };
+  return Table;
+});
+
+</pre>
+</body>
+</html>
