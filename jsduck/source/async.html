@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">define('summernote/core/async', function () {
+<span id='global-property-async'>  /**
+</span>   * Async functions which returns `Promise`
+   */
+  var async = (function () {
+<span id='global-method-readFileAsDataURL'>    /**
+</span>     * read contents of file as representing URL
+     *
+     * @param {File} file
+     * @return {Promise} - then: sDataUrl
+     */
+    var readFileAsDataURL = function (file) {
+      return $.Deferred(function (deferred) {
+        $.extend(new FileReader(), {
+          onload: function (e) {
+            var sDataURL = e.target.result;
+            deferred.resolve(sDataURL);
+          },
+          onerror: function () {
+            deferred.reject(this);
+          }
+        }).readAsDataURL(file);
+      }).promise();
+    };
+  
+<span id='global-method-createImage'>    /**
+</span>     * create `&lt;image&gt;` from url string
+     *
+     * @param {String} sUrl
+     * @param {String} filename
+     * @return {Promise} - then: $image
+     */
+    var createImage = function (sUrl, filename) {
+      return $.Deferred(function (deferred) {
+        var $img = $('&lt;img&gt;');
+
+        $img.one('load', function () {
+          $img.off('error abort');
+          deferred.resolve($img);
+        }).one('error abort', function () {
+          $img.off('load').detach();
+          deferred.reject($img);
+        }).css({
+          display: 'none'
+        }).appendTo(document.body).attr({
+          'src': sUrl,
+          'data-filename': filename
+        });
+      }).promise();
+    };
+
+    return {
+      readFileAsDataURL: readFileAsDataURL,
+      createImage: createImage
+    };
+  })();
+
+  return async;
+});
+</pre>
+</body>
+</html>
