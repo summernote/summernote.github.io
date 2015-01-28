@@ -167,7 +167,9 @@
       },
       fontname: function (lang, options) {
         var items = options.fontNames.reduce(function (memo, v) {
-          if (!agent.isFontInstalled(v)) { return memo; }
+          if (!agent.isFontInstalled(v) &amp;&amp; options.fontNamesIgnoreCheck.indexOf(v) === -1) {
+            return memo;
+          }
           return memo + '&lt;li&gt;&lt;a data-event=&quot;fontName&quot; href=&quot;#&quot; data-value=&quot;' + v + '&quot; style=&quot;font-family:\'' + v + '\'&quot;&gt;' +
                           '&lt;i class=&quot;fa fa-check&quot;&gt;&lt;/i&gt; ' + v +
                         '&lt;/a&gt;&lt;/li&gt;';
