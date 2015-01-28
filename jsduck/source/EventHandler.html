@@ -46,10 +46,6 @@
     var toolbar = new Toolbar(), popover = new Popover();
     var handle = new Handle(), dialog = new Dialog();
 
-    this.getEditor = function () {
-      return editor;
-    };
-
 <span id='EventHandler-method-makeLayoutInfo'>    /**
 </span>     * returns makeLayoutInfo from editor's descendant node.
      *
@@ -74,15 +70,11 @@
 <span id='EventHandler-method-insertImages'>    /**
 </span>     * insert Images from file array.
      *
-     * @param {Object} layoutInfo
+     * @param {jQuery} $editable
      * @param {File[]} files
      */
-    var insertImages = function (layoutInfo, files) {
-      var $editor = layoutInfo.editor(),
-          $editable = layoutInfo.editable();
-
+    var insertImages = function ($editable, files) {
       var callbacks = $editable.data('callbacks');
-      var options = $editor.data('options');
 
       // If onImageUpload options setted
       if (callbacks.onImageUpload) {
@@ -91,21 +83,13 @@
       } else {
         $.each(files, function (idx, file) {
           var filename = file.name;
-          if (options.maximumImageFileSize &amp;&amp; options.maximumImageFileSize &lt; file.size) {
+          async.readFileAsDataURL(file).then(function (sDataURL) {
+            editor.insertImage($editable, sDataURL, filename);
+          }).fail(function () {
             if (callbacks.onImageUploadError) {
-              callbacks.onImageUploadError(options.langInfo.image.maximumFileSizeError);
-            } else {
-              alert(options.langInfo.image.maximumFileSizeError);
+              callbacks.onImageUploadError();
             }
-          } else {
-            async.readFileAsDataURL(file).then(function (sDataURL) {
-              editor.insertImage($editable, sDataURL, filename);
-            }).fail(function () {
-              if (callbacks.onImageUploadError) {
-                callbacks.onImageUploadError();
-              }
-            });
-          }
+          });
         });
       }
     };
@@ -149,8 +133,25 @@
             editor.insertImage($editable, data);
           } else {
             // array of files
-            insertImages(layoutInfo, data);
+            insertImages($editable, data);
           }
+        }).fail(function () {
+          editor.restoreRange($editable);
+        });
+      },
+
+<span id='EventHandler-method-showVideoDialog'>      /**
+</span>       * @param {Object} layoutInfo
+       */
+      showVideoDialog: function (layoutInfo) {
+        var $dialog = layoutInfo.dialog(),
+            $editable = layoutInfo.editable(),
+            videoInfo = editor.getVideoInfo($editable);
+
+        editor.saveRange($editable);
+        dialog.showVideoDialog($editable, $dialog, videoInfo).then(function (sUrl) {
+          editor.restoreRange($editable);
+          editor.insertVideo($editable, sUrl);
         }).fail(function () {
           editor.restoreRange($editable);
         });
@@ -175,7 +176,10 @@
         $editable = layoutInfo.editable(),
         $codable = layoutInfo.codable();
 
+        var options = $editor.data('options');
+
         var resize = function (size) {
+          $editor.css('width', size.w);
           $editable.css('height', size.h);
           $codable.css('height', size.h);
           if ($codable.data('cmeditor')) {
@@ -190,6 +194,7 @@
 
           $window.on('resize', function () {
             resize({
+              w: $window.width(),
               h: $window.height() - $toolbar.outerHeight()
             });
           }).trigger('resize');
@@ -198,6 +203,7 @@
         } else {
           $window.off('resize');
           resize({
+            w: options.width || '',
             h: $editable.data('orgheight')
           });
           $scrollbar.css('overflow', 'visible');
@@ -211,8 +217,7 @@
         $toolbar = layoutInfo.toolbar(),
         $editable = layoutInfo.editable(),
         $codable = layoutInfo.codable(),
-        $popover = layoutInfo.popover(),
-        $handle = layoutInfo.handle();
+        $popover = layoutInfo.popover();
 
         var options = $editor.data('options');
 
@@ -222,11 +227,10 @@
 
         var isCodeview = $editor.hasClass('codeview');
         if (isCodeview) {
-          $codable.val(dom.html($editable, options.prettifyHtml));
+          $codable.val(dom.html($editable, true));
           $codable.height($editable.height());
           toolbar.deactivate($toolbar);
           popover.hide($popover);
-          handle.hide($handle);
           $codable.focus();
 
           // activate CodeMirror as codable
@@ -254,7 +258,7 @@
             cmEditor.toTextArea();
           }
 
-          $editable.html(dom.value($codable, options.prettifyHtml) || dom.emptyPara);
+          $editable.html(dom.value($codable) || dom.emptyPara);
           $editable.height(options.height ? $codable.height() : 'auto');
 
           toolbar.activate($toolbar);
@@ -303,50 +307,18 @@
      */
     var hPasteClipboardImage = function (event) {
       var clipboardData = event.originalEvent.clipboardData;
-      var layoutInfo = makeLayoutInfo(event.currentTarget || event.target);
-      var $editable = layoutInfo.editable();
-
       if (!clipboardData || !clipboardData.items || !clipboardData.items.length) {
-        var callbacks = $editable.data('callbacks');
-        // only can run if it has onImageUpload method
-        if (!callbacks.onImageUpload) {
-          return;
-        }
-
-        // save cursor
-        editor.saveNode($editable);
-        editor.saveRange($editable);
-
-        $editable.html('');
-
-        setTimeout(function () {
-          var $img = $editable.find('img');
-          var datauri = $img[0].src;
-
-          var data = atob(datauri.split(',')[1]);
-          var array = new Uint8Array(data.length);
-          for (var i = 0; i &lt; data.length; i++) {
-            array[i] = data.charCodeAt(i);
-          }
-
-          var blob = new Blob([array], { type : 'image/png'});
-          blob.name = 'clipboard.png';
-
-          editor.restoreNode($editable);
-          editor.restoreRange($editable);
-          insertImages(layoutInfo, [blob]);
-
-          editor.afterCommand($editable);
-        }, 0);
-
         return;
       }
+
+      var layoutInfo = makeLayoutInfo(event.currentTarget || event.target),
+          $editable = layoutInfo.editable();
 
       var item = list.head(clipboardData.items);
       var isClipboardImage = item.kind === 'file' &amp;&amp; item.type.indexOf('image/') !== -1;
 
       if (isClipboardImage) {
-        insertImages(layoutInfo, [item.getAsFile()]);
+        insertImages($editable, [item.getAsFile()]);
       }
 
       editor.afterCommand($editable);
@@ -384,12 +356,13 @@
           popover.update($popover, {image: target}, isAirMode);
         }).one('mouseup', function () {
           $document.off('mousemove');
-          editor.afterCommand($editable);
         });
 
         if (!$target.data('ratio')) { // original ratio.
           $target.data('ratio', $target.height() / $target.width());
         }
+
+        editor.afterCommand($editable);
       }
     };
 
@@ -425,15 +398,18 @@
         if (hide) {
           $btn.parents('.popover').hide();
         }
-
+        
         if (editor[eventName]) { // on command
           var $editable = layoutInfo.editable();
           $editable.trigger('focus');
           editor[eventName]($editable, value, $target);
         } else if (commands[eventName]) {
           commands[eventName].call(this, layoutInfo);
-        } else if ($.isFunction($.summernote.pluginEvents[eventName])) {
-          $.summernote.pluginEvents[eventName](layoutInfo, value, $target);
+        } else if ($.summernote.plugins[eventName]) {
+          var plugin = $.summernote.plugins[eventName];
+          if ($.isFunction(plugin.event)) {
+            plugin.event(event, editor, layoutInfo);
+          }
         }
 
         // after command
@@ -521,16 +497,16 @@
 </span>     * Drag and Drop Events
      *
      * @param {Object} layoutInfo - layout Informations
-     * @param {Object} options
+     * @param {Boolean} disableDragAndDrop
      */
-    var handleDragAndDropEvent = function (layoutInfo, options) {
-      if (options.disableDragAndDrop) {
+    var handleDragAndDropEvent = function (layoutInfo, disableDragAndDrop) {
+      if (disableDragAndDrop) {
         // prevent default drop event
         $document.on('drop', function (e) {
           e.preventDefault();
         });
       } else {
-        attachDragAndDropEvent(layoutInfo, options);
+        attachDragAndDropEvent(layoutInfo);
       }
     };
 
@@ -538,9 +514,8 @@
 </span>     * attach Drag and Drop Events
      *
      * @param {Object} layoutInfo - layout Informations
-     * @param {Object} options
      */
-    var attachDragAndDropEvent = function (layoutInfo, options) {
+    var attachDragAndDropEvent = function (layoutInfo) {
       var collection = $(),
           $dropzone = layoutInfo.dropzone,
           $dropzoneMessage = layoutInfo.dropzone.find('.note-dropzone-message');
@@ -552,7 +527,7 @@
           layoutInfo.editor.addClass('dragover');
           $dropzone.width(layoutInfo.editor.width());
           $dropzone.height(layoutInfo.editor.height());
-          $dropzoneMessage.text(options.langInfo.image.dragImageHere);
+          $dropzoneMessage.text('Drag Image Here');
         }
         collection = collection.add(e.target);
       }).on('dragleave', function (e) {
@@ -568,10 +543,10 @@
       // change dropzone's message on hover.
       $dropzone.on('dragenter', function () {
         $dropzone.addClass('hover');
-        $dropzoneMessage.text(options.langInfo.image.dropImage);
+        $dropzoneMessage.text('Drop Image');
       }).on('dragleave', function () {
         $dropzone.removeClass('hover');
-        $dropzoneMessage.text(options.langInfo.image.dragImageHere);
+        $dropzoneMessage.text('Drag Image Here');
       });
 
       // attach dropImage
@@ -579,13 +554,10 @@
         event.preventDefault();
 
         var dataTransfer = event.originalEvent.dataTransfer;
-        var text = dataTransfer.getData('text/plain');
-        var layoutInfo = makeLayoutInfo(event.currentTarget || event.target);
-        layoutInfo.editable().focus();
-        if (dataTransfer &amp;&amp; dataTransfer.files &amp;&amp; dataTransfer.files.length) {
-          insertImages(layoutInfo, dataTransfer.files);
-        } else if (text) {
-          editor.insertText(layoutInfo.editable(), text);
+        if (dataTransfer &amp;&amp; dataTransfer.files) {
+          var layoutInfo = makeLayoutInfo(event.currentTarget || event.target);
+          layoutInfo.editable().focus();
+          insertImages(layoutInfo.editable(), dataTransfer.files);
         }
       }).on('dragover', false); // prevent default dragover event
     };
@@ -644,9 +616,7 @@
      */
     this.attach = function (layoutInfo, options) {
       // handlers for editable
-      if (options.shortcuts) {
-        this.bindKeyMap(layoutInfo, options.keyMap[agent.isMac ? 'mac' : 'pc']);
-      }
+      this.bindKeyMap(layoutInfo, options.keyMap[agent.isMac ? 'mac' : 'pc']);
       layoutInfo.editable.on('mousedown', hMousedown);
       layoutInfo.editable.on('keyup mouseup', hToolbarAndPopoverUpdate);
       layoutInfo.editable.on('scroll', hScroll);
@@ -660,7 +630,7 @@
       // handlers for frame mode (toolbar, statusbar)
       if (!options.airMode) {
         // handler for drag and drop
-        handleDragAndDropEvent(layoutInfo, options);
+        handleDragAndDropEvent(layoutInfo, options.disableDragAndDrop);
 
         // handler for toolbar
         layoutInfo.toolbar.on('click', hToolbarAndPopoverClick);
@@ -687,10 +657,10 @@
       layoutInfo.editor.data('options', options);
 
       // ret styleWithCSS for backColor / foreColor clearing with 'inherit'.
-      if (!agent.isMSIE) {
+      if (options.styleWithSpan &amp;&amp; !agent.isMSIE) {
         // protect FF Error: NS_ERROR_FAILURE: Failure
         setTimeout(function () {
-          document.execCommand('styleWithCSS', 0, options.styleWithSpan);
+          document.execCommand('styleWithCSS', 0, true);
         }, 0);
       }
 
@@ -730,7 +700,6 @@
       // All editor status will be saved on editable with jquery's data
       // for support multiple editor with singleton object.
       layoutInfo.editable.data('callbacks', {
-        onBeforeChange: options.onBeforeChange,
         onChange: options.onChange,
         onAutoSave: options.onAutoSave,
         onImageUpload: options.onImageUpload,
@@ -740,7 +709,7 @@
       });
     };
 
-    this.detach = function (layoutInfo, options) {
+    this.dettach = function (layoutInfo, options) {
       layoutInfo.editable.off();
 
       layoutInfo.popover.off();

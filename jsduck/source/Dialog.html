@@ -53,7 +53,7 @@
           // Cloning imageInput to clear element.
           $imageInput.replaceWith($imageInput.clone()
             .on('change', function () {
-              deferred.resolve(this.files || this.value);
+              deferred.resolve(this.files);
               $imageDialog.modal('hide');
             })
             .val('')
@@ -89,6 +89,42 @@
       });
     };
 
+<span id='Dialog-method-showVideoDialog'>    /**
+</span>     * Show video dialog and set event handlers on dialog controls.
+     *
+     * @param {jQuery} $dialog 
+     * @param {Object} videoInfo 
+     * @return {Promise}
+     */
+    this.showVideoDialog = function ($editable, $dialog, videoInfo) {
+      return $.Deferred(function (deferred) {
+        var $videoDialog = $dialog.find('.note-video-dialog');
+        var $videoUrl = $videoDialog.find('.note-video-url'),
+            $videoBtn = $videoDialog.find('.note-video-btn');
+
+        $videoDialog.one('shown.bs.modal', function () {
+          $videoUrl.val(videoInfo.text).keyup(function () {
+            toggleBtn($videoBtn, $videoUrl.val());
+          }).trigger('keyup').trigger('focus');
+
+          $videoBtn.click(function (event) {
+            event.preventDefault();
+
+            deferred.resolve($videoUrl.val());
+            $videoDialog.modal('hide');
+          });
+        }).one('hidden.bs.modal', function () {
+          // dettach events
+          $videoUrl.off('keyup');
+          $videoBtn.off('click');
+
+          if (deferred.state() === 'pending') {
+            deferred.reject();
+          }
+        }).modal('show');
+      });
+    };
+
 <span id='Dialog-method-showLinkDialog'>    /**
 </span>     * Show link dialog and set event handlers on dialog controls.
      *
@@ -108,7 +144,7 @@
         $linkDialog.one('shown.bs.modal', function () {
           $linkText.val(linkInfo.text);
 
-          $linkText.on('input', function () {
+          $linkText.keyup(function () {
             // if linktext was modified by keyup,
             // stop cloning text from linkUrl
             linkInfo.text = $linkText.val();
@@ -120,7 +156,7 @@
             toggleBtn($linkBtn, linkInfo.text);
           }
 
-          $linkUrl.on('input', function () {
+          $linkUrl.keyup(function () {
             toggleBtn($linkBtn, $linkUrl.val());
             // display same link on `Text to display` input
             // when create a new link
@@ -143,9 +179,9 @@
             $linkDialog.modal('hide');
           });
         }).one('hidden.bs.modal', function () {
-          // detach events
-          $linkText.off('input');
-          $linkUrl.off('input');
+          // dettach events
+          $linkText.off('keyup');
+          $linkUrl.off('keyup');
           $linkBtn.off('click');
 
           if (deferred.state() === 'pending') {

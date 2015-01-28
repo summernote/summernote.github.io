@@ -44,25 +44,19 @@
 </span>     * create `&lt;image&gt;` from url string
      *
      * @param {String} sUrl
-     * @param {String} filename
      * @return {Promise} - then: $image
      */
     var createImage = function (sUrl, filename) {
       return $.Deferred(function (deferred) {
-        var $img = $('&lt;img&gt;');
-
-        $img.one('load', function () {
-          $img.off('error abort');
-          deferred.resolve($img);
+        $('&lt;img&gt;').one('load', function () {
+          deferred.resolve($(this));
         }).one('error abort', function () {
-          $img.off('load').detach();
-          deferred.reject($img);
+          deferred.reject($(this));
         }).css({
           display: 'none'
-        }).appendTo(document.body).attr({
-          'src': sUrl,
-          'data-filename': filename
-        });
+        }).appendTo(document.body)
+          .attr('src', sUrl)
+          .attr('data-filename', filename);
       }).promise();
     };
 
