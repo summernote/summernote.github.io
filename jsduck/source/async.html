@@ -16,12 +16,19 @@
 </head>
 <body onload="prettyPrint(); highlight();">
   <pre class="prettyprint lang-js">define('summernote/core/async', function () {
-<span id='global-property-async'>  /**
-</span>   * Async functions which returns `Promise`
+<span id='core-async'>  /**
+</span>   * @class core.async
+   *
+   * Async functions which returns `Promise`
+   *
+   * @singleton
+   * @alternateClassName async
    */
   var async = (function () {
-<span id='global-method-readFileAsDataURL'>    /**
-</span>     * read contents of file as representing URL
+<span id='core-async-method-readFileAsDataURL'>    /**
+</span>     * @method readFileAsDataURL
+     *
+     * read contents of file as representing URL
      *
      * @param {File} file
      * @return {Promise} - then: sDataUrl
@@ -40,8 +47,10 @@
       }).promise();
     };
   
-<span id='global-method-createImage'>    /**
-</span>     * create `&lt;image&gt;` from url string
+<span id='core-async-method-createImage'>    /**
+</span>     * @method createImage
+     *
+     * create `&lt;image&gt;` from url string
      *
      * @param {String} sUrl
      * @param {String} filename
