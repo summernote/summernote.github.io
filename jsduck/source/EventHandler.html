@@ -35,7 +35,9 @@
   }
 
 <span id='EventHandler'>  /**
-</span>   * EventHandler
+</span>   * @class EventHandler
+   *
+   * EventHandler
    */
   var EventHandler = function () {
     var $window = $(window);
@@ -53,8 +55,9 @@
 <span id='EventHandler-method-makeLayoutInfo'>    /**
 </span>     * returns makeLayoutInfo from editor's descendant node.
      *
+     * @private
      * @param {Node} descendant
-     * @returns {Object}
+     * @return {Object}
      */
     var makeLayoutInfo = function (descendant) {
       var $target = $(descendant).closest('.note-editor, .note-air-editor, .note-air-layout');
@@ -74,6 +77,7 @@
 <span id='EventHandler-method-insertImages'>    /**
 </span>     * insert Images from file array.
      *
+     * @private
      * @param {Object} layoutInfo
      * @param {File[]} files
      */

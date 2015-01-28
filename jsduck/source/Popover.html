@@ -20,16 +20,24 @@
   'summernote/core/list',
   'summernote/module/Button'
 ], function (func, list, Button) {
-<span id='Popover'>  /**
-</span>   * Popover (http://getbootstrap.com/javascript/#popovers)
+<span id='module-Popover'>  /**
+</span>   * @class module.Popover
+   *
+   * Popover (http://getbootstrap.com/javascript/#popovers)
+   *
    */
   var Popover = function () {
     var button = new Button();
 
-<span id='Popover-method-posFromPlaceholder'>    /**
+<span id='module-Popover-method-posFromPlaceholder'>    /**
 </span>     * returns position from placeholder
+     *
+     * @private
      * @param {Node} placeholder
      * @param {Boolean} isAirMode
+     * @return {Object}
+     * @return {Number} return.left
+     * @return {Number} return.top
      */
     var posFromPlaceholder = function (placeholder, isAirMode) {
       var $placeholder = $(placeholder);
@@ -43,8 +51,10 @@
       };
     };
 
-<span id='Popover-method-showPopover'>    /**
+<span id='module-Popover-method-showPopover'>    /**
 </span>     * show popover
+     *
+     * @private
      * @param {jQuery} popover
      * @param {Position} pos
      */
@@ -58,7 +68,7 @@
 
     var PX_POPOVER_ARROW_OFFSET_X = 20;
 
-<span id='Popover-method-update'>    /**
+<span id='module-Popover-method-update'>    /**
 </span>     * update current state
      * @param {jQuery} $popover - popover container
      * @param {Object} styleInfo - style object
@@ -96,7 +106,7 @@
       }
     };
 
-<span id='Popover-method-updateRecentColor'>    /**
+<span id='module-Popover-method-updateRecentColor'>    /**
 </span>     * @param {Node} button
      * @param {String} eventName
      * @param {String} value
@@ -105,7 +115,7 @@
       button.updateRecentColor(button, eventName, value);
     };
 
-<span id='Popover-method-hide'>    /**
+<span id='module-Popover-method-hide'>    /**
 </span>     * hide all popovers
      * @param {jQuery} $popover - popover container
      */

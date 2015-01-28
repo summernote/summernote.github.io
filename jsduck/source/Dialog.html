@@ -16,16 +16,18 @@
 </head>
 <body onload="prettyPrint(); highlight();">
   <pre class="prettyprint lang-js">define('summernote/module/Dialog', function () {
-<span id='Dialog'>  /**
-</span>   * Dialog 
+<span id='module-Dialog'>  /**
+</span>   * @class module.Dialog
    *
-   * @class
+   * Dialog
+   *
    */
   var Dialog = function () {
 
-<span id='Dialog-method-toggleBtn'>    /**
+<span id='module-Dialog-method-toggleBtn'>    /**
 </span>     * toggle button status
      *
+     * @private
      * @param {jQuery} $btn
      * @param {Boolean} isEnable
      */
@@ -34,7 +36,7 @@
       $btn.attr('disabled', !isEnable);
     };
 
-<span id='Dialog-method-showImageDialog'>    /**
+<span id='module-Dialog-method-showImageDialog'>    /**
 </span>     * show image dialog
      *
      * @param {jQuery} $editable
@@ -89,9 +91,10 @@
       });
     };
 
-<span id='Dialog-method-showLinkDialog'>    /**
+<span id='module-Dialog-method-showLinkDialog'>    /**
 </span>     * Show link dialog and set event handlers on dialog controls.
      *
+     * @param {jQuery} $editable
      * @param {jQuery} $dialog
      * @param {Object} linkInfo
      * @return {Promise}
@@ -155,10 +158,12 @@
       }).promise();
     };
 
-<span id='Dialog-method-showHelpDialog'>    /**
+<span id='module-Dialog-method-showHelpDialog'>    /**
 </span>     * show help dialog
      *
+     * @param {jQuery} $editable
      * @param {jQuery} $dialog
+     * @return {Promise}
      */
     this.showHelpDialog = function ($editable, $dialog) {
       return $.Deferred(function (deferred) {

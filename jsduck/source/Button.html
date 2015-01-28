@@ -18,18 +18,20 @@
   <pre class="prettyprint lang-js">define([
   'summernote/core/list'
 ], function (list) {
-<span id='Button'>  /**
-</span>   * Button
+<span id='module-Button'>  /**
+</span>   * @class module.Button
+   *
+   * Button
    */
   var Button = function () {
-<span id='Button-method-update'>    /**
+<span id='module-Button-method-update'>    /**
 </span>     * update button status
      *
      * @param {jQuery} $container
      * @param {Object} styleInfo
      */
     this.update = function ($container, styleInfo) {
-<span id='Button-method-checkDropdownMenu'>      /**
+<span id='module-Button-method-checkDropdownMenu'>      /**
 </span>       * handle dropdown's check mark (for fontname, fontsize, lineHeight).
        * @param {jQuery} $btn
        * @param {Number} value
@@ -42,9 +44,10 @@
         });
       };
 
-<span id='Button-method-btnState'>      /**
+<span id='module-Button-method-btnState'>      /**
 </span>       * update button state(active or not).
        *
+       * @private
        * @param {String} selector
        * @param {Function} pred
        */
@@ -112,7 +115,7 @@
       });
     };
 
-<span id='Button-method-updateRecentColor'>    /**
+<span id='module-Button-method-updateRecentColor'>    /**
 </span>     * update recent color
      *
      * @param {Node} button

@@ -19,7 +19,9 @@
   'summernote/core/agent', 'summernote/core/dom', 'summernote/core/func'
 ], function (agent, dom, func) {
 <span id='Renderer'>  /**
-</span>   * renderer
+</span>   * @class Renderer
+   *
+   * renderer
    *
    * rendering toolbar and editable
    */
@@ -911,6 +913,13 @@
       }
     };
 
+<span id='Renderer-method-getTemplate'>    /**
+</span>     *
+     * @return {Object}
+     * @return {Function} return.button
+     * @return {Function} return.iconButton
+     * @return {Function} return.dialog
+     */
     this.getTemplate = function () {
       return {
         button: tplButton,
@@ -919,10 +928,20 @@
       };
     };
 
+<span id='Renderer-method-addButtonInfo'>    /**
+</span>     *
+     * @param {String} name
+     * @param {Object} buttonInfo
+     */
     this.addButtonInfo = function (name, buttonInfo) {
       tplButtonInfo[name] = buttonInfo;
     };
 
+<span id='Renderer-method-addDialogInfo'>    /**
+</span>     *
+     * @param {String} name
+     * @param {Object} dialogInfo
+     */
     this.addDialogInfo = function (name, dialogInfo) {
       tplDialogInfo[name] = dialogInfo;
     };
