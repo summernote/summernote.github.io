@@ -22,25 +22,40 @@
   'summernote/core/range'
 ], function (list, func, dom, range) {
 
+<span id='editing-Bullet'>  /**
+</span>   * @class editing.Bullet
+   *
+   * @singleton
+   * @alternateClassName Bullet
+   */
   var Bullet = function () {
-<span id='global-property-insertOrderedList'>    /**
-</span>     * toggle ordered list
+<span id='editing-Bullet-method-insertOrderedList'>    /**
+</span>     * @method insertOrderedList
+     *
+     * toggle ordered list
+     *
      * @type command
      */
     this.insertOrderedList = function () {
       this.toggleList('OL');
     };
 
-<span id='global-property-insertUnorderedList'>    /**
-</span>     * toggle unordered list
+<span id='editing-Bullet-method-insertUnorderedList'>    /**
+</span>     * @method insertUnorderedList
+     *
+     * toggle unordered list
+     *
      * @type command
      */
     this.insertUnorderedList = function () {
       this.toggleList('UL');
     };
 
-<span id='global-property-indent'>    /**
-</span>     * indent
+<span id='editing-Bullet-method-indent'>    /**
+</span>     * @method indent
+     *
+     * indent
+     *
      * @type command
      */
     this.indent = function () {
@@ -66,8 +81,11 @@
       rng.select();
     };
 
-<span id='global-property-outdent'>    /**
-</span>     * outdent
+<span id='editing-Bullet-method-outdent'>    /**
+</span>     * @method outdent
+     *
+     * outdent
+     *
      * @type command
      */
     this.outdent = function () {
@@ -94,8 +112,11 @@
       rng.select();
     };
 
-<span id='global-method-toggleList'>    /**
-</span>     * toggle list
+<span id='editing-Bullet-method-toggleList'>    /**
+</span>     * @method toggleList
+     *
+     * toggle list
+     *
      * @param {String} listName - OL or UL
      */
     this.toggleList = function (listName) {
@@ -133,8 +154,10 @@
       range.createFromParaBookmark(bookmark, paras).select();
     };
 
-<span id='global-method-wrapList'>    /**
-</span>     * @param {Node[]} paras
+<span id='editing-Bullet-method-wrapList'>    /**
+</span>     * @method wrapList
+     *
+     * @param {Node[]} paras
      * @param {String} listName
      * @return {Node[]}
      */
@@ -163,8 +186,10 @@
       return paras;
     };
 
-<span id='global-method-releaseList'>    /**
-</span>     * @param {Array[]} clustereds
+<span id='editing-Bullet-method-releaseList'>    /**
+</span>     * @method releaseList
+     *
+     * @param {Array[]} clustereds
      * @param {Boolean} isEscapseToBody
      * @return {Node[]}
      */
