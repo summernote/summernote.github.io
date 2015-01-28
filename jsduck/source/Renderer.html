@@ -135,13 +135,6 @@
           hide: true
         });
       },
-      video: function (lang) {
-        return tplIconButton('fa fa-youtube-play', {
-          event: 'showVideoDialog',
-          title: lang.video.video,
-          hide: true
-        });
-      },
       table: function (lang) {
         var dropdown = '&lt;ul class=&quot;note-table dropdown-menu&quot;&gt;' +
                          '&lt;div class=&quot;note-dimension-picker&quot;&gt;' +
@@ -175,7 +168,7 @@
       fontname: function (lang, options) {
         var items = options.fontNames.reduce(function (memo, v) {
           if (!agent.isFontInstalled(v)) { return memo; }
-          return memo + '&lt;li&gt;&lt;a data-event=&quot;fontName&quot; href=&quot;#&quot; data-value=&quot;' + v + '&quot;&gt;' +
+          return memo + '&lt;li&gt;&lt;a data-event=&quot;fontName&quot; href=&quot;#&quot; data-value=&quot;' + v + '&quot; style=&quot;font-family:\'' + v + '\'&quot;&gt;' +
                           '&lt;i class=&quot;fa fa-check&quot;&gt;&lt;/i&gt; ' + v +
                         '&lt;/a&gt;&lt;/li&gt;';
         }, '');
@@ -187,20 +180,6 @@
           dropdown: '&lt;ul class=&quot;dropdown-menu&quot;&gt;' + items + '&lt;/ul&gt;'
         });
       },
-      fontsize: function (lang, options) {
-        var items = options.fontSizes.reduce(function (memo, v) {
-          return memo + '&lt;li&gt;&lt;a data-event=&quot;fontSize&quot; href=&quot;#&quot; data-value=&quot;' + v + '&quot;&gt;' +
-                          '&lt;i class=&quot;fa fa-check&quot;&gt;&lt;/i&gt; ' + v +
-                        '&lt;/a&gt;&lt;/li&gt;';
-        }, '');
-
-        var label = '&lt;span class=&quot;note-current-fontsize&quot;&gt;11&lt;/span&gt;';
-        return tplButton(label, {
-          title: lang.font.size,
-          dropdown: '&lt;ul class=&quot;dropdown-menu&quot;&gt;' + items + '&lt;/ul&gt;'
-        });
-      },
-
       color: function (lang) {
         var colorButtonLabel = '&lt;i class=&quot;fa fa-font&quot; style=&quot;color:black;background-color:yellow;&quot;&gt;&lt;/i&gt;';
         var colorButton = tplButton(colorButtonLabel, {
@@ -253,24 +232,6 @@
         return tplIconButton('fa fa-underline', {
           event: 'underline',
           title: lang.font.underline
-        });
-      },
-      strikethrough: function (lang) {
-        return tplIconButton('fa fa-strikethrough', {
-          event: 'strikethrough',
-          title: lang.font.strikethrough
-        });
-      },
-      superscript: function (lang) {
-        return tplIconButton('fa fa-superscript', {
-          event: 'superscript',
-          title: lang.font.superscript
-        });
-      },
-      subscript: function (lang) {
-        return tplIconButton('fa fa-subscript', {
-          event: 'subscript',
-          title: lang.font.subscript
         });
       },
       clear: function (lang) {
@@ -508,91 +469,122 @@
      * @param {String} title
      * @param {String} body
      */
-    var tplShortcut = function (title, body) {
-      return '&lt;table class=&quot;note-shortcut&quot;&gt;' +
-               '&lt;thead&gt;' +
-                 '&lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;th&gt;' + title + '&lt;/th&gt;&lt;/tr&gt;' +
-               '&lt;/thead&gt;' +
-               '&lt;tbody&gt;' + body + '&lt;/tbody&gt;' +
-             '&lt;/table&gt;';
+    var tplShortcut = function (title, keys) {
+      var keyClass = 'note-shortcut-col col-xs-6 note-shortcut-';
+      var body = [];
+
+      for (var i in keys) {
+        if (keys.hasOwnProperty(i)) {
+          body.push(
+            '&lt;div class=&quot;' + keyClass + 'key&quot;&gt;' + keys[i].kbd + '&lt;/div&gt;' +
+            '&lt;div class=&quot;' + keyClass + 'name&quot;&gt;' + keys[i].text + '&lt;/div&gt;'
+            );
+        }
+      }
+
+      return '&lt;div class=&quot;note-shortcut-row row&quot;&gt;&lt;div class=&quot;' + keyClass + 'title col-xs-offset-6&quot;&gt;' + title + '&lt;/div&gt;&lt;/div&gt;' +
+             '&lt;div class=&quot;note-shortcut-row row&quot;&gt;' + body.join('&lt;/div&gt;&lt;div class=&quot;note-shortcut-row row&quot;&gt;') + '&lt;/div&gt;';
     };
 
     var tplShortcutText = function (lang) {
-      var body = '&lt;tr&gt;&lt;td&gt;⌘ + B&lt;/td&gt;&lt;td&gt;' + lang.font.bold + '&lt;/td&gt;&lt;/tr&gt;' +
-                 '&lt;tr&gt;&lt;td&gt;⌘ + I&lt;/td&gt;&lt;td&gt;' + lang.font.italic + '&lt;/td&gt;&lt;/tr&gt;' +
-                 '&lt;tr&gt;&lt;td&gt;⌘ + U&lt;/td&gt;&lt;td&gt;' + lang.font.underline + '&lt;/td&gt;&lt;/tr&gt;' +
-                 '&lt;tr&gt;&lt;td&gt;⌘ + ⇧ + S&lt;/td&gt;&lt;td&gt;' + lang.font.strikethrough + '&lt;/td&gt;&lt;/tr&gt;' +
-                 '&lt;tr&gt;&lt;td&gt;⌘ + \\&lt;/td&gt;&lt;td&gt;' + lang.font.clear + '&lt;/td&gt;&lt;/tr&gt;';
+      var keys = [
+        { kbd: '⌘ + B', text: lang.font.bold },
+        { kbd: '⌘ + I', text: lang.font.italic },
+        { kbd: '⌘ + U', text: lang.font.underline },
+        { kbd: '⌘ + \\', text: lang.font.clear }
+      ];
 
-      return tplShortcut(lang.shortcut.textFormatting, body);
+      return tplShortcut(lang.shortcut.textFormatting, keys);
     };
 
     var tplShortcutAction = function (lang) {
-      var body = '&lt;tr&gt;&lt;td&gt;⌘ + Z&lt;/td&gt;&lt;td&gt;' + lang.history.undo + '&lt;/td&gt;&lt;/tr&gt;' +
-                 '&lt;tr&gt;&lt;td&gt;⌘ + ⇧ + Z&lt;/td&gt;&lt;td&gt;' + lang.history.redo + '&lt;/td&gt;&lt;/tr&gt;' +
-                 '&lt;tr&gt;&lt;td&gt;⌘ + ]&lt;/td&gt;&lt;td&gt;' + lang.paragraph.indent + '&lt;/td&gt;&lt;/tr&gt;' +
-                 '&lt;tr&gt;&lt;td&gt;⌘ + [&lt;/td&gt;&lt;td&gt;' + lang.paragraph.outdent + '&lt;/td&gt;&lt;/tr&gt;' +
-                 '&lt;tr&gt;&lt;td&gt;⌘ + ENTER&lt;/td&gt;&lt;td&gt;' + lang.hr.insert + '&lt;/td&gt;&lt;/tr&gt;';
+      var keys = [
+        { kbd: '⌘ + Z', text: lang.history.undo },
+        { kbd: '⌘ + ⇧ + Z', text: lang.history.redo },
+        { kbd: '⌘ + ]', text: lang.paragraph.indent },
+        { kbd: '⌘ + [', text: lang.paragraph.outdent },
+        { kbd: '⌘ + ENTER', text: lang.hr.insert }
+      ];
 
-      return tplShortcut(lang.shortcut.action, body);
+      return tplShortcut(lang.shortcut.action, keys);
     };
 
     var tplShortcutPara = function (lang) {
-      var body = '&lt;tr&gt;&lt;td&gt;⌘ + ⇧ + L&lt;/td&gt;&lt;td&gt;' + lang.paragraph.left + '&lt;/td&gt;&lt;/tr&gt;' +
-                 '&lt;tr&gt;&lt;td&gt;⌘ + ⇧ + E&lt;/td&gt;&lt;td&gt;' + lang.paragraph.center + '&lt;/td&gt;&lt;/tr&gt;' +
-                 '&lt;tr&gt;&lt;td&gt;⌘ + ⇧ + R&lt;/td&gt;&lt;td&gt;' + lang.paragraph.right + '&lt;/td&gt;&lt;/tr&gt;' +
-                 '&lt;tr&gt;&lt;td&gt;⌘ + ⇧ + J&lt;/td&gt;&lt;td&gt;' + lang.paragraph.justify + '&lt;/td&gt;&lt;/tr&gt;' +
-                 '&lt;tr&gt;&lt;td&gt;⌘ + ⇧ + NUM7&lt;/td&gt;&lt;td&gt;' + lang.lists.ordered + '&lt;/td&gt;&lt;/tr&gt;' +
-                 '&lt;tr&gt;&lt;td&gt;⌘ + ⇧ + NUM8&lt;/td&gt;&lt;td&gt;' + lang.lists.unordered + '&lt;/td&gt;&lt;/tr&gt;';
+      var keys = [
+        { kbd: '⌘ + ⇧ + L', text: lang.paragraph.left },
+        { kbd: '⌘ + ⇧ + E', text: lang.paragraph.center },
+        { kbd: '⌘ + ⇧ + R', text: lang.paragraph.right },
+        { kbd: '⌘ + ⇧ + J', text: lang.paragraph.justify },
+        { kbd: '⌘ + ⇧ + NUM7', text: lang.lists.ordered },
+        { kbd: '⌘ + ⇧ + NUM8', text: lang.lists.unordered }
+      ];
 
-      return tplShortcut(lang.shortcut.paragraphFormatting, body);
+      return tplShortcut(lang.shortcut.paragraphFormatting, keys);
     };
 
     var tplShortcutStyle = function (lang) {
-      var body = '&lt;tr&gt;&lt;td&gt;⌘ + NUM0&lt;/td&gt;&lt;td&gt;' + lang.style.normal + '&lt;/td&gt;&lt;/tr&gt;' +
-                 '&lt;tr&gt;&lt;td&gt;⌘ + NUM1&lt;/td&gt;&lt;td&gt;' + lang.style.h1 + '&lt;/td&gt;&lt;/tr&gt;' +
-                 '&lt;tr&gt;&lt;td&gt;⌘ + NUM2&lt;/td&gt;&lt;td&gt;' + lang.style.h2 + '&lt;/td&gt;&lt;/tr&gt;' +
-                 '&lt;tr&gt;&lt;td&gt;⌘ + NUM3&lt;/td&gt;&lt;td&gt;' + lang.style.h3 + '&lt;/td&gt;&lt;/tr&gt;' +
-                 '&lt;tr&gt;&lt;td&gt;⌘ + NUM4&lt;/td&gt;&lt;td&gt;' + lang.style.h4 + '&lt;/td&gt;&lt;/tr&gt;' +
-                 '&lt;tr&gt;&lt;td&gt;⌘ + NUM5&lt;/td&gt;&lt;td&gt;' + lang.style.h5 + '&lt;/td&gt;&lt;/tr&gt;' +
-                 '&lt;tr&gt;&lt;td&gt;⌘ + NUM6&lt;/td&gt;&lt;td&gt;' + lang.style.h6 + '&lt;/td&gt;&lt;/tr&gt;';
+      var keys = [
+        { kbd: '⌘ + NUM0', text: lang.style.normal },
+        { kbd: '⌘ + NUM1', text: lang.style.h1 },
+        { kbd: '⌘ + NUM2', text: lang.style.h2 },
+        { kbd: '⌘ + NUM3', text: lang.style.h3 },
+        { kbd: '⌘ + NUM4', text: lang.style.h4 },
+        { kbd: '⌘ + NUM5', text: lang.style.h5 },
+        { kbd: '⌘ + NUM6', text: lang.style.h6 }
+      ];
 
-      return tplShortcut(lang.shortcut.documentStyle, body);
+      return tplShortcut(lang.shortcut.documentStyle, keys);
     };
 
     var tplExtraShortcuts = function (lang, options) {
       var extraKeys = options.extraKeys;
-      var body = '';
+      var keys = [];
+
       for (var key in extraKeys) {
         if (extraKeys.hasOwnProperty(key)) {
-          body += '&lt;tr&gt;&lt;td&gt;' + key + '&lt;/td&gt;&lt;td&gt;' + extraKeys[key] + '&lt;/td&gt;&lt;/tr&gt;';
+          keys.push({ kbd: key, text: extraKeys[key] });
         }
       }
 
-      return tplShortcut(lang.shortcut.extraKeys, body);
+      return tplShortcut(lang.shortcut.extraKeys, keys);
     };
 
     var tplShortcutTable = function (lang, options) {
-      var template = '&lt;table class=&quot;note-shortcut-layout&quot;&gt;' +
-                       '&lt;tbody&gt;' +
-                         '&lt;tr&gt;&lt;td&gt;' + tplShortcutAction(lang, options) + '&lt;/td&gt;&lt;td&gt;' + tplShortcutText(lang, options) + '&lt;/td&gt;&lt;/tr&gt;' +
-                         '&lt;tr&gt;&lt;td&gt;' + tplShortcutStyle(lang, options) + '&lt;/td&gt;&lt;td&gt;' + tplShortcutPara(lang, options) + '&lt;/td&gt;&lt;/tr&gt;';
+      var colClass = 'class=&quot;note-shortcut note-shortcut-col col-sm-6 col-xs-12&quot;';
+      var template = [
+        '&lt;div ' + colClass + '&gt;' + tplShortcutAction(lang, options) + '&lt;/div&gt;' +
+        '&lt;div ' + colClass + '&gt;' + tplShortcutText(lang, options) + '&lt;/div&gt;',
+        '&lt;div ' + colClass + '&gt;' + tplShortcutStyle(lang, options) + '&lt;/div&gt;' +
+        '&lt;div ' + colClass + '&gt;' + tplShortcutPara(lang, options) + '&lt;/div&gt;'
+      ];
+
       if (options.extraKeys) {
-        template += '&lt;tr&gt;&lt;td colspan=&quot;2&quot;&gt;' + tplExtraShortcuts(lang, options) + '&lt;/td&gt;&lt;/tr&gt;';
+        template.push('&lt;div ' + colClass + '&gt;' + tplExtraShortcuts(lang, options) + '&lt;/div&gt;');
       }
-      template += '&lt;/tbody&gt;&lt;/table&gt;';
-      return template;
+
+      return '&lt;div class=&quot;note-shortcut-row row&quot;&gt;' +
+               template.join('&lt;/div&gt;&lt;div class=&quot;note-shortcut-row row&quot;&gt;') +
+             '&lt;/div&gt;';
     };
 
     var replaceMacKeys = function (sHtml) {
       return sHtml.replace(/⌘/g, 'Ctrl').replace(/⇧/g, 'Shift');
     };
 
-    var tplDialogs = function (lang, options) {
-      var tplImageDialog = function () {
+    var tplDialogInfo = {
+      image: function (lang, options) {
+        var imageLimitation = '';
+        if (options.maximumImageFileSize) {
+          var unit = Math.floor(Math.log(options.maximumImageFileSize) / Math.log(1024));
+          var readableSize = (options.maximumImageFileSize / Math.pow(1024, unit)).toFixed(2) * 1 +
+                             ' ' + ' KMGTP'[unit] + 'B';
+          imageLimitation = '&lt;small&gt;' + lang.image.maximumFileSize + ' : ' + readableSize + '&lt;/small&gt;';
+        }
+
         var body = '&lt;div class=&quot;form-group row-fluid note-group-select-from-files&quot;&gt;' +
                      '&lt;label&gt;' + lang.image.selectFromFiles + '&lt;/label&gt;' +
-                     '&lt;input class=&quot;note-image-input&quot; type=&quot;file&quot; name=&quot;files&quot; accept=&quot;image/*&quot; /&gt;' +
+                     '&lt;input class=&quot;note-image-input&quot; type=&quot;file&quot; name=&quot;files&quot; accept=&quot;image/*&quot; multiple=&quot;multiple&quot; /&gt;' +
+                     imageLimitation +
                    '&lt;/div&gt;' +
                    '&lt;div class=&quot;form-group row-fluid&quot;&gt;' +
                      '&lt;label&gt;' + lang.image.url + '&lt;/label&gt;' +
@@ -600,9 +592,9 @@
                    '&lt;/div&gt;';
         var footer = '&lt;button href=&quot;#&quot; class=&quot;btn btn-primary note-image-btn disabled&quot; disabled&gt;' + lang.image.insert + '&lt;/button&gt;';
         return tplDialog('note-image-dialog', lang.image.insert, body, footer);
-      };
+      },
 
-      var tplLinkDialog = function () {
+      link: function (lang, options) {
         var body = '&lt;div class=&quot;form-group row-fluid&quot;&gt;' +
                      '&lt;label&gt;' + lang.link.textToDisplay + '&lt;/label&gt;' +
                      '&lt;input class=&quot;note-link-text form-control span12&quot; type=&quot;text&quot; /&gt;' +
@@ -620,18 +612,9 @@
                    );
         var footer = '&lt;button href=&quot;#&quot; class=&quot;btn btn-primary note-link-btn disabled&quot; disabled&gt;' + lang.link.insert + '&lt;/button&gt;';
         return tplDialog('note-link-dialog', lang.link.insert, body, footer);
-      };
+      },
 
-      var tplVideoDialog = function () {
-        var body = '&lt;div class=&quot;form-group row-fluid&quot;&gt;' +
-                     '&lt;label&gt;' + lang.video.url + ' &lt;small class=&quot;text-muted&quot;&gt;' + lang.video.providers + '&lt;/small&gt;&lt;/label&gt;' +
-                     '&lt;input class=&quot;note-video-url form-control span12&quot; type=&quot;text&quot; /&gt;' +
-                   '&lt;/div&gt;';
-        var footer = '&lt;button href=&quot;#&quot; class=&quot;btn btn-primary note-video-btn disabled&quot; disabled&gt;' + lang.video.insert + '&lt;/button&gt;';
-        return tplDialog('note-video-dialog', lang.video.insert, body, footer);
-      };
-
-      var tplHelpDialog = function () {
+      help: function (lang, options) {
         var body = '&lt;a class=&quot;modal-close pull-right&quot; aria-hidden=&quot;true&quot; tabindex=&quot;-1&quot;&gt;' + lang.shortcut.close + '&lt;/a&gt;' +
                    '&lt;div class=&quot;title&quot;&gt;' + lang.shortcut.shortcuts + '&lt;/div&gt;' +
                    (agent.isMac ? tplShortcutTable(lang, options) : replaceMacKeys(tplShortcutTable(lang, options))) +
@@ -641,14 +624,17 @@
                      '&lt;a href=&quot;//github.com/HackerWins/summernote/issues&quot; target=&quot;_blank&quot;&gt;Issues&lt;/a&gt;' +
                    '&lt;/p&gt;';
         return tplDialog('note-help-dialog', '', body, '');
-      };
+      }
+    };
 
-      return '&lt;div class=&quot;note-dialog&quot;&gt;' +
-               tplImageDialog() +
-               tplLinkDialog() +
-               tplVideoDialog() +
-               tplHelpDialog() +
-             '&lt;/div&gt;';
+    var tplDialogs = function (lang, options) {
+      var dialogs = '';
+
+      $.each(tplDialogInfo, function (idx, tplDialog) {
+        dialogs += tplDialog(lang, options);
+      });
+
+      return '&lt;div class=&quot;note-dialog&quot;&gt;' + dialogs + '&lt;/div&gt;';
     };
 
     var tplStatusbar = function () {
@@ -723,30 +709,6 @@
       });
     };
 
-<span id='Renderer-method-createPluginToolbar'>    /**
-</span>     * create summernote plugin button 
-     * 
-     * @param {string} plugin  plugin name 
-     * @param {Object} options  plugin's options
-     */
-    var createPluginToolbar = function (plugin, options) {
-      return function () {
-        var toolbar = {
-          title : options.title,
-          className : options.className,
-          dropdown : $.isFunction(options.dropdown) ? options.dropdown() : options.dropdown,
-          hide : options.hide,
-          event : (!options.dropdown) ? plugin : '',
-          value : (!options.dropdown) ? plugin : ''
-        };
-        if (options.icon) {
-          return tplIconButton(options.icon, toolbar);
-        } else {
-          return tplButton(options.label, toolbar);
-        }
-      };
-    };
-
 <span id='Renderer-method-createLayoutByAirMode'>    /**
 </span>     * create summernote layout (air mode)
      *
@@ -754,9 +716,8 @@
      * @param {Object} options
      */
     this.createLayoutByAirMode = function ($holder, options) {
+      var langInfo = options.langInfo;
       var keyMap = options.keyMap[agent.isMac ? 'mac' : 'pc'];
-      var langInfo = $.extend($.summernote.lang['en-US'], $.summernote.lang[options.lang]);
-
       var id = func.uniqueId();
 
       $holder.addClass('note-air-editor note-editable');
@@ -798,6 +759,8 @@
      * @param {Object} options
      */
     this.createLayoutByFrame = function ($holder, options) {
+      var langInfo = options.langInfo;
+
       //01. create Editor
       var $editor = $('&lt;div class=&quot;note-editor&quot;&gt;&lt;/div&gt;');
       if (options.width) {
@@ -819,13 +782,15 @@
       if (options.direction) {
         $editable.attr('dir', options.direction);
       }
+      var placeholder = $holder.attr('placeholder') || options.placeholder;
+      if (placeholder) {
+        $editable.attr('data-placeholder', placeholder);
+      }
 
-      $editable.html(dom.html($holder) || dom.emptyPara);
+      $editable.html(dom.html($holder));
 
       //031. create codable
       $('&lt;textarea class=&quot;note-codable&quot;&gt;&lt;/textarea&gt;').prependTo($editor);
-
-      var langInfo = $.extend($.summernote.lang['en-US'], $.summernote.lang[options.lang]);
 
       //04. create Toolbar
       var toolbarHTML = '';
@@ -835,12 +800,7 @@
 
         toolbarHTML += '&lt;div class=&quot;note-' + groupName + ' btn-group&quot;&gt;';
         for (var i = 0, btnLength = groupButtons.length; i &lt; btnLength; i++) {
-          
           var buttonInfo = tplButtonInfo[groupButtons[i]];
-          if (!buttonInfo &amp;&amp; !!$.summernote.plugins[groupButtons[i]]) {
-            buttonInfo = createPluginToolbar(groupButtons[i], $.summernote.plugins[groupButtons[i]]);
-          }
-          
           // continue creating toolbar even if a button doesn't exist
           if (!$.isFunction(buttonInfo)) { continue; }
           toolbarHTML += buttonInfo(langInfo, options);
@@ -947,6 +907,22 @@
         layoutInfo.editor.remove();
         $holder.show();
       }
+    };
+
+    this.getTemplate = function () {
+      return {
+        button: tplButton,
+        iconButton: tplIconButton,
+        dialog: tplDialog
+      };
+    };
+
+    this.addButtonInfo = function (name, buttonInfo) {
+      tplButtonInfo[name] = buttonInfo;
+    };
+
+    this.addDialogInfo = function (name, dialogInfo) {
+      tplDialogInfo[name] = dialogInfo;
     };
   };
 
