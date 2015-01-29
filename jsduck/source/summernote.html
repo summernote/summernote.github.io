@@ -21,7 +21,17 @@
   'summernote/settings',
   'summernote/EventHandler', 'summernote/Renderer'
 ], function (agent, dom, range, settings, EventHandler, Renderer) {
+
   // jQuery namespace for summernote
+<span id='$-summernote'>  /**
+</span>   * @class $.summernote 
+   * 
+   * summernote attribute  
+   * 
+   * @mixin settings
+   * @singleton  
+   * 
+   */
   $.summernote = $.summernote || {};
 
   // extends default `settings`
@@ -31,19 +41,30 @@
   var eventHandler = new EventHandler();
 
   $.extend($.summernote, {
-    renderer: renderer,
-    eventHandler: eventHandler,
+<span id='$-summernote-property-renderer'>    /** @property {Renderer} */
+</span>    renderer: renderer,
+<span id='$-summernote-property-eventHandler'>    /** @property {EventHandler} */
+</span>    eventHandler: eventHandler,
+<span id='$-summernote-property-core'>    /** 
+</span>     * @property {Object} core 
+     * @property {core.agent} core.agent 
+     * @property {core.dom} core.dom
+     * @property {core.range} core.range 
+     */
     core: {
       agent: agent,
       dom: dom,
       range: range
     },
-    pluginEvents: {}
+<span id='$-summernote-property-pluginEvents'>    /** @property {Object} pluginEvents event list for plugins*/
+</span>    pluginEvents: {}
   });
 
-<span id='global-method-addPlugin'>  /**
-</span>   * addPlugin
+<span id='$-summernote-method-addPlugin'>  /**
+</span>   * @method addPlugin
    *
+   * add Plugin in Summernote 
+   *  
    * @param {Object} plugin
    */
   $.summernote.addPlugin = function (plugin) {
@@ -78,14 +99,15 @@
     }
   };
 
-<span id='global-property-'>  /**
-</span>   * extend jquery fn
+  /*
+   * extend $.fn
    */
   $.fn.extend({
-<span id='global-method-summernote'>    /**
-</span>     * initialize summernote
+<span id='$-fn-method-summernote'>    /**
+</span>     * @method
+     * nitialize summernote
      *  - create editor layout and attach Mouse and keyboard events.
-     *
+     * @member $.fn
      * @param {Object} options
      * @returns {this}
      */
@@ -135,9 +157,12 @@
     },
     //
 
-<span id='global-method-code'>    /**
-</span>     * get the HTML contents of note or set the HTML contents of note.
+<span id='$-fn-method-code'>    /**
+</span>     * @method 
+     * 
+     * get the HTML contents of note or set the HTML contents of note.
      *
+     * @member $.fn 
      * @param {String} [sHTML] - HTML contents(optional, set)
      * @returns {this|String} - context(set) or HTML contents of note(get).
      */
@@ -166,9 +191,12 @@
       return this;
     },
 
-<span id='global-method-destroy'>    /**
-</span>     * destroy Editor Layout and detach Key and Mouse Event
+<span id='$-fn-method-destroy'>    /**
+</span>     * @method
+     * 
+     * destroy Editor Layout and detach Key and Mouse Event
      *
+     * @member $.fn
      * @returns {this}
      */
     destroy: function () {
