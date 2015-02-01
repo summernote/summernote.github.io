@@ -22,21 +22,9 @@
   'summernote/core/dom'
 ], function (agent, func, list, dom) {
 
-<span id='core-range'>  /**
-</span>   * @class core.range
-   *
-   * Data structure
-   * * {BoundaryPoint}: a point of dom tree
-   * * {BoundaryPoints}: two boundaryPoints corresponding to the start and the end of the Range
-   *
-   * See [W3C Level-2-Range-Position][http://www.w3.org/TR/DOM-Level-2-Traversal-Range/ranges.html#Level-2-Range-Position]
-   *
-   * @singleton
-   * @alternateClassName range
-   */
   var range = (function () {
 
-<span id='core-range-method-textRangeToPoint'>    /**
+<span id='global-method-textRangeToPoint'>    /**
 </span>     * return boundaryPoint from TextRange, inspired by Andy Na's HuskyRange.js
      *
      * @param {TextRange} textRange
@@ -96,7 +84,7 @@
       };
     };
     
-<span id='core-range-method-pointToTextRange'>    /**
+<span id='global-method-pointToTextRange'>    /**
 </span>     * return TextRange from boundary point (inspired by google closure-library)
      * @param {BoundaryPoint} point
      * @return {TextRange}
@@ -140,7 +128,6 @@
 <span id='WrappedRange-method-constructor'><span id='WrappedRange'>    /**
 </span></span>     * Wrapped Range
      *
-     * @private
      * @constructor
      * @param {Node} sc - start container
      * @param {Number} so - start offset
@@ -586,10 +573,24 @@
         return nativeRng.getClientRects();
       };
     };
-  
+
+<span id='core-range'>  /**
+</span>   * @class core.range
+   *
+   * Data structure
+   *  * BoundaryPoint: a point of dom tree
+   *  * BoundaryPoints: two boundaryPoints corresponding to the start and the end of the Range
+   *
+   * See to http://www.w3.org/TR/DOM-Level-2-Traversal-Range/ranges.html#Level-2-Range-Position
+   *
+   * @singleton
+   * @alternateClassName range
+   */      
     return {
-<span id='WrappedRange-method-create'>      /**
-</span>       * create Range Object From arguments or Browser Selection
+<span id='core-range-method-create'>      /**
+</span>       * @method
+       * 
+       * create Range Object From arguments or Browser Selection
        *
        * @param {Node} sc - start container
        * @param {Number} so - start offset
@@ -641,8 +642,10 @@
         return new WrappedRange(sc, so, ec, eo);
       },
 
-<span id='WrappedRange-method-createFromNode'>      /**
-</span>       * create WrappedRange from node
+<span id='core-range-method-createFromNode'>      /**
+</span>       * @method 
+       * 
+       * create WrappedRange from node
        *
        * @param {Node} node
        * @return {WrappedRange}
@@ -669,8 +672,10 @@
         return this.create(sc, so, ec, eo);
       },
 
-<span id='WrappedRange-method-createFromBookmark'>      /**
-</span>       * create WrappedRange from bookmark
+<span id='core-range-method-createFromBookmark'>      /**
+</span>       * @method 
+       * 
+       * create WrappedRange from bookmark
        *
        * @param {Node} editable
        * @param {Object} bookmark
@@ -684,8 +689,10 @@
         return new WrappedRange(sc, so, ec, eo);
       },
 
-<span id='WrappedRange-method-createFromParaBookmark'>      /**
-</span>       * create WrappedRange from paraBookmark
+<span id='core-range-method-createFromParaBookmark'>      /**
+</span>       * @method 
+       *
+       * create WrappedRange from paraBookmark
        *
        * @param {Object} bookmark
        * @param {Node[]} paras
