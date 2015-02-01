@@ -56,16 +56,62 @@
       dom: dom,
       range: range
     },
-<span id='$-summernote-property-pluginEvents'>    /** @property {Object} pluginEvents event list for plugins*/
-</span>    pluginEvents: {}
+<span id='$-summernote-property-pluginEvents'>    /** 
+</span>     * @property {Object} 
+     * pluginEvents event list for plugins
+     * event has name and callback function.
+     * 
+     * ``` 
+     * $.summernote.addPlugin({
+     *     events : {
+     *          'hello' : function(layoutInfo, value, $target) {
+     *              console.log('event name is hello, value is ' + value );
+     *          }
+     *     }     
+     * })
+     * ```
+     * 
+     * * event name is data-event property.
+     * * layoutInfo is a summernote layout information.
+     * * value is data-value property.
+     */
+    pluginEvents: {}
   });
 
 <span id='$-summernote-method-addPlugin'>  /**
 </span>   * @method addPlugin
    *
    * add Plugin in Summernote 
-   *  
+   * 
+   * Summernote can make a own plugin.
+   *
+   * ```
+   * var tmpl = $.summernote.renderer.getTemplate();
+   * $.summernote.addPlugin({
+   *     buttons : {
+   *        &quot;name&quot; : function(lang, options) {        
+   *            return tmpl.iconButton('fa fa-header', {
+   *                event : 'hello',
+   *                value : 'hello',
+   *                hide : true
+   *            });           
+   *        }
+   *     
+   *     }
+   * });
+   * ``` 
+   *
+   *
    * @param {Object} plugin
+   * @param {Object} [plugin.buttons] 
+   * define plugin button 
+   * for detail, see to Renderer.addButtonInfo
+   * @param {Object} [plugin.dialogs] 
+   * define plugin dialog
+   * for detail, see to Renderer.addDialogInfo
+   * @param {Object} [plugin.events] add event in $.summernote.pluginEvents 
+   * @param {Object} [plugin.langs] update $.summernote.lang
+   * @param {Object} [plugin.options] update $.summernote.options
    */
   $.summernote.addPlugin = function (plugin) {
     if (plugin.buttons) {
@@ -105,10 +151,15 @@
   $.fn.extend({
 <span id='$-fn-method-summernote'>    /**
 </span>     * @method
-     * nitialize summernote
+     * Initialize summernote
      *  - create editor layout and attach Mouse and keyboard events.
+     * 
+     * ```
+     * $(&quot;#summernote&quot;).summernote( { options ..} );
+     * ```
+     *   
      * @member $.fn
-     * @param {Object} options
+     * @param {Object} options reference to $.summernote.options
      * @returns {this}
      */
     summernote: function (options) {
@@ -161,6 +212,16 @@
 </span>     * @method 
      * 
      * get the HTML contents of note or set the HTML contents of note.
+     *
+     * * get contents 
+     * ```
+     * var content = $(&quot;#summernote&quot;).code();
+     * ```
+     * * set contents 
+     *
+     * ```
+     * $(&quot;#summernote&quot;).code(html);
+     * ```
      *
      * @member $.fn 
      * @param {String} [sHTML] - HTML contents(optional, set)

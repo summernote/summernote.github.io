@@ -26,10 +26,11 @@
 </span>   * @class core.range
    *
    * Data structure
-   *  - {BoundaryPoint}: a point of dom tree
-   *  - {BoundaryPoints}: two boundaryPoints corresponding to the start and the end of the Range
+   * * {BoundaryPoint}: a point of dom tree
+   * * {BoundaryPoints}: two boundaryPoints corresponding to the start and the end of the Range
    *
-   * @see http://www.w3.org/TR/DOM-Level-2-Traversal-Range/ranges.html#Level-2-Range-Position
+   * See [W3C Level-2-Range-Position][http://www.w3.org/TR/DOM-Level-2-Traversal-Range/ranges.html#Level-2-Range-Position]
+   *
    * @singleton
    * @alternateClassName range
    */
@@ -136,9 +137,11 @@
       return textRange;
     };
     
-<span id='WrappedRange'>    /**
-</span>     * Wrapped Range
+<span id='WrappedRange-method-constructor'><span id='WrappedRange'>    /**
+</span></span>     * Wrapped Range
      *
+     * @private
+     * @constructor
      * @param {Node} sc - start container
      * @param {Number} so - start offset
      * @param {Node} ec - end container
@@ -389,6 +392,7 @@
           fullyContains: true
         });
 
+        // find new cursor point
         var point = dom.prevPointUntil(rng.getStartPoint(), function (point) {
           return !list.contains(nodes, point.node);
         });
@@ -463,12 +467,7 @@
       this.wrapBodyInlineWithPara = function () {
         if (dom.isBodyContainer(sc) &amp;&amp; dom.isEmpty(sc)) {
           sc.innerHTML = dom.emptyPara;
-          return new WrappedRange(
-            sc.firstChild,
-            0,
-            sc.firstChild,
-            0
-          );
+          return new WrappedRange(sc.firstChild, 0, sc.firstChild, 0);
         }
 
         if (dom.isParaInline(sc) || dom.isPara(sc)) {
@@ -484,7 +483,7 @@
             topAncestor = ancestors[ancestors.length - 2] || sc.childNodes[so];
           }
         } else {
-          topAncestor = sc.childNodes[so - 1];
+          topAncestor = sc.childNodes[so &gt; 0 ? so - 1 : 0];
         }
 
         // siblings not in paragraph
@@ -504,12 +503,12 @@
 </span>       * insert node at current cursor
        *
        * @param {Node} node
-       * @param {Boolean} [isInline]
        * @return {Node}
        */
-      this.insertNode = function (node, isInline) {
+      this.insertNode = function (node) {
         var rng = this.wrapBodyInlineWithPara();
         var point = rng.getStartPoint();
+        var isInline = dom.isInline(node);
 
         // find splitRoot, container
         //  - inline: splitRoot is child of paragraph
