@@ -123,11 +123,6 @@ hr.soften {
   margin: 0; /* BS2's prettyprint patch */
 }
 
-.about-pic {
-  max-width: 200px;
-  margin: 2em;
-}
-
 .contribute .thumbnail {
   border: none;
   box-shadow: none;

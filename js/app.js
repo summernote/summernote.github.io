@@ -49,7 +49,7 @@ page.config(['$routeProvider', '$locationProvider',
   }).when('/history', {
     templateUrl: 'html/history.html',
     controller: 'PageController'
-  }).when('/about', {
-    templateUrl: 'html/about.html'
+  }).when('/team', {
+    templateUrl: 'html/team.html'
   }).otherwise({redirectTo: '/'});
 }]);
