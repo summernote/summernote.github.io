@@ -16,56 +16,53 @@
 </head>
 <body onload="prettyPrint(); highlight();">
   <pre class="prettyprint lang-js">define(['jquery'], function ($) {
-  if (!Array.prototype.reduce) {
+  if ('function' !== typeof Array.prototype.reduce) {
 <span id='global-method-reduce'>    /**
-</span>     * Array.prototype.reduce polyfill
+</span>     * Array.prototype.reduce fallback
      *
-     * @param {Function} callback
-     * @param {Value} [initialValue]
-     * @return {Value}
-     *
-     * @see http://goo.gl/WNriQD
+     * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce
      */
-    Array.prototype.reduce = function (callback) {
-      var t = Object(this), len = t.length &gt;&gt;&gt; 0, k = 0, value;
-      if (arguments.length === 2) {
-        value = arguments[1];
-      } else {
-        while (k &lt; len &amp;&amp; !(k in t)) {
-          k++;
-        }
-        if (k &gt;= len) {
-          throw new TypeError('Reduce of empty array with no initial value');
-        }
-        value = t[k++];
+    Array.prototype.reduce = function (callback, optInitialValue) {
+      var idx, value, length = this.length &gt;&gt;&gt; 0, isValueSet = false;
+      if (1 &lt; arguments.length) {
+        value = optInitialValue;
+        isValueSet = true;
       }
-      for (; k &lt; len; k++) {
-        if (k in t) {
-          value = callback(value, t[k], k, t);
+      for (idx = 0; length &gt; idx; ++idx) {
+        if (this.hasOwnProperty(idx)) {
+          if (isValueSet) {
+            value = callback(value, this[idx], idx, this);
+          } else {
+            value = this[idx];
+            isValueSet = true;
+          }
         }
+      }
+      if (!isValueSet) {
+        throw new TypeError('Reduce of empty array with no initial value');
       }
       return value;
     };
   }
 
   if ('function' !== typeof Array.prototype.filter) {
-<span id='global-method-filter'>    /**
-</span>     * Array.prototype.filter polyfill
-     *
-     * @param {Function} func
-     * @return {Array}
-     *
-     * @see http://goo.gl/T1KFnq
-     */
-    Array.prototype.filter = function (func) {
-      var t = Object(this), len = t.length &gt;&gt;&gt; 0;
-
+    Array.prototype.filter = function (fun/*, thisArg*/) {
+      if (this === void 0 || this === null) {
+        throw new TypeError();
+      }
+  
+      var t = Object(this);
+      var len = t.length &gt;&gt;&gt; 0;
+      if (typeof fun !== 'function') {
+        throw new TypeError();
+      }
+  
       var res = [];
       var thisArg = arguments.length &gt;= 2 ? arguments[1] : void 0;
       for (var i = 0; i &lt; len; i++) {
         if (i in t) {
           var val = t[i];
-          if (func.call(thisArg, val, i, t)) {
+          if (fun.call(thisArg, val, i, t)) {
             res.push(val);
           }
         }
@@ -79,7 +76,6 @@
 
 <span id='global-method-isFontInstalled'>  /**
 </span>   * returns whether font is installed or not.
-   *
    * @param {String} fontName
    * @return {Boolean}
    */
@@ -100,23 +96,14 @@
     return originalWidth !== width;
   };
 
-<span id='core-agent'>  /**
-</span>   * @class core.agent
-   *
-   * Object which check platform and agent
-   *
-   * @singleton
-   * @alternateClassName agent
+<span id='global-property-agent'>  /**
+</span>   * Object which check platform and agent
    */
   var agent = {
-<span id='core-agent-property-isMac'>    /** @property {Boolean} [isMac=false] true if this agent is Mac  */
-</span>    isMac: navigator.appVersion.indexOf('Mac') &gt; -1,
-<span id='core-agent-property-isMSIE'>    /** @property {Boolean} [isMSIE=false] true if this agent is a Internet Explorer  */
-</span>    isMSIE: navigator.userAgent.indexOf('MSIE') &gt; -1 || navigator.userAgent.indexOf('Trident') &gt; -1,
-<span id='core-agent-property-isFF'>    /** @property {Boolean} [isFF=false] true if this agent is a Firefox  */
-</span>    isFF: navigator.userAgent.indexOf('Firefox') &gt; -1,
-<span id='core-agent-property-jqueryVersion'>    /** @property {String} jqueryVersion current jQuery version string  */
-</span>    jqueryVersion: parseFloat($.fn.jquery),
+    isMac: navigator.appVersion.indexOf('Mac') &gt; -1,
+    isMSIE: navigator.userAgent.indexOf('MSIE') &gt; -1 || navigator.userAgent.indexOf('Trident') &gt; -1,
+    isFF: navigator.userAgent.indexOf('Firefox') &gt; -1,
+    jqueryVersion: parseFloat($.fn.jquery),
     isSupportAmd: isSupportAmd,
     hasCodeMirror: isSupportAmd ? require.specified('CodeMirror') : !!window.CodeMirror,
     isFontInstalled: isFontInstalled,

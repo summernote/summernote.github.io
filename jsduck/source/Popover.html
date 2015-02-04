@@ -20,24 +20,16 @@
   'summernote/core/list',
   'summernote/module/Button'
 ], function (func, list, Button) {
-<span id='module-Popover'>  /**
-</span>   * @class module.Popover
-   *
-   * Popover (http://getbootstrap.com/javascript/#popovers)
-   *
+<span id='Popover'>  /**
+</span>   * Popover (http://getbootstrap.com/javascript/#popovers)
    */
   var Popover = function () {
     var button = new Button();
 
-<span id='module-Popover-method-posFromPlaceholder'>    /**
+<span id='Popover-method-posFromPlaceholder'>    /**
 </span>     * returns position from placeholder
-     *
-     * @private
      * @param {Node} placeholder
      * @param {Boolean} isAirMode
-     * @return {Object}
-     * @return {Number} return.left
-     * @return {Number} return.top
      */
     var posFromPlaceholder = function (placeholder, isAirMode) {
       var $placeholder = $(placeholder);
@@ -51,10 +43,8 @@
       };
     };
 
-<span id='module-Popover-method-showPopover'>    /**
+<span id='Popover-method-showPopover'>    /**
 </span>     * show popover
-     *
-     * @private
      * @param {jQuery} popover
      * @param {Position} pos
      */
@@ -68,7 +58,7 @@
 
     var PX_POPOVER_ARROW_OFFSET_X = 20;
 
-<span id='module-Popover-method-update'>    /**
+<span id='Popover-method-update'>    /**
 </span>     * update current state
      * @param {jQuery} $popover - popover container
      * @param {Object} styleInfo - style object
@@ -96,20 +86,17 @@
 
       var $airPopover = $popover.find('.note-air-popover');
       if (isAirMode &amp;&amp; !styleInfo.range.isCollapsed()) {
-        var rect = list.last(styleInfo.range.getClientRects());
-        if (rect) {
-          var bnd = func.rect2bnd(rect);
-          showPopover($airPopover, {
-            left: Math.max(bnd.left + bnd.width / 2 - PX_POPOVER_ARROW_OFFSET_X, 0),
-            top: bnd.top + bnd.height
-          });
-        }
+        var bnd = func.rect2bnd(list.last(styleInfo.range.getClientRects()));
+        showPopover($airPopover, {
+          left: Math.max(bnd.left + bnd.width / 2 - PX_POPOVER_ARROW_OFFSET_X, 0),
+          top: bnd.top + bnd.height
+        });
       } else {
         $airPopover.hide();
       }
     };
 
-<span id='module-Popover-method-updateRecentColor'>    /**
+<span id='Popover-method-updateRecentColor'>    /**
 </span>     * @param {Node} button
      * @param {String} eventName
      * @param {String} value
@@ -118,7 +105,7 @@
       button.updateRecentColor(button, eventName, value);
     };
 
-<span id='module-Popover-method-hide'>    /**
+<span id='Popover-method-hide'>    /**
 </span>     * hide all popovers
      * @param {jQuery} $popover - popover container
      */

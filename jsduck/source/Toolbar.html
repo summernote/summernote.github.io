@@ -19,10 +19,8 @@
   'summernote/core/list',
   'summernote/module/Button'
 ], function (list, Button) {
-<span id='module-Toolbar'>  /**
-</span>   * @class module.Toolbar
-   *
-   * Toolbar
+<span id='Toolbar'>  /**
+</span>   * Toolbar
    */
   var Toolbar = function () {
     var button = new Button();
@@ -31,7 +29,7 @@
       button.update($toolbar, styleInfo);
     };
 
-<span id='module-Toolbar-method-updateRecentColor'>    /**
+<span id='Toolbar-method-updateRecentColor'>    /**
 </span>     * @param {Node} button
      * @param {String} eventName
      * @param {String} value
@@ -40,7 +38,7 @@
       button.updateRecentColor(buttonNode, eventName, value);
     };
 
-<span id='module-Toolbar-method-activate'>    /**
+<span id='Toolbar-method-activate'>    /**
 </span>     * activate buttons exclude codeview
      * @param {jQuery} $toolbar
      */
@@ -50,7 +48,7 @@
               .removeClass('disabled');
     };
 
-<span id='module-Toolbar-method-deactivate'>    /**
+<span id='Toolbar-method-deactivate'>    /**
 </span>     * deactivate buttons exclude codeview
      * @param {jQuery} $toolbar
      */
@@ -60,21 +58,11 @@
               .addClass('disabled');
     };
 
-<span id='module-Toolbar-method-updateFullscreen'>    /**
-</span>     *
-     * @param {jQuery} $container
-     * @param {Boolean} [bFullscreen=false]
-     */
     this.updateFullscreen = function ($container, bFullscreen) {
       var $btn = $container.find('button[data-event=&quot;fullscreen&quot;]');
       $btn.toggleClass('active', bFullscreen);
     };
 
-<span id='module-Toolbar-method-updateCodeview'>    /**
-</span>     *
-     * @param {jQuery} $container
-     * @param {Boolean} [isCodeview=false]
-     */
     this.updateCodeview = function ($container, isCodeview) {
       var $btn = $container.find('button[data-event=&quot;codeview&quot;]');
       $btn.toggleClass('active', isCodeview);

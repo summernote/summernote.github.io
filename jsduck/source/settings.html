@@ -16,38 +16,12 @@
 </head>
 <body onload="prettyPrint(); highlight();">
   <pre class="prettyprint lang-js">define('summernote/settings', function () {
-<span id='settings'>  /**
-</span>   * @class settings 
-   * 
-   * @singleton
-   */
   var settings = {
-<span id='settings-property-version'>    /** @property */
-</span>    version: '@VERSION',
+    // version
+    version: '@VERSION',
 
-<span id='settings-property-options'>    /**
-</span>     * 
-     * for event options, reference to EventHandler.attach
-     * 
-     * @property {Object} options 
-     * @property {String/Number} [options.width=null] set editor width 
-     * @property {String/Number} [options.height=null] set editor height, ex) 300
-     * @property {String/Number} options.minHeight set minimum height of editor
-     * @property {String/Number} options.maxHeight
-     * @property {String/Number} options.focus 
-     * @property {Number} options.tabsize 
-     * @property {Boolean} options.styleWithSpan
-     * @property {Object} options.codemirror
-     * @property {Object} [options.codemirror.mode='text/html']
-     * @property {Object} [options.codemirror.htmlMode=true]
-     * @property {Object} [options.codemirror.lineNumbers=true]
-     * @property {String} [options.lang=en-US] language 'en-US', 'ko-KR', ...
-     * @property {String} [options.direction=null] text direction, ex) 'rtl'
-     * @property {Array} [options.toolbar]
-     * @property {Boolean} [options.airMode=false]
-     * @property {Array} [options.airPopover]
-     * @property {Fucntion} [options.onInit] initialize
-     * @property {Fucntion} [options.onsubmit]
+<span id='global-property-options'>    /**
+</span>     * options
      */
     options: {
       width: null,                  // set editor width
@@ -68,7 +42,6 @@
       shortcuts: true,              // enable keyboard shortcuts
 
       placeholder: false,           // enable placeholder text
-      prettifyHtml: true,           // enable prettifying html while toggling codeview
 
       codemirror: {                 // codemirror options
         mode: 'text/html',
@@ -127,7 +100,6 @@
         'Helvetica Neue', 'Impact', 'Lucida Grande',
         'Tahoma', 'Times New Roman', 'Verdana'
       ],
-      fontNamesIgnoreCheck: [],
 
       // pallete colors(n x n)
       colors: [
@@ -162,11 +134,10 @@
       onkeydown: null,          // keydown
       onImageUpload: null,      // imageUpload
       onImageUploadError: null, // imageUploadError
-      onMediaDelete: null,      // media delete
       onToolbarClick: null,
       onsubmit: null,
 
-<span id='settings-method-onCreateLink'>      /**
+<span id='global-method-onCreateLink'>      /**
 </span>       * manipulate link address when user create link
        * @param {String} sLinkUrl
        * @return {String}
@@ -268,8 +239,8 @@
           shapeCircle: 'Shape: Circle',
           shapeThumbnail: 'Shape: Thumbnail',
           shapeNone: 'Shape: None',
-          dragImageHere: 'Drag image or text here',
-          dropImage: 'Drop image or Text',
+          dragImageHere: 'Drag image here',
+          dropImage: 'Drop image',
           selectFromFiles: 'Select from files',
           maximumFileSize: 'Maximum file size',
           maximumFileSizeError: 'Maximum file size exceeded.',
@@ -337,8 +308,7 @@
           textFormatting: 'Text formatting',
           action: 'Action',
           paragraphFormatting: 'Paragraph formatting',
-          documentStyle: 'Document Style',
-          extraKeys: 'Extra keys'
+          documentStyle: 'Document Style'
         },
         history: {
           undo: 'Undo',

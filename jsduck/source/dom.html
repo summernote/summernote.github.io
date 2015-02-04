@@ -24,19 +24,12 @@
   var NBSP_CHAR = String.fromCharCode(160);
   var ZERO_WIDTH_NBSP_CHAR = '\ufeff';
 
-<span id='core-dom'>  /**
-</span>   * @class core.dom
-   *
-   * Dom functions
-   *
-   * @singleton
-   * @alternateClassName dom
+<span id='global-property-dom'>  /**
+</span>   * Dom functions
    */
   var dom = (function () {
-<span id='core-dom-method-isEditable'>    /**
-</span>     * @method isEditable
-     *
-     * returns whether node is `note-editable` or not.
+<span id='global-method-isEditable'>    /**
+</span>     * returns whether node is `note-editable` or not.
      *
      * @param {Node} node
      * @return {Boolean}
@@ -45,10 +38,8 @@
       return node &amp;&amp; $(node).hasClass('note-editable');
     };
 
-<span id='core-dom-method-isControlSizing'>    /**
-</span>     * @method isControlSizing
-     *
-     * returns whether node is `note-control-sizing` or not.
+<span id='global-method-isControlSizing'>    /**
+</span>     * returns whether node is `note-control-sizing` or not.
      *
      * @param {Node} node
      * @return {Boolean}
@@ -57,21 +48,11 @@
       return node &amp;&amp; $(node).hasClass('note-control-sizing');
     };
 
-<span id='core-dom-method-buildLayoutInfo'>    /**
-</span>     * @method  buildLayoutInfo
-     *
-     * build layoutInfo from $editor(.note-editor)
+<span id='global-method-buildLayoutInfo'>    /**
+</span>     * build layoutInfo from $editor(.note-editor)
      *
      * @param {jQuery} $editor
      * @return {Object}
-     * @return {Function} return.editor
-     * @return {Node} return.dropzone
-     * @return {Node} return.toolbar
-     * @return {Node} return.editable
-     * @return {Node} return.codable
-     * @return {Node} return.popover
-     * @return {Node} return.handle
-     * @return {Node} return.dialog
      */
     var buildLayoutInfo = function ($editor) {
       var makeFinder;
@@ -110,13 +91,11 @@
       }
     };
 
-<span id='core-dom-method-makePredByNodeName'>    /**
-</span>     * @method makePredByNodeName
-     *
-     * returns predicate which judge whether nodeName is same
+<span id='global-method-makePredByNodeName'>    /**
+</span>     * returns predicate which judge whether nodeName is same
      *
      * @param {String} nodeName
-     * @return {Function}
+     * @return {String}
      */
     var makePredByNodeName = function (nodeName) {
       nodeName = nodeName.toUpperCase();
@@ -125,19 +104,11 @@
       };
     };
 
-<span id='core-dom-method-isText'>    /**
-</span>     * @method isText
-     *
-     *
-     *
-     * @param {Node} node
-     * @return {Boolean} true if node's type is text(3)
-     */
     var isText = function (node) {
       return node &amp;&amp; node.nodeType === 3;
     };
 
-<span id='core-dom-method-isVoid'>    /**
+<span id='global-method-isVoid'>    /**
 </span>     * ex) br, col, embed, hr, img, input, ...
      * @see http://www.w3.org/html/wg/drafts/html/master/syntax.html#void-elements
      */
@@ -190,15 +161,13 @@
 
     var isBody = makePredByNodeName('BODY');
 
-<span id='core-dom-property-blankHTML'>    /**
+<span id='global-property-blankHTML'>    /**
 </span>     * blank HTML for cursor position
      */
     var blankHTML = agent.isMSIE ? '&amp;nbsp;' : '&lt;br&gt;';
 
-<span id='core-dom-method-nodeLength'>    /**
-</span>     * @method nodeLength
-     *
-     * returns #text's text size or element's childNodes size
+<span id='global-method-nodeLength'>    /**
+</span>     * returns #text's text size or element's childNodes size
      *
      * @param {Node} node
      */
@@ -210,7 +179,7 @@
       return node.childNodes.length;
     };
 
-<span id='core-dom-method-isEmpty'>    /**
+<span id='global-method-isEmpty'>    /**
 </span>     * returns whether node is empty or not.
      *
      * @param {Node} node
@@ -229,7 +198,7 @@
       return false;
     };
 
-<span id='core-dom-method-paddingBlankHTML'>    /**
+<span id='global-method-paddingBlankHTML'>    /**
 </span>     * padding blankHTML if node is empty (for cursor position)
      */
     var paddingBlankHTML = function (node) {
@@ -238,7 +207,7 @@
       }
     };
 
-<span id='core-dom-method-ancestor'>    /**
+<span id='global-method-ancestor'>    /**
 </span>     * find nearest ancestor predicate hit
      *
      * @param {Node} node
@@ -254,7 +223,7 @@
       return null;
     };
 
-<span id='core-dom-method-listAncestor'>    /**
+<span id='global-method-listAncestor'>    /**
 </span>     * returns new array of ancestor nodes (until predicate hit).
      *
      * @param {Node} node
@@ -274,7 +243,7 @@
       return ancestors;
     };
 
-<span id='core-dom-method-lastAncestor'>    /**
+<span id='global-method-lastAncestor'>    /**
 </span>     * find farthest ancestor predicate hit
      */
     var lastAncestor = function (node, pred) {
@@ -282,7 +251,7 @@
       return list.last(ancestors.filter(pred));
     };
 
-<span id='core-dom-method-commonAncestor'>    /**
+<span id='global-method-commonAncestor'>    /**
 </span>     * returns common ancestor node between two nodes.
      *
      * @param {Node} nodeA
@@ -296,7 +265,7 @@
       return null; // difference document area
     };
 
-<span id='core-dom-method-listPrev'>    /**
+<span id='global-method-listPrev'>    /**
 </span>     * listing all previous siblings (until predicate hit).
      *
      * @param {Node} node
@@ -314,7 +283,7 @@
       return nodes;
     };
 
-<span id='core-dom-method-listNext'>    /**
+<span id='global-method-listNext'>    /**
 </span>     * listing next siblings (until predicate hit).
      *
      * @param {Node} node
@@ -332,7 +301,7 @@
       return nodes;
     };
 
-<span id='core-dom-method-listDescendant'>    /**
+<span id='global-method-listDescendant'>    /**
 </span>     * listing descendant nodes
      *
      * @param {Node} node
@@ -355,7 +324,7 @@
       return descendents;
     };
 
-<span id='core-dom-method-wrap'>    /**
+<span id='global-method-wrap'>    /**
 </span>     * wrap node with new tag.
      *
      * @param {Node} node
@@ -372,7 +341,7 @@
       return wrapper;
     };
 
-<span id='core-dom-method-insertAfter'>    /**
+<span id='global-method-insertAfter'>    /**
 </span>     * insert node after preceding
      *
      * @param {Node} node
@@ -388,7 +357,7 @@
       return node;
     };
 
-<span id='core-dom-method-appendChildNodes'>    /**
+<span id='global-method-appendChildNodes'>    /**
 </span>     * append elements.
      *
      * @param {Node} node
@@ -401,7 +370,7 @@
       return node;
     };
 
-<span id='core-dom-method-isLeftEdgePoint'>    /**
+<span id='global-method-isLeftEdgePoint'>    /**
 </span>     * returns whether boundaryPoint is left edge or not.
      *
      * @param {BoundaryPoint} point
@@ -411,7 +380,7 @@
       return point.offset === 0;
     };
 
-<span id='core-dom-method-isRightEdgePoint'>    /**
+<span id='global-method-isRightEdgePoint'>    /**
 </span>     * returns whether boundaryPoint is right edge or not.
      *
      * @param {BoundaryPoint} point
@@ -421,7 +390,7 @@
       return point.offset === nodeLength(point.node);
     };
 
-<span id='core-dom-method-isEdgePoint'>    /**
+<span id='global-method-isEdgePoint'>    /**
 </span>     * returns whether boundaryPoint is edge or not.
      *
      * @param {BoundaryPoint} point
@@ -431,7 +400,7 @@
       return isLeftEdgePoint(point) || isRightEdgePoint(point);
     };
 
-<span id='core-dom-method-isLeftEdgeOf'>    /**
+<span id='global-method-isLeftEdgeOf'>    /**
 </span>     * returns wheter node is left edge of ancestor or not.
      *
      * @param {Node} node
@@ -449,7 +418,7 @@
       return true;
     };
 
-<span id='core-dom-method-isRightEdgeOf'>    /**
+<span id='global-method-isRightEdgeOf'>    /**
 </span>     * returns whether node is right edge of ancestor or not.
      *
      * @param {Node} node
@@ -467,7 +436,7 @@
       return true;
     };
 
-<span id='core-dom-method-position'>    /**
+<span id='global-method-position'>    /**
 </span>     * returns offset from parent.
      *
      * @param {Node} node
@@ -484,7 +453,7 @@
       return !!(node &amp;&amp; node.childNodes &amp;&amp; node.childNodes.length);
     };
 
-<span id='core-dom-method-prevPoint'>    /**
+<span id='global-method-prevPoint'>    /**
 </span>     * returns previous boundaryPoint
      *
      * @param {BoundaryPoint} point
@@ -515,7 +484,7 @@
       };
     };
 
-<span id='core-dom-method-nextPoint'>    /**
+<span id='global-method-nextPoint'>    /**
 </span>     * returns next boundaryPoint
      *
      * @param {BoundaryPoint} point
@@ -546,7 +515,7 @@
       };
     };
 
-<span id='core-dom-method-isSamePoint'>    /**
+<span id='global-method-isSamePoint'>    /**
 </span>     * returns whether pointA and pointB is same or not.
      *
      * @param {BoundaryPoint} pointA
@@ -557,7 +526,7 @@
       return pointA.node === pointB.node &amp;&amp; pointA.offset === pointB.offset;
     };
 
-<span id='core-dom-method-isVisiblePoint'>    /**
+<span id='global-method-isVisiblePoint'>    /**
 </span>     * returns whether point is visible (can set cursor) or not.
      * 
      * @param {BoundaryPoint} point
@@ -577,10 +546,8 @@
       return false;
     };
 
-<span id='core-dom-method-prevPointUtil'>    /**
-</span>     * @method prevPointUtil
-     *
-     * @param {BoundaryPoint} point
+<span id='global-method-prevPointUntil'>    /**
+</span>     * @param {BoundaryPoint} point
      * @param {Function} pred
      * @return {BoundaryPoint}
      */
@@ -596,10 +563,8 @@
       return null;
     };
 
-<span id='core-dom-method-nextPointUntil'>    /**
-</span>     * @method nextPointUntil
-     *
-     * @param {BoundaryPoint} point
+<span id='global-method-nextPointUntil'>    /**
+</span>     * @param {BoundaryPoint} point
      * @param {Function} pred
      * @return {BoundaryPoint}
      */
@@ -615,10 +580,8 @@
       return null;
     };
 
-<span id='core-dom-method-walkPoint'>    /**
-</span>     * @method walkPoint
-     *
-     * @param {BoundaryPoint} startPoint
+<span id='global-method-walkPoint'>    /**
+</span>     * @param {BoundaryPoint} startPoint
      * @param {BoundaryPoint} endPoint
      * @param {Function} handler
      * @param {Boolean} isSkipInnerOffset
@@ -640,10 +603,8 @@
       }
     };
 
-<span id='core-dom-method-makeOffsetPath'>    /**
-</span>     * @method makeOffsetPath
-     *
-     * return offsetPath(array of offset) from ancestor
+<span id='global-method-makeOffsetPath'>    /**
+</span>     * return offsetPath(array of offset) from ancestor
      *
      * @param {Node} ancestor - ancestor node
      * @param {Node} node
@@ -653,30 +614,26 @@
       return $.map(ancestors, position).reverse();
     };
 
-<span id='core-dom-method-fromOffsetPath'>    /**
-</span>     * @method fromOffsetPath
-     *
-     * return element from offsetPath(array of offset)
+<span id='global-method-fromOffsetPath'>    /**
+</span>     * return element from offsetPath(array of offset)
      *
      * @param {Node} ancestor - ancestor node
-     * @param {array} offsets - offsetPath
+     * @param {array} aOffset - offsetPath
      */
-    var fromOffsetPath = function (ancestor, offsets) {
+    var fromOffsetPath = function (ancestor, aOffset) {
       var current = ancestor;
-      for (var i = 0, len = offsets.length; i &lt; len; i++) {
-        if (current.childNodes.length &lt;= offsets[i]) {
+      for (var i = 0, len = aOffset.length; i &lt; len; i++) {
+        if (current.childNodes.length &lt;= aOffset[i]) {
           current = current.childNodes[current.childNodes.length - 1];
         } else {
-          current = current.childNodes[offsets[i]];
+          current = current.childNodes[aOffset[i]];
         }
       }
       return current;
     };
 
-<span id='core-dom-method-splitNode'>    /**
-</span>     * @method splitNode
-     *
-     * split element or #text
+<span id='global-method-splitNode'>    /**
+</span>     * split element or #text
      *
      * @param {BoundaryPoint} point
      * @param {Boolean} [isSkipPaddingBlankHTML]
@@ -708,10 +665,8 @@
       return clone;
     };
 
-<span id='core-dom-method-splitTree'>    /**
-</span>     * @method splitTree
-     *
-     * split tree by point
+<span id='global-method-splitTree'>    /**
+</span>     * split tree by point
      *
      * @param {Node} root - split root
      * @param {BoundaryPoint} point
@@ -753,11 +708,8 @@
       return document.createTextNode(text);
     };
 
-<span id='core-dom-method-remove'>    /**
-</span>     * @method remove
-     *
-     * remove node, (isRemoveChild: remove child or not)
-     *
+<span id='global-method-remove'>    /**
+</span>     * remove node, (isRemoveChild: remove child or not)
      * @param {Node} node
      * @param {Boolean} isRemoveChild
      */
@@ -781,10 +733,8 @@
       parent.removeChild(node);
     };
 
-<span id='core-dom-method-removeWhile'>    /**
-</span>     * @method removeWhile
-     *
-     * @param {Node} node
+<span id='global-method-removeWhile'>    /**
+</span>     * @param {Node} node
      * @param {Function} pred
      */
     var removeWhile = function (node, pred) {
@@ -799,10 +749,8 @@
       }
     };
 
-<span id='core-dom-method-replace'>    /**
-</span>     * @method replace
-     *
-     * replace node with provided nodeName
+<span id='global-method-replace'>    /**
+</span>     * replace node with provided nodeName
      *
      * @param {Node} node
      * @param {String} nodeName
@@ -828,10 +776,8 @@
 
     var isTextarea = makePredByNodeName('TEXTAREA');
 
-<span id='core-dom-method-html'>    /**
-</span>     * @method html
-     *
-     * get the HTML contents of node
+<span id='global-method-html'>    /**
+</span>     * get the HTML contents of node 
      *
      * @param {jQuery} $node
      * @param {Boolean} [isNewlineOnBlock]
@@ -855,28 +801,21 @@
       return markup;
     };
 
-    var value = function ($textarea, stripLinebreaks) {
+    var value = function ($textarea) {
       var val = $textarea.val();
-      if (stripLinebreaks) {
-        return val.replace(/[\n\r]/g, '');
-      }
-      return val;
+      // strip line breaks
+      return val.replace(/[\n\r]/g, '');
     };
 
     return {
-<span id='core-dom-property-NBSP_CHAR'>      /** @property {String} NBSP_CHAR */
-</span>      NBSP_CHAR: NBSP_CHAR,
-<span id='core-dom-property-ZERO_WIDTH_NBSP_CHAR'>      /** @property {String} ZERO_WIDTH_NBSP_CHAR */
-</span>      ZERO_WIDTH_NBSP_CHAR: ZERO_WIDTH_NBSP_CHAR,
-<span id='core-dom-property-blank'>      /** @property {String} blank */
-</span>      blank: blankHTML,
-<span id='core-dom-property-emptyPara'>      /** @property {String} emptyPara */
-</span>      emptyPara: '&lt;p&gt;' + blankHTML + '&lt;/p&gt;',
+      NBSP_CHAR: NBSP_CHAR,
+      ZERO_WIDTH_NBSP_CHAR: ZERO_WIDTH_NBSP_CHAR,
+      blank: blankHTML,
+      emptyPara: '&lt;p&gt;' + blankHTML + '&lt;/p&gt;',
       isEditable: isEditable,
       isControlSizing: isControlSizing,
       buildLayoutInfo: buildLayoutInfo,
       isText: isText,
-      isVoid: isVoid,
       isPara: isPara,
       isPurePara: isPurePara,
       isInline: isInline,
@@ -891,7 +830,6 @@
       isAnchor: isAnchor,
       isDiv: makePredByNodeName('DIV'),
       isLi: isLi,
-      isBR: makePredByNodeName('BR'),
       isSpan: makePredByNodeName('SPAN'),
       isB: makePredByNodeName('B'),
       isU: makePredByNodeName('U'),

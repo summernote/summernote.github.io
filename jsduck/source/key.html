@@ -18,28 +18,13 @@
   <pre class="prettyprint lang-js">define([
   'summernote/core/list'
 ], function (list) {
-<span id='core-key'>  /**
-</span>   * @class core.key
-   *
-   * Object for keycodes.
-   *
-   * @singleton
-   * @alternateClassName key
+<span id='global-property-key'>  /**
+</span>   * Object for keycodes.
    */
   var key = {
-<span id='core-key-method-isEdit'>    /**
-</span>     * @method isEdit
-     *
-     * @param {Number} keyCode
-     * @return {Boolean}
-     */
     isEdit: function (keyCode) {
       return list.contains([8, 9, 13, 32], keyCode);
     },
-<span id='core-key-property-nameFromCode'>    /**
-</span>     * @property {Object} nameFromCode
-     * @property {String} nameFromCode.8 &quot;BACKSPACE&quot;
-     */
     nameFromCode: {
       '8': 'BACKSPACE',
       '9': 'TAB',

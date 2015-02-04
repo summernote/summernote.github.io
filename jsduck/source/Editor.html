@@ -28,11 +28,9 @@
   'summernote/editing/Bullet'
 ], function (agent, func, list, dom, range, async,
              Style, Typing, Table, Bullet) {
-<span id='editing-Editor'>  /**
-</span>   * @class editing.Editor
-   *
-   * Editor
-   *
+<span id='Editor'>  /**
+</span>   * Editor
+   * @class
    */
   var Editor = function () {
 
@@ -41,26 +39,18 @@
     var typing = new Typing();
     var bullet = new Bullet();
 
-<span id='editing-Editor-method-createRange'>    /**
-</span>     * @method createRange
-     *
-     * create range
-     *
-     * @param {jQuery} $editable
-     * @return {WrappedRange}
+<span id='Editor-method-createRange'>    /**
+</span>     * create range
      */
     this.createRange = function ($editable) {
       $editable.focus();
       return range.create();
     };
 
-<span id='editing-Editor-method-saveRange'>    /**
-</span>     * @method saveRange
-     *
-     * save current range
+<span id='Editor-method-saveRange'>    /**
+</span>     * save current range
      *
      * @param {jQuery} $editable
-     * @param {Boolean} [thenCollapse=false]
      */
     this.saveRange = function ($editable, thenCollapse) {
       $editable.focus();
@@ -70,26 +60,8 @@
       }
     };
 
-<span id='editing-Editor-method-saveRange'>    /**
-</span>     * @method saveRange
-     *
-     * save current node list to $editable.data('childNodes')
-     *
-     * @param {jQuery} $editable
-     */
-    this.saveNode = function ($editable) {
-      // copy child node reference
-      var copy = [];
-      for (var key  = 0, len = $editable[0].childNodes.length; key &lt; len; key++) {
-        copy.push($editable[0].childNodes[key]);
-      }
-      $editable.data('childNodes', copy);
-    };
-
-<span id='editing-Editor-method-restoreRange'>    /**
-</span>     * @method restoreRange
-     *
-     * restore lately range
+<span id='Editor-method-restoreRange'>    /**
+</span>     * restore lately range
      *
      * @param {jQuery} $editable
      */
@@ -101,38 +73,13 @@
       }
     };
 
-<span id='editing-Editor-method-restoreNode'>    /**
-</span>     * @method restoreNode
-     *
-     * restore lately node list
-     *
-     * @param {jQuery} $editable
-     */
-    this.restoreNode = function ($editable) {
-      $editable.html('');
-      var child = $editable.data('childNodes');
-      for (var index = 0, len = child.length; index &lt; len; index++) {
-        $editable[0].appendChild(child[index]);
-      }
-    };
-<span id='editing-Editor-method-currentStyle'>    /**
-</span>     * @method currentStyle
-     *
-     * current style
-     *
+<span id='Editor-method-currentStyle'>    /**
+</span>     * current style
      * @param {Node} target
-     * @return {Boolean} false if range is no
      */
     this.currentStyle = function (target) {
       var rng = range.create();
       return rng ? rng.isOnEditable() &amp;&amp; style.current(rng, target) : false;
-    };
-
-    var triggerOnBeforeChange = this.triggerOnBeforeChange = function ($editable) {
-      var onBeforeChange = $editable.data('callbacks').onBeforeChange;
-      if (onBeforeChange) {
-        onBeforeChange($editable.html(), $editable);
-      }
     };
 
     var triggerOnChange = this.triggerOnChange = function ($editable) {
@@ -142,148 +89,32 @@
       }
     };
 
-<span id='editing-Editor-method-undo'>    /**
-</span>     * @method undo
-     * undo
+<span id='Editor-method-undo'>    /**
+</span>     * undo
      * @param {jQuery} $editable
      */
     this.undo = function ($editable) {
-      triggerOnBeforeChange($editable);
       $editable.data('NoteHistory').undo();
       triggerOnChange($editable);
     };
 
-<span id='editing-Editor-method-redo'>    /**
-</span>     * @method redo
-     * redo
+<span id='Editor-method-redo'>    /**
+</span>     * redo
      * @param {jQuery} $editable
      */
     this.redo = function ($editable) {
-      triggerOnBeforeChange($editable);
       $editable.data('NoteHistory').redo();
       triggerOnChange($editable);
     };
 
-<span id='editing-Editor-method-beforeCommand'>    /**
-</span>     * @method beforeCommand
-     * before command
-     * @param {jQuery} $editable
-     */
-    var beforeCommand = this.beforeCommand = function ($editable) {
-      triggerOnBeforeChange($editable);
-    };
-
-<span id='editing-Editor-method-afterCommand'>    /**
-</span>     * @method afterCommand
-     * after command
+<span id='Editor-method-afterCommand'>    /**
+</span>     * after command
      * @param {jQuery} $editable
      */
     var afterCommand = this.afterCommand = function ($editable) {
       $editable.data('NoteHistory').recordUndo();
       triggerOnChange($editable);
     };
-
-<span id='editing-Editor-method-bold'>    /**
-</span>     * @method bold
-     * @param {jQuery} $editable
-     * @param {Mixed} value
-     */
-
-<span id='editing-Editor-method-italic'>    /**
-</span>     * @method italic
-     * @param {jQuery} $editable
-     * @param {Mixed} value
-     */
-
-<span id='editing-Editor-method-underline'>    /**
-</span>     * @method underline
-     * @param {jQuery} $editable
-     * @param {Mixed} value
-     */
-
-<span id='editing-Editor-method-strikethrough'>    /**
-</span>     * @method strikethrough
-     * @param {jQuery} $editable
-     * @param {Mixed} value
-     */
-
-<span id='editing-Editor-method-formatBlock'>    /**
-</span>     * @method formatBlock
-     * @param {jQuery} $editable
-     * @param {Mixed} value
-     */
-
-<span id='editing-Editor-method-superscript'>    /**
-</span>     * @method superscript
-     * @param {jQuery} $editable
-     * @param {Mixed} value
-     */
-
-<span id='editing-Editor-method-subscript'>    /**
-</span>     * @method subscript
-     * @param {jQuery} $editable
-     * @param {Mixed} value
-     */
-
-<span id='editing-Editor-method-justifyLeft'>    /**
-</span>     * @method justifyLeft
-     * @param {jQuery} $editable
-     * @param {Mixed} value
-     */
-
-<span id='editing-Editor-method-justifyCenter'>    /**
-</span>     * @method justifyCenter
-     * @param {jQuery} $editable
-     * @param {Mixed} value
-     */
-
-<span id='editing-Editor-method-justifyRight'>    /**
-</span>     * @method justifyRight
-     * @param {jQuery} $editable
-     * @param {Mixed} value
-     */
-
-<span id='editing-Editor-method-justifyFull'>    /**
-</span>     * @method justifyFull
-     * @param {jQuery} $editable
-     * @param {Mixed} value
-     */
-
-<span id='editing-Editor-method-formatBlock'>    /**
-</span>     * @method formatBlock
-     * @param {jQuery} $editable
-     * @param {Mixed} value
-     */
-
-<span id='editing-Editor-method-removeFormat'>    /**
-</span>     * @method removeFormat
-     * @param {jQuery} $editable
-     * @param {Mixed} value
-     */
-
-<span id='editing-Editor-method-backColor'>    /**
-</span>     * @method backColor
-     * @param {jQuery} $editable
-     * @param {Mixed} value
-     */
-
-<span id='editing-Editor-method-foreColor'>    /**
-</span>     * @method foreColor
-     * @param {jQuery} $editable
-     * @param {Mixed} value
-     */
-
-<span id='editing-Editor-method-insertHorizontalRule'>    /**
-</span>     * @method insertHorizontalRule
-     * @param {jQuery} $editable
-     * @param {Mixed} value
-     */
-
-<span id='editing-Editor-method-fontName'>    /**
-</span>     * @method fontName
-     * @param {jQuery} $editable
-     * @param {Mixed} value
-     */
 
     /* jshint ignore:start */
     // native commands(with execCommand), generate function for execCommand
@@ -295,8 +126,6 @@
     for (var idx = 0, len = commands.length; idx &lt; len; idx ++) {
       this[commands[idx]] = (function (sCmd) {
         return function ($editable, value) {
-          beforeCommand($editable);
-
           document.execCommand(sCmd, false, value);
 
           afterCommand($editable);
@@ -305,10 +134,8 @@
     }
     /* jshint ignore:end */
 
-<span id='editing-Editor-method-tab'>    /**
-</span>     * @method tab
-     *
-     * handle tab key
+<span id='Editor-method-tab'>    /**
+</span>     * handle tab key
      *
      * @param {jQuery} $editable
      * @param {Object} options
@@ -318,17 +145,13 @@
       if (rng.isCollapsed() &amp;&amp; rng.isOnCell()) {
         table.tab(rng);
       } else {
-        beforeCommand($editable);
         typing.insertTab($editable, rng, options.tabsize);
         afterCommand($editable);
       }
     };
 
-<span id='editing-Editor-method-untab'>    /**
-</span>     * @method untab
-     *
-     * handle shift+tab key
-     *
+<span id='Editor-method-untab'>    /**
+</span>     * handle shift+tab key
      */
     this.untab = function () {
       var rng = range.create();
@@ -337,58 +160,49 @@
       }
     };
 
-<span id='editing-Editor-method-insertParagraph'>    /**
-</span>     * @method insertParagraph
-     *
-     * insert paragraph
+<span id='Editor-method-insertParagraph'>    /**
+</span>     * insert paragraph
      *
      * @param {Node} $editable
      */
     this.insertParagraph = function ($editable) {
-      beforeCommand($editable);
       typing.insertParagraph($editable);
       afterCommand($editable);
     };
 
-<span id='editing-Editor-method-insertOrderedList'>    /**
-</span>     * @method insertOrderedList
-     *
-     * @param {jQuery} $editable
+<span id='Editor-method-insertOrderedList'>    /**
+</span>     * @param {jQuery} $editable
      */
     this.insertOrderedList = function ($editable) {
-      beforeCommand($editable);
       bullet.insertOrderedList($editable);
       afterCommand($editable);
     };
 
-<span id='editing-Editor-method-insertUnorderedList'>    /**
+<span id='Editor-method-insertUnorderedList'>    /**
 </span>     * @param {jQuery} $editable
      */
     this.insertUnorderedList = function ($editable) {
-      beforeCommand($editable);
       bullet.insertUnorderedList($editable);
       afterCommand($editable);
     };
 
-<span id='editing-Editor-method-indent'>    /**
+<span id='Editor-method-indent'>    /**
 </span>     * @param {jQuery} $editable
      */
     this.indent = function ($editable) {
-      beforeCommand($editable);
       bullet.indent($editable);
       afterCommand($editable);
     };
 
-<span id='editing-Editor-method-outdent'>    /**
+<span id='Editor-method-outdent'>    /**
 </span>     * @param {jQuery} $editable
      */
     this.outdent = function ($editable) {
-      beforeCommand($editable);
       bullet.outdent($editable);
       afterCommand($editable);
     };
 
-<span id='editing-Editor-method-insertImage'>    /**
+<span id='Editor-method-insertImage'>    /**
 </span>     * insert image
      *
      * @param {jQuery} $editable
@@ -400,7 +214,6 @@
           display: '',
           width: Math.min($editable.width(), $image.width())
         });
-        beforeCommand($editable);
         range.create().insertNode($image[0]);
         afterCommand($editable);
       }).fail(function () {
@@ -411,31 +224,29 @@
       });
     };
 
-<span id='editing-Editor-method-insertNode'>    /**
-</span>     * @method insertNode
-     * insert node
+<span id='Editor-method-insertNode'>    /**
+</span>     * insert node
      * @param {Node} $editable
      * @param {Node} node
+     * @param {Boolean} [isInline]
      */
-    this.insertNode = function ($editable, node) {
-      beforeCommand($editable);
-      range.create().insertNode(node);
+    this.insertNode = function ($editable, node, isInline) {
+      range.create().insertNode(node, isInline);
       afterCommand($editable);
     };
 
-<span id='editing-Editor-method-insertText'>    /**
+<span id='Editor-method-insertText'>    /**
 </span>     * insert text
      * @param {Node} $editable
      * @param {String} text
      */
     this.insertText = function ($editable, text) {
-      var textNode = this.createRange($editable).insertNode(dom.createText(text));
-      beforeCommand($editable);
+      var textNode = this.createRange($editable).insertNode(dom.createText(text), true);
       range.create(textNode, dom.nodeLength(textNode)).select();
       afterCommand($editable);
     };
 
-<span id='editing-Editor-method-formatBlock'>    /**
+<span id='Editor-method-formatBlock'>    /**
 </span>     * formatBlock
      *
      * @param {jQuery} $editable
@@ -443,13 +254,11 @@
      */
     this.formatBlock = function ($editable, tagName) {
       tagName = agent.isMSIE ? '&lt;' + tagName + '&gt;' : tagName;
-      beforeCommand($editable);
       document.execCommand('FormatBlock', false, tagName);
       afterCommand($editable);
     };
 
     this.formatPara = function ($editable) {
-      beforeCommand($editable);
       this.formatBlock($editable, 'P');
       afterCommand($editable);
     };
@@ -464,7 +273,7 @@
     };
     /* jshint ignore:end */
 
-<span id='editing-Editor-method-fontSize'>    /**
+<span id='Editor-method-fontSize'>    /**
 </span>     * fontsize
      * FIXME: Still buggy
      *
@@ -472,8 +281,6 @@
      * @param {String} value - px
      */
     this.fontSize = function ($editable, value) {
-      beforeCommand($editable);
-
       document.execCommand('fontSize', false, 3);
       if (agent.isFF) {
         // firefox: &lt;font size=&quot;3&quot;&gt; to &lt;span style='font-size={value}px;'&gt;, buggy
@@ -488,20 +295,19 @@
       afterCommand($editable);
     };
 
-<span id='editing-Editor-method-lineHeight'>    /**
+<span id='Editor-method-lineHeight'>    /**
 </span>     * lineHeight
      * @param {jQuery} $editable
      * @param {String} value
      */
     this.lineHeight = function ($editable, value) {
-      beforeCommand($editable);
       style.stylePara(range.create(), {
         lineHeight: value
       });
       afterCommand($editable);
     };
 
-<span id='editing-Editor-property-unlink'>    /**
+<span id='Editor-property-unlink'>    /**
 </span>     * unlink
      *
      * @type command
@@ -514,15 +320,16 @@
         var anchor = dom.ancestor(rng.sc, dom.isAnchor);
         rng = range.createFromNode(anchor);
         rng.select();
-
-        beforeCommand($editable);
         document.execCommand('unlink');
+
         afterCommand($editable);
       }
     };
 
-<span id='editing-Editor-method-createLink'>    /**
-</span>     * create link (command)
+<span id='Editor-property-createLink'>    /**
+</span>     * create link
+     *
+     * @type command
      *
      * @param {jQuery} $editable
      * @param {Object} linkInfo
@@ -541,25 +348,20 @@
       rng = rng.deleteContents();
 
       // Create a new link when there is no anchor on range.
-      var anchor = rng.insertNode($('&lt;A&gt;' + linkText + '&lt;/A&gt;')[0]);
+      var anchor = rng.insertNode($('&lt;A&gt;' + linkText + '&lt;/A&gt;')[0], true);
       $(anchor).attr({
         href: linkUrl,
         target: isNewWindow ? '_blank' : ''
       });
 
-      beforeCommand($editable);
       range.createFromNode(anchor).select();
       afterCommand($editable);
     };
 
-<span id='editing-Editor-method-getLinkInfo'>    /**
+<span id='Editor-method-getLinkInfo'>    /**
 </span>     * returns link info
      *
      * @return {Object}
-     * @return {WrappedRange} return.range
-     * @return {String} return.text
-     * @return {Boolean} [return.isNewWindow=true]
-     * @return {String} [return.url=&quot;&quot;]
      */
     this.getLinkInfo = function ($editable) {
       $editable.focus();
@@ -577,19 +379,9 @@
       };
     };
 
-<span id='editing-Editor-method-color'>    /**
-</span>     * setting color
-     *
-     * @param {Node} $editable
-     * @param {Object} sObjColor  color code
-     * @param {String} sObjColor.foreColor foreground color
-     * @param {String} sObjColor.backColor background color
-     */
     this.color = function ($editable, sObjColor) {
       var oColor = JSON.parse(sObjColor);
       var foreColor = oColor.foreColor, backColor = oColor.backColor;
-
-      beforeCommand($editable);
 
       if (foreColor) { document.execCommand('foreColor', false, foreColor); }
       if (backColor) { document.execCommand('backColor', false, backColor); }
@@ -597,45 +389,25 @@
       afterCommand($editable);
     };
 
-<span id='editing-Editor-method-insertTable'>    /**
-</span>     * insert Table
-     *
-     * @param {Node} $editable
-     * @param {String} sDim dimension of table (ex : &quot;5x5&quot;)
-     */
     this.insertTable = function ($editable, sDim) {
       var dimension = sDim.split('x');
-      beforeCommand($editable);
-
       var rng = range.create();
       rng = rng.deleteContents();
       rng.insertNode(table.createTable(dimension[0], dimension[1]));
       afterCommand($editable);
     };
 
-<span id='editing-Editor-method-floatMe'>    /**
-</span>     * float me
-     *
-     * @param {jQuery} $editable
+<span id='Editor-method-floatMe'>    /**
+</span>     * @param {jQuery} $editable
      * @param {String} value
      * @param {jQuery} $target
      */
     this.floatMe = function ($editable, value, $target) {
-      beforeCommand($editable);
       $target.css('float', value);
       afterCommand($editable);
     };
 
-<span id='editing-Editor-method-imageShape'>    /**
-</span>     * change image shape
-     *
-     * @param {jQuery} $editable
-     * @param {String} value css class
-     * @param {Node} $target
-     */
     this.imageShape = function ($editable, value, $target) {
-      beforeCommand($editable);
-
       $target.removeClass('img-rounded img-circle img-thumbnail');
 
       if (value) {
@@ -645,15 +417,13 @@
       afterCommand($editable);
     };
 
-<span id='editing-Editor-method-resize'>    /**
+<span id='Editor-method-resize'>    /**
 </span>     * resize overlay element
      * @param {jQuery} $editable
      * @param {String} value
      * @param {jQuery} $target - target element
      */
     this.resize = function ($editable, value, $target) {
-      beforeCommand($editable);
-
       $target.css({
         width: value * 100 + '%',
         height: ''
@@ -662,7 +432,7 @@
       afterCommand($editable);
     };
 
-<span id='editing-Editor-method-resizeTo'>    /**
+<span id='Editor-method-resizeTo'>    /**
 </span>     * @param {Position} pos
      * @param {jQuery} $target - target element
      * @param {Boolean} [bKeepRatio] - keep ratio
@@ -686,7 +456,7 @@
       $target.css(imageSize);
     };
 
-<span id='editing-Editor-method-removeMedia'>    /**
+<span id='Editor-method-removeMedia'>    /**
 </span>     * remove media object
      *
      * @param {jQuery} $editable
@@ -694,13 +464,7 @@
      * @param {jQuery} $target - target element
      */
     this.removeMedia = function ($editable, value, $target) {
-      beforeCommand($editable);
       $target.detach();
-
-      var callbacks = $editable.data('callbacks');
-      if (callbacks &amp;&amp; callbacks.onMediaDelete) {
-        callbacks.onMediaDelete($target, this, $editable);
-      }
 
       afterCommand($editable);
     };

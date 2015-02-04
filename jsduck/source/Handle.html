@@ -16,13 +16,11 @@
 </head>
 <body onload="prettyPrint(); highlight();">
   <pre class="prettyprint lang-js">define('summernote/module/Handle', function () {
-<span id='module-Handle'>  /**
-</span>   * @class module.Handle
-   *
-   * Handle
+<span id='Handle'>  /**
+</span>   * Handle
    */
   var Handle = function () {
-<span id='module-Handle-method-update'>    /**
+<span id='Handle-method-update'>    /**
 </span>     * update handle
      * @param {jQuery} $handle
      * @param {Object} styleInfo
@@ -54,11 +52,6 @@
       }
     };
 
-<span id='module-Handle-method-hide'>    /**
-</span>     * hide
-     *
-     * @param {jQuery} $handle
-     */
     this.hide = function ($handle) {
       $handle.children().hide();
     };

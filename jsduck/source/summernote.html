@@ -21,17 +21,7 @@
   'summernote/settings',
   'summernote/EventHandler', 'summernote/Renderer'
 ], function (agent, dom, range, settings, EventHandler, Renderer) {
-
   // jQuery namespace for summernote
-<span id='$-summernote'>  /**
-</span>   * @class $.summernote 
-   * 
-   * summernote attribute  
-   * 
-   * @mixin settings
-   * @singleton  
-   * 
-   */
   $.summernote = $.summernote || {};
 
   // extends default `settings`
@@ -41,77 +31,20 @@
   var eventHandler = new EventHandler();
 
   $.extend($.summernote, {
-<span id='$-summernote-property-renderer'>    /** @property {Renderer} */
-</span>    renderer: renderer,
-<span id='$-summernote-property-eventHandler'>    /** @property {EventHandler} */
-</span>    eventHandler: eventHandler,
-<span id='$-summernote-property-core'>    /** 
-</span>     * @property {Object} core 
-     * @property {core.agent} core.agent 
-     * @property {core.dom} core.dom
-     * @property {core.range} core.range 
-     */
+    renderer: renderer,
+    eventHandler: eventHandler,
     core: {
       agent: agent,
       dom: dom,
       range: range
     },
-<span id='$-summernote-property-pluginEvents'>    /** 
-</span>     * @property {Object} 
-     * pluginEvents event list for plugins
-     * event has name and callback function.
-     * 
-     * ``` 
-     * $.summernote.addPlugin({
-     *     events : {
-     *          'hello' : function(layoutInfo, value, $target) {
-     *              console.log('event name is hello, value is ' + value );
-     *          }
-     *     }     
-     * })
-     * ```
-     * 
-     * * event name is data-event property.
-     * * layoutInfo is a summernote layout information.
-     * * value is data-value property.
-     */
     pluginEvents: {}
   });
 
-<span id='$-summernote-method-addPlugin'>  /**
-</span>   * @method addPlugin
-   *
-   * add Plugin in Summernote 
-   * 
-   * Summernote can make a own plugin.
-   *
-   * ```
-   * var tmpl = $.summernote.renderer.getTemplate();
-   * $.summernote.addPlugin({
-   *     buttons : {
-   *        &quot;name&quot; : function(lang, options) {        
-   *            return tmpl.iconButton('fa fa-header', {
-   *                event : 'hello',
-   *                value : 'hello',
-   *                hide : true
-   *            });           
-   *        }
-   *     
-   *     }
-   * });
-   * ``` 
-   *
+<span id='global-method-addPlugin'>  /**
+</span>   * addPlugin
    *
    * @param {Object} plugin
-   * @param {Object} [plugin.buttons] 
-   * define plugin button 
-   * for detail, see to Renderer.addButtonInfo
-   * @param {Object} [plugin.dialogs] 
-   * define plugin dialog
-   * for detail, see to Renderer.addDialogInfo
-   * @param {Object} [plugin.events] add event in $.summernote.pluginEvents 
-   * @param {Object} [plugin.langs] update $.summernote.lang
-   * @param {Object} [plugin.options] update $.summernote.options
    */
   $.summernote.addPlugin = function (plugin) {
     if (plugin.buttons) {
@@ -145,21 +78,15 @@
     }
   };
 
-  /*
-   * extend $.fn
+<span id='global-property-'>  /**
+</span>   * extend jquery fn
    */
   $.fn.extend({
-<span id='$-fn-method-summernote'>    /**
-</span>     * @method
-     * Initialize summernote
+<span id='global-method-summernote'>    /**
+</span>     * initialize summernote
      *  - create editor layout and attach Mouse and keyboard events.
-     * 
-     * ```
-     * $(&quot;#summernote&quot;).summernote( { options ..} );
-     * ```
-     *   
-     * @member $.fn
-     * @param {Object} options reference to $.summernote.options
+     *
+     * @param {Object} options
      * @returns {this}
      */
     summernote: function (options) {
@@ -208,22 +135,9 @@
     },
     //
 
-<span id='$-fn-method-code'>    /**
-</span>     * @method 
-     * 
-     * get the HTML contents of note or set the HTML contents of note.
+<span id='global-method-code'>    /**
+</span>     * get the HTML contents of note or set the HTML contents of note.
      *
-     * * get contents 
-     * ```
-     * var content = $(&quot;#summernote&quot;).code();
-     * ```
-     * * set contents 
-     *
-     * ```
-     * $(&quot;#summernote&quot;).code(html);
-     * ```
-     *
-     * @member $.fn 
      * @param {String} [sHTML] - HTML contents(optional, set)
      * @returns {this|String} - context(set) or HTML contents of note(get).
      */
@@ -252,12 +166,9 @@
       return this;
     },
 
-<span id='$-fn-method-destroy'>    /**
-</span>     * @method
-     * 
-     * destroy Editor Layout and detach Key and Mouse Event
+<span id='global-method-destroy'>    /**
+</span>     * destroy Editor Layout and detach Key and Mouse Event
      *
-     * @member $.fn
      * @returns {this}
      */
     destroy: function () {

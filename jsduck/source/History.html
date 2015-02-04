@@ -16,11 +16,9 @@
 </head>
 <body onload="prettyPrint(); highlight();">
   <pre class="prettyprint lang-js">define(['summernote/core/range'], function (range) {
-<span id='editing-History'>  /**
-</span>   * @class editing.History
-   *
-   * Editor History
-   *
+<span id='History'>  /**
+</span>   * History
+   * @class
    */
   var History = function ($editable) {
     var stack = [], stackOffset = -1;
@@ -45,9 +43,6 @@
       }
     };
 
-<span id='editing-History-method-undo'>    /**
-</span>     * undo
-     */
     this.undo = function () {
       if (0 &lt; stackOffset) {
         stackOffset--;
@@ -55,9 +50,6 @@
       }
     };
 
-<span id='editing-History-method-redo'>    /**
-</span>     * redo
-     */
     this.redo = function () {
       if (stack.length - 1 &gt; stackOffset) {
         stackOffset++;
@@ -65,9 +57,6 @@
       }
     };
 
-<span id='editing-History-method-recordUndo'>    /**
-</span>     * recorded undo
-     */
     this.recordUndo = function () {
       stackOffset++;
 

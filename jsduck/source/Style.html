@@ -19,24 +19,19 @@
   'summernote/core/agent',
   'summernote/core/dom'
 ], function (agent, dom) {
-<span id='editing-Style'>  /**
-</span>   * @class editing.Style
-   *
-   * Style
-   *
+<span id='Style'>  /**
+</span>   * Style
+   * @class
    */
   var Style = function () {
-<span id='editing-Style-method-jQueryCSS'>    /**
-</span>     * @method jQueryCSS
-     *
-     * passing an array of style properties to .css()
+<span id='Style-method-jQueryCSS'>    /**
+</span>     * passing an array of style properties to .css()
      * will result in an object of property-value pairs.
      * (compability with version &lt; 1.9)
      *
-     * @private
      * @param  {jQuery} $obj
      * @param  {Array} propertyNames - An array of one or more CSS properties.
-     * @return {Object}
+     * @returns {Object}
      */
     var jQueryCSS = function ($obj, propertyNames) {
       if (agent.jqueryVersion &lt; 1.9) {
@@ -49,7 +44,7 @@
       return $obj.css.call($obj, propertyNames);
     };
 
-<span id='editing-Style-method-stylePara'>    /**
+<span id='Style-method-stylePara'>    /**
 </span>     * paragraph level style
      *
      * @param {WrappedRange} rng
@@ -63,7 +58,7 @@
       });
     };
 
-<span id='editing-Style-method-current'>    /**
+<span id='Style-method-current'>    /**
 </span>     * get current style on cursor
      *
      * @param {WrappedRange} rng
