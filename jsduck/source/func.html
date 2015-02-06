@@ -16,8 +16,13 @@
 </head>
 <body onload="prettyPrint(); highlight();">
   <pre class="prettyprint lang-js">define('summernote/core/func', function () {
-<span id='global-property-func'>  /**
-</span>   * func utils (for high-order func's arg)
+<span id='core-func'>  /**
+</span>   * @class core.func
+   *
+   * func utils (for high-order func's arg)
+   *
+   * @singleton
+   * @alternateClassName func
    */
   var func = (function () {
     var eq = function (itemA) {
@@ -62,7 +67,7 @@
 
     var idCounter = 0;
 
-<span id='global-method-uniqueId'>    /**
+<span id='core-func-method-uniqueId'>    /**
 </span>     * generate a globally-unique id
      *
      * @param {String} [prefix]
@@ -72,7 +77,7 @@
       return prefix ? prefix + id : id;
     };
 
-<span id='global-method-rect2bnd'>    /**
+<span id='core-func-method-rect2bnd'>    /**
 </span>     * returns bnd (bounds) from rect
      *
      * - IE Compatability Issue: http://goo.gl/sRLOAo
@@ -95,7 +100,7 @@
       };
     };
 
-<span id='global-method-invertObject'>    /**
+<span id='core-func-method-invertObject'>    /**
 </span>     * returns a copy of the object where the keys have become the values and the values the keys.
      * @param {Object} obj
      * @return {Object}

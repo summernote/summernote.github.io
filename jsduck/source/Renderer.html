@@ -19,7 +19,9 @@
   'summernote/core/agent', 'summernote/core/dom', 'summernote/core/func'
 ], function (agent, dom, func) {
 <span id='Renderer'>  /**
-</span>   * renderer
+</span>   * @class Renderer
+   *
+   * renderer
    *
    * rendering toolbar and editable
    */
@@ -27,14 +29,15 @@
 
 <span id='Renderer-method-tplButton'>    /**
 </span>     * bootstrap button template
-     *
-     * @param {String} label
-     * @param {Object} [options]
-     * @param {String} [options.event]
-     * @param {String} [options.value]
-     * @param {String} [options.title]
-     * @param {String} [options.dropdown]
-     * @param {String} [options.hide]
+     * @private
+     * @param {String} label button name
+     * @param {Object} [options] button options
+     * @param {String} [options.event] data-event
+     * @param {String} [options.className] button's class name
+     * @param {String} [options.value] data-value
+     * @param {String} [options.title] button's title for popup
+     * @param {String} [options.dropdown] dropdown html
+     * @param {String} [options.hide] data-hide
      */
     var tplButton = function (label, options) {
       var event = options.event;
@@ -63,7 +66,7 @@
 
 <span id='Renderer-method-tplIconButton'>    /**
 </span>     * bootstrap icon button template
-     *
+     * @private
      * @param {String} iconClassName
      * @param {Object} [options]
      * @param {String} [options.event]
@@ -78,7 +81,7 @@
 
 <span id='Renderer-method-tplPopover'>    /**
 </span>     * bootstrap popover template
-     *
+     * @private
      * @param {String} className
      * @param {String} content
      */
@@ -95,9 +98,9 @@
 </span>     * bootstrap dialog template
      *
      * @param {String} className
-     * @param {String} [title]
+     * @param {String} [title='']
      * @param {String} body
-     * @param {String} [footer]
+     * @param {String} [footer='']
      */
     var tplDialog = function (className, title, body, footer) {
       return '&lt;div class=&quot;' + className + ' modal&quot; aria-hidden=&quot;false&quot;&gt;' +
@@ -167,8 +170,10 @@
       },
       fontname: function (lang, options) {
         var items = options.fontNames.reduce(function (memo, v) {
-          if (!agent.isFontInstalled(v)) { return memo; }
-          return memo + '&lt;li&gt;&lt;a data-event=&quot;fontName&quot; href=&quot;#&quot; data-value=&quot;' + v + '&quot;&gt;' +
+          if (!agent.isFontInstalled(v) &amp;&amp; options.fontNamesIgnoreCheck.indexOf(v) === -1) {
+            return memo;
+          }
+          return memo + '&lt;li&gt;&lt;a data-event=&quot;fontName&quot; href=&quot;#&quot; data-value=&quot;' + v + '&quot; style=&quot;font-family:\'' + v + '\'&quot;&gt;' +
                           '&lt;i class=&quot;fa fa-check&quot;&gt;&lt;/i&gt; ' + v +
                         '&lt;/a&gt;&lt;/li&gt;';
         }, '');
@@ -474,10 +479,12 @@
       var body = [];
 
       for (var i in keys) {
-        body.push(
-          '&lt;div class=&quot;' + keyClass + 'key&quot;&gt;' + keys[i].kbd + '&lt;/div&gt;' +
-          '&lt;div class=&quot;' + keyClass + 'name&quot;&gt;' + keys[i].text + '&lt;/div&gt;'
-          );
+        if (keys.hasOwnProperty(i)) {
+          body.push(
+            '&lt;div class=&quot;' + keyClass + 'key&quot;&gt;' + keys[i].kbd + '&lt;/div&gt;' +
+            '&lt;div class=&quot;' + keyClass + 'name&quot;&gt;' + keys[i].text + '&lt;/div&gt;'
+            );
+        }
       }
 
       return '&lt;div class=&quot;note-shortcut-row row&quot;&gt;&lt;div class=&quot;' + keyClass + 'title col-xs-offset-6&quot;&gt;' + title + '&lt;/div&gt;&lt;/div&gt;' +
@@ -489,7 +496,6 @@
         { kbd: '⌘ + B', text: lang.font.bold },
         { kbd: '⌘ + I', text: lang.font.italic },
         { kbd: '⌘ + U', text: lang.font.underline },
-        { kbd: '⌘ + ⇧ + S', text: lang.font.sdivikethrough },
         { kbd: '⌘ + \\', text: lang.font.clear }
       ];
 
@@ -501,7 +507,7 @@
         { kbd: '⌘ + Z', text: lang.history.undo },
         { kbd: '⌘ + ⇧ + Z', text: lang.history.redo },
         { kbd: '⌘ + ]', text: lang.paragraph.indent },
-        { kbd: '⌘ + [', text: lang.paragraph.oudivent },
+        { kbd: '⌘ + [', text: lang.paragraph.outdent },
         { kbd: '⌘ + ENTER', text: lang.hr.insert }
       ];
 
@@ -582,7 +588,7 @@
 
         var body = '&lt;div class=&quot;form-group row-fluid note-group-select-from-files&quot;&gt;' +
                      '&lt;label&gt;' + lang.image.selectFromFiles + '&lt;/label&gt;' +
-                     '&lt;input class=&quot;note-image-input&quot; type=&quot;file&quot; name=&quot;files&quot; accept=&quot;image/*&quot; /&gt;' +
+                     '&lt;input class=&quot;note-image-input&quot; type=&quot;file&quot; name=&quot;files&quot; accept=&quot;image/*&quot; multiple=&quot;multiple&quot; /&gt;' +
                      imageLimitation +
                    '&lt;/div&gt;' +
                    '&lt;div class=&quot;form-group row-fluid&quot;&gt;' +
@@ -618,9 +624,9 @@
                    '&lt;div class=&quot;title&quot;&gt;' + lang.shortcut.shortcuts + '&lt;/div&gt;' +
                    (agent.isMac ? tplShortcutTable(lang, options) : replaceMacKeys(tplShortcutTable(lang, options))) +
                    '&lt;p class=&quot;text-center&quot;&gt;' +
-                     '&lt;a href=&quot;//hackerwins.github.io/summernote/&quot; target=&quot;_blank&quot;&gt;Summernote @VERSION&lt;/a&gt; · ' +
-                     '&lt;a href=&quot;//github.com/HackerWins/summernote&quot; target=&quot;_blank&quot;&gt;Project&lt;/a&gt; · ' +
-                     '&lt;a href=&quot;//github.com/HackerWins/summernote/issues&quot; target=&quot;_blank&quot;&gt;Issues&lt;/a&gt;' +
+                     '&lt;a href=&quot;//summernote.org/&quot; target=&quot;_blank&quot;&gt;Summernote @VERSION&lt;/a&gt; · ' +
+                     '&lt;a href=&quot;//github.com/summernote/summernote&quot; target=&quot;_blank&quot;&gt;Project&lt;/a&gt; · ' +
+                     '&lt;a href=&quot;//github.com/summernote/summernote/issues&quot; target=&quot;_blank&quot;&gt;Issues&lt;/a&gt;' +
                    '&lt;/p&gt;';
         return tplDialog('note-help-dialog', '', body, '');
       }
@@ -781,8 +787,9 @@
       if (options.direction) {
         $editable.attr('dir', options.direction);
       }
-      if (options.placeholder) {
-        $editable.attr('data-placeholder', options.placeholder);
+      var placeholder = $holder.attr('placeholder') || options.placeholder;
+      if (placeholder) {
+        $editable.attr('data-placeholder', placeholder);
       }
 
       $editable.html(dom.html($holder));
@@ -907,6 +914,13 @@
       }
     };
 
+<span id='Renderer-method-getTemplate'>    /**
+</span>     *
+     * @return {Object}
+     * @return {function(label, options=):string} return.button {@link #tplButton function to make text button}
+     * @return {function(iconClass, options=):string} return.iconButton {@link #tplIconButton function to make icon button}
+     * @return {function(className, title=, body=, footer=):string} return.dialog {@link #tplDialog function to make dialog}
+     */
     this.getTemplate = function () {
       return {
         button: tplButton,
@@ -915,10 +929,21 @@
       };
     };
 
+<span id='Renderer-method-addButtonInfo'>    /**
+</span>     * add button information
+     *
+     * @param {String} name button name
+     * @param {Function} buttonInfo function to make button, reference to {@link #tplButton},{@link #tplIconButton}
+     */
     this.addButtonInfo = function (name, buttonInfo) {
       tplButtonInfo[name] = buttonInfo;
     };
 
+<span id='Renderer-method-addDialogInfo'>    /**
+</span>     *
+     * @param {String} name
+     * @param {Function} dialogInfo function to make dialog, reference to {@link #tplDialog}
+     */
     this.addDialogInfo = function (name, dialogInfo) {
       tplDialogInfo[name] = dialogInfo;
     };

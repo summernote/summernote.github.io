@@ -16,11 +16,16 @@
 </head>
 <body onload="prettyPrint(); highlight();">
   <pre class="prettyprint lang-js">define(['summernote/core/func'], function (func) {
-<span id='global-property-list'>  /**
-</span>   * list utils
+<span id='core-list'>  /**
+</span>   * @class core.list
+   *
+   * list utils
+   *
+   * @singleton
+   * @alternateClassName list
    */
   var list = (function () {
-<span id='global-method-head'>    /**
+<span id='core-list-method-head'>    /**
 </span>     * returns the first item of an array.
      *
      * @param {Array} array
@@ -29,7 +34,7 @@
       return array[0];
     };
 
-<span id='global-method-last'>    /**
+<span id='core-list-method-last'>    /**
 </span>     * returns the last item of an array.
      *
      * @param {Array} array
@@ -38,7 +43,7 @@
       return array[array.length - 1];
     };
 
-<span id='global-method-initial'>    /**
+<span id='core-list-method-initial'>    /**
 </span>     * returns everything but the last entry of the array.
      *
      * @param {Array} array
@@ -47,7 +52,7 @@
       return array.slice(0, array.length - 1);
     };
 
-<span id='global-method-tail'>    /**
+<span id='core-list-method-tail'>    /**
 </span>     * returns the rest of the items in an array.
      *
      * @param {Array} array
@@ -56,7 +61,7 @@
       return array.slice(1);
     };
 
-<span id='global-method-find'>    /**
+<span id='core-list-method-find'>    /**
 </span>     * returns item of array
      */
     var find = function (array, pred) {
@@ -68,7 +73,7 @@
       }
     };
 
-<span id='global-method-all'>    /**
+<span id='core-list-method-all'>    /**
 </span>     * returns true if all of the values in the array pass the predicate truth test.
      */
     var all = function (array, pred) {
@@ -80,14 +85,14 @@
       return true;
     };
 
-<span id='global-method-contains'>    /**
+<span id='core-list-method-contains'>    /**
 </span>     * returns true if the value is present in the list.
      */
     var contains = function (array, item) {
       return $.inArray(item, array) !== -1;
     };
 
-<span id='global-method-sum'>    /**
+<span id='core-list-method-sum'>    /**
 </span>     * get sum from a list
      *
      * @param {Array} array - array
@@ -100,7 +105,7 @@
       }, 0);
     };
   
-<span id='global-method-from'>    /**
+<span id='core-list-method-from'>    /**
 </span>     * returns a copy of the collection with array type.
      * @param {Collection} collection - collection eg) node.childNodes, ...
      */
@@ -112,7 +117,7 @@
       return result;
     };
   
-<span id='global-method-clusterBy'>    /**
+<span id='core-list-method-clusterBy'>    /**
 </span>     * cluster elements by predicate function.
      *
      * @param {Array} array - array
@@ -133,7 +138,7 @@
       }, [[head(array)]]);
     };
   
-<span id='global-method-compact'>    /**
+<span id='core-list-method-compact'>    /**
 </span>     * returns a copy of the array with all falsy values removed
      *
      * @param {Array} array - array
@@ -147,7 +152,7 @@
       return aResult;
     };
 
-<span id='global-method-unique'>    /**
+<span id='core-list-method-unique'>    /**
 </span>     * produces a duplicate-free version of the array
      *
      * @param {Array} array
@@ -164,7 +169,7 @@
       return results;
     };
 
-<span id='global-method-next'>    /**
+<span id='core-list-method-next'>    /**
 </span>     * returns next item.
      * @param {Array} array
      */
@@ -175,7 +180,7 @@
       return array[idx + 1];
     };
 
-<span id='global-method-prev'>    /**
+<span id='core-list-method-prev'>    /**
 </span>     * returns prev item.
      * @param {Array} array
      */
