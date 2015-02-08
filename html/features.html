@@ -68,6 +68,14 @@
             </ul>
           </li>
           <li><a data-target="#keyboard" ng-click="scrollTo('keyboard')">Keyboard shortcuts</a></li>
+          <li>
+            <a data-target="#plugin" ng-click="scrollTo('plugin')">Plugin</a>
+            <ul class="nav">
+              <li><a data-target="#plugin-define" ng-click="scrollTo('plugin-define')">How to define</a></li>
+              <li><a data-target="#plugin-use" ng-click="scrollTo('plugin-use')">How to use</a></li>
+              <li><a data-target="#plugin-provided" ng-click="scrollTo('plugin-provided')">Provided Plugins</a></li>
+            </ul>
+          </li>
         </ul>
       </div>
     </div>
@@ -76,7 +84,7 @@
         <h2 id="download">Download Summernote</h2>
         <h3 id="download-compiled">Compiled CSS, JS</h3>
         <p>The fastest way to get Summernote is to download the precompiled and minified versions of our CSS, JavaScript. No documentation or original source code files are included.</p>
-        <p><a href="https://github.com/HackerWins/summernote/releases/download/v0.6.0/summernote-0.6.0-dist.zip" class="btn btn-primary">Download compiled Summernote</a></p>
+        <p><a href="https://github.com/HackerWins/summernote/releases/download/v0.6.1/summernote-0.6.1-dist.zip" class="btn btn-primary">Download compiled Summernote</a></p>
         <h3 id="download-additional">Additional downloads</h3>
         <h4><a href="https://github.com/HackerWins/summernote/archive/master.zip">Download source code</a></h4>
         <p>Get the lastest Summernote LESS and Javascript source code by downloading it directly from GitHub.</p>
@@ -427,7 +435,7 @@
         <p>Handy update for your django admin page.</p>
         <p><img class="img-rounded img-responsive" src="https://raw.github.com/lqez/pastebin/master/img/django-summernote.png" alt="django"/></p>
         <ul>
-          <li><a href="https://github.com/lqez/django-summernote">django-summernote</a></li>
+          <li><a href="https://github.com/summernote/django-summernote">django-summernote</a></li>
           <li><a href="https://pypi.python.org/pypi/django-summernote">Summernote plugin for Django</a></li>
         </ul>
 
@@ -435,7 +443,7 @@
         <p>This gem was built to gemify the assets used in Summernote.</p>
         <p><img class="img-rounded img-responsive" src="./images/summernote-rails.jpg" alt="django" style="border: 1px solid #eaeaea" /></p>
         <ul>
-          <li><a href="http://rorlab.github.io/summernote-rails/">summernote-rails</a></li>
+          <li><a href="http://summernote.org/summernote-rails/">summernote-rails</a></li>
           <li><a href="https://github.com/rorlab/summernote-test">summernote-test for Rails v4</a></li>
           <li><a href="https://github.com/rorlab/summernote-test-r3">summernote-test-r3 for Rails v3.2.14</a></li>
         </ul>
@@ -567,7 +575,90 @@
           </tbody>
         </table>
       </section>
+      <section>
+        <h2 id="plugin">Plugin</h2>
+        <p>Summernote supports simple plug-in system.</p>
+        <h3 id="plugin-define">How to define</h3>
+        <p>You can define a plugin with the <code>$.summernote.addPlugin()</code>.<br />
+          For detail, reference to <a href="/jsduck/" target="_blank">API Docs <i class="fa fa-external-link"></i></a></p>
+        <pre><code class="javascript">// template, editor
+var tmpl = $.summernote.renderer.getTemplate();
+var editor = $.summernote.eventHandler.getEditor();
 
+// add hello plugin 
+$.summernote.addPlugin({
+  // plugin's name
+  name: 'hello',
+  buttons: { // define button that be added in the toolbar
+    // "hello" button (key is a button's name)
+    hello: function () {
+          
+      // create button template 
+      return tmpl.iconButton('fa fa-header', {
+        // set event's name to used as callback when this button is clicked
+        // add data-event='hello' in button element
+        event : 'hello',
+        title: 'hello',
+        hide: true
+      });
+    }
+  },
+
+  events: { // events
+    // run callback when hello button is clicked
+    hello: function (layoutInfo) {
+      // Get current editable node
+      var $editable = layoutInfo.editable();
+
+      // Call insertText with 'hello'
+      editor.insertText($editable, 'hello ');
+    }
+  }
+});</code></pre>
+        <h3 id="plugin-use">How to use</h3>
+        <p>To use plugin, add button's name in the toolbar</p>
+        <pre><code class="html">&lt;script&gt;
+$("#editor").summernote({
+  toolbar : [
+    ...
+    ['group', ['hello']]   // add button name
+    ...
+  ]
+});
+&lt;/script&gt;</code></pre>
+        <h3 id="plugin-provided">Provided Plugins</h3>
+        <p>Summernote provides some plugins.</p>
+        <table class="table table-hover table-striped">
+          <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>API</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>summernote-ext-hello</td>
+            <td>A example for show how to use plugin system with your toolbar.</td>
+            <td><a href="/jsduck/#!/api/plugin.hello">Link</a></td>
+          </tr>
+          <tr>
+            <td>summernote-ext-fontstyle</td>
+            <td>supported font-size, strikethrough, superscript and subscript.</td>
+            <td><a href="/jsduck/#!/api/plugin.fontstyle">Link</a></td>
+          </tr>
+          <tr>
+            <td>summernote-ext-video</td>
+            <td>
+              make embeded tag for video url
+              (YouTube, Vimeo, Vine, Instagram, DailyMotion or Youku)
+            </td>
+            <td><a href="/jsduck/#!/api/plugin.video">Link</a></td>
+          </tr>
+        </tbody>
+      </table>
+      <p>You can find this plugins and also contribute with your plugin here: <a href="https://github.com/HackerWins/summernote/tree/develop/plugin" target="_blank">plugin <i class="fa fa-external-link"></i></p>
+      </section>
       <!-- upcoming features
       <section id="image">
         <h2>Image upload</h2>
