@@ -1,6 +1,6 @@
 <div class="subhead container">
   <h2>Getting started</h2>
-  <p class="muted">An overview of summernote, how to download and use, basic templates and examples, and more.</p>
+  <p class="muted">An overview of summernote, how to download and use, basic features and examples, and more.</p>
 </div>
 <div class="container">
   <div class="row">
@@ -24,32 +24,18 @@
             </ul>
           </li>
           <li>
-            <a data-target="#api" ng-click="scrollTo('api')">API</a>
+            <a data-target="#basic-api" ng-click="scrollTo('basic-api')">Basic API</a>
             <ul class="nav">
               <li>
-                <a data-target="#api-summernote" ng-click="scrollTo('api-summernote')">summernote</a>
+                <a data-target="#basic-api-summernote" ng-click="scrollTo('basic-api-summernote')">summernote</a>
                 <ul class="nav">
                   <li><a data-target="#heightandfocus" ng-click="scrollTo('heightandfocus')">Height and Focus</a></li>
                   <li><a data-target="#customtoolbar" ng-click="scrollTo('customtoolbar')">Custom toolbar</a></li>
                   <li><a data-target="#customairpopover" ng-click="scrollTo('customairpopover')">Custom popover for Air-mode</a></li>
                 </ul>
               </li>
-              <li><a data-target="#api-destroy" ng-click="scrollTo('api-destroy')">destroy</a></li>
-              <li><a data-target="#api-code" ng-click="scrollTo('api-code')">code</a></li>
-            </ul>
-          </li>
-          <li>
-            <a data-target="#callbacks" ng-click="scrollTo('callbacks')">Callbacks</a>
-            <ul class="nav">
-              <li><a data-target="#callbacks-oninit" ng-click="scrollTo('callbacks-oninit')">oninit</a></li>
-              <li><a data-target="#callbacks-onenter" ng-click="scrollTo('callbacks-onenter')">onenter</a></li>
-              <li><a data-target="#callbacks-onfocus" ng-click="scrollTo('callbacks-onfocus')">onfocus</a></li>
-              <li><a data-target="#callbacks-onblur" ng-click="scrollTo('callbacks-onblur')">onblur</a></li>
-              <li><a data-target="#callbacks-onkeyup" ng-click="scrollTo('callbacks-onkeyup')">onkeyup</a></li>
-              <li><a data-target="#callbacks-onkeydown" ng-click="scrollTo('callbacks-onkeydown')">onkeydown</a></li>
-              <li><a data-target="#callbacks-onpaste" ng-click="scrollTo('callbacks-onpaste')">onpaste</a></li>
-              <li><a data-target="#callbacks-onImageUpload" ng-click="scrollTo('callbacks-onImageUpload')">onImageUpload</a></li>
-              <li><a data-target="#callbacks-onChange" ng-click="scrollTo('callbacks-onChange')">onChange</a></li>
+              <li><a data-target="#basic-api-destroy" ng-click="scrollTo('basic-api-destroy')">destroy</a></li>
+              <li><a data-target="#basic-api-code" ng-click="scrollTo('basic-api-code')">code</a></li>
             </ul>
           </li>
           <li>
@@ -68,14 +54,6 @@
             </ul>
           </li>
           <li><a data-target="#keyboard" ng-click="scrollTo('keyboard')">Keyboard shortcuts</a></li>
-          <li>
-            <a data-target="#plugin" ng-click="scrollTo('plugin')">Plugin</a>
-            <ul class="nav">
-              <li><a data-target="#plugin-define" ng-click="scrollTo('plugin-define')">How to define</a></li>
-              <li><a data-target="#plugin-use" ng-click="scrollTo('plugin-use')">How to use</a></li>
-              <li><a data-target="#plugin-provided" ng-click="scrollTo('plugin-provided')">Provided Plugins</a></li>
-            </ul>
-          </li>
         </ul>
       </div>
     </div>
@@ -84,11 +62,11 @@
         <h2 id="download">Download Summernote</h2>
         <h3 id="download-compiled">Compiled CSS, JS</h3>
         <p>The fastest way to get Summernote is to download the precompiled and minified versions of our CSS, JavaScript. No documentation or original source code files are included.</p>
-        <p><a href="https://github.com/HackerWins/summernote/releases/download/v0.6.2/summernote-0.6.2-dist.zip" class="btn btn-primary">Download compiled Summernote</a></p>
+        <p><a href="https://github.com/summernote/summernote/releases/download/v0.6.2/summernote-0.6.2-dist.zip" class="btn btn-primary">Download compiled Summernote</a></p>
         <h3 id="download-additional">Additional downloads</h3>
-        <h4><a href="https://github.com/HackerWins/summernote/archive/master.zip">Download source code</a></h4>
+        <h4><a href="https://github.com/summernote/summernote/archive/master.zip">Download source code</a></h4>
         <p>Get the lastest Summernote LESS and Javascript source code by downloading it directly from GitHub.</p>
-        <h4><a href="https://github.com/HackerWins/summernote">Clone or fork via Github</a></h4>
+        <h4><a href="https://github.com/summernote/summernote">Clone or fork via Github</a></h4>
         <p>Visit us on GitHub to clone or fork the summernote project.</p>
         <h4>Install with <a href="http://bower.io/">Bower</a></h4>
         <p>Install and manage Summernote's styles, JavaScript, and documentation using Bower.</p>
@@ -125,8 +103,8 @@
 });</code></pre>
       </section>
       <section>
-        <h2 id="api">API</h2>
-        <h3 id="api-summernote">Summernote</h3>
+        <h2 id="basic-api">Basic API</h2>
+        <h3 id="basic-api-summernote">Summernote</h3>
         <p>Initialize Summernote</p>
         <pre><code class="javascript">$('.summernote').summernote();</code></pre>
         <p>Initialize Summernote with options</p>
@@ -305,79 +283,16 @@
     ['insert', ['link', 'picture']]
   ]
 });</code></pre>
-        <h3 id="api-destroy">Destroy</h3>
+        <h3 id="basic-api-destroy">Destroy</h3>
         <p>Destroy Summernote.</p>
         <pre><code class="javascript">$('.summernote').destroy();</code></pre>
-        <h3 id="api-code">get & set Code</h3>
+        <h3 id="basic-api-code">get & set Code</h3>
         <p>Get the HTML contents of the first summernote in the set of matched elements.</p>
         <pre><code class="javascript">var sHTML = $('.summernote').code();</code></pre>
         <p>Get the HTML content of the second summernote with jQuery <a href="http://api.jquery.com/eq/">eq</a>.</p>
         <pre><code class="javascript">var sHTML = $('.summernote').eq(1).code();</code></pre>
         <p>A string of HTML to set as the content of each matched element.</p>
         <pre><code class="javascript">$('.summernote').code(sHTML);</code></pre>
-      </section>
-      <section>
-        <h2 id="callbacks">Callbacks</h2>
-        <h3 id="callbacks-oninit">oninit</h3>
-        <pre><code class="javascript">$('#summernote').summernote({
-  oninit: function() {
-    console.log('Summernote is launched');
-  }
-});</code></pre>
-        <h3 id="callbacks-onenter">onenter</h3>
-        <pre><code class="javascript">$('#summernote').summernote({
-  onenter: function(e) {
-    console.log('Enter/Return key pressed');
-  }
-});</code></pre>
-        <h3 id="callbacks-onfocus">onfocus</h3>
-        <pre><code class="javascript">$('#summernote').summernote({
-  onfocus: function(e) {
-    console.log('Editable area is focused');
-  }
-});</code></pre>
-        <h3 id="callbacks-onblur">onblur</h3>
-        <pre><code class="javascript">$('#summernote').summernote({
-  onblur: function(e) {
-    console.log('Editable area loses focus');
-  }
-});</code></pre>
-        <h3 id="callbacks-onkeyup">onkeyup</h3>
-        <pre><code class="javascript">$('#summernote').summernote({
-  onkeyup: function(e) {
-    console.log('Key is released:', e.keyCode);
-  }
-});</code></pre>
-        <h3 id="callbacks-onkeydown">onkeydown</h3>
-        <pre><code class="javascript">$('#summernote').summernote({
-  onkeydown: function(e) {
-    console.log('Key is pressed:', e.keyCode);
-  }
-});</code></pre>
-        <h3 id="callbacks-onpaste">onpaste</h3>
-        <pre><code class="javascript">$('#summernote').summernote({
-  onpaste: function(e) {
-    console.log('Called event paste');
-  }
-});</code></pre>
-        <h3 id="callbacks-onImageUpload">onImageUpload</h3>
-        <p>Override image upload handler(default: base64 dataURL on `IMG` tag).</p>
-        <p>You can upload image to server or AWS S3: <a href="https://github.com/HackerWins/summernote/issues/72" target="_blank">More...</a>.</p>
-        <pre><code class="javascript">$('#summernote').summernote({
-  onImageUpload: function(files, editor, $editable) {
-    console.log('image upload:', files, editor, $editable);
-  }
-});</code></pre>
-        <h3 id="callbacks-onChange">onChange</h3>
-        <ul>
-          <li>IE9-10: DOMCharacterDataModified, DOMSubtreeModified, DOMNodeInserted</li>
-          <li>Chrome, FF: input</li>
-        </ul>
-        <pre><code class="javascript">$('#summernote').summernote({
-  onChange: function(contents, $editable) {
-    console.log('onChange:', contents, $editable);
-  }
-});</code></pre>
       </section>
       <section>
         <h2 id="i18n">I18n Support</h2>
@@ -410,7 +325,7 @@
           });
         </script>
         <p></p>
-        <p>More summernote languages: <a href="https://github.com/HackerWins/summernote/tree/master/lang" target="_blank">languages <i class="fa fa-external-link"></i></a></p>
+        <p>More summernote languages: <a href="https://github.com/summernote/summernote/tree/master/lang" target="_blank">languages <i class="fa fa-external-link"></i></a></p>
       </section>
       <section>
         <h2 id="integration">Server Integration</h2>
@@ -575,104 +490,6 @@
           </tbody>
         </table>
       </section>
-      <section>
-        <h2 id="plugin">Plugin</h2>
-        <p>Summernote supports simple plug-in system.</p>
-        <h3 id="plugin-define">How to define</h3>
-        <p>You can define a plugin with the <code>$.summernote.addPlugin()</code>.<br />
-          For detail, reference to <a href="/jsduck/" target="_blank">API Docs <i class="fa fa-external-link"></i></a></p>
-        <pre><code class="javascript">// template, editor
-var tmpl = $.summernote.renderer.getTemplate();
-var editor = $.summernote.eventHandler.getEditor();
-
-// add hello plugin 
-$.summernote.addPlugin({
-  // plugin's name
-  name: 'hello',
-  buttons: { // define button that be added in the toolbar
-    // "hello" button (key is a button's name)
-    hello: function () {
-          
-      // create button template 
-      return tmpl.iconButton('fa fa-header', {
-        // set event's name to used as callback when this button is clicked
-        // add data-event='hello' in button element
-        event : 'hello',
-        title: 'hello',
-        hide: true
-      });
-    }
-  },
-
-  events: { // events
-    // run callback when hello button is clicked
-    hello: function (layoutInfo) {
-      // Get current editable node
-      var $editable = layoutInfo.editable();
-
-      // Call insertText with 'hello'
-      editor.insertText($editable, 'hello ');
-    }
-  }
-});</code></pre>
-        <h3 id="plugin-use">How to use</h3>
-        <p>To use plugin, add button's name in the toolbar</p>
-        <pre><code class="html">&lt;script&gt;
-$("#editor").summernote({
-  toolbar : [
-    ...
-    ['group', ['hello']]   // add button name
-    ...
-  ]
-});
-&lt;/script&gt;</code></pre>
-        <h3 id="plugin-provided">Provided Plugins</h3>
-        <p>Summernote provides some plugins.</p>
-        <table class="table table-hover table-striped">
-          <thead>
-          <tr>
-            <th>Name</th>
-            <th>Description</th>
-            <th>API</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr>
-            <td>summernote-ext-hello</td>
-            <td>A example for show how to use plugin system with your toolbar.</td>
-            <td><a href="/jsduck/#!/api/plugin.hello">Link</a></td>
-          </tr>
-          <tr>
-            <td>summernote-ext-fontstyle</td>
-            <td>supported font-size, strikethrough, superscript and subscript.</td>
-            <td><a href="/jsduck/#!/api/plugin.fontstyle">Link</a></td>
-          </tr>
-          <tr>
-            <td>summernote-ext-video</td>
-            <td>
-              make embeded tag for video url
-              (YouTube, Vimeo, Vine, Instagram, DailyMotion or Youku)
-            </td>
-            <td><a href="/jsduck/#!/api/plugin.video">Link</a></td>
-          </tr>
-        </tbody>
-      </table>
-      <p>You can find this plugins and also contribute with your plugin here: <a href="https://github.com/HackerWins/summernote/tree/develop/plugin" target="_blank">plugin <i class="fa fa-external-link"></i></p>
-      </section>
-      <!-- upcoming features
-      <section id="image">
-        <h2>Image upload</h2>
-        <p></p>
-        <pre>hello world</pre>
-      </section>
-
-      <section id="local">
-        <h2>use Local storage</h2>
-        <p>install</p>
-        <pre>hello world</pre>
-
-      </section>
-      -->
     </div>
   </div>
 </div>
