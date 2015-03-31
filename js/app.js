@@ -43,8 +43,8 @@ page.config(['$routeProvider', '$locationProvider',
   }).when('/getting-started', {
     templateUrl: 'html/getting-started.html',
     controller: 'PageController'
-  }).when('/deep-diving', {
-    templateUrl: 'html/deep-diving.html',
+  }).when('/deep-dive', {
+    templateUrl: 'html/deep-dive.html',
     controller: 'PageController'
   }).when('/example', {
     templateUrl: 'html/example.html',

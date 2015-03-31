@@ -30,8 +30,6 @@
                 <a data-target="#basic-api-summernote" ng-click="scrollTo('basic-api-summernote')">summernote</a>
                 <ul class="nav">
                   <li><a data-target="#heightandfocus" ng-click="scrollTo('heightandfocus')">Height and Focus</a></li>
-                  <li><a data-target="#customtoolbar" ng-click="scrollTo('customtoolbar')">Custom toolbar</a></li>
-                  <li><a data-target="#customairpopover" ng-click="scrollTo('customairpopover')">Custom popover for Air-mode</a></li>
                 </ul>
               </li>
               <li><a data-target="#basic-api-destroy" ng-click="scrollTo('basic-api-destroy')">destroy</a></li>
@@ -134,155 +132,6 @@
           });
         </script>
         <p></p>
-        <h4 id="customtoolbar">Custom toolbar</h4>
-        <p>Summernote allows you to make own custom toolbar.</p>
-        <pre><code class="javascript">$('.summernote').summernote({
-  toolbar: [
-    //[groupname, [button list]]
-     
-    ['style', ['bold', 'italic', 'underline', 'clear']],
-    ['font', ['strikethrough']],
-    ['fontsize', ['fontsize']],
-    ['color', ['color']],
-    ['para', ['ul', 'ol', 'paragraph']],
-    ['height', ['height']],
-  ]
-});</code></pre>
-        <div class="customtoolbar">This is a toolbar with font style only.</div>
-        <script>
-          $(document).ready(function() {
-            $('.customtoolbar').summernote({
-              toolbar: [
-                ['style', ['bold', 'italic', 'underline', 'clear']],
-                ['font', ['strikethrough']],
-                ['fontsize', ['fontsize']],
-                ['color', ['color']],
-                ['para', ['ul', 'ol', 'paragraph']],
-                ['height', ['height']],
-              ]
-            });
-          });
-        </script>
-        <p></p>
-        <p>You can compose a toolbar with pre-shipped buttons.</p>
-        <table class="table table-hover table-bordered table-condensed">
-          <thead>
-            <tr>
-              <th>Category</th>
-              <th>Button id</th>
-              <th>Function</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th rowspan="5">Insert</th>
-              <td><code>picture</code></td>
-              <td>Insert a picture</td>
-            </tr>
-            <tr>
-              <td><code>link</code></td>
-              <td>Insert a hyperlink</td>
-            </tr>
-            <tr>
-              <td><code>video</code></td>
-              <td>Insert a video</td>
-            </tr>
-            <tr>
-              <td><code>table</code></td>
-              <td>Insert a table</td>
-            </tr>
-            <tr>
-              <td><code>hr</code></td>
-              <td>Insert a horizontal rule</td>
-            </tr>
-            <tr>
-              <th rowspan="9">Style</th>
-              <td><code>style</code></td>
-              <td>Format selected block</td>
-            </tr>
-            <tr>
-              <td><code>fontname</code></td>
-              <td>Set font family</td>
-            </tr>
-            <tr>
-              <td><code>fontsize</code></td>
-              <td>Set font size</td>
-            </tr>
-            <tr>
-              <td><code>color</code></td>
-              <td>Set foreground and background color</td>
-            </tr>
-            <tr>
-              <td><code>bold</code></td>
-              <td>Toggle weight</td>
-            </tr>
-            <tr>
-              <td><code>italic</code></td>
-              <td>Toggle italic</td>
-            </tr>
-            <tr>
-              <td><code>underline</code></td>
-              <td>Toggle underline</td>
-            </tr>
-            <tr>
-              <td><code>strikethrough</code></td>
-              <td>Toggle strikethrough</td>
-            </tr>
-            <tr>
-              <td><code>clear</code></td>
-              <td>Clearing all styles</td>
-            </tr>
-            <tr>
-              <th rowspan="4">Layout</th>
-              <td><code>ul</code></td>
-              <td>Make an un-ordered list</td>
-            </tr>
-            <tr>
-              <td><code>ol</code></td>
-              <td>Make an ordered list</td>
-            </tr>
-            <tr>
-              <td><code>paragraph</code></td>
-              <td>Set text alignment</td>
-            </tr>
-            <tr>
-              <td><code>height</code></td>
-              <td>Set height of text</td>
-            </tr>
-            <tr>
-              <th rowspan="5">Misc</th>
-              <td><code>fullscreen</code></td>
-              <td>Toggle fullscreen editing mode</td>
-            </tr>
-            <tr>
-              <td><code>codeview</code></td>
-              <td>Toggle wysiwyg and html editing mode</td>
-            </tr>
-            <tr>
-              <td><code>undo</code></td>
-              <td>Undo</td>
-            </tr>
-            <tr>
-              <td><code>redo</code></td>
-              <td>Redo</td>
-            </tr>
-            <tr>
-              <td><code>help</code></td>
-              <td>Show help dialog</td>
-            </tr>
-          </tbody>
-        </table>
-        <h4 id="customairpopover">Custom Popover for Air-mode</h4>
-        <p>Air-mode has its own popover, not toolbar. You can customize it with <code>airPopover</code> option.</p>
-        <pre><code class="javascript">$('.summernote').summernote({
-  airPopover: [
-    ['color', ['color']],
-    ['font', ['bold', 'underline', 'clear']],
-    ['para', ['ul', 'paragraph']],
-    ['table', ['table']],
-    ['insert', ['link', 'picture']]
-  ]
-});</code></pre>
         <h3 id="basic-api-destroy">Destroy</h3>
         <p>Destroy Summernote.</p>
         <pre><code class="javascript">$('.summernote').destroy();</code></pre>
@@ -293,6 +142,7 @@
         <pre><code class="javascript">var sHTML = $('.summernote').eq(1).code();</code></pre>
         <p>A string of HTML to set as the content of each matched element.</p>
         <pre><code class="javascript">$('.summernote').code(sHTML);</code></pre>
+        <p>for more detail api: <a href="#/deep-dive/#api">deep dive with api</a></p>
       </section>
       <section>
         <h2 id="i18n">I18n Support</h2>
