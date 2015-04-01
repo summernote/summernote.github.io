@@ -35,6 +35,24 @@ hr.soften {
   border: 0;
 }
 
+.bs-page-callout {
+  padding: 20px;
+  margin: 20px 0;
+  border: 1px solid #eee;
+  border-left-width: 5px;
+  border-left-color: #1b809e;
+  border-radius: 3px;
+}
+
+.bs-page-callout h4 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: #1b809e;
+}
+
+.bs-page-callout p {
+  margin: 0;
+}
 
 /* Base class
 ------------------------- */

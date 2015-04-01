@@ -48,6 +48,53 @@
       <section>
         <h2 id="api">API</h2>
         <h3 id="api-summernote">summernote</h3>
+        <p>You can initialize summernote with <code>summernote</code>.</p>
+        <pre><code class="javascript">$('.summernote').summernote();</code></pre>
+        <p>Then You can use editor API through the <code>summernote</code> method. This is a example code for insert 'hello world' text.</p>
+        <pre><code class="javascript">$('.summernote').summernote('editor.insertText', 'hello world'));</code></pre>
+        <p>It's is called editor module's insertText method with 'hello world'. First argument is a string type represent module and it's method. And rest are method's arguments.</p>
+        <div class="bs-page-callout">
+          <h4>API is only work for editor module</h4>
+          <p>For now, API is only works for editor module. If you call API without module name, `editor.{{method}}` will be called. ex) <code>$('.summernote').summernote('insertText', 'hello world'));</code></p>
+        </div>
+        <table class="table table-hover table-bordered table-condensed">
+          <thead>
+            <tr>
+              <th>Module</th>
+              <th>Method</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th rowspan="5">editor</th>
+              <td>insertText</td>
+              <td>
+                <p>Insert a text</p>
+                <pre><code>/**
+ * @param {String} text
+ */</code></pre>
+              </td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+
         <h4 id="customtoolbar">Custom toolbar</h4>
         <p>Summernote allows you to make own custom toolbar.</p>
         <pre><code class="javascript">$('.summernote').summernote({
