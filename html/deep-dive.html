@@ -55,45 +55,124 @@
         <p>It's is called editor module's insertText method with 'hello world'. First argument is a string type represent module and it's method. And rest are method's arguments.</p>
         <div class="bs-page-callout">
           <h4>API is only work for editor module</h4>
-          <p>For now, API is only works for editor module. If you call API without module name, `editor.{{method}}` will be called. ex) <code>$('.summernote').summernote('insertText', 'hello world'));</code></p>
+          <p>For now, API is only works for editor module. If you call API without module name, `editor.{{method}}` will be called. ex) <code>$('.summernote').summernote('insertText', 'hello world');</code></p>
         </div>
-        <table class="table table-hover table-bordered table-condensed">
-          <thead>
-            <tr>
-              <th>Module</th>
-              <th>Method</th>
-              <th>Description</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th rowspan="5">editor</th>
-              <td>insertText</td>
-              <td>
-                <p>Insert a text</p>
-                <pre><code>/**
- * @param {String} text
- */</code></pre>
-              </td>
-            </tr>
-            <tr>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td></td>
-              <td></td>
-            </tr>
-          </tbody>
-        </table>
+
+        <div role="tabpanel">
+
+          <!-- Nav tabs -->
+          <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#editor" aria-controls="editor" role="tab" data-toggle="tab">Editor</a></li>
+            <li role="presentation"><a href="#toolbar" aria-controls="toolbar" role="tab" data-toggle="tab">Toolbar</a></li>
+          </ul>
+
+          <!-- Tab panes -->
+          <div class="tab-content">
+
+            <!-- Editor Description -->
+            <div role="tabpanel" class="tab-pane active" id="editor">
+              <p class="alert">editor description</p>
+              <table class="table table-hover table-bordered table-condensed">
+                <colgroup>
+                  <col width="150" />
+                </colgroup>
+                <thead>
+                <tr>
+                  <th>Method</th>
+                  <th>Description</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td>insertText</td>
+                  <td>
+                    <p>Insert a text</p>
+                    <p><strong>Params : </strong> text:String </p>
+                    <p><strong>Usage </strong></p>
+<pre><code>var str = "Hello, world";
+$(".summernote").summernote("insertText", str); </code></pre>
+                  </td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td></td>
+                </tr>
+                </tbody>
+              </table>
+
+            </div>
+
+            <!-- Toolbar Description -->
+            <div role="tabpanel" class="tab-pane" id="toolbar">
+              <p class="alert">toolbar description</p>
+              <table class="table table-hover table-bordered table-condensed">
+                <colgroup>
+                  <col width="150" />
+                </colgroup>
+                <thead>
+                <tr>
+                  <th>Method</th>
+                  <th>Description</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td>get</td>
+                  <td>
+                    <p>get a button in toolbar </p>
+                    <p><strong>Params : </strong> name:String </p>
+                    <p><strong>Usage </strong></p>
+<pre><code> var $boldButton = $(".summernote").summernote("toolbar.get", 'bold');
+$boldButton.css('background', 'red'); // change button's color
+</code></pre>
+                  </td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td></td>
+                </tr>
+                </tbody>
+              </table>
+
+
+            </div>
+          </div>
+
+        </div>
+
+        <script>
+          $(function() {
+            $("a[data-toggle=tab]").click(function(e) {
+              e.preventDefault();
+              $(this).tab('show');
+            });
+          })
+        </script>
+
 
         <h4 id="customtoolbar">Custom toolbar</h4>
         <p>Summernote allows you to make own custom toolbar.</p>
