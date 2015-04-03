@@ -84,30 +84,353 @@
                 </thead>
                 <tbody>
                 <tr>
-                  <td>insertText</td>
+                  <td>createRange</td>
                   <td>
-                    <p>Insert a text</p>
-                    <p><strong>Params : </strong> text:String </p>
-                    <p><strong>Usage </strong></p>
-<pre><code>var str = "Hello, world";
-$(".summernote").summernote("insertText", str); </code></pre>
+                    <p>create a range object</p>
+                    <pre><code class="javascript">var range = $(".summernote").summernote("createRange"); </code></pre>
                   </td>
                 </tr>
                 <tr>
-                  <td></td>
-                  <td></td>
+                  <td>saveRange</td>
+                  <td>
+                    <p>save current range</p>
+                    <pre><code class="javascript">$(".summernote").summernote("saveRange"); </code></pre>
+                  </td>
                 </tr>
                 <tr>
-                  <td></td>
-                  <td></td>
+                  <td>restoreRange</td>
+                  <td>
+                    <p>restore lately range</p>
+<pre><code class="javascript">var $note = $(".summernote")
+$note.summernote("saveRange");
+
+// something to do
+
+$note.summernote("restoreRange");</code></pre>
+                  </td>
                 </tr>
                 <tr>
-                  <td></td>
-                  <td></td>
+                  <td>undo</td>
+                  <td>
+                    <p>Undoes the last command</p>
+                    <pre><code class="javascript">$(".summernote").summernote("undo"); </code></pre>
+                  </td>
                 </tr>
                 <tr>
-                  <td></td>
-                  <td></td>
+                  <td>redo</td>
+                  <td>
+                    <p>Redoes the last command</p>
+                    <pre><code class="javascript">$(".summernote").summernote("redo"); </code></pre>
+                  </td>
+                </tr>
+                <tr>
+                  <td>focus</td>
+                  <td>
+                    <p>Set a focus in current summernote</p>
+                    <pre><code class="javascript">$(".summernote").summernote("focus"); </code></pre>
+                  </td>
+                </tr>
+                <tr>
+                  <td>beforeCommand <span class="label label-danger">FIXME</span></td>
+                  <td>
+                    <p>???????</p>
+                    <pre><code class="javascript">$(".summernote").summernote("beforeCommand", ??????? ); </code></pre>
+                  </td>
+                </tr>
+                <tr>
+                  <td>afterCommand <span class="label label-danger">FIXME</span></td>
+                  <td>
+                    <p>???????</p>
+                    <pre><code class="javascript">$(".summernote").summernote("afterCommand", ??????? ); </code></pre>
+                  </td>
+                </tr>
+                <tr>
+                  <td>bold</td>
+                  <td>
+                    <p>Set a bold style </p>
+                    <pre><code class="javascript">$(".summernote").summernote("bold"); </code></pre>
+                  </td>
+                </tr>
+                <tr>
+                  <td>italic</td>
+                  <td>
+                    <p>Set a italic style </p>
+                    <pre><code class="javascript">$(".summernote").summernote("italic"); </code></pre>
+                  </td>
+                </tr>
+                <tr>
+                  <td>underline</td>
+                  <td>
+                    <p>Set a underline style </p>
+                    <pre><code class="javascript">$(".summernote").summernote("underline"); </code></pre>
+                  </td>
+                </tr>
+                <tr>
+                  <td>strikethrough</td>
+                  <td>
+                    <p>Set a strikethrough style </p>
+                    <pre><code class="javascript">$(".summernote").summernote("strikethrough"); </code></pre>
+                  </td>
+                </tr>
+                <tr>
+                  <td>superscript</td>
+                  <td>
+                    <p>Set a superscript style </p>
+                    <pre><code class="javascript">$(".summernote").summernote("superscript"); </code></pre>
+                  </td>
+                </tr>
+                <tr>
+                  <td>subscript</td>
+                  <td>
+                    <p>Set a subscript style </p>
+                    <pre><code class="javascript">$(".summernote").summernote("subscript"); </code></pre>
+                  </td>
+                </tr>
+                <tr>
+                  <td>justifyLeft</td>
+                  <td>
+                    <p>Set left align</p>
+                    <pre><code class="javascript">$(".summernote").summernote("justifyLeft"); </code></pre>
+                  </td>
+                </tr>
+                <tr>
+                  <td>justifyRight</td>
+                  <td>
+                    <p>Set right align</p>
+                    <pre><code class="javascript">$(".summernote").summernote("justifyRight"); </code></pre>
+                  </td>
+                </tr>
+                <tr>
+                  <td>justifyCenter</td>
+                  <td>
+                    <p>Set center align</p>
+                    <pre><code class="javascript">$(".summernote").summernote("justifyCenter"); </code></pre>
+                  </td>
+                </tr>
+                <tr>
+                  <td>justifyFull</td>
+                  <td>
+                    <p>Set full align</p>
+                    <pre><code class="javascript">$(".summernote").summernote("justifyFull"); </code></pre>
+                  </td>
+                </tr>
+                <tr>
+                  <td>removeFormat</td>
+                  <td>
+                    <p>Clean a style</p>
+                    <pre><code class="javascript">$(".summernote").summernote("removeFormat"); </code></pre>
+                  </td>
+                </tr>
+                <tr>
+                  <td>removeFormat</td>
+                  <td>
+                    <p>Clean a style</p>
+                    <pre><code class="javascript">$(".summernote").summernote("removeFormat"); </code></pre>
+                  </td>
+                </tr>
+                <tr>
+                  <td>backColor</td>
+                  <td>
+                    <p>set background color</p>
+                    <p><strong>Params: </strong> color:String</p>
+                    <pre><code class="javascript">$(".summernote").summernote("backColor", "red"); </code></pre>
+                  </td>
+                </tr>
+                <tr>
+                  <td>foreColor</td>
+                  <td>
+                    <p>set foreground color</p>
+                    <p><strong>Params: </strong> color:String</p>
+                    <pre><code class="javascript">$(".summernote").summernote("foreColor", "blue"); </code></pre>
+                  </td>
+                </tr>
+                <tr>
+                  <td>fontName</td>
+                  <td>
+                    <p>set font family</p>
+                    <p><strong>Params: </strong> fontFamily:String</p>
+                    <pre><code class="javascript">$(".summernote").summernote("fontName", "Arial"); </code></pre>
+                  </td>
+                </tr>
+                <tr>
+                  <td>insertParagraph</td>
+                  <td>
+                    <p>insert paragraph</p>
+                    <pre><code class="javascript">$(".summernote").summernote("insertParagraph"); </code></pre>
+                  </td>
+                </tr>
+                <tr>
+                  <td>insertOrderedList</td>
+                  <td>
+                    <p>toggle ordered list</p>
+                    <pre><code class="javascript">$(".summernote").summernote("insertOrderedList"); </code></pre>
+                  </td>
+                </tr>
+                <tr>
+                  <td>insertUnorderedList</td>
+                  <td>
+                    <p>toggle unordered list</p>
+                    <pre><code class="javascript">$(".summernote").summernote("insertUnorderedList"); </code></pre>
+                  </td>
+                </tr>
+                <tr>
+                  <td>indent <span class="label label-danger">FIXME</span></td>
+                  <td>
+                    <p>???????</p>
+                    <pre><code class="javascript">$(".summernote").summernote("indent"); </code></pre>
+                  </td>
+                </tr>
+                <tr>
+                  <td>outdent <span class="label label-danger">FIXME</span></td>
+                  <td>
+                    <p>???????</p>
+                    <pre><code class="javascript">$(".summernote").summernote("outdent"); </code></pre>
+                  </td>
+                </tr>
+                <tr>
+                  <td>insertImage</td>
+                  <td>
+                    <p>insert a image</p>
+                    <p><strong>Params: </strong>
+                      <ul>
+                      <li>sUrl:String - image url string or datauri</li>
+                      <li>filename:String - file name</li>
+                      </ul>
+                    </p>
+                    <pre><code class="javascript">$(".summernote").summernote("insertImage", sUrl, filename); </code></pre>
+                  </td>
+                </tr>
+                <tr>
+                  <td>insertNode</td>
+                  <td>
+                    <p>Insert a dom object</p>
+                    <p><strong>Params: </strong>
+                    <ul>
+                      <li>dom:Element - native dom object</li>
+                    </ul>
+                    </p>
+                    <pre><code class="javascript">var dom = document.createElement("DIV");
+$(".summernote").summernote("insertNode", dom);
+
+// jQuery style
+var $dom = $("&lt;div /&gt;");
+$(".summernote").summernote("insertNode", $dom[0]);</code></pre>
+                  </td>
+                </tr>
+                <tr>
+                  <td>insertText</td>
+                  <td>
+                    <p>Insert a text node</p>
+                    <p><strong>Params: </strong>
+                    <ul>
+                      <li>text:String</li>
+                    </ul>
+                    </p>
+                    <pre><code class="javascript">var text = "Hello, world";
+$(".summernote").summernote("insertText", text);</code></pre>
+                  </td>
+                </tr>
+                <tr>
+                  <td>formatPara</td>
+                  <td>
+                    <p>change current block's format as a paragraph(P tag)</p>
+                    <pre><code class="javascript">$(".summernote").summernote("formatPara");</code></pre>
+                  </td>
+                </tr>
+                <tr>
+                  <td>formatH2</td>
+                  <td>
+                    <p>change current block's format as H2 </p>
+                    <pre><code class="javascript">$(".summernote").summernote("formatH2");</code></pre>
+                  </td>
+                </tr>
+                <tr>
+                  <td>formatH3</td>
+                  <td>
+                    <p>change current block's format as H3 </p>
+                    <pre><code class="javascript">$(".summernote").summernote("formatH3");</code></pre>
+                  </td>
+                </tr>
+                <tr>
+                  <td>formatH4</td>
+                  <td>
+                    <p>change current block's format as H4 </p>
+                    <pre><code class="javascript">$(".summernote").summernote("formatH4");</code></pre>
+                  </td>
+                </tr>
+                <tr>
+                  <td>formatH5</td>
+                  <td>
+                    <p>change current block's format as H5 </p>
+                    <pre><code class="javascript">$(".summernote").summernote("formatH5");</code></pre>
+                  </td>
+                </tr>
+                <tr>
+                  <td>formatH6</td>
+                  <td>
+                    <p>change current block's format as H6 </p>
+                    <pre><code class="javascript">$(".summernote").summernote("formatH6");</code></pre>
+                  </td>
+                </tr>
+                <tr>
+                  <td>fontSize</td>
+                  <td>
+                    <p>set font-size</p>
+                    <p><strong>Params: </strong>
+                    <ul>
+                      <li>size:Number - unit is <span class="label">px</span>.</li>
+                    </ul>
+                    </p>
+                    <pre><code class="javascript">var size = 20;
+$(".summernote").summernote("fontSize", size); // set a font size  to 20px </code></pre>
+                  </td>
+                </tr>
+                <tr>
+                  <td>lineHeight</td>
+                  <td>
+                    <p>set line-height</p>
+                    <p><strong>Params: </strong>
+                    <ul>
+                      <li>lineHeight:String - unit is <span class="label">px</span>.</li>
+                    </ul>
+                    </p>
+                    <pre><code class="javascript">var lineHeight = '20px';
+                      $(".summernote").summernote("lineHeight", lineHeight); // set a line-height to 20px </code></pre>
+                  </td>
+                </tr>
+                <tr>
+                  <td>unlink</td>
+                  <td>
+                    <p>Unlink</p>
+                    <pre><code class="javascript">$(".summernote").summernote("unlink");</code></pre>
+                  </td>
+                </tr>
+                <tr>
+                  <td>createLink</td>
+                  <td>
+                    <p>create a link </p>
+                    <p><strong>Params: </strong>
+                    <ul>
+                      <li>linkInfo:Object
+                          <ul>
+                            <li>text:String - link's text </li>
+                            <li>url:String - link's url </li>
+                            <li>[newWindow:Boolean] - Whether link's target is new window  </li>
+                          </ul>
+                      </li>
+                      <li> [options:Object]
+                        <ul>
+                          <li>onCreateLink:Function -  callback to create link  </li>
+                        </ul>
+                      </li>
+                    </ul>
+                    </p>
+                    <pre><code class="javascript">$(".summernote").summernote("createLink", {
+      text : "This is the Summernote's Official Site",
+      url : "http://summernote.org",
+      newWindow : true
+});</code></pre>
+                  </td>
                 </tr>
                 </tbody>
               </table>
