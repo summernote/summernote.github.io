@@ -13,8 +13,9 @@
               <li>
                 <a data-target="#api-summernote" ng-click="scrollTo('api-summernote')">summernote</a>
                 <ul class="nav">
-                  <li><a data-target="#customtoolbar" ng-click="scrollTo('customtoolbar')">Custom toolbar</a></li>
-                  <li><a data-target="#customairpopover" ng-click="scrollTo('customairpopover')">Custom popover for Air-mode</a></li>
+                  <li><a data-target="#external-api-access" ng-click="scrollTo('custom-toolbar')">External API access</a></li>
+                  <li><a data-target="#custom-toolbar" ng-click="scrollTo('custom-toolbar')">Custom toolbar</a></li>
+                  <li><a data-target="#custom-air-popover" ng-click="scrollTo('custom-air-popover')">Custom popover for Air-mode</a></li>
                 </ul>
               </li>
             </ul>
@@ -50,6 +51,7 @@
         <h3 id="api-summernote">summernote</h3>
         <p>You can initialize summernote with <code>summernote</code>.</p>
         <pre><code class="javascript">$('.summernote').summernote();</code></pre>
+        <h4 id="external-api-access">External API access</h4>
         <p>Then You can use editor API through the <code>summernote</code> method. This is a example code for insert 'hello world' text.</p>
         <pre><code class="javascript">$('.summernote').summernote('editor.insertText', 'hello world'));</code></pre>
         <p>It's is called editor module's insertText method with 'hello world'. First argument is a string type represent module and it's method. And rest are method's arguments.</p>
@@ -57,21 +59,17 @@
           <h4>API is only work for editor module</h4>
           <p>For now, API is only works for editor module. If you call API without module name, `editor.{{method}}` will be called. ex) <code>$('.summernote').summernote('insertText', 'hello world');</code></p>
         </div>
-
         <div role="tabpanel">
-
           <!-- Nav tabs -->
           <ul class="nav nav-tabs" role="tablist">
             <li role="presentation" class="active"><a href="#editor" aria-controls="editor" role="tab" data-toggle="tab">Editor</a></li>
             <li role="presentation"><a href="#toolbar" aria-controls="toolbar" role="tab" data-toggle="tab">Toolbar</a></li>
           </ul>
-
           <!-- Tab panes -->
           <div class="tab-content">
-
             <!-- Editor Description -->
             <div role="tabpanel" class="tab-pane active" id="editor">
-              <p class="alert">editor description</p>
+              <p class="alert">A module named <code>editor</code> support several methods for editor's basic behavior</p>
               <table class="table table-hover table-bordered table-condensed">
                 <colgroup>
                   <col width="150" />
@@ -86,25 +84,25 @@
                 <tr>
                   <td>createRange</td>
                   <td>
-                    <p>create a range object</p>
-                    <pre><code class="javascript">var range = $(".summernote").summernote("createRange"); </code></pre>
+                    <p>create a range object for current user selection.</p>
+                    <pre><code class="javascript">var range = $(".summernote").summernote("createRange");</code></pre>
                   </td>
                 </tr>
                 <tr>
                   <td>saveRange</td>
                   <td>
-                    <p>save current range</p>
+                    <p>save current user selection internally.</p>
                     <pre><code class="javascript">$(".summernote").summernote("saveRange"); </code></pre>
                   </td>
                 </tr>
                 <tr>
                   <td>restoreRange</td>
                   <td>
-                    <p>restore lately range</p>
+                    <p>restore currently saved range</p>
 <pre><code class="javascript">var $note = $(".summernote")
 $note.summernote("saveRange");
 
-// something to do
+// move cursor and select another
 
 $note.summernote("restoreRange");</code></pre>
                   </td>
@@ -128,20 +126,6 @@ $note.summernote("restoreRange");</code></pre>
                   <td>
                     <p>Set a focus in current summernote</p>
                     <pre><code class="javascript">$(".summernote").summernote("focus"); </code></pre>
-                  </td>
-                </tr>
-                <tr>
-                  <td>beforeCommand <span class="label label-danger">FIXME</span></td>
-                  <td>
-                    <p>???????</p>
-                    <pre><code class="javascript">$(".summernote").summernote("beforeCommand", ??????? ); </code></pre>
-                  </td>
-                </tr>
-                <tr>
-                  <td>afterCommand <span class="label label-danger">FIXME</span></td>
-                  <td>
-                    <p>???????</p>
-                    <pre><code class="javascript">$(".summernote").summernote("afterCommand", ??????? ); </code></pre>
                   </td>
                 </tr>
                 <tr>
@@ -222,13 +206,6 @@ $note.summernote("restoreRange");</code></pre>
                   </td>
                 </tr>
                 <tr>
-                  <td>removeFormat</td>
-                  <td>
-                    <p>Clean a style</p>
-                    <pre><code class="javascript">$(".summernote").summernote("removeFormat"); </code></pre>
-                  </td>
-                </tr>
-                <tr>
                   <td>backColor</td>
                   <td>
                     <p>set background color</p>
@@ -274,16 +251,16 @@ $note.summernote("restoreRange");</code></pre>
                   </td>
                 </tr>
                 <tr>
-                  <td>indent <span class="label label-danger">FIXME</span></td>
+                  <td>indent</td>
                   <td>
-                    <p>???????</p>
+                    <p>indent on current paragraph</p>
                     <pre><code class="javascript">$(".summernote").summernote("indent"); </code></pre>
                   </td>
                 </tr>
                 <tr>
-                  <td>outdent <span class="label label-danger">FIXME</span></td>
+                  <td>outdent</td>
                   <td>
-                    <p>???????</p>
+                    <p>outdent on current paragraph</p>
                     <pre><code class="javascript">$(".summernote").summernote("outdent"); </code></pre>
                   </td>
                 </tr>
@@ -395,7 +372,7 @@ $(".summernote").summernote("fontSize", size); // set a font size  to 20px </cod
                     </ul>
                     </p>
                     <pre><code class="javascript">var lineHeight = '20px';
-                      $(".summernote").summernote("lineHeight", lineHeight); // set a line-height to 20px </code></pre>
+$(".summernote").summernote("lineHeight", lineHeight); // set a line-height to 20px </code></pre>
                   </td>
                 </tr>
                 <tr>
@@ -462,31 +439,11 @@ $boldButton.css('background', 'red'); // change button's color
 </code></pre>
                   </td>
                 </tr>
-                <tr>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <td></td>
-                </tr>
                 </tbody>
               </table>
-
-
             </div>
           </div>
-
         </div>
-
         <script>
           $(function() {
             $("a[data-toggle=tab]").click(function(e) {
@@ -496,8 +453,7 @@ $boldButton.css('background', 'red'); // change button's color
           })
         </script>
 
-
-        <h4 id="customtoolbar">Custom toolbar</h4>
+        <h4 id="custom-toolbar">Custom toolbar</h4>
         <p>Summernote allows you to make own custom toolbar.</p>
         <pre><code class="javascript">$('.summernote').summernote({
   toolbar: [
@@ -511,10 +467,10 @@ $boldButton.css('background', 'red'); // change button's color
     ['height', ['height']],
   ]
 });</code></pre>
-        <div class="customtoolbar">This is a toolbar with font style only.</div>
+        <div class="custom-toolbar">This is a toolbar with font style only.</div>
         <script>
           $(document).ready(function() {
-            $('.customtoolbar').summernote({
+            $('.custom-toolbar').summernote({
               toolbar: [
                 ['style', ['bold', 'italic', 'underline', 'clear']],
                 ['font', ['strikethrough']],
@@ -635,7 +591,7 @@ $boldButton.css('background', 'red'); // change button's color
             </tr>
           </tbody>
         </table>
-        <h4 id="customairpopover">Custom Popover for Air-mode</h4>
+        <h4 id="custom-air-popover">Custom Popover for Air-mode</h4>
         <p>Air-mode has its own popover, not toolbar. You can customize it with <code>airPopover</code> option.</p>
         <pre><code class="javascript">$('.summernote').summernote({
   airPopover: [
