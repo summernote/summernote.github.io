@@ -477,7 +477,7 @@ $boldButton.css('background', 'red'); // change button's color
                 ['fontsize', ['fontsize']],
                 ['color', ['color']],
                 ['para', ['ul', 'ol', 'paragraph']],
-                ['height', ['height']],
+                ['height', ['height']]
               ]
             });
           });
@@ -606,17 +606,27 @@ $boldButton.css('background', 'red'); // change button's color
       </section>
       <section>
         <h2 id="callbacks">Callbacks</h2>
+        <div class="alert alert-info">The summernote is supported jquery's custom event.</div>
         <h3 id="callbacks-oninit">oninit</h3>
         <pre><code class="javascript">$('#summernote').summernote({
   oninit: function() {
     console.log('Summernote is launched');
   }
 });</code></pre>
+        <h5>summernote.init</h5>
+        <pre><code class="javascript">$('#summernote').on('summernote.init', function() {
+  console.log('Summernote is launched');
+});</code></pre>
+        
         <h3 id="callbacks-onenter">onenter</h3>
         <pre><code class="javascript">$('#summernote').summernote({
   onenter: function(e) {
     console.log('Enter/Return key pressed');
   }
+});</code></pre>
+        <h5>summernote.enter</h5>
+        <pre><code class="javascript">$('#summernote').on('summernote.enter', function(_, e) {
+  console.log('Enter/Return key pressed');
 });</code></pre>
         <h3 id="callbacks-onfocus">onfocus</h3>
         <pre><code class="javascript">$('#summernote').summernote({
@@ -624,11 +634,19 @@ $boldButton.css('background', 'red'); // change button's color
     console.log('Editable area is focused');
   }
 });</code></pre>
+        <h5>summernote.focus</h5>
+        <pre><code class="javascript">$('#summernote').on('summernote.focus', function(_, e) {
+  console.log('Editable area is focused');
+});</code></pre>
         <h3 id="callbacks-onblur">onblur</h3>
         <pre><code class="javascript">$('#summernote').summernote({
   onblur: function(e) {
     console.log('Editable area loses focus');
   }
+});</code></pre>
+        <h5>summernote.blur</h5>
+        <pre><code class="javascript">$('#summernote').on('summernote.blur', function(_, e) {
+  console.log('Editable area loses focus');
 });</code></pre>
         <h3 id="callbacks-onkeyup">onkeyup</h3>
         <pre><code class="javascript">$('#summernote').summernote({
@@ -636,17 +654,29 @@ $boldButton.css('background', 'red'); // change button's color
     console.log('Key is released:', e.keyCode);
   }
 });</code></pre>
+        <h5>summernote.keyup</h5>
+        <pre><code class="javascript">$('#summernote').on('summernote.keyup', function(_, e) {
+  console.log('Key is pressed:', e.keyCode);
+});</code></pre>
         <h3 id="callbacks-onkeydown">onkeydown</h3>
         <pre><code class="javascript">$('#summernote').summernote({
   onkeydown: function(e) {
     console.log('Key is pressed:', e.keyCode);
   }
 });</code></pre>
+        <h5>summernote.keydown</h5>
+        <pre><code class="javascript">$('#summernote').on('summernote.keydown', function(_, e) {
+  console.log('Key is pressed:', e.keyCode);
+});</code></pre>        
         <h3 id="callbacks-onpaste">onpaste</h3>
         <pre><code class="javascript">$('#summernote').summernote({
   onpaste: function(e) {
     console.log('Called event paste');
   }
+});</code></pre>
+        <h5>summernote.paste</h5>
+        <pre><code class="javascript">$('#summernote').on('summernote.paste', function(_, e) {
+  console.log('Called event paste');
 });</code></pre>
         <h3 id="callbacks-onImageUpload">onImageUpload</h3>
         <p>Override image upload handler(default: base64 dataURL on `IMG` tag).</p>
@@ -655,6 +685,10 @@ $boldButton.css('background', 'red'); // change button's color
   onImageUpload: function(files, editor, $editable) {
     console.log('image upload:', files, editor, $editable);
   }
+});</code></pre>
+        <h5>summernote.image.upload</h5>
+        <pre><code class="javascript">$('#summernote').on('summernote.image.upload', function(_, files) {
+  console.log('image upload:', files);
 });</code></pre>
         <h3 id="callbacks-onChange">onChange</h3>
         <ul>
@@ -665,6 +699,18 @@ $boldButton.css('background', 'red'); // change button's color
   onChange: function(contents, $editable) {
     console.log('onChange:', contents, $editable);
   }
+});</code></pre>
+        <h5>summernote.change</h5>
+        <pre><code class="javascript">$('#summernote').on('summernote.change', function(_, e) {
+  console.log('summernote's content is changed.', e);
+});</code></pre>
+        <h5>summernote.update</h5>
+        <pre><code class="javascript">$('#summernote').on('summernote.update', function(_, e) {
+  console.log('keyup or mouseup ', e);
+});</code></pre>
+        <h5>summernote.scroll</h5>
+        <pre><code class="javascript">$('#summernote').on('summernote.scroll', function(_, e) {
+  console.log('summernote is scrolled. ', e);
 });</code></pre>
       </section>
       <section>
