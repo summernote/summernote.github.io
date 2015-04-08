@@ -13,7 +13,7 @@
               <li>
                 <a data-target="#api-summernote" ng-click="scrollTo('api-summernote')">summernote</a>
                 <ul class="nav">
-                  <li><a data-target="#external-api-access" ng-click="scrollTo('custom-toolbar')">External API access</a></li>
+                  <li><a data-target="#external-api-access" ng-click="scrollTo('external-api-access')">External API access</a></li>
                   <li><a data-target="#custom-toolbar" ng-click="scrollTo('custom-toolbar')">Custom toolbar</a></li>
                   <li><a data-target="#custom-air-popover" ng-click="scrollTo('custom-air-popover')">Custom popover for Air-mode</a></li>
                 </ul>
@@ -715,39 +715,6 @@ $summernote.summernote({
         <pre><code class="javascript">$('#summernote').on('summernote.scroll', function(customEvent, nativeEvent) {
   console.log('summernote is scrolled. ', nativeEvent);
 });</code></pre>
-      </section>
-      <section>
-        <h2 id="i18n">I18n Support</h2>
-        <h3 id="i18n-language">Language</h3>
-        <p>Include libraries with lang file. eg) <code>summernote-ko-KR.js</code></p>
-        <pre><code class="xml">&lt;!-- include libries(jQuery, bootstrap, fontawesome) --&gt;
-&lt;script src="//code.jquery.com/jquery-1.9.1.min.js"&gt;&lt;/script&gt; 
-&lt;link href="//netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.min.css"&gt; 
-&lt;script src="//netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js"&gt;&lt;/script&gt; 
-&lt;link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"&gt;
-
-&lt;!-- include summernote css/js--&gt;
-&lt;link href="summernote.css" /&gt;
-&lt;script src="summernote.min.js"&gt;&lt;/script&gt;
-
-&lt;!-- include summernote-ko-KR --&gt;
-&lt;script src="lang/summernote-ko-KR.js"&gt;&lt;/script&gt;</code></pre>
-        <p>Run the script with locale option.</p>
-        <pre><code class="javascript">$(document).ready(function() {
-  $('#summernote').summernote({
-    lang: 'ko-KR' // default: 'en-US'
-  });
-});</code></pre>
-        <div class="lang"></div>
-        <script>
-          $(document).ready(function() {
-            $('.lang').summernote({
-              lang: 'ko-KR'
-            });
-          });
-        </script>
-        <p></p>
-        <p>More summernote languages: <a href="https://github.com/HackerWins/summernote/tree/master/lang" target="_blank">languages <i class="fa fa-external-link"></i></a></p>
       </section>
       <section>
         <h2 id="plugin">Plugin</h2>
