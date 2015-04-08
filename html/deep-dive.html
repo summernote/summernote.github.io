@@ -656,7 +656,7 @@ $boldButton.css('background', 'red'); // change button's color
 });</code></pre>
         <h5>summernote.keyup</h5>
         <pre><code class="javascript">$('#summernote').on('summernote.keyup', function(customEvent, nativeEvent) {
-  console.log('Key is pressed:', e.keyCode);
+  console.log('Key is pressed:', nativeEvent.keyCode);
 });</code></pre>
         <h3 id="callbacks-onkeydown">onkeydown</h3>
         <pre><code class="javascript">$('#summernote').summernote({
@@ -666,7 +666,7 @@ $boldButton.css('background', 'red'); // change button's color
 });</code></pre>
         <h5>summernote.keydown</h5>
         <pre><code class="javascript">$('#summernote').on('summernote.keydown', function(customEvent, nativeEvent) {
-  console.log('Key is pressed:', e.keyCode);
+  console.log('Key is pressed:', nativeEvent.keyCode);
 });</code></pre>        
         <h3 id="callbacks-onpaste">onpaste</h3>
         <pre><code class="javascript">$('#summernote').summernote({
@@ -681,9 +681,12 @@ $boldButton.css('background', 'red'); // change button's color
         <h3 id="callbacks-onImageUpload">onImageUpload</h3>
         <p>Override image upload handler(default: base64 dataURL on `IMG` tag).</p>
         <p>You can upload image to server or AWS S3: <a href="https://github.com/HackerWins/summernote/issues/72" target="_blank">More...</a>.</p>
-        <pre><code class="javascript">$('#summernote').summernote({
-  onImageUpload: function(files, editor, $editable) {
-    console.log('image upload:', files, editor, $editable);
+        <pre><code class="javascript">var $summernote = $('#summernote');
+$summernote.summernote({
+  onImageUpload: function(files) {
+    console.log('image upload:', files);
+    // upload image to server and create imgNode...
+    $summernote.summernote('insertNode', imgNode);
   }
 });</code></pre>
         <h5>summernote.image.upload</h5>
