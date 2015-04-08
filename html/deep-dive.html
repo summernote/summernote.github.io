@@ -730,6 +730,32 @@ var editor = $.summernote.eventHandler.getEditor();
 $.summernote.addPlugin({
   // plugin's name
   name: 'hello',
+
+  init : function(layoutInfo) { // run init method when summernote was initialized
+    // layoutInfo.holder() is current summernote's jquery instance.
+    var $note = layoutInfo.holder();
+    
+    // you can use jquery custom event. 
+    $note.on('summernote.focus', function(customEvent, nativeEvent) { 
+       showLayer(nativeEvent.target);   
+    });
+    $note.on('summernote.update', function(customEvent, nativeEvent) {
+       var $boldButton = $(this).summernote('toolbar.get', 'bold');
+       $boldButton.toggleClass('active').css({
+         color : 'red'
+       });
+    });
+
+    $note.on('summernote.blur', function(customEvent, nativeEvent) {
+      hideLayer(nativeEvent.target);
+      var $boldButton = $(this).summernote('toolbar.get', 'bold');
+      $boldButton.removeClass('active').css({
+        color : 'inherit'
+      });
+    });          
+    $note.summernote('insertText', 'plugin start.');
+  },
+          
   buttons: { // define button that be added in the toolbar
     // "hello" button (key is a button's name)
     hello: function () {
@@ -747,12 +773,15 @@ $.summernote.addPlugin({
 
   events: { // events
     // run callback when hello button is clicked
-    hello: function (layoutInfo) {
+    hello: function (event, editor, layoutInfo, value) {
       // Get current editable node
       var $editable = layoutInfo.editable();
 
       // Call insertText with 'hello'
       editor.insertText($editable, 'hello ');
+          
+      // or 
+      layoutInfo.holder().summernote("insertText", "Hello");
     }
   }
 });</code></pre>
