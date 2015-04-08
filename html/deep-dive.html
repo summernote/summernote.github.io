@@ -1,0 +1,819 @@
+<div class="subhead container">
+  <h2>Deep dive</h2>
+  <p class="muted">Customize summernote's components, toolbar, plugins to get your very own version.</p>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="bs-page-sidebar" role="complementary">
+        <ul class="nav">
+          <li>
+            <a data-target="#api" ng-click="scrollTo('api')">API</a>
+            <ul class="nav">
+              <li>
+                <a data-target="#api-summernote" ng-click="scrollTo('api-summernote')">summernote</a>
+                <ul class="nav">
+                  <li><a data-target="#external-api-access" ng-click="scrollTo('external-api-access')">External API access</a></li>
+                  <li><a data-target="#custom-toolbar" ng-click="scrollTo('custom-toolbar')">Custom toolbar</a></li>
+                  <li><a data-target="#custom-air-popover" ng-click="scrollTo('custom-air-popover')">Custom popover for Air-mode</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a data-target="#callbacks" ng-click="scrollTo('callbacks')">Callbacks</a>
+            <ul class="nav">
+              <li><a data-target="#callbacks-oninit" ng-click="scrollTo('callbacks-oninit')">oninit</a></li>
+              <li><a data-target="#callbacks-onenter" ng-click="scrollTo('callbacks-onenter')">onenter</a></li>
+              <li><a data-target="#callbacks-onfocus" ng-click="scrollTo('callbacks-onfocus')">onfocus</a></li>
+              <li><a data-target="#callbacks-onblur" ng-click="scrollTo('callbacks-onblur')">onblur</a></li>
+              <li><a data-target="#callbacks-onkeyup" ng-click="scrollTo('callbacks-onkeyup')">onkeyup</a></li>
+              <li><a data-target="#callbacks-onkeydown" ng-click="scrollTo('callbacks-onkeydown')">onkeydown</a></li>
+              <li><a data-target="#callbacks-onpaste" ng-click="scrollTo('callbacks-onpaste')">onpaste</a></li>
+              <li><a data-target="#callbacks-onImageUpload" ng-click="scrollTo('callbacks-onImageUpload')">onImageUpload</a></li>
+              <li><a data-target="#callbacks-onChange" ng-click="scrollTo('callbacks-onChange')">onChange</a></li>
+            </ul>
+          </li>
+          <li>
+            <a data-target="#plugin" ng-click="scrollTo('plugin')">Plugin</a>
+            <ul class="nav">
+              <li><a data-target="#plugin-define" ng-click="scrollTo('plugin-define')">How to define</a></li>
+              <li><a data-target="#plugin-use" ng-click="scrollTo('plugin-use')">How to use</a></li>
+              <li><a data-target="#plugin-provided" ng-click="scrollTo('plugin-provided')">Provided Plugins</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-md-9" role="main">
+      <section>
+        <h2 id="api">API</h2>
+        <h3 id="api-summernote">summernote</h3>
+        <p>You can initialize summernote with <code>summernote</code>.</p>
+        <pre><code class="javascript">$('.summernote').summernote();</code></pre>
+        <h4 id="external-api-access">External API access</h4>
+        <p>Then You can use editor API through the <code>summernote</code> method. This is a example code for insert 'hello world' text.</p>
+        <pre><code class="javascript">$('.summernote').summernote('editor.insertText', 'hello world'));</code></pre>
+        <p>It's is called editor module's insertText method with 'hello world'. First argument is a string type represent module and it's method. And rest are method's arguments.</p>
+        <div class="bs-page-callout">
+          <h4>API is only work for editor module</h4>
+          <p>For now, API is only works for editor module. If you call API without module name, `editor.{{method}}` will be called. ex) <code>$('.summernote').summernote('insertText', 'hello world');</code></p>
+        </div>
+        <div role="tabpanel">
+          <!-- Nav tabs -->
+          <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#editor" aria-controls="editor" role="tab" data-toggle="tab">Editor</a></li>
+            <li role="presentation"><a href="#toolbar" aria-controls="toolbar" role="tab" data-toggle="tab">Toolbar</a></li>
+          </ul>
+          <!-- Tab panes -->
+          <div class="tab-content">
+            <!-- Editor Description -->
+            <div role="tabpanel" class="tab-pane active" id="editor">
+              <p class="alert">A module named <code>editor</code> support several methods for editor's basic behavior</p>
+              <table class="table table-hover table-bordered table-condensed">
+                <colgroup>
+                  <col width="150" />
+                </colgroup>
+                <thead>
+                <tr>
+                  <th>Method</th>
+                  <th>Description</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td>createRange</td>
+                  <td>
+                    <p>create a range object for current user selection.</p>
+                    <pre><code class="javascript">var range = $(".summernote").summernote("createRange");</code></pre>
+                  </td>
+                </tr>
+                <tr>
+                  <td>saveRange</td>
+                  <td>
+                    <p>save current user selection internally.</p>
+                    <pre><code class="javascript">$(".summernote").summernote("saveRange"); </code></pre>
+                  </td>
+                </tr>
+                <tr>
+                  <td>restoreRange</td>
+                  <td>
+                    <p>restore currently saved range</p>
+<pre><code class="javascript">var $note = $(".summernote")
+$note.summernote("saveRange");
+
+// move cursor and select another
+
+$note.summernote("restoreRange");</code></pre>
+                  </td>
+                </tr>
+                <tr>
+                  <td>undo</td>
+                  <td>
+                    <p>Undoes the last command</p>
+                    <pre><code class="javascript">$(".summernote").summernote("undo"); </code></pre>
+                  </td>
+                </tr>
+                <tr>
+                  <td>redo</td>
+                  <td>
+                    <p>Redoes the last command</p>
+                    <pre><code class="javascript">$(".summernote").summernote("redo"); </code></pre>
+                  </td>
+                </tr>
+                <tr>
+                  <td>focus</td>
+                  <td>
+                    <p>Set a focus in current summernote</p>
+                    <pre><code class="javascript">$(".summernote").summernote("focus"); </code></pre>
+                  </td>
+                </tr>
+                <tr>
+                  <td>bold</td>
+                  <td>
+                    <p>Set a bold style </p>
+                    <pre><code class="javascript">$(".summernote").summernote("bold"); </code></pre>
+                  </td>
+                </tr>
+                <tr>
+                  <td>italic</td>
+                  <td>
+                    <p>Set a italic style </p>
+                    <pre><code class="javascript">$(".summernote").summernote("italic"); </code></pre>
+                  </td>
+                </tr>
+                <tr>
+                  <td>underline</td>
+                  <td>
+                    <p>Set a underline style </p>
+                    <pre><code class="javascript">$(".summernote").summernote("underline"); </code></pre>
+                  </td>
+                </tr>
+                <tr>
+                  <td>strikethrough</td>
+                  <td>
+                    <p>Set a strikethrough style </p>
+                    <pre><code class="javascript">$(".summernote").summernote("strikethrough"); </code></pre>
+                  </td>
+                </tr>
+                <tr>
+                  <td>superscript</td>
+                  <td>
+                    <p>Set a superscript style </p>
+                    <pre><code class="javascript">$(".summernote").summernote("superscript"); </code></pre>
+                  </td>
+                </tr>
+                <tr>
+                  <td>subscript</td>
+                  <td>
+                    <p>Set a subscript style </p>
+                    <pre><code class="javascript">$(".summernote").summernote("subscript"); </code></pre>
+                  </td>
+                </tr>
+                <tr>
+                  <td>justifyLeft</td>
+                  <td>
+                    <p>Set left align</p>
+                    <pre><code class="javascript">$(".summernote").summernote("justifyLeft"); </code></pre>
+                  </td>
+                </tr>
+                <tr>
+                  <td>justifyRight</td>
+                  <td>
+                    <p>Set right align</p>
+                    <pre><code class="javascript">$(".summernote").summernote("justifyRight"); </code></pre>
+                  </td>
+                </tr>
+                <tr>
+                  <td>justifyCenter</td>
+                  <td>
+                    <p>Set center align</p>
+                    <pre><code class="javascript">$(".summernote").summernote("justifyCenter"); </code></pre>
+                  </td>
+                </tr>
+                <tr>
+                  <td>justifyFull</td>
+                  <td>
+                    <p>Set full align</p>
+                    <pre><code class="javascript">$(".summernote").summernote("justifyFull"); </code></pre>
+                  </td>
+                </tr>
+                <tr>
+                  <td>removeFormat</td>
+                  <td>
+                    <p>Clean a style</p>
+                    <pre><code class="javascript">$(".summernote").summernote("removeFormat"); </code></pre>
+                  </td>
+                </tr>
+                <tr>
+                  <td>backColor</td>
+                  <td>
+                    <p>set background color</p>
+                    <p><strong>Params: </strong> color:String</p>
+                    <pre><code class="javascript">$(".summernote").summernote("backColor", "red"); </code></pre>
+                  </td>
+                </tr>
+                <tr>
+                  <td>foreColor</td>
+                  <td>
+                    <p>set foreground color</p>
+                    <p><strong>Params: </strong> color:String</p>
+                    <pre><code class="javascript">$(".summernote").summernote("foreColor", "blue"); </code></pre>
+                  </td>
+                </tr>
+                <tr>
+                  <td>fontName</td>
+                  <td>
+                    <p>set font family</p>
+                    <p><strong>Params: </strong> fontFamily:String</p>
+                    <pre><code class="javascript">$(".summernote").summernote("fontName", "Arial"); </code></pre>
+                  </td>
+                </tr>
+                <tr>
+                  <td>insertParagraph</td>
+                  <td>
+                    <p>insert paragraph</p>
+                    <pre><code class="javascript">$(".summernote").summernote("insertParagraph"); </code></pre>
+                  </td>
+                </tr>
+                <tr>
+                  <td>insertOrderedList</td>
+                  <td>
+                    <p>toggle ordered list</p>
+                    <pre><code class="javascript">$(".summernote").summernote("insertOrderedList"); </code></pre>
+                  </td>
+                </tr>
+                <tr>
+                  <td>insertUnorderedList</td>
+                  <td>
+                    <p>toggle unordered list</p>
+                    <pre><code class="javascript">$(".summernote").summernote("insertUnorderedList"); </code></pre>
+                  </td>
+                </tr>
+                <tr>
+                  <td>indent</td>
+                  <td>
+                    <p>indent on current paragraph</p>
+                    <pre><code class="javascript">$(".summernote").summernote("indent"); </code></pre>
+                  </td>
+                </tr>
+                <tr>
+                  <td>outdent</td>
+                  <td>
+                    <p>outdent on current paragraph</p>
+                    <pre><code class="javascript">$(".summernote").summernote("outdent"); </code></pre>
+                  </td>
+                </tr>
+                <tr>
+                  <td>insertImage</td>
+                  <td>
+                    <p>insert a image</p>
+                    <p><strong>Params: </strong>
+                      <ul>
+                      <li>sUrl:String - image url string or datauri</li>
+                      <li>filename:String - file name</li>
+                      </ul>
+                    </p>
+                    <pre><code class="javascript">$(".summernote").summernote("insertImage", sUrl, filename); </code></pre>
+                  </td>
+                </tr>
+                <tr>
+                  <td>insertNode</td>
+                  <td>
+                    <p>Insert a dom object</p>
+                    <p><strong>Params: </strong>
+                    <ul>
+                      <li>dom:Element - native dom object</li>
+                    </ul>
+                    </p>
+                    <pre><code class="javascript">var dom = document.createElement("DIV");
+$(".summernote").summernote("insertNode", dom);
+
+// jQuery style
+var $dom = $("&lt;div /&gt;");
+$(".summernote").summernote("insertNode", $dom[0]);</code></pre>
+                  </td>
+                </tr>
+                <tr>
+                  <td>insertText</td>
+                  <td>
+                    <p>Insert a text node</p>
+                    <p><strong>Params: </strong>
+                    <ul>
+                      <li>text:String</li>
+                    </ul>
+                    </p>
+                    <pre><code class="javascript">var text = "Hello, world";
+$(".summernote").summernote("insertText", text);</code></pre>
+                  </td>
+                </tr>
+                <tr>
+                  <td>formatPara</td>
+                  <td>
+                    <p>change current block's format as a paragraph(P tag)</p>
+                    <pre><code class="javascript">$(".summernote").summernote("formatPara");</code></pre>
+                  </td>
+                </tr>
+                <tr>
+                  <td>formatH2</td>
+                  <td>
+                    <p>change current block's format as H2 </p>
+                    <pre><code class="javascript">$(".summernote").summernote("formatH2");</code></pre>
+                  </td>
+                </tr>
+                <tr>
+                  <td>formatH3</td>
+                  <td>
+                    <p>change current block's format as H3 </p>
+                    <pre><code class="javascript">$(".summernote").summernote("formatH3");</code></pre>
+                  </td>
+                </tr>
+                <tr>
+                  <td>formatH4</td>
+                  <td>
+                    <p>change current block's format as H4 </p>
+                    <pre><code class="javascript">$(".summernote").summernote("formatH4");</code></pre>
+                  </td>
+                </tr>
+                <tr>
+                  <td>formatH5</td>
+                  <td>
+                    <p>change current block's format as H5 </p>
+                    <pre><code class="javascript">$(".summernote").summernote("formatH5");</code></pre>
+                  </td>
+                </tr>
+                <tr>
+                  <td>formatH6</td>
+                  <td>
+                    <p>change current block's format as H6 </p>
+                    <pre><code class="javascript">$(".summernote").summernote("formatH6");</code></pre>
+                  </td>
+                </tr>
+                <tr>
+                  <td>fontSize</td>
+                  <td>
+                    <p>set font-size</p>
+                    <p><strong>Params: </strong>
+                    <ul>
+                      <li>size:Number - unit is <span class="label">px</span>.</li>
+                    </ul>
+                    </p>
+                    <pre><code class="javascript">var size = 20;
+$(".summernote").summernote("fontSize", size); // set a font size  to 20px </code></pre>
+                  </td>
+                </tr>
+                <tr>
+                  <td>lineHeight</td>
+                  <td>
+                    <p>set line-height</p>
+                    <p><strong>Params: </strong>
+                    <ul>
+                      <li>lineHeight:String - unit is <span class="label">px</span>.</li>
+                    </ul>
+                    </p>
+                    <pre><code class="javascript">var lineHeight = '20px';
+$(".summernote").summernote("lineHeight", lineHeight); // set a line-height to 20px </code></pre>
+                  </td>
+                </tr>
+                <tr>
+                  <td>unlink</td>
+                  <td>
+                    <p>Unlink</p>
+                    <pre><code class="javascript">$(".summernote").summernote("unlink");</code></pre>
+                  </td>
+                </tr>
+                <tr>
+                  <td>createLink</td>
+                  <td>
+                    <p>create a link </p>
+                    <p><strong>Params: </strong>
+                    <ul>
+                      <li>linkInfo:Object
+                          <ul>
+                            <li>text:String - link's text </li>
+                            <li>url:String - link's url </li>
+                            <li>[newWindow:Boolean] - Whether link's target is new window  </li>
+                          </ul>
+                      </li>
+                      <li> [options:Object]
+                        <ul>
+                          <li>onCreateLink:Function -  callback to create link  </li>
+                        </ul>
+                      </li>
+                    </ul>
+                    </p>
+                    <pre><code class="javascript">$(".summernote").summernote("createLink", {
+      text : "This is the Summernote's Official Site",
+      url : "http://summernote.org",
+      newWindow : true
+});</code></pre>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+
+            </div>
+
+            <!-- Toolbar Description -->
+            <div role="tabpanel" class="tab-pane" id="toolbar">
+              <p class="alert">toolbar description</p>
+              <table class="table table-hover table-bordered table-condensed">
+                <colgroup>
+                  <col width="150" />
+                </colgroup>
+                <thead>
+                <tr>
+                  <th>Method</th>
+                  <th>Description</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td>get</td>
+                  <td>
+                    <p>get a button in toolbar </p>
+                    <p><strong>Params : </strong> name:String </p>
+                    <p><strong>Usage </strong></p>
+<pre><code> var $boldButton = $(".summernote").summernote("toolbar.get", 'bold');
+$boldButton.css('background', 'red'); // change button's color
+</code></pre>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <script>
+          $(function() {
+            $("a[data-toggle=tab]").click(function(e) {
+              e.preventDefault();
+              $(this).tab('show');
+            });
+          })
+        </script>
+
+        <h4 id="custom-toolbar">Custom toolbar</h4>
+        <p>Summernote allows you to make own custom toolbar.</p>
+        <pre><code class="javascript">$('.summernote').summernote({
+  toolbar: [
+    //[groupname, [button list]]
+     
+    ['style', ['bold', 'italic', 'underline', 'clear']],
+    ['font', ['strikethrough']],
+    ['fontsize', ['fontsize']],
+    ['color', ['color']],
+    ['para', ['ul', 'ol', 'paragraph']],
+    ['height', ['height']],
+  ]
+});</code></pre>
+        <div class="custom-toolbar">This is a toolbar with font style only.</div>
+        <script>
+          $(document).ready(function() {
+            $('.custom-toolbar').summernote({
+              toolbar: [
+                ['style', ['bold', 'italic', 'underline', 'clear']],
+                ['font', ['strikethrough']],
+                ['fontsize', ['fontsize']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['height', ['height']]
+              ]
+            });
+          });
+        </script>
+        <p></p>
+        <p>You can compose a toolbar with pre-shipped buttons.</p>
+        <table class="table table-hover table-bordered table-condensed">
+          <thead>
+            <tr>
+              <th>Category</th>
+              <th>Button id</th>
+              <th>Function</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th rowspan="5">Insert</th>
+              <td><code>picture</code></td>
+              <td>Insert a picture</td>
+            </tr>
+            <tr>
+              <td><code>link</code></td>
+              <td>Insert a hyperlink</td>
+            </tr>
+            <tr>
+              <td><code>video</code></td>
+              <td>Insert a video</td>
+            </tr>
+            <tr>
+              <td><code>table</code></td>
+              <td>Insert a table</td>
+            </tr>
+            <tr>
+              <td><code>hr</code></td>
+              <td>Insert a horizontal rule</td>
+            </tr>
+            <tr>
+              <th rowspan="9">Style</th>
+              <td><code>style</code></td>
+              <td>Format selected block</td>
+            </tr>
+            <tr>
+              <td><code>fontname</code></td>
+              <td>Set font family</td>
+            </tr>
+            <tr>
+              <td><code>fontsize</code></td>
+              <td>Set font size</td>
+            </tr>
+            <tr>
+              <td><code>color</code></td>
+              <td>Set foreground and background color</td>
+            </tr>
+            <tr>
+              <td><code>bold</code></td>
+              <td>Toggle weight</td>
+            </tr>
+            <tr>
+              <td><code>italic</code></td>
+              <td>Toggle italic</td>
+            </tr>
+            <tr>
+              <td><code>underline</code></td>
+              <td>Toggle underline</td>
+            </tr>
+            <tr>
+              <td><code>strikethrough</code></td>
+              <td>Toggle strikethrough</td>
+            </tr>
+            <tr>
+              <td><code>clear</code></td>
+              <td>Clearing all styles</td>
+            </tr>
+            <tr>
+              <th rowspan="4">Layout</th>
+              <td><code>ul</code></td>
+              <td>Make an un-ordered list</td>
+            </tr>
+            <tr>
+              <td><code>ol</code></td>
+              <td>Make an ordered list</td>
+            </tr>
+            <tr>
+              <td><code>paragraph</code></td>
+              <td>Set text alignment</td>
+            </tr>
+            <tr>
+              <td><code>height</code></td>
+              <td>Set height of text</td>
+            </tr>
+            <tr>
+              <th rowspan="5">Misc</th>
+              <td><code>fullscreen</code></td>
+              <td>Toggle fullscreen editing mode</td>
+            </tr>
+            <tr>
+              <td><code>codeview</code></td>
+              <td>Toggle wysiwyg and html editing mode</td>
+            </tr>
+            <tr>
+              <td><code>undo</code></td>
+              <td>Undo</td>
+            </tr>
+            <tr>
+              <td><code>redo</code></td>
+              <td>Redo</td>
+            </tr>
+            <tr>
+              <td><code>help</code></td>
+              <td>Show help dialog</td>
+            </tr>
+          </tbody>
+        </table>
+        <h4 id="custom-air-popover">Custom Popover for Air-mode</h4>
+        <p>Air-mode has its own popover, not toolbar. You can customize it with <code>airPopover</code> option.</p>
+        <pre><code class="javascript">$('.summernote').summernote({
+  airPopover: [
+    ['color', ['color']],
+    ['font', ['bold', 'underline', 'clear']],
+    ['para', ['ul', 'paragraph']],
+    ['table', ['table']],
+    ['insert', ['link', 'picture']]
+  ]
+});</code></pre>
+
+      </section>
+      <section>
+        <h2 id="callbacks">Callbacks</h2>
+        <div class="alert alert-info">The summernote is supported jquery's custom event.</div>
+        <h3 id="callbacks-oninit">oninit</h3>
+        <pre><code class="javascript">$('#summernote').summernote({
+  oninit: function() {
+    console.log('Summernote is launched');
+  }
+});</code></pre>
+        <h5>summernote.init</h5>
+        <pre><code class="javascript">$('#summernote').on('summernote.init', function() {
+  console.log('Summernote is launched');
+});</code></pre>
+        
+        <h3 id="callbacks-onenter">onenter</h3>
+        <pre><code class="javascript">$('#summernote').summernote({
+  onenter: function(e) {
+    console.log('Enter/Return key pressed');
+  }
+});</code></pre>
+        <h5>summernote.enter</h5>
+        <pre><code class="javascript">$('#summernote').on('summernote.enter', function(customEvent, nativeEvent) {
+  console.log('Enter/Return key pressed');
+});</code></pre>
+        <h3 id="callbacks-onfocus">onfocus</h3>
+        <pre><code class="javascript">$('#summernote').summernote({
+  onfocus: function(e) {
+    console.log('Editable area is focused');
+  }
+});</code></pre>
+        <h5>summernote.focus</h5>
+        <pre><code class="javascript">$('#summernote').on('summernote.focus', function(customEvent, nativeEvent) {
+  console.log('Editable area is focused');
+});</code></pre>
+        <h3 id="callbacks-onblur">onblur</h3>
+        <pre><code class="javascript">$('#summernote').summernote({
+  onblur: function(e) {
+    console.log('Editable area loses focus');
+  }
+});</code></pre>
+        <h5>summernote.blur</h5>
+        <pre><code class="javascript">$('#summernote').on('summernote.blur', function(customEvent, nativeEvent) {
+  console.log('Editable area loses focus');
+});</code></pre>
+        <h3 id="callbacks-onkeyup">onkeyup</h3>
+        <pre><code class="javascript">$('#summernote').summernote({
+  onkeyup: function(e) {
+    console.log('Key is released:', e.keyCode);
+  }
+});</code></pre>
+        <h5>summernote.keyup</h5>
+        <pre><code class="javascript">$('#summernote').on('summernote.keyup', function(customEvent, nativeEvent) {
+  console.log('Key is pressed:', nativeEvent.keyCode);
+});</code></pre>
+        <h3 id="callbacks-onkeydown">onkeydown</h3>
+        <pre><code class="javascript">$('#summernote').summernote({
+  onkeydown: function(e) {
+    console.log('Key is pressed:', e.keyCode);
+  }
+});</code></pre>
+        <h5>summernote.keydown</h5>
+        <pre><code class="javascript">$('#summernote').on('summernote.keydown', function(customEvent, nativeEvent) {
+  console.log('Key is pressed:', nativeEvent.keyCode);
+});</code></pre>        
+        <h3 id="callbacks-onpaste">onpaste</h3>
+        <pre><code class="javascript">$('#summernote').summernote({
+  onpaste: function(e) {
+    console.log('Called event paste');
+  }
+});</code></pre>
+        <h5>summernote.paste</h5>
+        <pre><code class="javascript">$('#summernote').on('summernote.paste', function(customEvent, nativeEvent) {
+  console.log('Called event paste');
+});</code></pre>
+        <h3 id="callbacks-onImageUpload">onImageUpload</h3>
+        <p>Override image upload handler(default: base64 dataURL on `IMG` tag).</p>
+        <p>You can upload image to server or AWS S3: <a href="https://github.com/HackerWins/summernote/issues/72" target="_blank">More...</a>.</p>
+        <pre><code class="javascript">var $summernote = $('#summernote');
+$summernote.summernote({
+  onImageUpload: function(files) {
+    console.log('image upload:', files);
+    // upload image to server and create imgNode...
+    $summernote.summernote('insertNode', imgNode);
+  }
+});</code></pre>
+        <h5>summernote.image.upload</h5>
+        <pre><code class="javascript">$('#summernote').on('summernote.image.upload', function(customEvent, files) {
+  console.log('image upload:', files);
+});</code></pre>
+        <h3 id="callbacks-onChange">onChange</h3>
+        <ul>
+          <li>IE9-10: DOMCharacterDataModified, DOMSubtreeModified, DOMNodeInserted</li>
+          <li>Chrome, FF: input</li>
+        </ul>
+        <pre><code class="javascript">$('#summernote').summernote({
+  onChange: function(contents, $editable) {
+    console.log('onChange:', contents, $editable);
+  }
+});</code></pre>
+        <h5>summernote.change</h5>
+        <pre><code class="javascript">$('#summernote').on('summernote.change', function(customEvent, nativeEvent) {
+  console.log('summernote's content is changed.', nativeEvent);
+});</code></pre>
+        <h5>summernote.update</h5>
+        <pre><code class="javascript">$('#summernote').on('summernote.update', function(customEvent, nativeEvent) {
+  console.log('keyup or mouseup ', nativeEvent);
+});</code></pre>
+        <h5>summernote.scroll</h5>
+        <pre><code class="javascript">$('#summernote').on('summernote.scroll', function(customEvent, nativeEvent) {
+  console.log('summernote is scrolled. ', nativeEvent);
+});</code></pre>
+      </section>
+      <section>
+        <h2 id="plugin">Plugin</h2>
+        <p>Summernote supports simple plug-in system.</p>
+        <h3 id="plugin-define">How to define</h3>
+        <p>You can define a plugin with the <code>$.summernote.addPlugin()</code>.<br />
+          For detail, reference to <a href="/jsduck/" target="_blank">API Docs <i class="fa fa-external-link"></i></a></p>
+        <pre><code class="javascript">// template, editor
+var tmpl = $.summernote.renderer.getTemplate();
+var editor = $.summernote.eventHandler.getEditor();
+
+// add hello plugin 
+$.summernote.addPlugin({
+  // plugin's name
+  name: 'hello',
+  buttons: { // define button that be added in the toolbar
+    // "hello" button (key is a button's name)
+    hello: function () {
+          
+      // create button template 
+      return tmpl.iconButton('fa fa-header', {
+        // set event's name to used as callback when this button is clicked
+        // add data-event='hello' in button element
+        event : 'hello',
+        title: 'hello',
+        hide: true
+      });
+    }
+  },
+
+  events: { // events
+    // run callback when hello button is clicked
+    hello: function (layoutInfo) {
+      // Get current editable node
+      var $editable = layoutInfo.editable();
+
+      // Call insertText with 'hello'
+      editor.insertText($editable, 'hello ');
+    }
+  }
+});</code></pre>
+        <h3 id="plugin-use">How to use</h3>
+        <p>To use plugin, add button's name in the toolbar</p>
+        <pre><code class="html">&lt;script&gt;
+$("#editor").summernote({
+  toolbar : [
+    ...
+    ['group', ['hello']]   // add button name
+    ...
+  ]
+});
+&lt;/script&gt;</code></pre>
+        <h3 id="plugin-provided">Provided Plugins</h3>
+        <p>Summernote provides some plugins.</p>
+        <table class="table table-hover table-striped">
+          <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>API</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>summernote-ext-hello</td>
+            <td>A example for show how to use plugin system with your toolbar.</td>
+            <td><a href="/jsduck/#!/api/plugin.hello">Link</a></td>
+          </tr>
+          <tr>
+            <td>summernote-ext-fontstyle</td>
+            <td>supported font-size, strikethrough, superscript and subscript.</td>
+            <td><a href="/jsduck/#!/api/plugin.fontstyle">Link</a></td>
+          </tr>
+          <tr>
+            <td>summernote-ext-video</td>
+            <td>
+              make embeded tag for video url
+              (YouTube, Vimeo, Vine, Instagram, DailyMotion or Youku)
+            </td>
+            <td><a href="/jsduck/#!/api/plugin.video">Link</a></td>
+          </tr>
+        </tbody>
+      </table>
+      <p>You can find this plugins and also contribute with your plugin here: <a href="https://github.com/HackerWins/summernote/tree/develop/plugin" target="_blank">plugin <i class="fa fa-external-link"></i></p>
+      </section>
+      <!-- upcoming features
+      <section id="image">
+        <h2>Image upload</h2>
+        <p></p>
+        <pre>hello world</pre>
+      </section>
+
+      <section id="local">
+        <h2>use Local storage</h2>
+        <p>install</p>
+        <pre>hello world</pre>
+
+      </section>
+      -->
+    </div>
+  </div>
+</div>

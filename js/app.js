@@ -40,8 +40,11 @@ page.config(['$routeProvider', '$locationProvider',
 
   $routeProvider.when('/', {
     templateUrl: 'html/main.html'
-  }).when('/features', {
-    templateUrl: 'html/features.html',
+  }).when('/getting-started', {
+    templateUrl: 'html/getting-started.html',
+    controller: 'PageController'
+  }).when('/deep-dive', {
+    templateUrl: 'html/deep-dive.html',
     controller: 'PageController'
   }).when('/example', {
     templateUrl: 'html/example.html',
