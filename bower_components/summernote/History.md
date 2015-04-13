@@ -1,5 +1,8 @@
 ### Change Log
 
+#### v0.6.4 2015-04-13
+* Fixed option bug(#1009, #1008).
+
 #### v0.6.3 2015-04-08
 * Support external API access
 * Support callbacks with jquery custom event.
