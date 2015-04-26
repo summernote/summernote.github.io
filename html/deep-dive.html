@@ -23,13 +23,13 @@
           <li>
             <a data-target="#callbacks" ng-click="scrollTo('callbacks')">Callbacks</a>
             <ul class="nav">
-              <li><a data-target="#callbacks-oninit" ng-click="scrollTo('callbacks-oninit')">oninit</a></li>
-              <li><a data-target="#callbacks-onenter" ng-click="scrollTo('callbacks-onenter')">onenter</a></li>
-              <li><a data-target="#callbacks-onfocus" ng-click="scrollTo('callbacks-onfocus')">onfocus</a></li>
-              <li><a data-target="#callbacks-onblur" ng-click="scrollTo('callbacks-onblur')">onblur</a></li>
-              <li><a data-target="#callbacks-onkeyup" ng-click="scrollTo('callbacks-onkeyup')">onkeyup</a></li>
-              <li><a data-target="#callbacks-onkeydown" ng-click="scrollTo('callbacks-onkeydown')">onkeydown</a></li>
-              <li><a data-target="#callbacks-onpaste" ng-click="scrollTo('callbacks-onpaste')">onpaste</a></li>
+              <li><a data-target="#callbacks-oninit" ng-click="scrollTo('callbacks-oninit')">onInit</a></li>
+              <li><a data-target="#callbacks-onenter" ng-click="scrollTo('callbacks-onenter')">onEnter</a></li>
+              <li><a data-target="#callbacks-onfocus" ng-click="scrollTo('callbacks-onfocus')">onFocus</a></li>
+              <li><a data-target="#callbacks-onblur" ng-click="scrollTo('callbacks-onblur')">onBlur</a></li>
+              <li><a data-target="#callbacks-onkeyup" ng-click="scrollTo('callbacks-onkeyup')">onKeyup</a></li>
+              <li><a data-target="#callbacks-onkeydown" ng-click="scrollTo('callbacks-onkeydown')">onKeydown</a></li>
+              <li><a data-target="#callbacks-onpaste" ng-click="scrollTo('callbacks-onpaste')">onPaste</a></li>
               <li><a data-target="#callbacks-onImageUpload" ng-click="scrollTo('callbacks-onImageUpload')">onImageUpload</a></li>
               <li><a data-target="#callbacks-onChange" ng-click="scrollTo('callbacks-onChange')">onChange</a></li>
             </ul>
@@ -460,7 +460,7 @@ $boldButton.css('background', 'red'); // change button's color
     //[groupname, [button list]]
      
     ['style', ['bold', 'italic', 'underline', 'clear']],
-    ['font', ['strikethrough']],
+    ['font', ['strikethrough', 'superscript', 'subscript']],
     ['fontsize', ['fontsize']],
     ['color', ['color']],
     ['para', ['ul', 'ol', 'paragraph']],
@@ -473,7 +473,7 @@ $boldButton.css('background', 'red'); // change button's color
             $('.custom-toolbar').summernote({
               toolbar: [
                 ['style', ['bold', 'italic', 'underline', 'clear']],
-                ['font', ['strikethrough']],
+                ['font', ['strikethrough', 'superscript', 'subscript']],
                 ['fontsize', ['fontsize']],
                 ['color', ['color']],
                 ['para', ['ul', 'ol', 'paragraph']],
@@ -607,9 +607,9 @@ $boldButton.css('background', 'red'); // change button's color
       <section>
         <h2 id="callbacks">Callbacks</h2>
         <div class="alert alert-info">The summernote is supported jquery's custom event.</div>
-        <h3 id="callbacks-oninit">oninit</h3>
+        <h3 id="callbacks-oninit">onInit</h3>
         <pre><code class="javascript">$('#summernote').summernote({
-  oninit: function() {
+  onInit: function() {
     console.log('Summernote is launched');
   }
 });</code></pre>
@@ -618,9 +618,9 @@ $boldButton.css('background', 'red'); // change button's color
   console.log('Summernote is launched');
 });</code></pre>
         
-        <h3 id="callbacks-onenter">onenter</h3>
+        <h3 id="callbacks-onenter">onEnter</h3>
         <pre><code class="javascript">$('#summernote').summernote({
-  onenter: function(e) {
+  onEnter: function(e) {
     console.log('Enter/Return key pressed');
   }
 });</code></pre>
@@ -628,9 +628,9 @@ $boldButton.css('background', 'red'); // change button's color
         <pre><code class="javascript">$('#summernote').on('summernote.enter', function(customEvent, nativeEvent) {
   console.log('Enter/Return key pressed');
 });</code></pre>
-        <h3 id="callbacks-onfocus">onfocus</h3>
+        <h3 id="callbacks-onfocus">onFocus</h3>
         <pre><code class="javascript">$('#summernote').summernote({
-  onfocus: function(e) {
+  onFocus: function(e) {
     console.log('Editable area is focused');
   }
 });</code></pre>
@@ -638,9 +638,9 @@ $boldButton.css('background', 'red'); // change button's color
         <pre><code class="javascript">$('#summernote').on('summernote.focus', function(customEvent, nativeEvent) {
   console.log('Editable area is focused');
 });</code></pre>
-        <h3 id="callbacks-onblur">onblur</h3>
+        <h3 id="callbacks-onblur">onBlur</h3>
         <pre><code class="javascript">$('#summernote').summernote({
-  onblur: function(e) {
+  onBlur: function(e) {
     console.log('Editable area loses focus');
   }
 });</code></pre>
@@ -648,9 +648,9 @@ $boldButton.css('background', 'red'); // change button's color
         <pre><code class="javascript">$('#summernote').on('summernote.blur', function(customEvent, nativeEvent) {
   console.log('Editable area loses focus');
 });</code></pre>
-        <h3 id="callbacks-onkeyup">onkeyup</h3>
+        <h3 id="callbacks-onkeyup">onKeyup</h3>
         <pre><code class="javascript">$('#summernote').summernote({
-  onkeyup: function(e) {
+  onKeyup: function(e) {
     console.log('Key is released:', e.keyCode);
   }
 });</code></pre>
@@ -658,9 +658,9 @@ $boldButton.css('background', 'red'); // change button's color
         <pre><code class="javascript">$('#summernote').on('summernote.keyup', function(customEvent, nativeEvent) {
   console.log('Key is pressed:', nativeEvent.keyCode);
 });</code></pre>
-        <h3 id="callbacks-onkeydown">onkeydown</h3>
+        <h3 id="callbacks-onkeydown">onKeydown</h3>
         <pre><code class="javascript">$('#summernote').summernote({
-  onkeydown: function(e) {
+  onKeydown: function(e) {
     console.log('Key is pressed:', e.keyCode);
   }
 });</code></pre>
@@ -668,9 +668,9 @@ $boldButton.css('background', 'red'); // change button's color
         <pre><code class="javascript">$('#summernote').on('summernote.keydown', function(customEvent, nativeEvent) {
   console.log('Key is pressed:', nativeEvent.keyCode);
 });</code></pre>        
-        <h3 id="callbacks-onpaste">onpaste</h3>
+        <h3 id="callbacks-onpaste">onPaste</h3>
         <pre><code class="javascript">$('#summernote').summernote({
-  onpaste: function(e) {
+  onPaste: function(e) {
     console.log('Called event paste');
   }
 });</code></pre>
@@ -813,11 +813,6 @@ $("#editor").summernote({
             <td><a href="/jsduck/#!/api/plugin.hello">Link</a></td>
           </tr>
           <tr>
-            <td>summernote-ext-fontstyle</td>
-            <td>supported font-size, strikethrough, superscript and subscript.</td>
-            <td><a href="/jsduck/#!/api/plugin.fontstyle">Link</a></td>
-          </tr>
-          <tr>
             <td>summernote-ext-video</td>
             <td>
               make embeded tag for video url
@@ -829,20 +824,6 @@ $("#editor").summernote({
       </table>
       <p>You can find this plugins and also contribute with your plugin here: <a href="https://github.com/HackerWins/summernote/tree/develop/plugin" target="_blank">plugin <i class="fa fa-external-link"></i></p>
       </section>
-      <!-- upcoming features
-      <section id="image">
-        <h2>Image upload</h2>
-        <p></p>
-        <pre>hello world</pre>
-      </section>
-
-      <section id="local">
-        <h2>use Local storage</h2>
-        <p>install</p>
-        <pre>hello world</pre>
-
-      </section>
-      -->
     </div>
   </div>
 </div>
