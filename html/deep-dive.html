@@ -704,12 +704,8 @@ $summernote.summernote({
   }
 });</code></pre>
         <h5>summernote.change</h5>
-        <pre><code class="javascript">$('#summernote').on('summernote.change', function(customEvent, nativeEvent) {
+        <pre><code class="javascript">$('#summernote').on('summernote.change', function(customEvent, contents, $editable) {
   console.log('summernote's content is changed.', nativeEvent);
-});</code></pre>
-        <h5>summernote.update</h5>
-        <pre><code class="javascript">$('#summernote').on('summernote.update', function(customEvent, nativeEvent) {
-  console.log('keyup or mouseup ', nativeEvent);
 });</code></pre>
         <h5>summernote.scroll</h5>
         <pre><code class="javascript">$('#summernote').on('summernote.scroll', function(customEvent, nativeEvent) {

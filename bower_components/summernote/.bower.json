@@ -1,6 +1,6 @@
 {
   "name": "summernote",
-  "version": "0.6.5",
+  "version": "0.6.6",
   "main": [
     "./dist/summernote.js",
     "./dist/summernote.css"
@@ -18,13 +18,14 @@
     "font-awesome": ">=4.2.0"
   },
   "homepage": "https://github.com/summernote/summernote",
-  "_release": "0.6.5",
+  "_release": "0.6.6",
   "_resolution": {
     "type": "version",
-    "tag": "v0.6.5",
-    "commit": "0deff89f7554f7776458dac47d0531875dac5831"
+    "tag": "v0.6.6",
+    "commit": "e5f6e88235f44165824973ac9b32cc15aa34e4bc"
   },
   "_source": "git://github.com/summernote/summernote.git",
-  "_target": "~0.6.4",
-  "_originalSource": "summernote"
+  "_target": "~0.6.6",
+  "_originalSource": "summernote",
+  "_direct": true
 }
