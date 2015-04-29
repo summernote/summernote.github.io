@@ -606,7 +606,12 @@ $boldButton.css('background', 'red'); // change button's color
       </section>
       <section>
         <h2 id="callbacks">Callbacks</h2>
-        <div class="alert alert-info">The summernote is supported jquery's custom event.</div>
+        <p>Summernote support initialize callbacks and jquery's custom event style callbacks.</p>
+        <div class="bs-page-callout">
+          <h4>Callback only works with camel case string.</h4>
+          <p>Lowercase string has been used for basic event name(ex: <code>oninit</code>, <code>onenter</code>, <code>onfocus</code>, <code>onblur</code>, <code>onkeyup</code>, <code>onkeydown</code>, <code>onpaste</code>). In contrast, callbacks name for advanced feature has been used with camel case string. This is inconsistent and confusing to use. So we rename all lowercase callback to camel case string.</p>
+          <p>You can use only camel case string for callback's name after <code>v0.6.5</code>.</p>
+        </div>
         <h3 id="callbacks-oninit">onInit</h3>
         <pre><code class="javascript">$('#summernote').summernote({
   onInit: function() {
