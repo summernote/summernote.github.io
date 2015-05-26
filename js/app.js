@@ -5,10 +5,13 @@ page.controller('PageController', function ($scope, $location, $anchorScroll) {
   var $navbar = $('.navbar');
 
   $scope.$on('$viewContentLoaded', function (event) {
+    window.scrollTo(0, 0);
     ga('send', 'pageview', { page: $location.url() });
   });
 
   $scope.$on('$routeChangeSuccess', function () {
+    $('.navbar-collapse').collapse('hide');
+
     var $sidebar = $('.bs-page-sidebar');
     if ($sidebar.length) {
       $body.scrollspy({
