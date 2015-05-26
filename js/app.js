@@ -4,25 +4,30 @@ page.controller('PageController', function ($scope, $location, $anchorScroll) {
   var $body = $(document.body);
   var $navbar = $('.navbar');
 
+  $scope.$on('$viewContentLoaded', function (event) {
+    ga('send', 'pageview', { page: $location.url() });
+  });
+
   $scope.$on('$routeChangeSuccess', function () {
     var $sidebar = $('.bs-page-sidebar');
+    if ($sidebar.length) {
+      $body.scrollspy({
+        target: '.bs-page-sidebar',
+        offset: $navbar.height()
+      });
 
-    $body.scrollspy({
-      target: '.bs-page-sidebar',
-      offset: $navbar.height()
-    });
-
-    $sidebar.affix({
-      offset: {
-        top: function() {
-          var offsetTop = $sidebar.offset().top;
-          var nPadding = 20;
-          return (this.top = offsetTop - nPadding - $navbar.height());
-        }, bottom: function() {
-          return (this.bottom = $('.bs-page-footer').outerHeight(true));
-        }
-      } 
-    });
+      $sidebar.affix({
+        offset: {
+          top: function() {
+            var offsetTop = $sidebar.offset().top;
+            var nPadding = 20;
+            return (this.top = offsetTop - nPadding - $navbar.height());
+          }, bottom: function() {
+            return (this.bottom = $('.bs-page-footer').outerHeight(true));
+          }
+        } 
+      });
+    }
 
     $('pre code').each(function(i, block) {
       hljs.highlightBlock(block);
@@ -39,7 +44,8 @@ page.config(['$routeProvider', '$locationProvider',
             function ($routeProvider, $locationProvider) {
 
   $routeProvider.when('/', {
-    templateUrl: 'html/main.html'
+    templateUrl: 'html/main.html',
+    controller: 'PageController'
   }).when('/getting-started', {
     templateUrl: 'html/getting-started.html',
     controller: 'PageController'
@@ -53,6 +59,7 @@ page.config(['$routeProvider', '$locationProvider',
     templateUrl: 'html/history.html',
     controller: 'PageController'
   }).when('/team', {
-    templateUrl: 'html/team.html'
+    templateUrl: 'html/team.html',
+    controller: 'PageController'
   }).otherwise({redirectTo: '/'});
 }]);
