@@ -735,11 +735,8 @@ $.summernote.addPlugin({
   init : function(layoutInfo) { // run init method when summernote was initialized
     // layoutInfo.holder() is current summernote's jquery instance.
     var $note = layoutInfo.holder();
-    
-    // you can use jquery custom event. 
-    $note.on('summernote.focus', function(customEvent, nativeEvent) { 
-       showLayer(nativeEvent.target);   
-    });
+
+    // you can use jquery custom event.
     $note.on('summernote.update', function(customEvent, nativeEvent) {
        var $boldButton = $(this).summernote('toolbar.get', 'bold');
        $boldButton.toggleClass('active').css({
@@ -748,7 +745,6 @@ $.summernote.addPlugin({
     });
 
     $note.on('summernote.blur', function(customEvent, nativeEvent) {
-      hideLayer(nativeEvent.target);
       var $boldButton = $(this).summernote('toolbar.get', 'bold');
       $boldButton.removeClass('active').css({
         color : 'inherit'
