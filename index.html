@@ -35,7 +35,7 @@
 
   <!-- angular -->
   <script src="bower_components/angular/angular.js"></script>
-  <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
 
   <!-- language ko-KR -->
   <script src="bower_components/summernote/lang/summernote-ko-KR.js"></script>
@@ -54,21 +54,21 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#/"><i class="fa fa-sun-o"></i> Summernote</a>
+      <a class="navbar-brand" ui-sref="app.home"><i class="fa fa-sun-o"></i> Summernote</a>
     </div>
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse navbar-ex1-collapse">
       <ul class="nav navbar-nav">
-        <li><a href="#/getting-started">Getting started</a></li>
-        <li><a href="#/deep-dive">Deep dive</a></li>
-        <li><a href="#/example">Example</a></li>
-        <li><a href="#/team">Team</a></li>
+        <li><a ui-sref="app.gettingstarted">Getting started</a></li>
+        <li><a ui-sref="app.deepdive">Deep dive</a></li>
+        <li><a ui-sref="app.example">Example</a></li>
+        <li><a ui-sref="app.team">Team</a></li>
         <li><a href="/jsduck/" target="_blank">API Docs&nbsp; <i class="fa fa-external-link" style="font-size:12px"></i></a></li>
       </ul>
     </div>
   </div>
 </div>
-<div ng-view></div>
+<div ui-view></div>
 <footer class="footer">
   <div class="container">
     <p><i class="fa fa-sun-o"></i> Summernote v0.6 · Created and Maintained by <a href="https://github.com/summernote">Summernote team</a>.</p>

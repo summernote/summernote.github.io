@@ -1,6 +1,84 @@
-var page = angular.module('summernote-page', ['ngRoute']);
+angular
+  .module('summernote-page', [
+    'ui.router'
+  ])
+  .config(PageConfgig)
+  .controller('PageController', PageController)
+  .run(PageRun);
 
-page.controller('PageController', function ($scope, $location, $anchorScroll) {
+
+PageConfgig.$inject = ['$urlRouterProvider', '$urlMatcherFactoryProvider', '$stateProvider'];
+
+function PageConfgig($urlRouterProvider,  $urlMatcherFactoryProvider, $stateProvider) {
+  $urlRouterProvider.otherwise('/');
+  $urlMatcherFactoryProvider.strictMode(false); // Handling trailing slashes            
+
+  var states = getStates();
+
+  angular.forEach(states, function (state) {
+    $stateProvider.state(state.state, state.config);
+  });
+
+  function getStates() {
+    return [
+      {
+        state: 'app',
+        config: {
+          url: '',
+          abstract: true,
+          controller: 'PageController',
+          template: '<div ui-view/>'
+        }
+      },
+      {
+        state: 'app.home',
+        config: {
+          url: '/',
+          templateUrl: 'html/main.html'
+        }
+      },
+      {
+        state: 'app.gettingstarted',
+        config: {
+          url: '/getting-started',
+          templateUrl: 'html/getting-started.html'
+        }
+      },
+      {
+        state: 'app.deepdive',
+        config: {
+          url: '/deep-dive',
+          templateUrl: 'html/deep-dive.html'
+        }
+      },
+      {
+        state: 'app.example',
+        config: {
+          url: '/example',
+          templateUrl: 'html/example.html'
+        }
+      },
+      {
+        state: 'app.history',
+        config: {
+          url: '/history',
+          templateUrl: 'html/history.html'
+        }
+      },
+      {
+        state: 'app.team',
+        config: {
+          url: '/team',
+          templateUrl: 'html/team.html'
+        }
+      }
+    ];
+  }  
+}  
+
+PageController.$inject = ['$scope', '$location', '$anchorScroll'];
+
+function PageController($scope, $location, $anchorScroll) {
   var $body = $(document.body);
   var $navbar = $('.navbar');
 
@@ -9,7 +87,16 @@ page.controller('PageController', function ($scope, $location, $anchorScroll) {
     ga('send', 'pageview', { page: $location.url() });
   });
 
-  $scope.$on('$routeChangeSuccess', function () {
+  $scope.scrollTo = function(id) {
+    $location.hash(id);
+    $anchorScroll();
+  };
+}
+
+PageRun.$inject = ['$rootScope'];
+
+function PageRun($rootScope) {
+  $rootScope.$on('$stateChangeSuccess', function () {
     $('.navbar-collapse').collapse('hide');
 
     var $sidebar = $('.bs-page-sidebar');
@@ -36,33 +123,4 @@ page.controller('PageController', function ($scope, $location, $anchorScroll) {
       hljs.highlightBlock(block);
     });
   });
-
-  $scope.scrollTo = function(id) {
-    $location.hash(id);
-    $anchorScroll();
-  };
-});
-
-page.config(['$routeProvider', '$locationProvider',
-            function ($routeProvider, $locationProvider) {
-
-  $routeProvider.when('/', {
-    templateUrl: 'html/main.html',
-    controller: 'PageController'
-  }).when('/getting-started', {
-    templateUrl: 'html/getting-started.html',
-    controller: 'PageController'
-  }).when('/deep-dive', {
-    templateUrl: 'html/deep-dive.html',
-    controller: 'PageController'
-  }).when('/example', {
-    templateUrl: 'html/example.html',
-    controller: 'PageController'
-  }).when('/history', {
-    templateUrl: 'html/history.html',
-    controller: 'PageController'
-  }).when('/team', {
-    templateUrl: 'html/team.html',
-    controller: 'PageController'
-  }).otherwise({redirectTo: '/'});
-}]);
+}
