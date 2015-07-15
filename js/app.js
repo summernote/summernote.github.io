@@ -4,8 +4,8 @@ angular
   ])
   .config(PageConfgig)
   .controller('PageController', PageController)
-  .run(PageRun);
-
+  .directive('sideNavbar', sideNavbarDirective)
+  .directive('code', codeDirective);
 
 PageConfgig.$inject = ['$urlRouterProvider', '$urlMatcherFactoryProvider', '$stateProvider'];
 
@@ -79,9 +79,6 @@ function PageConfgig($urlRouterProvider,  $urlMatcherFactoryProvider, $stateProv
 PageController.$inject = ['$scope', '$location', '$anchorScroll'];
 
 function PageController($scope, $location, $anchorScroll) {
-  var $body = $(document.body);
-  var $navbar = $('.navbar');
-
   $scope.$on('$viewContentLoaded', function (event) {
     window.scrollTo(0, 0);
     ga('send', 'pageview', { page: $location.url() });
@@ -93,13 +90,20 @@ function PageController($scope, $location, $anchorScroll) {
   };
 }
 
-PageRun.$inject = ['$rootScope'];
+sideNavbarDirective.$inject = [];
 
-function PageRun($rootScope) {
-  $rootScope.$on('$stateChangeSuccess', function () {
-    $('.navbar-collapse').collapse('hide');
+function sideNavbarDirective() {
+  return {
+    replace: false,
+    restrict: 'A',
+    link: PostLink
+  };
 
-    var $sidebar = $('.bs-page-sidebar');
+  function PostLink(scope, element, attr) {
+    var $sidebar = element;
+    var $body = $(document.body);
+    var $navbar = $('.navbar');
+
     if ($sidebar.length) {
       $body.scrollspy({
         target: '.bs-page-sidebar',
@@ -118,9 +122,21 @@ function PageRun($rootScope) {
         } 
       });
     }
+  }
+}
 
-    $('pre code').each(function(i, block) {
-      hljs.highlightBlock(block);
-    });
-  });
+codeDirective.$inject = [];
+
+function codeDirective() {
+  return {
+    replace: false,
+    restrict: 'E',
+    link: PostLink
+  };
+
+  function PostLink(scope, element, attr) {
+    if($(element).parent().prop('tagName') === 'PRE') {
+      $(element).html(hljs.highlightAuto($(element).text(), attr.class).value);
+    }
+  }
 }
