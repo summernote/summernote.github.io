@@ -1,0 +1,23 @@
+{
+  "name": "summernote.github.io",
+  "version": "1.0.0",
+  "homepage": "http://summernote.org",
+  "authors": [
+    "Alan Hong <susukang98@gmail.com>"
+  ],
+  "description": "Official site of Super Simple WYSIWYG Editor Summernote",
+  "keywords": [
+    "summernote",
+    "WYSIWYG",
+    "editor"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "angularjs": "~1.3.4",
+    "angular-ui-router": "~0.2.15",
+    "bootstrap": ">= 3.0.1",
+    "font-awesome": ">=4.2.0",
+    "fontawesome": ">= 4.1.0",
+    "summernote": "~0.6.6"
+  }
+}
