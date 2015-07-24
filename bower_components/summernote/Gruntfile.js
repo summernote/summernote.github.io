@@ -106,7 +106,12 @@ module.exports = function (grunt) {
       all: {
         options: {
           port: 3000,
-          livereload: true,
+          livereload: {
+            options: {
+              open: true,
+              base: ['index.html']
+            }
+          },
           middleware: function (connect, options, middlewares) {
             var base = options.base[0];
             middlewares = middlewares || [];
@@ -115,8 +120,7 @@ module.exports = function (grunt) {
               connect['static'](base),    // serve static files
               connect.directory(base)  // make empty directories browsable
             ]);
-          },
-          open: 'http://localhost:3000'
+          }
         }
       }
     },
@@ -140,8 +144,48 @@ module.exports = function (grunt) {
       'meteor-publish': {
         command: 'meteor/publish.sh'
       }
-    }
+    },
 
+    'saucelabs-qunit': {
+      'all': {
+        options: {
+          urls: ['http://localhost:3000/test/unit.html'],
+          build: process.env.TRAVIS_BUILD_NUMBER,
+          tags: [process.env.TRAVIS_BRANCH, process.env.TRAVIS_PULL_REQUEST],
+          browsers: [{
+            browserName: 'internet explorer',
+            version: '8.0',
+            platform: 'windows XP'
+          }, {
+            browserName: 'internet explorer',
+            version: '9.0',
+            platform: 'windows 7'
+          }, {
+            browserName: 'internet explorer',
+            version: '10.0',
+            platform: 'windows 8'
+          }, {
+            browserName: 'internet explorer',
+            version: '11.0',
+            platform: 'windows 8.1'
+          }, {
+            browserName: 'chrome',
+            version: '43',
+            platform: 'windows 8'
+          }, {
+            browserName: 'firefox',
+            version: '38',
+            platform: 'windows 8'
+          }, {
+            browserName: 'safari',
+            version: '8.0',
+            platform: 'OS X 10.10'
+          }],
+          testname: 'unit test for summernote',
+          'public': 'public'
+        }
+      }
+    }
   });
 
   // load all tasks from the grunt plugins used in this file
@@ -156,11 +200,11 @@ module.exports = function (grunt) {
   // test: unit test on test folder
   grunt.registerTask('test', ['jshint', 'qunit']);
 
-  // dist: make dist files
-  grunt.registerTask('dist', ['build', 'test', 'uglify', 'recess']);
+  // test: saucelabs test
+  grunt.registerTask('saucelabs-test', ['connect', 'saucelabs-qunit']);
 
-  // deploy: compress dist files
-  grunt.registerTask('deploy', ['dist', 'compress']);
+  // dist: make dist files
+  grunt.registerTask('dist', ['build', 'test', 'uglify', 'recess', 'compress']);
 
   // default: server
   grunt.registerTask('default', ['server']);

@@ -82,6 +82,10 @@ hr.soften {
   }
 }
 
+.jumbotron .note-editor {
+  margin-bottom: 0;
+}
+
 .jumbotron>p {
   font-size: 24px;
   font-weight: 300;

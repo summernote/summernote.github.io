@@ -77,9 +77,14 @@ define([
 
         // frame mode
       } else {
-        makeFinder = function (sClassName) {
-          return function () { return $editor.find(sClassName); };
+        makeFinder = function (className, $base) {
+          $base = $base || $editor;
+          return function () { return $base.find(className); };
         };
+
+        var options = $editor.data('options');
+        var $dialogHolder = (options && options.dialogsInBody) ? $(document.body) : null;
+
         return {
           editor: function () { return $editor; },
           holder : function () { return $editor.data('holder'); },
@@ -90,7 +95,7 @@ define([
           statusbar: makeFinder('.note-statusbar'),
           popover: makeFinder('.note-popover'),
           handle: makeFinder('.note-handle'),
-          dialog: makeFinder('.note-dialog')
+          dialog: makeFinder('.note-dialog', $dialogHolder)
         };
       }
     };
@@ -240,9 +245,10 @@ define([
 
     /**
      * blank HTML for cursor position
-     * - [workaround] for MSIE IE doesn't works with bogus br
+     * - [workaround] old IE only works with &nbsp;
+     * - [workaround] IE11 and other browser works with bogus br
      */
-    var blankHTML = agent.isMSIE ? '&nbsp;' : '<br>';
+    var blankHTML = agent.isMSIE && agent.browserVersion < 11 ? '&nbsp;' : '<br>';
 
     /**
      * @method nodeLength
@@ -539,6 +545,26 @@ define([
     };
 
     /**
+     * returns whether point is left edge of ancestor or not.
+     * @param {BoundaryPoint} point
+     * @param {Node} ancestor
+     * @return {Boolean}
+     */
+    var isLeftEdgePointOf = function (point, ancestor) {
+      return isLeftEdgePoint(point) && isLeftEdgeOf(point.node, ancestor);
+    };
+
+    /**
+     * returns whether point is right edge of ancestor or not.
+     * @param {BoundaryPoint} point
+     * @param {Node} ancestor
+     * @return {Boolean}
+     */
+    var isRightEdgePointOf = function (point, ancestor) {
+      return isRightEdgePoint(point) && isRightEdgeOf(point.node, ancestor);
+    };
+
+    /**
      * returns offset from parent.
      *
      * @param {Node} node
@@ -736,7 +762,7 @@ define([
      */
     var makeOffsetPath = function (ancestor, node) {
       var ancestors = listAncestor(node, func.eq(ancestor));
-      return $.map(ancestors, position).reverse();
+      return ancestors.map(position).reverse();
     };
 
     /**
@@ -1046,6 +1072,8 @@ define([
       isEdgePoint: isEdgePoint,
       isLeftEdgeOf: isLeftEdgeOf,
       isRightEdgeOf: isRightEdgeOf,
+      isLeftEdgePointOf: isLeftEdgePointOf,
+      isRightEdgePointOf: isRightEdgePointOf,
       prevPoint: prevPoint,
       nextPoint: nextPoint,
       isSamePoint: isSamePoint,
