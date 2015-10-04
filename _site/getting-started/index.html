@@ -77,18 +77,206 @@
 
 
     <div>
-        <div class="post">
+        <header class="subhead container">
+  <h2>Getting started</h2>
+  <p class="muted">An overview of summernote, how to download and use, basic features and examples, and more.</p>
+</header>
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="bs-page-sidebar" side-navbar role="complementary">
+        * TOC
+        {:toc}
+      </div>
+    </div>
+    <div class="col-md-9">
+      <div role="main">
+        <h2 id="download-summernote">Download Summernote</h2>
 
-  <header class="post-header">
-    <h1 class="post-title">Getting started</h1>
-  </header>
+<h3 id="compiled-css-js">Compiled CSS, JS</h3>
 
-  <article class="post-content">
-    <p>hello
-hello</p>
+<p>The fastest way to get Summernote is to download the precompiled and minified versions of our CSS, JavaScript. No documentation or original source code files are included.</p>
 
-  </article>
+<p><a href="https://github.com/summernote/summernote/releases/download/v0.7.0/summernote-v0.7.0-dist.zip" class="btn btn-primary">Download compiled Summernote</a></p>
 
+<h3 id="additional-downloads">Additional downloads</h3>
+
+<h4 id="download-source-codehttpsgithubcomsummernotesummernotearchivemasterzip"><a href="https://github.com/summernote/summernote/archive/master.zip">Download source code</a></h4>
+
+<p>Get the latest Summernote LESS and Javascript source code by downloading it directly from GitHub.</p>
+
+<h4 id="clone-or-fork-via-githubhttpsgithubcomsummernotesummernote"><a href="https://github.com/summernote/summernote">Clone or fork via Github</a></h4>
+
+<p>Visit us on GitHub to clone or fork the summernote project.</p>
+
+<h4 id="install-with-bowerhttpbowerio">Install with <a href="http://bower.io">Bower</a></h4>
+
+<p>Install and manage Summernote’s styles, JavaScript, and documentation using Bower.</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">bower install summernote</code></pre></div>
+
+<h2 id="installation">Installation</h2>
+
+<h3 id="requires-html5-doctype">00. Requires HTML5 doctype</h3>
+
+<p>Bootstrap uses certain HTML elements and CSS properties which require HTML5 doctype. Include <code>&lt;!DOCTYPE html&gt;</code> in the beginning of all your projects.</p>
+
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">&quot;en&quot;</span><span class="nt">&gt;</span>
+...
+<span class="nt">&lt;/html&gt;</span></code></pre></div>
+
+<h3 id="include-jscss">01. Include js/css</h3>
+
+<p>Summernote uses open source libraries(jQuery, Bootstrap, font-awesome).
+Include the Following code in your HTML <code>&lt;HTML&gt;</code> tag</p>
+
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="c">&lt;!-- include libraries(jQuery, bootstrap, fontawesome) --&gt;</span>
+<span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">&quot;//netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.css&quot;</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span><span class="nt">&gt;</span> 
+<span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">&quot;//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css&quot;</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;//code.jquery.com/jquery-1.9.1.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span> 
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;//netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span> 
+
+<span class="c">&lt;!-- include summernote css/js--&gt;</span>
+<span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">&quot;summernote.css&quot;</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;summernote.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span></code></pre></div>
+
+<p>Don’t forget to change the file’s path if you downloaded summernote in a different folders.</p>
+
+<h3 id="insert">02. Insert</h3>
+
+<p>Add <code>div</code> into <code>body</code>; this targeted element will later be rendered to summernote editing tool.</p>
+
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;summernote&quot;</span><span class="nt">&gt;</span>Hello Summernote<span class="nt">&lt;/div&gt;</span></code></pre></div>
+
+<h3 id="run-summernote">03. Run summernote</h3>
+<p>Run the script below when document is ready!</p>
+
+<div class="highlight"><pre><code class="language-html" data-lang="html">$(document).ready(function() {
+  $(&#39;#summernote&#39;).summernote();
+});</code></pre></div>
+
+<h2 id="basic-api">Basic API</h2>
+
+<h3 id="summernote">summernote</h3>
+
+<p>Initialize Summernote</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#summernote&#39;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">();</span></code></pre></div>
+
+<p>Initialize Summernote with options</p>
+
+<h4 id="height-and-focus">Height and Focus</h4>
+<p>If you set focus option, cursor will focus editable area after initialize summernote.</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#summernote&#39;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">({</span>
+  <span class="nx">height</span><span class="o">:</span> <span class="mi">300</span><span class="p">,</span>                 <span class="c1">// set editor height</span>
+  <span class="nx">minHeight</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>             <span class="c1">// set minimum height of editor</span>
+  <span class="nx">maxHeight</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>             <span class="c1">// set maximum height of editor</span>
+  <span class="nx">focus</span><span class="o">:</span> <span class="kc">true</span>                  <span class="c1">// set focus to editable area after initializing summernote</span>
+<span class="p">});</span></code></pre></div>
+
+<p>If you set height, you can see resizebar below.</p>
+
+<div class="height">blah blah~<br />blah blah~<br />blah blah~<br />blah blah~<br />blah blah~<br />blah blah~<br />blah blah~<br />blah blah~<br />blah blah~<br />blah blah~<br />blah blah~<br />blah blah~<br />blah blah~<br />blah blah~<br />blah blah~<br />blah blah~<br />blah blah~<br />blah blah~<br />blah blah~<br />blah blah~<br />blah blah~<br />blah blah~<br />blah blah~<br />blah blah~</div>
+<script>
+  $(function() {
+    $('.height').summernote({height: 150});
+  });
+</script>
+
+<p>If you don’t set the height, editable area’s height will change according to contents.</p>
+
+<div class="noheight"><p>press enter key.</p></div>
+<script>
+  $(function() {
+    $('.noheight').summernote();
+  });
+</script>
+
+<h4 id="destroy">Destroy</h4>
+
+<p>Destroy Summernote.</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#summernote&#39;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">(</span><span class="s1">&#39;destroy&#39;</span><span class="p">);</span></code></pre></div>
+
+<h4 id="get-amp-set-code">get &amp; set Code</h4>
+
+<p>Get the HTML contents of the first summernote in the set of matched elements.</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">markupStr</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#summernote&#39;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">(</span><span class="s1">&#39;code&#39;</span><span class="p">);</span></code></pre></div>
+
+<p>If you initialize multiple editor, You can get the HTML content of the second summernote with jQuery <a href="http://api.jquery.com/eq/">eq</a>.</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">markupStr</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.summernote&#39;</span><span class="p">).</span><span class="nx">eq</span><span class="p">(</span><span class="mi">1</span><span class="p">).</span><span class="nx">summernote</span><span class="p">(</span><span class="s1">&#39;code&#39;</span><span class="p">);</span></code></pre></div>
+
+<p>A string of HTML to set as the content of each matched element.</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#summernote&#39;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">(</span><span class="s1">&#39;code&#39;</span><span class="p">,</span> <span class="nx">markupStr</span><span class="p">);</span></code></pre></div>
+
+<p>for more detail api: <a href="/deep-dive/#api">deep dive with api</a></p>
+
+<h2 id="i18n-support">I18n support</h2>
+
+<h3 id="language">Language</h3>
+
+<p>Include libraries with lang file. eg) <code>summernote-ko-KR.js</code></p>
+
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;//code.jquery.com/jquery-1.9.1.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span> 
+<span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">&quot;//netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.min.css&quot;</span><span class="nt">&gt;</span> 
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;//netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span> 
+<span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">&quot;//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css&quot;</span><span class="nt">&gt;</span>
+
+<span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">&quot;summernote.css&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;summernote.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+
+<span class="c">&lt;!-- include summernote-ko-KR --&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;lang/summernote-ko-KR.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span></code></pre></div>
+
+<p>Run the script with locale option.</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#summernote&#39;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">({</span>
+    <span class="nx">lang</span><span class="o">:</span> <span class="s1">&#39;ko-KR&#39;</span> <span class="c1">// default: &#39;en-US&#39;</span>
+  <span class="p">});</span>
+<span class="p">});</span></code></pre></div>
+
+<div class="lang"></div>
+<script>
+  $(document).ready(function() {
+    $('.lang').summernote({
+      lang: 'ko-KR'
+    });
+  });
+</script>
+
+<p>More summernote languages: <a href="https://github.com/summernote/summernote/tree/master/lang">languages</a></p>
+
+<h2 id="server-integration">Server Integration</h2>
+<p>Examples with backend server.</p>
+
+<h3 id="django-summernote">Django-summernote</h3>
+<p>Handy update for your django admin page.</p>
+
+<p><img class="img-rounded img-responsive" src="https://raw.github.com/lqez/pastebin/master/img/django-summernote.png" alt="django" /></p>
+
+<ul>
+  <li><a href="https://github.com/summernote/django-summernote">django-summernote</a></li>
+  <li><a href="https://pypi.python.org/pypi/django-summernote">Summernote plugin for Django</a></li>
+</ul>
+
+<h3 id="summernote-rails-gem">summernote-rails (gem)</h3>
+<p>This gem was built to gemify the assets used in Summernote.</p>
+
+<ul>
+  <li><a href="http://summernote.org/summernote-rails">summernote-rails</a></li>
+  <li><a href="https://github.com/rorlab/summernote-test">summernote-test for Rails v4</a></li>
+  <li><a href="https://github.com/rorlab/summernote-test-r3">summernote-test-r3 for Rails v3.2.14</a></li>
+</ul>
+
+      </div>
+    </div>
+  </div>
 </div>
 
     </div>
