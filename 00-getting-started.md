@@ -73,7 +73,7 @@ Add <code>div</code> into <code>body</code>; this targeted element will later be
 ### 03. Run summernote
 Run the script below when document is ready!
 
-{% highlight html %}
+{% highlight javascript %}
 $(document).ready(function() {
   $('#summernote').summernote();
 });

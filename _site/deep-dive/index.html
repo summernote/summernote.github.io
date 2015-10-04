@@ -8,7 +8,7 @@
   <title>Deep dive</title>
   <meta name="description" content="Super Simple WYSIWYG Editor on Bootstrap Summernote is a JavaScript library that helps you create WYSIWYG editors online.
 ">
-  <meta name="author" content="">
+  <meta name="author" content="https://github.com/hackerwins">
 
   <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
   <!--[if lt IE 9]>
@@ -91,11 +91,440 @@
     </div>
     <div class="col-md-9">
       <div role="main">
-        <p>This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at <a href="http://jekyllrb.com/">jekyllrb.com</a></p>
+        <h2 id="api">API</h2>
 
-<p>You can find the source code for the Jekyll new theme at: <a href="https://github.com/jglovier/jekyll-new">github.com/jglovier/jekyll-new</a></p>
+<h3 id="external-api-access">External API access</h3>
 
-<p>You can find the source code for Jekyll at <a href="https://github.com/jekyll/jekyll">github.com/jekyll/jekyll</a></p>
+<p>You can initialize summernote with <code>summernote</code>.</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#summernote&#39;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">();</span></code></pre></div>
+
+<p>Then You can use editor API through the <code>summernote</code> method. This is an example code for inserting ‘hello world’ text.</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#summernote&#39;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">(</span><span class="s1">&#39;editor.insertText&#39;</span><span class="p">,</span> <span class="s1">&#39;hello world&#39;</span><span class="p">));</span></code></pre></div>
+
+<p>It calls the editor module’s insertText method with ‘hello world’. First argument is a string type which represents the module and its method. The rest are method’s arguments.</p>
+
+<p>If you call API without module name, <code>editor.methodName</code> will be called.</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#summernote&#39;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">(</span><span class="s1">&#39;insertText&#39;</span><span class="p">,</span> <span class="s1">&#39;hello world&#39;</span><span class="p">);</span></code></pre></div>
+
+<p>A module named <code>editor</code> supports several methods for editor’s basic behavior</p>
+
+<h4 id="createrange">createRange</h4>
+
+<p>create a range object for current user selection.</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">range</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#summernote&quot;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">(</span><span class="s2">&quot;createRange&quot;</span><span class="p">);</span></code></pre></div>
+
+<h4 id="saverange">saveRange</h4>
+
+<p>save current user selection internally.</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#summernote&quot;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">(</span><span class="s2">&quot;saveRange&quot;</span><span class="p">);</span></code></pre></div>
+
+<h4 id="restorerange">restoreRange</h4>
+
+<p>restore currently saved range</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#summernote&quot;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">(</span><span class="s2">&quot;saveRange&quot;</span><span class="p">);</span>
+<span class="c1">// move cursor and select another</span>
+<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#summernote&quot;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">(</span><span class="s2">&quot;restoreRange&quot;</span><span class="p">);</span></code></pre></div>
+
+<h4 id="undo-redo">undo, redo</h4>
+
+<p>Undoes and redoes the last command</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#summernote&quot;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">(</span><span class="s2">&quot;undo&quot;</span><span class="p">);</span>
+<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#summernote&quot;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">(</span><span class="s2">&quot;redo&quot;</span><span class="p">);</span></code></pre></div>
+
+<h4 id="focus">focus</h4>
+
+<p>Set a focus in current summernote</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#summernote&quot;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">(</span><span class="s2">&quot;focus&quot;</span><span class="p">);</span></code></pre></div>
+
+<h4 id="bold-italic-underline-strikethrough">bold, italic, underline, strikethrough</h4>
+
+<p>Set font style</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#summernote&quot;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">(</span><span class="s2">&quot;bold&quot;</span><span class="p">);</span>
+<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#summernote&quot;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">(</span><span class="s2">&quot;italic&quot;</span><span class="p">);</span>
+<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#summernote&quot;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">(</span><span class="s2">&quot;underline&quot;</span><span class="p">);</span>
+<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#summernote&quot;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">(</span><span class="s2">&quot;strikethrough&quot;</span><span class="p">);</span></code></pre></div>
+
+<h4 id="superscript-subscript">superscript, subscript</h4>
+
+<p>Set superscript or subscript</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#summernote&quot;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">(</span><span class="s2">&quot;superscript&quot;</span><span class="p">);</span>
+<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#summernote&quot;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">(</span><span class="s2">&quot;subscript&quot;</span><span class="p">);</span></code></pre></div>
+
+<h4 id="justifyleft-justifyright-justifycenter-justifyfull">justifyLeft, justifyRight, justifyCenter, justifyFull</h4>
+
+<p>Set paragraph align</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#summernote&quot;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">(</span><span class="s2">&quot;justifyLeft&quot;</span><span class="p">);</span>
+<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#summernote&quot;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">(</span><span class="s2">&quot;justifyRight&quot;</span><span class="p">);</span>
+<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#summernote&quot;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">(</span><span class="s2">&quot;justifyCenter&quot;</span><span class="p">);</span>
+<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#summernote&quot;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">(</span><span class="s2">&quot;justifyFull&quot;</span><span class="p">);</span></code></pre></div>
+
+<h4 id="removeformat">removeFormat</h4>
+
+<p>Clean a style</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#summernote&quot;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">(</span><span class="s2">&quot;removeFormat&quot;</span><span class="p">);</span></code></pre></div>
+
+<h4 id="backcolor-forecolor">backColor, foreColor</h4>
+
+<p>Set background and foreground color</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// @param {String} color</span>
+<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#summernote&quot;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">(</span><span class="s2">&quot;backColor&quot;</span><span class="p">,</span> <span class="s2">&quot;red&quot;</span><span class="p">);</span>
+
+<span class="c1">// @param {String} color</span>
+<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#summernote&quot;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">(</span><span class="s2">&quot;foreColor&quot;</span><span class="p">,</span> <span class="s2">&quot;blue&quot;</span><span class="p">);</span></code></pre></div>
+
+<h4 id="fontname">fontName</h4>
+
+<p>Set font family</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// @param {String} fontName</span>
+<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#summernote&quot;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">(</span><span class="s2">&quot;fontName&quot;</span><span class="p">,</span> <span class="s2">&quot;Arial&quot;</span><span class="p">);</span></code></pre></div>
+
+<h4 id="fontsize">fontSize</h4>
+
+<p>Set font size</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// @param {Number} font size - unit is px</span>
+<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#summernote&quot;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">(</span><span class="s2">&quot;fontSize&quot;</span><span class="p">,</span> <span class="mi">20</span><span class="p">);</span></code></pre></div>
+
+<h4 id="insertparagraph">insertParagraph</h4>
+
+<p>insert paragraph</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#summernote&quot;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">(</span><span class="s2">&quot;insertParagraph&quot;</span><span class="p">);</span></code></pre></div>
+
+<h4 id="insertorderedlist">insertOrderedList</h4>
+
+<p>toggle ordered list</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#summernote&quot;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">(</span><span class="s2">&quot;insertOrderedList&quot;</span><span class="p">);</span></code></pre></div>
+
+<h4 id="insertunorderedlist">insertUnorderedList</h4>
+
+<p>toggle unordered list</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#summernote&quot;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">(</span><span class="s2">&quot;insertUnorderedList&quot;</span><span class="p">);</span></code></pre></div>
+
+<h4 id="indent">indent</h4>
+
+<p>indent on current paragraph</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#summernote&quot;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">(</span><span class="s2">&quot;indent&quot;</span><span class="p">);</span></code></pre></div>
+
+<h4 id="outdent">outdent</h4>
+
+<p>outdent on current paragraph</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#summernote&quot;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">(</span><span class="s2">&quot;outdent&quot;</span><span class="p">);</span></code></pre></div>
+
+<h4 id="insertimage">insertImage</h4>
+
+<p>insert a image</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// @param {String} url</span>
+<span class="c1">// @param {String} filename - optional</span>
+<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#summernote&quot;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">(</span><span class="s2">&quot;insertImage&quot;</span><span class="p">,</span> <span class="nx">url</span><span class="p">,</span> <span class="nx">filename</span><span class="p">);</span></code></pre></div>
+
+<h4 id="insertnode">insertNode</h4>
+
+<p>Insert a element or textnode</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">node</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;div&#39;</span><span class="p">);</span>
+<span class="c1">// @param {Node} node</span>
+<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#summernote&quot;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">(</span><span class="s2">&quot;insertNode&quot;</span><span class="p">,</span> <span class="nx">node</span><span class="p">);</span></code></pre></div>
+
+<h4 id="inserttext">insertText</h4>
+
+<p>Insert a text</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// @param {String} text</span>
+<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#summernote&quot;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">(</span><span class="s2">&quot;insertText&quot;</span><span class="p">,</span> <span class="s2">&quot;Hello, world&quot;</span><span class="p">);</span></code></pre></div>
+
+<h4 id="formatpara">formatPara</h4>
+
+<p>Change current paragraph as a <code>&lt;p&gt;</code>.</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#summernote&quot;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">(</span><span class="s2">&quot;formatPara&quot;</span><span class="p">);</span></code></pre></div>
+
+<h4 id="formath1--formath6">formatH1 ~ formatH6</h4>
+
+<p>Change current paragraph as a <code>&lt;h1&gt; ~ &lt;h6&gt;</code>.</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#summernote&quot;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">(</span><span class="s2">&quot;formatH2&quot;</span><span class="p">);</span>
+<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#summernote&quot;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">(</span><span class="s2">&quot;formatH6&quot;</span><span class="p">);</span></code></pre></div>
+
+<h4 id="lineheight">lineHeight</h4>
+
+<p>Set line height</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// @param {Number} line height - unit is px</span>
+<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#summernote&quot;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">(</span><span class="s2">&quot;lineHeight&quot;</span><span class="p">,</span> <span class="mi">20</span><span class="p">);</span></code></pre></div>
+
+<h4 id="createlink-unlink">createLink, unlink</h4>
+
+<p>Create link and unlink</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// @param {String} text - link text</span>
+<span class="c1">// @param {String} url - link url</span>
+<span class="c1">// @param {Boolean} newWindow - whether link&#39;s target is new window or not</span>
+<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#summernote&quot;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">(</span><span class="s2">&quot;createLink&quot;</span><span class="p">,</span> <span class="p">{</span>
+  <span class="nx">text</span><span class="o">:</span> <span class="s2">&quot;This is the Summernote&#39;s Official Site&quot;</span><span class="p">,</span>
+  <span class="nx">url</span><span class="o">:</span> <span class="s2">&quot;http://summernote.org&quot;</span><span class="p">,</span>
+  <span class="nx">newWindow</span><span class="o">:</span> <span class="kc">true</span>
+<span class="p">});</span>
+
+<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#summernote&quot;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">(</span><span class="s2">&quot;unlink&quot;</span><span class="p">);</span></code></pre></div>
+
+<h4 id="custom-toolbar">Custom toolbar</h4>
+
+<p>Summernote allows you to make own custom toolbar.</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#summernote&#39;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">({</span>
+  <span class="nx">toolbar</span><span class="o">:</span> <span class="p">[</span>
+    <span class="c1">// [groupName, [list of button]]</span>
+    <span class="p">[</span><span class="s1">&#39;style&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="s1">&#39;italic&#39;</span><span class="p">,</span> <span class="s1">&#39;underline&#39;</span><span class="p">,</span> <span class="s1">&#39;clear&#39;</span><span class="p">]],</span>
+    <span class="p">[</span><span class="s1">&#39;font&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;strikethrough&#39;</span><span class="p">,</span> <span class="s1">&#39;superscript&#39;</span><span class="p">,</span> <span class="s1">&#39;subscript&#39;</span><span class="p">]],</span>
+    <span class="p">[</span><span class="s1">&#39;fontsize&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;fontsize&#39;</span><span class="p">]],</span>
+    <span class="p">[</span><span class="s1">&#39;color&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;color&#39;</span><span class="p">]],</span>
+    <span class="p">[</span><span class="s1">&#39;para&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;ul&#39;</span><span class="p">,</span> <span class="s1">&#39;ol&#39;</span><span class="p">,</span> <span class="s1">&#39;paragraph&#39;</span><span class="p">]],</span>
+    <span class="p">[</span><span class="s1">&#39;height&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;height&#39;</span><span class="p">]],</span>
+  <span class="p">]</span>
+<span class="p">});</span></code></pre></div>
+
+<p>This is a toolbar with font style only.</p>
+<div class="custom-toolbar"></div>
+<script>
+  $(function() {
+    $('.custom-toolbar').summernote({
+      toolbar: [
+        ['style', ['bold', 'italic', 'underline', 'clear']],
+        ['font', ['strikethrough', 'superscript', 'subscript']],
+        ['fontsize', ['fontsize']],
+        ['color', ['color']],
+        ['para', ['ul', 'ol', 'paragraph']],
+        ['height', ['height']]
+      ]
+    });
+  });
+</script>
+
+<p>You can compose a toolbar with pre-shipped buttons.</p>
+
+<ul>
+  <li>Insert
+    <ul>
+      <li><code>picture</code>: open image dialog</li>
+      <li><code>link</code>: open link dialog</li>
+      <li><code>video</code>: open video dialog</li>
+      <li><code>table</code>: insert a table</li>
+      <li><code>hr</code>: insert a horizontal rule</li>
+    </ul>
+  </li>
+  <li>Font Style
+    <ul>
+      <li><code>fontname</code>: set font family</li>
+      <li><code>fontsize</code>: set font size</li>
+      <li><code>color</code>: set foreground and background color</li>
+      <li><code>bold</code>: toggle font weight</li>
+      <li><code>italic</code>: toggle italic</li>
+      <li><code>underline</code>: toggle underline</li>
+      <li><code>strikethrough</code>: toggle strikethrough</li>
+      <li><code>clear</code>: clear font style</li>
+    </ul>
+  </li>
+  <li>Paragraph style
+    <ul>
+      <li><code>style</code>: format selected block</li>
+      <li><code>ol</code>: toggle ordered list</li>
+      <li><code>ul</code>: toggle unordered list</li>
+      <li><code>paragraph</code>: dropdown for paragraph align</li>
+      <li><code>height</code>: set line height</li>
+    </ul>
+  </li>
+  <li>Misc
+    <ul>
+      <li><code>fullscreen</code>: toggle fullscreen editing mode</li>
+      <li><code>codeview</code>: toggle wysiwyg and html editing mode</li>
+      <li><code>undo</code>: undo</li>
+      <li><code>redo</code>: redo</li>
+      <li><code>help</code>: open help dialog</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="custom-popover-for-air-mode">Custom popover for air-mode</h4>
+
+<p>Air-mode has its own popover, not toolbar. You can customize it with <code>airPopover</code> option.</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#summernote&#39;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">({</span>
+  <span class="nx">popover</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">air</span><span class="o">:</span> <span class="p">[</span>
+      <span class="p">[</span><span class="s1">&#39;color&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;color&#39;</span><span class="p">]],</span>
+      <span class="p">[</span><span class="s1">&#39;font&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="s1">&#39;underline&#39;</span><span class="p">,</span> <span class="s1">&#39;clear&#39;</span><span class="p">]],</span>
+      <span class="p">[</span><span class="s1">&#39;para&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;ul&#39;</span><span class="p">,</span> <span class="s1">&#39;paragraph&#39;</span><span class="p">]],</span>
+      <span class="p">[</span><span class="s1">&#39;table&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;table&#39;</span><span class="p">]],</span>
+      <span class="p">[</span><span class="s1">&#39;insert&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;link&#39;</span><span class="p">,</span> <span class="s1">&#39;picture&#39;</span><span class="p">]]</span>
+    <span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">});</span></code></pre></div>
+
+<h2 id="callbacks">callbacks</h2>
+<p>Summernote support initialize callbacks and jquery’s custom event style callbacks.</p>
+
+<blockquote>
+  <p>Callback only works with camel case string.
+Lowercase string has been used for basic event name(ex: <code>oninit</code>, <code>onenter</code>, <code>onfocus</code>, <code>onblur</code>, <code>onkeyup</code>, <code>onkeydown</code>, <code>onpaste</code>). In contrast, callbacks name for advanced feature has been used with camel case string. This is inconsistent and confusing to use. So we rename all lowercase callback to camel case string.
+You can use only camel case string for callback’s name after <code>v0.6.5</code>.</p>
+</blockquote>
+
+<h3 id="oninit">onInit</h3>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// onInit callback</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#summernote&#39;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">({</span>
+  <span class="nx">onInit</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Summernote is launched&#39;</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+
+<span class="c1">// summernote.init</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#summernote&#39;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;summernote.init&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Summernote is launched&#39;</span><span class="p">);</span>
+<span class="p">});</span></code></pre></div>
+
+<h3 id="onenter">onEnter</h3>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// onEnter callback</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#summernote&#39;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">({</span>
+  <span class="nx">onEnter</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Enter/Return key pressed&#39;</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+
+<span class="c1">// summernote.enter</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#summernote&#39;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;summernote.enter&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Enter/Return key pressed&#39;</span><span class="p">);</span>
+<span class="p">});</span></code></pre></div>
+
+<h3 id="onfocus">onFocus</h3>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// onFocus callback</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#summernote&#39;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">({</span>
+  <span class="nx">onFocus</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Editable area is focused&#39;</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+
+<span class="c1">// summernote.focus</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#summernote&#39;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;summernote.focus&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Editable area is focused&#39;</span><span class="p">);</span>
+<span class="p">});</span></code></pre></div>
+
+<h3 id="onblur">onBlur</h3>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// onBlur callback</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#summernote&#39;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">({</span>
+  <span class="nx">onBlur</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Editable area loses focus&#39;</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+
+<span class="c1">// summernote.blur</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#summernote&#39;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;summernote.blur&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Editable area loses focus&#39;</span><span class="p">);</span>
+<span class="p">});</span></code></pre></div>
+
+<h3 id="onkeyup">onKeyup</h3>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// onKeyup callback</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#summernote&#39;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">({</span>
+  <span class="nx">onKeyup</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Key is released:&#39;</span><span class="p">,</span> <span class="nx">e</span><span class="p">.</span><span class="nx">keyCode</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+
+<span class="c1">// summernote.keyup</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#summernote&#39;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;summernote.keyup&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">we</span><span class="p">,</span> <span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Key is released:&#39;</span><span class="p">,</span> <span class="nx">e</span><span class="p">.</span><span class="nx">keyCode</span><span class="p">);</span>
+<span class="p">});</span></code></pre></div>
+
+<h3 id="onkeydown">onKeydown</h3>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// onKeydown callback</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#summernote&#39;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">({</span>
+  <span class="nx">onKeydown</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Key is downed:&#39;</span><span class="p">,</span> <span class="nx">e</span><span class="p">.</span><span class="nx">keyCode</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+
+<span class="c1">// summernote.keydown</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#summernote&#39;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;summernote.keydown&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">we</span><span class="p">,</span> <span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Key is downed:&#39;</span><span class="p">,</span> <span class="nx">e</span><span class="p">.</span><span class="nx">keyCode</span><span class="p">);</span>
+<span class="p">});</span></code></pre></div>
+
+<h3 id="onpaste">onPaste</h3>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// onPaste callback</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#summernote&#39;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">({</span>
+  <span class="nx">onPaste</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Called event paste&#39;</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+
+<span class="c1">// summernote.paste</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#summernote&#39;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;summernote.keydown&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">we</span><span class="p">,</span> <span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Called event paste&#39;</span><span class="p">);</span>
+<span class="p">});</span></code></pre></div>
+
+<h3 id="onimageupload">onImageUpload</h3>
+
+<p>Override image upload handler(default: base64 dataURL on <code>IMG</code> tag).
+You can upload image to server or AWS S3: <a href="https://github.com/HackerWins/summernote/issues/72">more…</a></p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// onImageUpload callback</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#summernote&#39;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">({</span>
+  <span class="nx">onImageUpload</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">files</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// upload image to server and create imgNode...</span>
+    <span class="nx">$summernote</span><span class="p">.</span><span class="nx">summernote</span><span class="p">(</span><span class="s1">&#39;insertNode&#39;</span><span class="p">,</span> <span class="nx">imgNode</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+
+<span class="c1">// summernote.image.upload</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#summernote&#39;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;summernote.image.upload&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">we</span><span class="p">,</span> <span class="nx">files</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// upload image to server and create imgNode...</span>
+  <span class="nx">$summernote</span><span class="p">.</span><span class="nx">summernote</span><span class="p">(</span><span class="s1">&#39;insertNode&#39;</span><span class="p">,</span> <span class="nx">imgNode</span><span class="p">);</span>
+<span class="p">});</span></code></pre></div>
+
+<h3 id="onchange">onChange</h3>
+
+<ul>
+  <li>IE9-10: DOMCharacterDataModified, DOMSubtreeModified, DOMNodeInserted</li>
+  <li>Chrome, FF: input</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// onChange callback</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#summernote&#39;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">({</span>
+  <span class="nx">onChange</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">contents</span><span class="p">,</span> <span class="nx">$editable</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;onChange:&#39;</span><span class="p">,</span> <span class="nx">contents</span><span class="p">,</span> <span class="nx">$editable</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+
+<span class="c1">// summernote.change</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#summernote&#39;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;summernote.change&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">we</span><span class="p">,</span> <span class="nx">contents</span><span class="p">,</span> <span class="nx">$editable</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;summernote\&#39;s content is changed.&#39;</span><span class="p">);</span>
+<span class="p">});</span></code></pre></div>
+
 
       </div>
     </div>
