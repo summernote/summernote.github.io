@@ -32,7 +32,6 @@
 
 
   <body>
-
     <header class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
@@ -70,12 +69,14 @@
         
           
         
+          
+        
       </ul>
     </div>
   </div>
 </header>
 
-
+    
     <div>
         <header class="subhead container">
   <h2>Example</h2>
@@ -91,11 +92,138 @@
     </div>
     <div class="col-md-9">
       <div role="main">
-        <p>This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at <a href="http://jekyllrb.com/">jekyllrb.com</a></p>
+        <h2 id="themes-with-booswatch">Themes with booswatch</h2>
+<p>Style changed accroding to bootstrap theme.
+More bootstrap theme: <a href="&quot;http://bootswatch.com">Bootswatch</a></p>
 
-<p>You can find the source code for the Jekyll new theme at: <a href="https://github.com/jglovier/jekyll-new">github.com/jglovier/jekyll-new</a></p>
+<iframe src="/themes.html" width="100%" height="400" frameborder="0"></iframe>
 
-<p>You can find the source code for Jekyll at <a href="https://github.com/jekyll/jekyll">github.com/jekyll/jekyll</a></p>
+<h2 id="air-mode">Air-mode</h2>
+<p>Air-mode gives clearer interface with hiddened toolbar. To reveal toolbar, select a text where you want to shape up. Simply turn on <code>airMode</code> and just focus on text.</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.summernote&#39;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">({</span>
+  <span class="nx">airMode</span><span class="o">:</span> <span class="kc">true</span>
+<span class="p">});</span></code></pre></div>
+
+<h3 id="example">Example</h3>
+
+<div class="airmode">
+  <p>This is an Air-mode editable area.</p>
+  <ul>
+    <li>Select a text to reveal the toolbar.</li>
+    <li>Edit rich document on-the-fly, so elastic!</li>
+  </ul>
+  <p>End of air-mode area</p>
+</div>
+<script>
+  $(function() {
+    $('.airmode').summernote({
+      height: 300,
+      airMode: true
+    });
+  });
+</script>
+
+<h3 id="codemirror-as-codeview">Codemirror as codeview</h3>
+
+<p>If you include a <code>CodeMirror</code> on a page, you can use CodeMirror to Codeview. Include jQuery, Bootstrap, font-awesome and CodeMirror with summernote.</p>
+
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="c">&lt;!-- include libraries(jQuery, bootstrap, fontawesome) --&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;//code.jquery.com/jquery-1.9.1.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span> 
+<span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">&quot;//netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.css&quot;</span><span class="nt">&gt;</span> 
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;//netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span> 
+<span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">&quot;//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css&quot;</span><span class="nt">&gt;</span>
+
+<span class="c">&lt;!-- include codemirror (codemirror.css, codemirror.js, xml.js, formatting.js) --&gt;</span>
+<span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">type=</span><span class="s">&quot;text/css&quot;</span> <span class="na">href=</span><span class="s">&quot;//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/codemirror.css&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">type=</span><span class="s">&quot;text/css&quot;</span> <span class="na">href=</span><span class="s">&quot;//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/theme/monokai.css&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">src=</span><span class="s">&quot;//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/codemirror.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">src=</span><span class="s">&quot;//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/mode/xml/xml.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">src=</span><span class="s">&quot;//cdnjs.cloudflare.com/ajax/libs/codemirror/2.36.0/formatting.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+
+<span class="c">&lt;!-- include summernote css/js--&gt;</span>
+<span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">&quot;summernote.css&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;summernote.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span></code></pre></div>
+
+<p>Initialize Summernote with codemirror options</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.summernote&#39;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">({</span>
+  <span class="nx">height</span><span class="o">:</span> <span class="mi">150</span><span class="p">,</span>   <span class="c1">//set editable area&#39;s height</span>
+  <span class="nx">codemirror</span><span class="o">:</span> <span class="p">{</span> <span class="c1">// codemirror options</span>
+    <span class="nx">theme</span><span class="o">:</span> <span class="s1">&#39;monokai&#39;</span>
+  <span class="p">}</span>
+<span class="p">});</span></code></pre></div>
+
+<textarea class="codemirror">Click <b>Code View</b>!!!</textarea>
+<script>
+  $(function() {
+    $('.codemirror').summernote({
+      height: 150,
+      codemirror: { // codemirror options
+        mode: 'text/html',
+        htmlMode: true,
+        lineNumbers: true,
+        theme: 'monokai'
+      }
+    });
+  });
+</script>
+
+<p><a href="http://codemirror.net">CodeMirror</a> is a versatile text editor implemented in JavaScript for the browser. It is specialized for editing code, and comes with a number of language modes and addons that implement more advanced editing functionaly.</p>
+
+<h3 id="multiple-editor">Multiple Editor</h3>
+<p>To display multiple editors on a page, you need to place more than two <code>&lt;div&gt;</code> elements in HTML.</p>
+
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;summernote&quot;</span><span class="nt">&gt;</span>summernote 1<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;summernote&quot;</span><span class="nt">&gt;</span>summernote 2<span class="nt">&lt;/div&gt;</span></code></pre></div>
+
+<p>Then run summernote with jQuery selector.</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.summernote&#39;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">();</span>
+<span class="p">});</span></code></pre></div>
+
+<div class="multiple">summernote 1</div>
+<div class="multiple">summernote 2</div>
+<script>
+  $(function() {
+    $('.multiple').summernote();
+  });
+</script>
+
+<h3 id="click-to-edit">Click to edit</h3>
+<p>You can edit content on the fly.</p>
+
+<p>html:</p>
+
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;button</span> <span class="na">id=</span><span class="s">&quot;edit&quot;</span> <span class="na">class=</span><span class="s">&quot;btn btn-primary&quot;</span> <span class="na">onclick=</span><span class="s">&quot;edit()&quot;</span> <span class="na">type=</span><span class="s">&quot;button&quot;</span><span class="nt">&gt;</span>Edit 1<span class="nt">&lt;/button&gt;</span>
+<span class="nt">&lt;button</span> <span class="na">id=</span><span class="s">&quot;save&quot;</span> <span class="na">class=</span><span class="s">&quot;btn btn-primary&quot;</span> <span class="na">onclick=</span><span class="s">&quot;save()&quot;</span> <span class="na">type=</span><span class="s">&quot;button&quot;</span><span class="nt">&gt;</span>Save 2<span class="nt">&lt;/button&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;click2edit&quot;</span><span class="nt">&gt;</span>click2edit<span class="nt">&lt;/div&gt;</span></code></pre></div>
+
+<p>Javascript:</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">edit</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.click2edit&#39;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">({</span><span class="nx">focus</span><span class="o">:</span> <span class="kc">true</span><span class="p">});</span>
+<span class="p">};</span>
+<span class="kd">var</span> <span class="nx">save</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">aHTML</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.click2edit&#39;</span><span class="p">).</span><span class="nx">code</span><span class="p">();</span> <span class="c1">//save HTML If you need(aHTML: array).</span>
+  <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.click2edit&#39;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">(</span><span class="s1">&#39;destroy&#39;</span><span class="p">);</span>
+<span class="p">};</span></code></pre></div>
+
+<p>
+  <button id="edit" class="btn btn-primary" onclick="edit()">Edit</button>
+  <button id="save" class="btn btn-primary" onclick="save()">Save</button>
+</p>
+<div class="click2edit">Hello world~!</div>
+<script>
+  var edit = function() {
+    $('.click2edit').summernote({focus: true});
+  };
+  var save = function() {
+    $('.click2edit').summernote('destroy');
+  };
+</script>
+
 
       </div>
     </div>
@@ -103,7 +231,7 @@
 </div>
 
     </div>
-
+    
     <footer class="footer">
   <p class="text-center">
     <i class="fa fa-sun-o"></i> Summernote v0.7.0 · Created and Maintained by <a href="https://github.com/summernote">Summernote team</a>.<br>Based on <a href="http://twitter.github.io/bootstrap/">Bootstrap</a> and <a href="http://jquery.com/">jQuery</a>. Icons from <a href="http://fontawesome.io/">Font Awesome</a>.<br>Summernote distributed under the MIT license.</p>
