@@ -35,7 +35,7 @@ A module named `editor` supports several methods for editor's basic behavior
 create a range object for current user selection.
 
 {% highlight javascript %}
-var range = $("#summernote").summernote("createRange");
+var range = $('#summernote').summernote('createRange');
 {% endhighlight %}
 
 #### saveRange
@@ -43,7 +43,7 @@ var range = $("#summernote").summernote("createRange");
 save current user selection internally.
 
 {% highlight javascript %}
-$("#summernote").summernote("saveRange");
+$('#summernote').summernote('saveRange');
 {% endhighlight %}
 
 #### restoreRange
@@ -51,9 +51,9 @@ $("#summernote").summernote("saveRange");
 restore currently saved range
 
 {% highlight javascript %}
-$("#summernote").summernote("saveRange");
+$('#summernote').summernote('saveRange');
 // move cursor and select another
-$("#summernote").summernote("restoreRange");
+$('#summernote').summernote('restoreRange');
 {% endhighlight %}
 
 #### undo, redo
@@ -61,8 +61,8 @@ $("#summernote").summernote("restoreRange");
 Undoes and redoes the last command
 
 {% highlight javascript %}
-$("#summernote").summernote("undo");
-$("#summernote").summernote("redo");
+$('#summernote').summernote('undo');
+$('#summernote').summernote('redo');
 {% endhighlight %}
 
 #### focus
@@ -70,7 +70,7 @@ $("#summernote").summernote("redo");
 Set a focus in current summernote
 
 {% highlight javascript %}
-$("#summernote").summernote("focus");
+$('#summernote').summernote('focus');
 {% endhighlight %}
 
 #### bold, italic, underline, strikethrough
@@ -78,10 +78,10 @@ $("#summernote").summernote("focus");
 Set font style
 
 {% highlight javascript %}
-$("#summernote").summernote("bold");
-$("#summernote").summernote("italic");
-$("#summernote").summernote("underline");
-$("#summernote").summernote("strikethrough");
+$('#summernote').summernote('bold');
+$('#summernote').summernote('italic');
+$('#summernote').summernote('underline');
+$('#summernote').summernote('strikethrough');
 {% endhighlight %}
 
 #### superscript, subscript
@@ -89,8 +89,8 @@ $("#summernote").summernote("strikethrough");
 Set superscript or subscript
 
 {% highlight javascript %}
-$("#summernote").summernote("superscript");
-$("#summernote").summernote("subscript");
+$('#summernote').summernote('superscript');
+$('#summernote').summernote('subscript');
 {% endhighlight %}
 
 #### justifyLeft, justifyRight, justifyCenter, justifyFull
@@ -98,10 +98,10 @@ $("#summernote").summernote("subscript");
 Set paragraph align
 
 {% highlight javascript %}
-$("#summernote").summernote("justifyLeft");
-$("#summernote").summernote("justifyRight");
-$("#summernote").summernote("justifyCenter");
-$("#summernote").summernote("justifyFull");
+$('#summernote').summernote('justifyLeft');
+$('#summernote').summernote('justifyRight');
+$('#summernote').summernote('justifyCenter');
+$('#summernote').summernote('justifyFull');
 {% endhighlight %}
 
 #### removeFormat
@@ -109,7 +109,7 @@ $("#summernote").summernote("justifyFull");
 Clean a style
 
 {% highlight javascript %}
-$("#summernote").summernote("removeFormat");
+$('#summernote').summernote('removeFormat');
 {% endhighlight %}
 
 #### backColor, foreColor
@@ -118,10 +118,10 @@ Set background and foreground color
 
 {% highlight javascript %}
 // @param {String} color
-$("#summernote").summernote("backColor", "red");
+$('#summernote').summernote('backColor', 'red');
 
 // @param {String} color
-$("#summernote").summernote("foreColor", "blue");
+$('#summernote').summernote('foreColor', 'blue');
 {% endhighlight %}
 
 #### fontName
@@ -130,7 +130,7 @@ Set font family
 
 {% highlight javascript %}
 // @param {String} fontName
-$("#summernote").summernote("fontName", "Arial");
+$('#summernote').summernote('fontName', 'Arial');
 {% endhighlight %}
 
 #### fontSize
@@ -139,7 +139,7 @@ Set font size
 
 {% highlight javascript %}
 // @param {Number} font size - unit is px
-$("#summernote").summernote("fontSize", 20);
+$('#summernote').summernote('fontSize', 20);
 {% endhighlight %}
 
 #### insertParagraph
@@ -147,7 +147,7 @@ $("#summernote").summernote("fontSize", 20);
 insert paragraph
 
 {% highlight javascript %}
-$("#summernote").summernote("insertParagraph");
+$('#summernote').summernote('insertParagraph');
 {% endhighlight %}
 
 #### insertOrderedList
@@ -155,7 +155,7 @@ $("#summernote").summernote("insertParagraph");
 toggle ordered list
 
 {% highlight javascript %}
-$("#summernote").summernote("insertOrderedList");
+$('#summernote').summernote('insertOrderedList');
 {% endhighlight %}
 
 #### insertUnorderedList
@@ -163,7 +163,7 @@ $("#summernote").summernote("insertOrderedList");
 toggle unordered list
 
 {% highlight javascript %}
-$("#summernote").summernote("insertUnorderedList");
+$('#summernote').summernote('insertUnorderedList');
 {% endhighlight %}
 
 #### indent
@@ -171,7 +171,7 @@ $("#summernote").summernote("insertUnorderedList");
 indent on current paragraph
 
 {% highlight javascript %}
-$("#summernote").summernote("indent");
+$('#summernote').summernote('indent');
 {% endhighlight %}
 
 #### outdent
@@ -179,7 +179,7 @@ $("#summernote").summernote("indent");
 outdent on current paragraph
 
 {% highlight javascript %}
-$("#summernote").summernote("outdent");
+$('#summernote').summernote('outdent');
 {% endhighlight %}
 
 #### insertImage
@@ -189,7 +189,7 @@ insert a image
 {% highlight javascript %}
 // @param {String} url
 // @param {String} filename - optional
-$("#summernote").summernote("insertImage", url, filename);
+$('#summernote').summernote('insertImage', url, filename);
 {% endhighlight %}
 
 #### insertNode
@@ -199,7 +199,7 @@ Insert a element or textnode
 {% highlight javascript %}
 var node = document.createElement('div');
 // @param {Node} node
-$("#summernote").summernote("insertNode", node);
+$('#summernote').summernote('insertNode', node);
 {% endhighlight %}
 
 #### insertText
@@ -208,7 +208,7 @@ Insert a text
 
 {% highlight javascript %}
 // @param {String} text
-$("#summernote").summernote("insertText", "Hello, world");
+$('#summernote').summernote('insertText', 'Hello, world');
 {% endhighlight %}
 
 #### formatPara
@@ -216,7 +216,7 @@ $("#summernote").summernote("insertText", "Hello, world");
 Change current paragraph as a `<p>`.
 
 {% highlight javascript %}
-$("#summernote").summernote("formatPara");
+$('#summernote').summernote('formatPara');
 {% endhighlight %}
 
 #### formatH1 ~ formatH6
@@ -224,8 +224,8 @@ $("#summernote").summernote("formatPara");
 Change current paragraph as a `<h1> ~ <h6>`.
 
 {% highlight javascript %}
-$("#summernote").summernote("formatH2");
-$("#summernote").summernote("formatH6");
+$('#summernote').summernote('formatH2');
+$('#summernote').summernote('formatH6');
 {% endhighlight %}
 
 #### lineHeight
@@ -234,7 +234,7 @@ Set line height
 
 {% highlight javascript %}
 // @param {Number} line height - unit is px
-$("#summernote").summernote("lineHeight", 20);
+$('#summernote').summernote('lineHeight', 20);
 {% endhighlight %}
 
 #### createLink, unlink
@@ -245,13 +245,13 @@ Create link and unlink
 // @param {String} text - link text
 // @param {String} url - link url
 // @param {Boolean} newWindow - whether link's target is new window or not
-$("#summernote").summernote("createLink", {
-  text: "This is the Summernote's Official Site",
-  url: "http://summernote.org",
+$('#summernote').summernote('createLink', {
+  text: 'This is the Summernote's Official Site',
+  url: 'http://summernote.org',
   newWindow: true
 });
 
-$("#summernote").summernote("unlink");
+$('#summernote').summernote('unlink');
 {% endhighlight %}
 
 #### Custom toolbar

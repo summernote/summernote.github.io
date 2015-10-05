@@ -146,6 +146,7 @@ var markupStr = $('.summernote').eq(1).summernote('code');
 A string of HTML to set as the content of each matched element.
 
 {% highlight javascript %}
+var markupStr = 'hello world';
 $('#summernote').summernote('code', markupStr);
 {% endhighlight %}
 
