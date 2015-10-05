@@ -5,6 +5,9 @@
 # note_modules
 node_modules
 
+# sass cache
+.sass-cache
+
 # intellij
 *.iml
 *.ipr
