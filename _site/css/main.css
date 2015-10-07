@@ -5,10 +5,11 @@ html {
   min-height: 100%; }
 
 body {
-  margin-top: 0px;
-  /*margin-bottom: $footer-height + $footer-padding;*/
-  background-image: url(/img/img_main_picture.png);
-  background-repeat: no-repeat; }
+  margin-top: 80px; }
+  body.index {
+    margin-top: 0px;
+    background-image: url(/img/img_main_picture.png);
+    background-repeat: no-repeat; }
 
 header.navbar {
   height: 80px;

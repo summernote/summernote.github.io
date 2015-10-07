@@ -14,11 +14,15 @@ html {
 }
 
 body {
-  margin-top: 0px;
-  /*margin-bottom: $footer-height + $footer-padding;*/
+  margin-top: 80px;
+  //margin-bottom: $footer-height + $footer-padding;
 
-  background-image: url(/img/img_main_picture.png);
-  background-repeat: no-repeat;
+  &.index {
+    margin-top: 0px;
+    background-image: url(/img/img_main_picture.png);
+    background-repeat: no-repeat;
+  }
+
 }
 
 header.navbar {
