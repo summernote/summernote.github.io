@@ -1,9 +1,12 @@
 /* Fixed header and Sticky footer
 -------------------------------------------------- */
 
-$header-height: 50px;
-$footer-height: 120px;
+$header-height: 80px;
+$footer-height: 272px;
 $footer-padding: 40px;
+
+$jumbotron-top-padding: 42px;
+$main-title-margin: 100px;
 
 html {
   position: relative;
@@ -11,15 +14,132 @@ html {
 }
 
 body {
-  margin-top: $header-height;
-  margin-bottom: $footer-height + $footer-padding;
+  margin-top: 0px;
+  /*margin-bottom: $footer-height + $footer-padding;*/
+
+  background-image: url(/img/img_main_picture.png);
+  background-repeat: no-repeat;
 }
 
+header.navbar {
+  height: $header-height;
+  margin-bottom:0px;
+  padding-top:15px;
+  background: #3fc6f7;
+  opacity: .9;
+  border:0px;
+  border-radius: 0px;
+  position:absolute;
+  top:0px;
+  left:0px;
+  right:0px;
+
+  .page-link {
+    font-size: 18px;
+    color: #c6f3ff !important;
+  }
+
+}
+
+.jumbotron {
+  background-color: transparent;
+  margin-bottom: 0px;
+  padding-bottom: 60px;
+}
+
+.main-title {
+  margin-top: $main-title-margin + $header-height;
+  margin-bottom: $main-title-margin;
+}
+
+.main-title-img {
+  margin-right: 40px;
+  display:inline-block;
+}
+
+.main-download-img{
+  display:inline-block;
+}
+
+.main-row {
+
+  h3 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #42515f;
+  }
+
+  p {
+    font-size: 13px;
+    color: #6b717a;
+  }
+}
+
+.main-row-1 {
+  margin-bottom: 48px;
+}
+
+.main-row-2 {
+  height: 500px;
+  background: rgba(183, 203, 216, 0.16);
+
+  .col-sm-6 {
+    margin-top: 68px;
+    padding-left: 0px;
+
+    &:first-child {
+      margin-top: 80px;
+    }
+  }
+
+  h3 {
+    margin-top: 40px;
+
+    &:first-child {
+      margin-top: 0px;
+    }
+  }
+}
+
+.card-item {
+  display: inline-block;
+  margin-right: 5px;
+  text-align: center;
+  width: 184px;
+  height: 174px;
+  vertical-align: middle;
+
+
+
+  &:last-child {
+    margin-right: 0px;
+  }
+}
+
+.donate-btn {
+  width: 152px;
+  height: 40px;
+  background: #f86466;
+  border: 1px solid #f86466;
+  color:white;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 1px;
+
+}
+
+.twitter-list {
+  padding: 36px 38px !important;
+  background: #ffffff;
+}
+
+
 .footer {
-  position: absolute;
-  bottom: 0;
-  padding-top: 10px;
+  padding-top: 60px;
+  padding-bottom: 60px;
+  text-align:center;
   width: 100%;
   height: $footer-height;
-  background-color: #f5f5f5;
+  background: rgba(183, 203, 216, 0.16);
+  font-size: 15px;
 }
