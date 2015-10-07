@@ -452,7 +452,7 @@ $('#summernote').on('summernote.keydown', function(we, e) {
 ### onImageUpload
 
 Override image upload handler(default: base64 dataURL on `IMG` tag).
-You can upload image to server or AWS S3: [more...](https://github.com/HackerWins/summernote/issues/72)
+You can upload image to server or AWS S3: [more...]({{ site.repository }}/issues/72)
 
 {% highlight javascript %}
 // onImageUpload callback

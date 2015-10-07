@@ -10,15 +10,15 @@ permalink: /getting-started/
 
 The fastest way to get Summernote is to download the precompiled and minified versions of our CSS, JavaScript. No documentation or original source code files are included.
 
-<a href="https://github.com/summernote/summernote/releases/download/{{ site.version }}/summernote-{{ site.version }}-dist.zip" class="btn btn-primary">Download compiled Summernote</a>
+<a href="{{ site.repository }}/releases/download/{{ site.version }}/summernote-{{ site.version }}-dist.zip" class="btn btn-primary">Download compiled Summernote</a>
 
 ### Additional downloads
 
-#### [Download source code](https://github.com/summernote/summernote/archive/master.zip)
+#### [Download source code]({{ site.repository }}/archive/master.zip)
 
 Get the latest Summernote LESS and Javascript source code by downloading it directly from GitHub.
 
-#### [Clone or fork via Github](https://github.com/summernote/summernote)
+#### [Clone or fork via Github]({{ site.repository }})
 
 Visit us on GitHub to clone or fork the summernote project.
 
@@ -190,15 +190,13 @@ $(document).ready(function() {
   });
 </script>
 
-More summernote languages: [languages](https://github.com/summernote/summernote/tree/master/lang)
+More summernote languages: [languages]({{ site.repository }}/tree/master/lang)
 
 ## Server Integration
 Examples with backend server.
 
 ### Django-summernote
 Handy update for your django admin page.
-
-<img class="img-rounded img-responsive" src="https://raw.github.com/lqez/pastebin/master/img/django-summernote.png" alt="django"/>
 
 * [django-summernote](https://github.com/summernote/django-summernote)
 * [Summernote plugin for Django](https://pypi.python.org/pypi/django-summernote)

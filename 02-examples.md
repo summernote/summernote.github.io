@@ -1,7 +1,7 @@
 ---
 layout: page
-title: Example
-permalink: /example/
+title: Examples
+permalink: /examples/
 ---
 
 ## Themes with booswatch
