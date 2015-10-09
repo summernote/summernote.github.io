@@ -33,7 +33,7 @@
 
   <body class="index">
     <header class="navbar navbar-default navbar-fixed-top" role="navigation">
-  <div class="container" style="max-width:1000px;">
+  <div class="page-container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
         <span class="sr-only">Toggle navigation</span>
@@ -78,7 +78,9 @@
 
     
     <div>
-        <div class="jumbotron">
+        <div class="index-main-background"></div>
+
+<div class="container">
   <h1 class="text-center main-title">
     <span class="index-title-img"></span>
       <span class="img-index-title"></span>
@@ -86,47 +88,55 @@
         <span class="img-index-download"></span>
       </a>
   </h1>
-  <div class="container" style="max-width:1000px;">
-    <div id="summernote"><p><br></p></div>
+</div>
+
+<div class="page-container index-section-1">
+  <div id="summernote"><p><br></p></div>
+  <div class="row card-list">
+    <div class="card-item">
+      <a href="/getting-started/#installation">
+        <span class="img-index-install"></span>
+        <h3>Easy to Install</h3>
+        <p>Simply download a zip file and add your html folder with Bootstrap. </p>
+      </a>
+    </div>
+    <div class="card-item">
+      <a href="/getting-started/#installation">
+        <span class="img-index-customizing"></span>
+        <h3>Customizing</h3>
+        <p>Customize by Initializing various options and plugins.<br></p>
+      </a>
+    </div>
+    <div class="card-item">
+      <a href="/">
+        <span class="img-index-shortcuts"></span>
+        <h3>Smart Shortcuts</h3>
+        <p>Bind your favorite keyboard shortcut easily, We provide default common shortcut. </p>
+      </a>
+    </div>
+    <div class="card-item">
+      <a href="/">
+        <span class="img-index-opensource"></span>
+        <h3>Open Source</h3>
+        <p>Summernote is licensed under MIT and maintained by the community on.</p>
+      </a>
+    </div>
+    <div class="card-item">
+      <a href="/">
+        <span class="img-index-backend"></span>
+        <h3>Integrate Backend</h3>
+        <p>Integrate it with any back-end technology. Examples available in nodejs, python, ruby.</p>
+      </a>
+    </div>
   </div>
 </div>
 
-<div class="container" style="max-width:1000px;">
-  <div class="row main-row-1">
-    <div class="card-item">
-      <span class="img-index-install"></span>
-      <h3>Easy to Install</h3>
-      <p>Simply download a zip file and add your html folder with Bootstrap. </p>
-    </div>
-    <div class="card-item">
-      <span class="img-index-customizing"></span>
-      <h3>Customizing</h3>
-      <p>Customize by Initializing various options and plugins.<br></p>
-    </div>
-    <div class="card-item">
-      <span class="img-index-shortcuts"></span>
-      <h3>Smart Shortcuts</h3>
-      <p>Bind your favorite keyboard shortcut easily, We provide default common shortcut. </p>
-    </div>
-    <div class="card-item">
-      <span class="img-index-opensource"></span>
-      <h3>Open Source</h3>
-      <p>Summernote is licensed under MIT and maintained by the community on.</p>
-    </div>
-    <div class="card-item">
-      <span class="img-index-backend"></span>
-      <h3>Integrate Backend</h3>
-      <p>Integrate it with any back-end technology. Examples available in nodejs, python, ruby.</p>
-    </div>
-  </div>
-</div>
-
-<div class="main-row-2">
-  <div class="container" style="max-width:1000px;">
+<div class="index-section-2">
+  <div class="page-container">
     <div class="row">
       <div class="col-sm-6">
         <h3>Worldwide Bootstrap</h3>
-        <p>Meet the world's best WYSIWYG editor on bootstrap. Summernote support bootstrap <strong>3.x.x</strong>.</p>
+        <p>Meet the world's best WYSIWYG editor on bootstrap.<br>Summernote support bootstrap <strong>3.x.x</strong>.</p>
 
         <h3>Trend-leading Features</h3>
         <ul style="list-style:none;padding:0px;">
@@ -135,7 +145,6 @@
           <li>Safari, Chrome, Firefox, Opera</li>
           <li>Internet Explorer 9+ (IE8 support coming soon)</li>
         </ul>
-        <p><br></p>
         <h3>Donate</h3>
         <div class="row">
           <div class="col-sm-12" >
@@ -178,13 +187,13 @@ $(function() {
     
     <footer class="footer">
   <p class="text-center">
+    Summernote v0.7.0 · Created and Maintained by <a href="https://github.com/summernote">Summernote team</a>.<br>Based on <a href="http://getbootstrap.com">Bootstrap</a> and <a href="http://jquery.com">jQuery</a>. Icons from <a href="http://fontawesome.io">Font Awesome</a>.<br>Summernote distributed under the MIT license.</p>
+  <p class="text-center"><a href="https://github.com/summernote/summernote">GitHub Project</a> · <a href="https://github.com/summernote/summernote/issues">Issues</a></p>
+  <p class="text-center">
     <a href="https://twitter.com/intent/tweet?button_hashtag=summernote" class="twitter-hashtag-button" data-related="hackerwins">Tweet #summernote</a>
     <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
     <iframe class="github-btn" src="http://ghbtns.com/github-btn.html?user=summernote&amp;repo=summernote&amp;type=watch&amp;count=true" allowTransparency="true" frameborder="0" scrolling="no" width="100" height="20"></iframe>
   </p>
-  <p class="text-center">
-    Summernote v0.7.0 · Created and Maintained by <a href="https://github.com/summernote">Summernote team</a>.<br>Based on <a href="http://getbootstrap.com">Bootstrap</a> and <a href="http://jquery.com">jQuery</a>. Icons from <a href="http://fontawesome.io">Font Awesome</a>.<br>Summernote distributed under the MIT license.</p>
-  <p class="text-center"><a href="https://github.com/summernote/summernote">GitHub Project</a> · <a href="https://github.com/summernote/summernote/issues">Issues</a></p>
 </footer>
 
 

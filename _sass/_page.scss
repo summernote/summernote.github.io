@@ -1,7 +1,7 @@
+/* Index page typography
+-------------------------------------------------- */
 body.index {
   margin-top: 0;
-  background-image: url(/img/img_main_picture.png);
-  background-repeat: no-repeat;
 
   h3 {
     font-size: 18px;
@@ -15,22 +15,54 @@ body.index {
   }
 }
 
+/* Main background image
+-------------------------------------------------- */
+.index-main-background {
+  position: absolute;
+  @include at2x('/img/img_main_picture');
+  z-index: -1;
+  width: 100%;
+  height: 466px;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .jumbotron {
   background-color: transparent;
   margin-bottom: 0;
   padding-bottom: 60px;
 }
 
+$main-title-margin: 120px;
+
 .main-title {
   margin-top: $main-title-margin + $header-height;
   margin-bottom: $main-title-margin;
 }
 
-.main-row-1 {
-  margin-bottom: 48px;
+.index-section-1 {
+  margin-bottom: 60px;
 }
 
-.main-row-2 {
+.card-list {
+  margin-top: 60px;
+}
+
+.card-item {
+  display: inline-block;
+  margin-right: 20px;
+  text-align: center;
+  width: 184px;
+  height: 174px;
+  vertical-align: middle;
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.index-section-2 {
   height: 500px;
   background: rgba(183, 203, 216, 0.16);
 
@@ -52,19 +84,6 @@ body.index {
   }
 }
 
-.card-item {
-  display: inline-block;
-  margin-right: 5px;
-  text-align: center;
-  width: 184px;
-  height: 174px;
-  vertical-align: middle;
-
-  &:last-child {
-    margin-right: 0;
-  }
-}
-
 .donate-btn {
   width: 152px;
   height: 40px;
@@ -81,6 +100,8 @@ body.index {
   background: #ffffff;
 }
 
+/* Index page image sprites
+-------------------------------------------------- */
 .img-index-title {
   margin-right: 48px;
   @include img('/img/img_main_title', 432px, 84px);

@@ -1,3 +1,5 @@
+/* Retina image
+-------------------------------------------------- */
 /* Fixed header and Sticky footer
 -------------------------------------------------- */
 html {
@@ -6,7 +8,10 @@ html {
 
 body {
   margin-top: 80px;
-  margin-bottom: 272px; }
+  margin-bottom: 272px;
+  background: #f0f3f9;
+  background-image: linear-gradient(rgba(218, 224, 232, 0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(218, 224, 232, 0.5) 1px, transparent 1px);
+  background-size: 10px 10px; }
 
 header.navbar {
   margin-bottom: 0;
@@ -18,6 +23,7 @@ header.navbar {
   border-radius: 0; }
 
 .page-container {
+  margin: 0 auto;
   max-width: 1000px; }
 
 .header-page-link {
@@ -28,11 +34,11 @@ header.navbar {
   display: inline-block;
   width: 132px;
   height: 16px;
-  background-image: url("/img/img_gnb_bi.png"); }
+  background-image: url("/img/img_gnb_bi.png");
+  background-size: 132px 16px; }
   @media all and (-webkit-min-device-pixel-ratio: 1.5), all and (-o-min-device-pixel-ratio: 3 / 2), all and (min--moz-device-pixel-ratio: 1.5), all and (min-device-pixel-ratio: 1.5) {
     .header-bi {
-      background-image: url("/img/img_gnb_bi_2x.png");
-      background-size: 132px 16px; } }
+      background-image: url("/img/img_gnb_bi_2x.png"); } }
 
 .footer {
   position: absolute;
@@ -40,8 +46,10 @@ header.navbar {
   padding-bottom: 60px;
   width: 100%;
   height: 272px;
+  background: #e1e7ef;
+  background-image: linear-gradient(rgba(218, 224, 232, 0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(218, 224, 232, 0.5) 1px, transparent 1px);
+  background-size: 10px 10px;
   text-align: center;
-  background: rgba(183, 203, 216, 0.16);
   font-size: 15px; }
 
 .highlight .hll {
@@ -309,10 +317,10 @@ header.navbar {
   color: #40a070; }
 
 /* Literal.Number.Integer.Long */
+/* Index page typography
+-------------------------------------------------- */
 body.index {
-  margin-top: 0;
-  background-image: url(/img/img_main_picture.png);
-  background-repeat: no-repeat; }
+  margin-top: 0; }
   body.index h3 {
     font-size: 18px;
     font-weight: bold;
@@ -321,40 +329,58 @@ body.index {
     font-size: 13px;
     color: #6b717a; }
 
+/* Main background image
+-------------------------------------------------- */
+.index-main-background {
+  position: absolute;
+  background-image: url("/img/img_main_picture.png");
+  z-index: -1;
+  width: 100%;
+  height: 466px;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover; }
+  @media all and (-webkit-min-device-pixel-ratio: 1.5), all and (-o-min-device-pixel-ratio: 3 / 2), all and (min--moz-device-pixel-ratio: 1.5), all and (min-device-pixel-ratio: 1.5) {
+    .index-main-background {
+      background-image: url("/img/img_main_picture_2x.png"); } }
+
 .jumbotron {
   background-color: transparent;
   margin-bottom: 0;
   padding-bottom: 60px; }
 
 .main-title {
-  margin-top: 180px;
-  margin-bottom: 100px; }
+  margin-top: 200px;
+  margin-bottom: 120px; }
 
-.main-row-1 {
-  margin-bottom: 48px; }
+.index-section-1 {
+  margin-bottom: 60px; }
 
-.main-row-2 {
-  height: 500px;
-  background: rgba(183, 203, 216, 0.16); }
-  .main-row-2 .col-sm-6 {
-    margin-top: 68px;
-    padding-left: 0; }
-    .main-row-2 .col-sm-6:first-child {
-      margin-top: 80px; }
-  .main-row-2 h3 {
-    margin-top: 40px; }
-    .main-row-2 h3:first-child {
-      margin-top: 0; }
+.card-list {
+  margin-top: 60px; }
 
 .card-item {
   display: inline-block;
-  margin-right: 5px;
+  margin-right: 20px;
   text-align: center;
   width: 184px;
   height: 174px;
   vertical-align: middle; }
   .card-item:last-child {
     margin-right: 0; }
+
+.index-section-2 {
+  height: 500px;
+  background: rgba(183, 203, 216, 0.16); }
+  .index-section-2 .col-sm-6 {
+    margin-top: 68px;
+    padding-left: 0; }
+    .index-section-2 .col-sm-6:first-child {
+      margin-top: 80px; }
+  .index-section-2 h3 {
+    margin-top: 40px; }
+    .index-section-2 h3:first-child {
+      margin-top: 0; }
 
 .donate-btn {
   width: 152px;
@@ -370,73 +396,75 @@ body.index {
   padding: 36px 38px !important;
   background: #ffffff; }
 
+/* Index page image sprites
+-------------------------------------------------- */
 .img-index-title {
   margin-right: 48px;
   display: inline-block;
   width: 432px;
   height: 84px;
-  background-image: url("/img/img_main_title.png"); }
+  background-image: url("/img/img_main_title.png");
+  background-size: 432px 84px; }
   @media all and (-webkit-min-device-pixel-ratio: 1.5), all and (-o-min-device-pixel-ratio: 3 / 2), all and (min--moz-device-pixel-ratio: 1.5), all and (min-device-pixel-ratio: 1.5) {
     .img-index-title {
-      background-image: url("/img/img_main_title_2x.png");
-      background-size: 432px 84px; } }
+      background-image: url("/img/img_main_title_2x.png"); } }
 
 .img-index-download {
   display: inline-block;
   width: 100px;
   height: 100px;
-  background-image: url("/img/img_main_download.png"); }
+  background-image: url("/img/img_main_download.png");
+  background-size: 100px 100px; }
   @media all and (-webkit-min-device-pixel-ratio: 1.5), all and (-o-min-device-pixel-ratio: 3 / 2), all and (min--moz-device-pixel-ratio: 1.5), all and (min-device-pixel-ratio: 1.5) {
     .img-index-download {
-      background-image: url("/img/img_main_download_2x.png");
-      background-size: 100px 100px; } }
+      background-image: url("/img/img_main_download_2x.png"); } }
 
 .img-index-install {
   display: inline-block;
   width: 76px;
   height: 76px;
-  background-image: url("/img/img_main_install.png"); }
+  background-image: url("/img/img_main_install.png");
+  background-size: 76px 76px; }
   @media all and (-webkit-min-device-pixel-ratio: 1.5), all and (-o-min-device-pixel-ratio: 3 / 2), all and (min--moz-device-pixel-ratio: 1.5), all and (min-device-pixel-ratio: 1.5) {
     .img-index-install {
-      background-image: url("/img/img_main_install_2x.png");
-      background-size: 76px 76px; } }
+      background-image: url("/img/img_main_install_2x.png"); } }
 
 .img-index-customizing {
   display: inline-block;
   width: 76px;
   height: 76px;
-  background-image: url("/img/img_main_customizing.png"); }
+  background-image: url("/img/img_main_customizing.png");
+  background-size: 76px 76px; }
   @media all and (-webkit-min-device-pixel-ratio: 1.5), all and (-o-min-device-pixel-ratio: 3 / 2), all and (min--moz-device-pixel-ratio: 1.5), all and (min-device-pixel-ratio: 1.5) {
     .img-index-customizing {
-      background-image: url("/img/img_main_customizing_2x.png");
-      background-size: 76px 76px; } }
+      background-image: url("/img/img_main_customizing_2x.png"); } }
 
 .img-index-shortcuts {
   display: inline-block;
   width: 76px;
   height: 76px;
-  background-image: url("/img/img_main_shortcuts.png"); }
+  background-image: url("/img/img_main_shortcuts.png");
+  background-size: 76px 76px; }
   @media all and (-webkit-min-device-pixel-ratio: 1.5), all and (-o-min-device-pixel-ratio: 3 / 2), all and (min--moz-device-pixel-ratio: 1.5), all and (min-device-pixel-ratio: 1.5) {
     .img-index-shortcuts {
-      background-image: url("/img/img_main_shortcuts_2x.png");
-      background-size: 76px 76px; } }
+      background-image: url("/img/img_main_shortcuts_2x.png"); } }
 
 .img-index-opensource {
   display: inline-block;
   width: 76px;
   height: 76px;
-  background-image: url("/img/img_main_opensource.png"); }
+  background-image: url("/img/img_main_opensource.png");
+  background-size: 76px 76px; }
   @media all and (-webkit-min-device-pixel-ratio: 1.5), all and (-o-min-device-pixel-ratio: 3 / 2), all and (min--moz-device-pixel-ratio: 1.5), all and (min-device-pixel-ratio: 1.5) {
     .img-index-opensource {
-      background-image: url("/img/img_main_opensource_2x.png");
-      background-size: 76px 76px; } }
+      background-image: url("/img/img_main_opensource_2x.png"); } }
 
 .img-index-backend {
   display: inline-block;
   width: 76px;
   height: 76px;
-  background-image: url("/img/img_main_backend.png"); }
+  background-image: url("/img/img_main_backend.png");
+  background-size: 76px 76px; }
   @media all and (-webkit-min-device-pixel-ratio: 1.5), all and (-o-min-device-pixel-ratio: 3 / 2), all and (min--moz-device-pixel-ratio: 1.5), all and (min-device-pixel-ratio: 1.5) {
     .img-index-backend {
-      background-image: url("/img/img_main_backend_2x.png");
-      background-size: 76px 76px; } }
+      background-image: url("/img/img_main_backend_2x.png"); } }

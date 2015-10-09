@@ -2,17 +2,22 @@
 -------------------------------------------------- */
 $header-height: 80px;
 $footer-height: 272px;
-$main-title-margin: 100px;
 
 html {
   position: relative;
   min-height: 100%;
 }
 
+$line-color: rgba(218, 224, 232, 0.5);
+
 body {
   margin-top: $header-height;
   margin-bottom: $footer-height;
+  background: rgb(240, 243, 249);
+  background-image: linear-gradient($line-color 1px, transparent 1px), linear-gradient(90deg, $line-color 1px, transparent 1px);
+  background-size: 10px 10px;
 }
+
 
 header.navbar {
   margin-bottom: 0;
@@ -25,6 +30,7 @@ header.navbar {
 }
 
 .page-container {
+  margin: 0 auto;
   max-width: 1000px;
 }
 
@@ -43,7 +49,9 @@ header.navbar {
   padding-bottom: 60px;
   width: 100%;
   height: $footer-height;
+  background: rgb(225, 231, 239);
+  background-image: linear-gradient($line-color 1px, transparent 1px), linear-gradient(90deg, $line-color 1px, transparent 1px);
+  background-size: 10px 10px;
   text-align:center;
-  background: rgba(183, 203, 216, 0.16);
   font-size: 15px;
 }
