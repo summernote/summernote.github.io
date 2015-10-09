@@ -1,3 +1,19 @@
+/* Page container for 1000px
+-------------------------------------------------- */
+.page-container {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1000px; }
+
+.btn-important {
+  padding: 10px 20px;
+  background: #f86466;
+  border: 1px solid #f86466;
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 1px; }
+
 /* Retina image
 -------------------------------------------------- */
 /* Fixed header and Sticky footer
@@ -12,11 +28,6 @@ body {
   background: #f0f3f9;
   background-image: linear-gradient(rgba(218, 224, 232, 0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(218, 224, 232, 0.5) 1px, transparent 1px);
   background-size: 10px 10px; }
-
-.page-container {
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 1000px; }
 
 .fix-navbar {
   margin-bottom: 0;
@@ -49,6 +60,7 @@ body {
 
 .footer {
   position: absolute;
+  bottom: 0;
   width: 100%;
   height: 272px;
   padding-top: 60px;
@@ -56,8 +68,10 @@ body {
   background: #e1e7ef;
   background-image: linear-gradient(rgba(218, 224, 232, 0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(218, 224, 232, 0.5) 1px, transparent 1px);
   background-size: 10px 10px;
-  text-align: center;
-  font-size: 15px; }
+  text-align: center; }
+  .footer p {
+    color: #7f95a9 !important;
+    font-size: 15px !important; }
 
 .highlight .hll {
   background-color: #ffffcc; }
@@ -68,7 +82,7 @@ body {
 
 /* Comment */
 .highlight .err {
-  border: 1px solid red; }
+  border: 1px solid #FF0000; }
 
 /* Error */
 .highlight .k {
@@ -100,7 +114,7 @@ body {
 
 /* Comment.Special */
 .highlight .gd {
-  color: #a00000; }
+  color: #A00000; }
 
 /* Generic.Deleted */
 .highlight .ge {
@@ -108,7 +122,7 @@ body {
 
 /* Generic.Emph */
 .highlight .gr {
-  color: red; }
+  color: #FF0000; }
 
 /* Generic.Error */
 .highlight .gh {
@@ -117,11 +131,11 @@ body {
 
 /* Generic.Heading */
 .highlight .gi {
-  color: #00a000; }
+  color: #00A000; }
 
 /* Generic.Inserted */
 .highlight .go {
-  color: gray; }
+  color: #808080; }
 
 /* Generic.Output */
 .highlight .gp {
@@ -139,7 +153,7 @@ body {
 
 /* Generic.Subheading */
 .highlight .gt {
-  color: #0040d0; }
+  color: #0040D0; }
 
 /* Generic.Traceback */
 .highlight .kc {
@@ -324,7 +338,7 @@ body {
   color: #40a070; }
 
 /* Literal.Number.Integer.Long */
-/* Index page typography
+/* Index typography
 -------------------------------------------------- */
 body.index {
   margin-top: 0; }
@@ -332,7 +346,7 @@ body.index {
     font-size: 18px;
     font-weight: bold;
     color: #42515f; }
-  body.index p {
+  body.index p, body.index li {
     font-size: 13px;
     color: #6b717a; }
 
@@ -368,10 +382,14 @@ body.index {
   width: 184px;
   height: 174px;
   vertical-align: middle; }
+  .card-item h3 {
+    margin-top: 13px;
+    margin-bottom: 5px; }
   .card-item:last-child {
     margin-right: 0; }
 
 .index-section-2 {
+  padding-top: 68px;
   padding-bottom: 60px;
   background: rgba(183, 203, 216, 0.16); }
   .index-section-2 .col-sm-6 {
@@ -384,15 +402,8 @@ body.index {
     .index-section-2 h3:first-child {
       margin-top: 0; }
 
-.donate-btn {
-  width: 152px;
-  height: 40px;
-  background: #f86466;
-  border: 1px solid #f86466;
-  color: #ffffff;
-  font-size: 18px;
-  font-weight: bold;
-  border-radius: 1px; }
+.btn-donate {
+  width: 152px; }
 
 .twitter-list {
   padding: 36px 38px !important;
@@ -470,3 +481,13 @@ body.index {
   @media all and (-webkit-min-device-pixel-ratio: 1.5), all and (-o-min-device-pixel-ratio: 3 / 2), all and (min--moz-device-pixel-ratio: 1.5), all and (min-device-pixel-ratio: 1.5) {
     .img-index-backend {
       background-image: url("/img/img_main_backend_2x.png"); } }
+
+/* Page typography
+-------------------------------------------------- */
+body.page h3 {
+  font-size: 18px;
+  font-weight: bold;
+  color: #42515f; }
+body.page p {
+  font-size: 13px;
+  color: #6b717a; }

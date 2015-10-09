@@ -8,20 +8,14 @@ html {
   min-height: 100%;
 }
 
-$line-color: rgba(218, 224, 232, 0.5);
+$grid-color: rgba(218, 224, 232, 0.5);
 
 body {
   margin-top: $header-height;
   margin-bottom: $footer-height;
   background: rgb(240, 243, 249);
-  background-image: linear-gradient($line-color 1px, transparent 1px), linear-gradient(90deg, $line-color 1px, transparent 1px);
+  background-image: linear-gradient($grid-color 1px, transparent 1px), linear-gradient(90deg, $grid-color 1px, transparent 1px);
   background-size: 10px 10px;
-}
-
-.page-container {
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 1000px;
 }
 
 .fix-navbar {
@@ -51,17 +45,19 @@ body {
   @include img('/img/img_gnb_bi', 132px, 16px);
 }
 
-$footer-margin: 60px;
-
 .footer {
   position: absolute;
+  bottom: 0;
   width: 100%;
   height: $footer-height;
   padding-top: 60px;
   padding-bottom: 60px;
   background: rgb(225, 231, 239);
-  background-image: linear-gradient($line-color 1px, transparent 1px), linear-gradient(90deg, $line-color 1px, transparent 1px);
+  background-image: linear-gradient($grid-color 1px, transparent 1px), linear-gradient(90deg, $grid-color 1px, transparent 1px);
   background-size: 10px 10px;
   text-align:center;
-  font-size: 15px;
+  p {
+    color: #7f95a9 !important;
+    font-size: 15px !important;
+  }
 }

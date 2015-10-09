@@ -4,7 +4,9 @@
 @charset "utf-8";
 
 // Import partials from `sass_dir` (defaults to `_sass`)
+@import "commons";
 @import "mixins";
 @import "layout";
 @import "syntax-highlighting";
+@import "index";
 @import "page";
