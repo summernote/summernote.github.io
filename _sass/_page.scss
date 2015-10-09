@@ -1,0 +1,109 @@
+.jumbotron {
+  background-color: transparent;
+  margin-bottom: 0px;
+  padding-bottom: 60px;
+}
+
+.main-title {
+  margin-top: $main-title-margin + $header-height;
+  margin-bottom: $main-title-margin;
+}
+
+.main-row {
+
+  h3 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #42515f;
+  }
+
+  p {
+    font-size: 13px;
+    color: #6b717a;
+  }
+}
+
+.main-row-1 {
+  margin-bottom: 48px;
+}
+
+.main-row-2 {
+  height: 500px;
+  background: rgba(183, 203, 216, 0.16);
+
+  .col-sm-6 {
+    margin-top: 68px;
+    padding-left: 0px;
+
+    &:first-child {
+      margin-top: 80px;
+    }
+  }
+
+  h3 {
+    margin-top: 40px;
+
+    &:first-child {
+      margin-top: 0px;
+    }
+  }
+}
+
+.card-item {
+  display: inline-block;
+  margin-right: 5px;
+  text-align: center;
+  width: 184px;
+  height: 174px;
+  vertical-align: middle;
+
+  &:last-child {
+    margin-right: 0px;
+  }
+}
+
+.donate-btn {
+  width: 152px;
+  height: 40px;
+  background: #f86466;
+  border: 1px solid #f86466;
+  color:white;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 1px;
+}
+
+.twitter-list {
+  padding: 36px 38px !important;
+  background: #ffffff;
+}
+
+
+.img-index-title {
+  margin-right: 48px;
+  @include img('/img/img_main_title', 432px, 84px);
+}
+
+.img-index-download {
+  @include img('/img/img_main_download', 100px, 100px);
+}
+
+.img-index-install {
+  @include img('/img/img_main_install', 76px, 76px);
+}
+
+.img-index-customizing {
+  @include img('/img/img_main_customizing', 76px, 76px);
+}
+
+.img-index-shortcuts {
+  @include img('/img/img_main_shortcuts', 76px, 76px);
+}
+
+.img-index-opensource {
+  @include img('/img/img_main_opensource', 76px, 76px);
+}
+
+.img-index-backend {
+  @include img('/img/img_main_backend', 76px, 76px);
+}
