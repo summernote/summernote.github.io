@@ -44,10 +44,10 @@ If you include a `CodeMirror` on a page, you can use CodeMirror to Codeview. Inc
 
 {% highlight html %}
 <!-- include libraries(jQuery, bootstrap, fontawesome) -->
-<script src="//code.jquery.com/jquery-1.9.1.js"></script> 
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.css"> 
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.js"></script> 
-<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+<link href="{{ site.bootstrap_css }}" rel="stylesheet"> 
+<link href="{{ site.fontawesome_css }}" rel="stylesheet">
+<script src="{{ site.jquery_js }}"></script> 
+<script src="{{ site.bootstrap_js }}"></script> 
 
 <!-- include codemirror (codemirror.css, codemirror.js, xml.js, formatting.js) -->
 <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/codemirror.css">

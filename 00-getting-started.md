@@ -50,10 +50,10 @@ Include the Following code in your HTML <code>&lt;HTML&gt;</code> tag
 
 {% highlight html %}
 <!-- include libraries(jQuery, bootstrap, fontawesome) -->
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.css" rel="stylesheet"> 
-<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-<script src="//code.jquery.com/jquery-1.9.1.js"></script> 
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.js"></script> 
+<link href="{{ site.bootstrap_css }}" rel="stylesheet">
+<link href="{{ site.fontawesome_css }}" rel="stylesheet">
+<script src="{{ site.jquery_js }}"></script> 
+<script src="{{ site.bootstrap_js }}"></script> 
 
 <!-- include summernote css/js-->
 <link href="summernote.css" rel="stylesheet">
@@ -159,12 +159,12 @@ for more detail api: [deep dive with api](/deep-dive/#api)
 Include libraries with lang file. eg) <code>summernote-ko-KR.js</code>
 
 {% highlight html %}
-<script src="//code.jquery.com/jquery-1.9.1.min.js"></script> 
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.min.css"> 
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js"></script> 
-<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+<link href="{{ site.bootstrap_css }}" rel="stylesheet"> 
+<link href="{{ site.fontawesome_css }}" rel="stylesheet">
+<script src="{{ site.jquery_js }}"></script> 
+<script src="{{ site.bootstrap_js }}"></script> 
 
-<link href="summernote.css" />
+<link href="summernote.css" rel="stylesheet">
 <script src="summernote.min.js"></script>
 
 <!-- include summernote-ko-KR -->
