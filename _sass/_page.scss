@@ -28,17 +28,11 @@ body.index {
   background-size: cover;
 }
 
-.jumbotron {
-  background-color: transparent;
-  margin-bottom: 0;
-  padding-bottom: 60px;
-}
+$index-title-margin: 120px;
 
-$main-title-margin: 120px;
-
-.main-title {
-  margin-top: $main-title-margin + $header-height;
-  margin-bottom: $main-title-margin;
+.index-title {
+  margin-top: $index-title-margin + $header-height;
+  margin-bottom: $index-title-margin;
 }
 
 .index-section-1 {
@@ -63,7 +57,7 @@ $main-title-margin: 120px;
 }
 
 .index-section-2 {
-  height: 500px;
+  padding-bottom: 60px;
   background: rgba(183, 203, 216, 0.16);
 
   .col-sm-6 {

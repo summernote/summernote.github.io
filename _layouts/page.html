@@ -2,13 +2,11 @@
 layout: default
 layoutType: page
 ---
-<header class="subhead container">
-  <h2>{{ page.title }}</h2>
-  <p class="muted">{{ page.description }}</p>
-</header>
-<div class="container">
+<div class="page-container">
   <div class="row">
     <div class="col-md-3">
+      <h2>{{ page.title }}</h2>
+      <p class="muted">{{ page.description }}</p>
       <div class="bs-page-sidebar" side-navbar role="complementary">
         * TOC
         {:toc}
