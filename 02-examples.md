@@ -39,7 +39,7 @@ $('.summernote').summernote({
   });
 </script>
 
-### Codemirror as codeview
+## Codemirror as codeview
 
 If you include a `CodeMirror` on a page, you can use CodeMirror to Codeview. Include jQuery, Bootstrap, font-awesome and CodeMirror with summernote.
 
@@ -91,7 +91,7 @@ $('.summernote').summernote({
 
 [CodeMirror](http://codemirror.net) is a versatile text editor implemented in JavaScript for the browser. It is specialized for editing code, and comes with a number of language modes and addons that implement more advanced editing functionaly.
 
-### Multiple Editor
+## Multiple Editor
 To display multiple editors on a page, you need to place more than two `<div>` elements in HTML.
 
 {% highlight html %}
@@ -115,7 +115,7 @@ $(document).ready(function() {
   });
 </script>
 
-### Click to edit
+## Click to edit
 You can edit content on the fly.
 
 html:

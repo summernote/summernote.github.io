@@ -25,6 +25,8 @@
   <link href="/bower_components/summernote/dist/summernote.css" rel="stylesheet">
   <script src="/bower_components/summernote/dist/summernote.js"></script>
 
+  <script src="/js/toc.js"></script>
+
   <link rel="stylesheet" href="/css/main.css">
   <link rel="canonical" href="http://summernote.org/getting-started/">
   <link rel="alternate" type="application/rss+xml" title="Summernote - Super Simple WYSIWYG editor" href="http://summernote.org/feed.xml" />
@@ -84,13 +86,12 @@
       <h2>Getting started</h2>
       <p class="muted">An overview of summernote, how to download and use, basic features and examples, and more.</p>
       <div class="bs-page-sidebar" side-navbar role="complementary">
-        * TOC
-        {:toc}
+        <div id="toc"></div>
       </div>
     </div>
     <div class="col-md-9">
       <div class="page-content" role="main">
-        <h2 id="download-summernote">Download Summernote</h2>
+        <h2 id="download">Download</h2>
 
 <h3 id="compiled-css-js">Compiled CSS, JS</h3>
 
@@ -116,7 +117,7 @@
 
 <h2 id="installation">Installation</h2>
 
-<h3 id="requires-html5-doctype">00. Requires HTML5 doctype</h3>
+<h3 id="requires-html5-doctype">Requires HTML5 doctype</h3>
 
 <p>Bootstrap uses certain HTML elements and CSS properties which require HTML5 doctype. Include <code>&lt;!DOCTYPE html&gt;</code> in the beginning of all your projects.</p>
 
@@ -125,7 +126,7 @@
 ...
 <span class="nt">&lt;/html&gt;</span></code></pre></div>
 
-<h3 id="include-jscss">01. Include js/css</h3>
+<h3 id="include-jscss">Include js/css</h3>
 
 <p>Summernote uses open source libraries(jQuery, Bootstrap, font-awesome).
 Include the Following code in your HTML <code>&lt;HTML&gt;</code> tag</p>
@@ -142,13 +143,13 @@ Include the Following code in your HTML <code>&lt;HTML&gt;</code> tag</p>
 
 <p>Don’t forget to change the file’s path if you downloaded summernote in a different folders.</p>
 
-<h3 id="insert">02. Insert</h3>
+<h3 id="insert">Insert</h3>
 
 <p>Add <code>div</code> into <code>body</code>; this targeted element will later be rendered to summernote editing tool.</p>
 
 <div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;summernote&quot;</span><span class="nt">&gt;</span>Hello Summernote<span class="nt">&lt;/div&gt;</span></code></pre></div>
 
-<h3 id="run-summernote">03. Run summernote</h3>
+<h3 id="run-summernote">Run summernote</h3>
 <p>Run the script below when document is ready!</p>
 
 <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
@@ -252,8 +253,8 @@ Include the Following code in your HTML <code>&lt;HTML&gt;</code> tag</p>
 
 <p>More summernote languages: <a href="https://github.com/summernote/summernote/tree/master/lang">languages</a></p>
 
-<h2 id="server-integration">Server Integration</h2>
-<p>Examples with backend server.</p>
+<h2 id="integration">Integration</h2>
+<p>3rd parties available in django, rails, angular.</p>
 
 <h3 id="django-summernote">Django-summernote</h3>
 <p>Handy update for your django admin page.</p>
@@ -272,10 +273,22 @@ Include the Following code in your HTML <code>&lt;HTML&gt;</code> tag</p>
   <li><a href="https://github.com/rorlab/summernote-test-r3">summernote-test-r3 for Rails v3.2.14</a></li>
 </ul>
 
+<h3 id="angular-summernote">angular-summernote</h3>
+<p>AngularJS directive to Summernote.</p>
+
+<ul>
+  <li><a href="https://github.com/summernote/angular-summernote">angular-summernote</a></li>
+</ul>
+
       </div>
     </div>
   </div>
 </div>
+<script>
+$(function () {
+  $('#toc').toc();
+});
+</script>
 
     </div>
     

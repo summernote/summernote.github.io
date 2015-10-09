@@ -4,7 +4,7 @@ title: Getting started
 description: An overview of summernote, how to download and use, basic features and examples, and more.
 permalink: /getting-started/
 ---
-## Download Summernote
+## Download
 
 ### Compiled CSS, JS
 
@@ -32,7 +32,7 @@ bower install summernote
 
 ## Installation
 
-### 00. Requires HTML5 doctype
+### Requires HTML5 doctype
 
 Bootstrap uses certain HTML elements and CSS properties which require HTML5 doctype. Include <code>&lt;!DOCTYPE html&gt;</code> in the beginning of all your projects.
 
@@ -43,7 +43,7 @@ Bootstrap uses certain HTML elements and CSS properties which require HTML5 doct
 </html>
 {% endhighlight %}
 
-### 01. Include js/css
+### Include js/css
 
 Summernote uses open source libraries(jQuery, Bootstrap, font-awesome).
 Include the Following code in your HTML <code>&lt;HTML&gt;</code> tag
@@ -62,7 +62,7 @@ Include the Following code in your HTML <code>&lt;HTML&gt;</code> tag
 
 Don't forget to change the file's path if you downloaded summernote in a different folders.
 
-### 02. Insert
+### Insert
 
 Add <code>div</code> into <code>body</code>; this targeted element will later be rendered to summernote editing tool.
 
@@ -70,7 +70,7 @@ Add <code>div</code> into <code>body</code>; this targeted element will later be
 <div id="summernote">Hello Summernote</div>
 {% endhighlight %}
 
-### 03. Run summernote
+### Run summernote
 Run the script below when document is ready!
 
 {% highlight javascript %}
@@ -192,8 +192,8 @@ $(document).ready(function() {
 
 More summernote languages: [languages]({{ site.repository }}/tree/master/lang)
 
-## Server Integration
-Examples with backend server.
+## Integration
+3rd parties available in django, rails, angular.
 
 ### Django-summernote
 Handy update for your django admin page.
@@ -207,3 +207,8 @@ This gem was built to gemify the assets used in Summernote.
 * [summernote-rails](http://summernote.org/summernote-rails)
 * [summernote-test for Rails v4](https://github.com/rorlab/summernote-test)
 * [summernote-test-r3 for Rails v3.2.14](https://github.com/rorlab/summernote-test-r3)
+
+### angular-summernote
+AngularJS directive to Summernote.
+
+* [angular-summernote](https://github.com/summernote/angular-summernote)

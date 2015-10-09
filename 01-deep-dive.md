@@ -7,8 +7,6 @@ permalink: /deep-dive/
 
 ## API
 
-### External API access
-
 You can initialize summernote with `summernote`.
 
 {% highlight javascript %}
@@ -31,7 +29,7 @@ $('#summernote').summernote('insertText', 'hello world');
 
 A module named `editor` supports several methods for editor's basic behavior
 
-#### createRange
+### createRange
 
 create a range object for current user selection.
 
@@ -39,7 +37,7 @@ create a range object for current user selection.
 var range = $('#summernote').summernote('createRange');
 {% endhighlight %}
 
-#### saveRange
+### saveRange
 
 save current user selection internally.
 
@@ -47,7 +45,7 @@ save current user selection internally.
 $('#summernote').summernote('saveRange');
 {% endhighlight %}
 
-#### restoreRange
+### restoreRange
 
 restore currently saved range
 
@@ -57,7 +55,7 @@ $('#summernote').summernote('saveRange');
 $('#summernote').summernote('restoreRange');
 {% endhighlight %}
 
-#### undo, redo
+### undo, redo
 
 Undoes and redoes the last command
 
@@ -66,7 +64,7 @@ $('#summernote').summernote('undo');
 $('#summernote').summernote('redo');
 {% endhighlight %}
 
-#### focus
+### focus
 
 Set a focus in current summernote
 
@@ -74,7 +72,7 @@ Set a focus in current summernote
 $('#summernote').summernote('focus');
 {% endhighlight %}
 
-#### bold, italic, underline, strikethrough
+### bold, italic, underline, strikethrough
 
 Set font style
 
@@ -85,7 +83,7 @@ $('#summernote').summernote('underline');
 $('#summernote').summernote('strikethrough');
 {% endhighlight %}
 
-#### superscript, subscript
+### superscript, subscript
 
 Set superscript or subscript
 
@@ -94,7 +92,7 @@ $('#summernote').summernote('superscript');
 $('#summernote').summernote('subscript');
 {% endhighlight %}
 
-#### justifyLeft, justifyRight, justifyCenter, justifyFull
+### justifyLeft, justifyRight, justifyCenter, justifyFull
 
 Set paragraph align
 
@@ -105,7 +103,7 @@ $('#summernote').summernote('justifyCenter');
 $('#summernote').summernote('justifyFull');
 {% endhighlight %}
 
-#### removeFormat
+### removeFormat
 
 Clean a style
 
@@ -113,7 +111,7 @@ Clean a style
 $('#summernote').summernote('removeFormat');
 {% endhighlight %}
 
-#### backColor, foreColor
+### backColor, foreColor
 
 Set background and foreground color
 
@@ -125,7 +123,7 @@ $('#summernote').summernote('backColor', 'red');
 $('#summernote').summernote('foreColor', 'blue');
 {% endhighlight %}
 
-#### fontName
+### fontName
 
 Set font family
 
@@ -134,7 +132,7 @@ Set font family
 $('#summernote').summernote('fontName', 'Arial');
 {% endhighlight %}
 
-#### fontSize
+### fontSize
 
 Set font size
 
@@ -143,7 +141,7 @@ Set font size
 $('#summernote').summernote('fontSize', 20);
 {% endhighlight %}
 
-#### insertParagraph
+### insertParagraph
 
 insert paragraph
 
@@ -151,7 +149,7 @@ insert paragraph
 $('#summernote').summernote('insertParagraph');
 {% endhighlight %}
 
-#### insertOrderedList
+### insertOrderedList
 
 toggle ordered list
 
@@ -159,7 +157,7 @@ toggle ordered list
 $('#summernote').summernote('insertOrderedList');
 {% endhighlight %}
 
-#### insertUnorderedList
+### insertUnorderedList
 
 toggle unordered list
 
@@ -167,7 +165,7 @@ toggle unordered list
 $('#summernote').summernote('insertUnorderedList');
 {% endhighlight %}
 
-#### indent
+### indent
 
 indent on current paragraph
 
@@ -175,7 +173,7 @@ indent on current paragraph
 $('#summernote').summernote('indent');
 {% endhighlight %}
 
-#### outdent
+### outdent
 
 outdent on current paragraph
 
@@ -183,7 +181,7 @@ outdent on current paragraph
 $('#summernote').summernote('outdent');
 {% endhighlight %}
 
-#### insertImage
+### insertImage
 
 insert a image
 
@@ -193,7 +191,7 @@ insert a image
 $('#summernote').summernote('insertImage', url, filename);
 {% endhighlight %}
 
-#### insertNode
+### insertNode
 
 Insert a element or textnode
 
@@ -203,7 +201,7 @@ var node = document.createElement('div');
 $('#summernote').summernote('insertNode', node);
 {% endhighlight %}
 
-#### insertText
+### insertText
 
 Insert a text
 
@@ -212,7 +210,7 @@ Insert a text
 $('#summernote').summernote('insertText', 'Hello, world');
 {% endhighlight %}
 
-#### formatPara
+### formatPara
 
 Change current paragraph as a `<p>`.
 
@@ -220,7 +218,7 @@ Change current paragraph as a `<p>`.
 $('#summernote').summernote('formatPara');
 {% endhighlight %}
 
-#### formatH1 ~ formatH6
+### formatH1 ~ formatH6
 
 Change current paragraph as a `<h1> ~ <h6>`.
 
@@ -229,7 +227,7 @@ $('#summernote').summernote('formatH2');
 $('#summernote').summernote('formatH6');
 {% endhighlight %}
 
-#### lineHeight
+### lineHeight
 
 Set line height
 
@@ -238,7 +236,7 @@ Set line height
 $('#summernote').summernote('lineHeight', 20);
 {% endhighlight %}
 
-#### createLink, unlink
+### createLink, unlink
 
 Create link and unlink
 
@@ -255,7 +253,9 @@ $('#summernote').summernote('createLink', {
 $('#summernote').summernote('unlink');
 {% endhighlight %}
 
-#### Custom toolbar
+## Customizing
+
+### Custom toolbar
 
 Summernote allows you to make own custom toolbar.
 
@@ -320,9 +320,9 @@ You can compose a toolbar with pre-shipped buttons.
   * `redo`: redo
   * `help`: open help dialog
 
-#### Custom popover for air-mode
+### Custom popover for air-mode
 
-Air-mode has its own popover, not toolbar. You can customize it with <code>airPopover</code> option.
+Air-mode has its own popover, not toolbar. You can customize it with <code>popover.air</code> option.
 
 {% highlight javascript %}
 $('#summernote').summernote({

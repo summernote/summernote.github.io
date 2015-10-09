@@ -8,8 +8,7 @@ layoutType: page
       <h2>{{ page.title }}</h2>
       <p class="muted">{{ page.description }}</p>
       <div class="bs-page-sidebar" side-navbar role="complementary">
-        * TOC
-        {:toc}
+        <div id="toc"></div>
       </div>
     </div>
     <div class="col-md-9">
@@ -19,3 +18,8 @@ layoutType: page
     </div>
   </div>
 </div>
+<script>
+$(function () {
+  $('#toc').toc();
+});
+</script>

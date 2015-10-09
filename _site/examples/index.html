@@ -25,6 +25,8 @@
   <link href="/bower_components/summernote/dist/summernote.css" rel="stylesheet">
   <script src="/bower_components/summernote/dist/summernote.js"></script>
 
+  <script src="/js/toc.js"></script>
+
   <link rel="stylesheet" href="/css/main.css">
   <link rel="canonical" href="http://summernote.org/examples/">
   <link rel="alternate" type="application/rss+xml" title="Summernote - Super Simple WYSIWYG editor" href="http://summernote.org/feed.xml" />
@@ -84,8 +86,7 @@
       <h2>Examples</h2>
       <p class="muted">See all useful features of summernote in action.</p>
       <div class="bs-page-sidebar" side-navbar role="complementary">
-        * TOC
-        {:toc}
+        <div id="toc"></div>
       </div>
     </div>
     <div class="col-md-9">
@@ -122,7 +123,7 @@ More bootstrap theme: <a href="&quot;http://bootswatch.com">Bootswatch</a></p>
   });
 </script>
 
-<h3 id="codemirror-as-codeview">Codemirror as codeview</h3>
+<h2 id="codemirror-as-codeview">Codemirror as codeview</h2>
 
 <p>If you include a <code>CodeMirror</code> on a page, you can use CodeMirror to Codeview. Include jQuery, Bootstrap, font-awesome and CodeMirror with summernote.</p>
 
@@ -169,7 +170,7 @@ More bootstrap theme: <a href="&quot;http://bootswatch.com">Bootswatch</a></p>
 
 <p><a href="http://codemirror.net">CodeMirror</a> is a versatile text editor implemented in JavaScript for the browser. It is specialized for editing code, and comes with a number of language modes and addons that implement more advanced editing functionaly.</p>
 
-<h3 id="multiple-editor">Multiple Editor</h3>
+<h2 id="multiple-editor">Multiple Editor</h2>
 <p>To display multiple editors on a page, you need to place more than two <code>&lt;div&gt;</code> elements in HTML.</p>
 
 <div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;summernote&quot;</span><span class="nt">&gt;</span>summernote 1<span class="nt">&lt;/div&gt;</span>
@@ -189,7 +190,7 @@ More bootstrap theme: <a href="&quot;http://bootswatch.com">Bootswatch</a></p>
   });
 </script>
 
-<h3 id="click-to-edit">Click to edit</h3>
+<h2 id="click-to-edit">Click to edit</h2>
 <p>You can edit content on the fly.</p>
 
 <p>html:</p>
@@ -227,6 +228,11 @@ More bootstrap theme: <a href="&quot;http://bootswatch.com">Bootswatch</a></p>
     </div>
   </div>
 </div>
+<script>
+$(function () {
+  $('#toc').toc();
+});
+</script>
 
     </div>
     
