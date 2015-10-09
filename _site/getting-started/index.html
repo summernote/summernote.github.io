@@ -32,8 +32,8 @@
 
 
   <body class="page">
-    <header class="navbar navbar-default" role="navigation">
-  <div class="container">
+    <header class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="container" style="max-width:1000px;">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
         <span class="sr-only">Toggle navigation</span>
@@ -41,47 +41,36 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="/"><img src="/img/img_gnb_bi.png" /></a>
+      <a class="navbar-brand" href="/"><span class="header-bi"></span></a>
     </div>
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse navbar-collapse">
       <ul class="nav navbar-nav">
         
           
-          <li><a class="page-link" href="/getting-started/">Getting started</a></li>
+          <li><a class="header-page-link" href="/getting-started/">Getting started</a></li>
           
         
           
-          <li><a class="page-link" href="/deep-dive/">Deep dive</a></li>
+          <li><a class="header-page-link" href="/deep-dive/">Deep dive</a></li>
           
         
           
-          <li><a class="page-link" href="/examples/">Examples</a></li>
+          <li><a class="header-page-link" href="/examples/">Examples</a></li>
           
         
           
-          <li><a class="page-link" href="/team/">Team</a></li>
-          
-        
-          
-        
+          <li><a class="header-page-link" href="/team/">Team</a></li>
           
         
           
         
           
         
-      </ul>
-
-      <ul class="nav navbar-nav navbar-right">
-        <li>
-
-        <a href="https://twitter.com/intent/tweet?button_hashtag=summernote" class="twitter-hashtag-button" data-related="hackerwins">Tweet #summernote</a>
-        </li>
-        <li>
-        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-        <iframe class="github-btn" src="http://ghbtns.com/github-btn.html?user=summernote&amp;repo=summernote&amp;type=watch&amp;count=true" allowTransparency="true" frameborder="0" scrolling="no" width="100" height="20"></iframe>
-        </li>
+          
+        
+          
+        
       </ul>
     </div>
   </div>
@@ -109,15 +98,15 @@
 
 <p>The fastest way to get Summernote is to download the precompiled and minified versions of our CSS, JavaScript. No documentation or original source code files are included.</p>
 
-<p><a href="/releases/download/v0.7.0/summernote-v0.7.0-dist.zip" class="btn btn-primary">Download compiled Summernote</a></p>
+<p><a href="https://github.com/summernote/summernote/releases/download/v0.7.0/summernote-v0.7.0-dist.zip" class="btn btn-primary">Download compiled Summernote</a></p>
 
 <h3 id="additional-downloads">Additional downloads</h3>
 
-<h4 id="download-source-codearchivemasterzip"><a href="/archive/master.zip">Download source code</a></h4>
+<h4 id="download-source-codehttpsgithubcomsummernotesummernotearchivemasterzip"><a href="https://github.com/summernote/summernote/archive/master.zip">Download source code</a></h4>
 
 <p>Get the latest Summernote LESS and Javascript source code by downloading it directly from GitHub.</p>
 
-<h4 id="clone-or-fork-via-github"><a href="">Clone or fork via Github</a></h4>
+<h4 id="clone-or-fork-via-githubhttpsgithubcomsummernotesummernote"><a href="https://github.com/summernote/summernote">Clone or fork via Github</a></h4>
 
 <p>Visit us on GitHub to clone or fork the summernote project.</p>
 
@@ -144,10 +133,10 @@
 Include the Following code in your HTML <code>&lt;HTML&gt;</code> tag</p>
 
 <div class="highlight"><pre><code class="language-html" data-lang="html"><span class="c">&lt;!-- include libraries(jQuery, bootstrap, fontawesome) --&gt;</span>
-<span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">&quot;//netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.css&quot;</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span><span class="nt">&gt;</span> 
-<span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">&quot;//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css&quot;</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span><span class="nt">&gt;</span>
-<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;//code.jquery.com/jquery-1.9.1.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span> 
-<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;//netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span> 
+<span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">&quot;//netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css&quot;</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">&quot;//netdna.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.css&quot;</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery&quot;</span><span class="nt">&gt;&lt;/script&gt;</span> 
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;//netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span> 
 
 <span class="c">&lt;!-- include summernote css/js--&gt;</span>
 <span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">&quot;summernote.css&quot;</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span><span class="nt">&gt;</span>
@@ -235,12 +224,12 @@ Include the Following code in your HTML <code>&lt;HTML&gt;</code> tag</p>
 
 <p>Include libraries with lang file. eg) <code>summernote-ko-KR.js</code></p>
 
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;//code.jquery.com/jquery-1.9.1.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span> 
-<span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">&quot;//netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.min.css&quot;</span><span class="nt">&gt;</span> 
-<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;//netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span> 
-<span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">&quot;//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css&quot;</span><span class="nt">&gt;</span>
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">&quot;//netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css&quot;</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span><span class="nt">&gt;</span> 
+<span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">&quot;//netdna.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.css&quot;</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery&quot;</span><span class="nt">&gt;&lt;/script&gt;</span> 
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;//netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span> 
 
-<span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">&quot;summernote.css&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">&quot;summernote.css&quot;</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span><span class="nt">&gt;</span>
 <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;summernote.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
 
 <span class="c">&lt;!-- include summernote-ko-KR --&gt;</span>
@@ -263,7 +252,7 @@ Include the Following code in your HTML <code>&lt;HTML&gt;</code> tag</p>
   });
 </script>
 
-<p>More summernote languages: <a href="/tree/master/lang">languages</a></p>
+<p>More summernote languages: <a href="https://github.com/summernote/summernote/tree/master/lang">languages</a></p>
 
 <h2 id="server-integration">Server Integration</h2>
 <p>Examples with backend server.</p>
@@ -294,8 +283,13 @@ Include the Following code in your HTML <code>&lt;HTML&gt;</code> tag</p>
     
     <footer class="footer">
   <p class="text-center">
-    <i class="fa fa-sun-o"></i> Summernote v0.7.0 · Created and Maintained by <a href="https://github.com/summernote">Summernote team</a>.<br>Based on <a href="http://getbootstrap.com">Bootstrap</a> and <a href="http://jquery.com">jQuery</a>. Icons from <a href="http://fontawesome.io">Font Awesome</a>.<br>Summernote distributed under the MIT license.</p>
-  <p class="text-center"><a href="">GitHub Project</a> · <a href="/issues">Issues</a></p>
+    <a href="https://twitter.com/intent/tweet?button_hashtag=summernote" class="twitter-hashtag-button" data-related="hackerwins">Tweet #summernote</a>
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+    <iframe class="github-btn" src="http://ghbtns.com/github-btn.html?user=summernote&amp;repo=summernote&amp;type=watch&amp;count=true" allowTransparency="true" frameborder="0" scrolling="no" width="100" height="20"></iframe>
+  </p>
+  <p class="text-center">
+    Summernote v0.7.0 · Created and Maintained by <a href="https://github.com/summernote">Summernote team</a>.<br>Based on <a href="http://getbootstrap.com">Bootstrap</a> and <a href="http://jquery.com">jQuery</a>. Icons from <a href="http://fontawesome.io">Font Awesome</a>.<br>Summernote distributed under the MIT license.</p>
+  <p class="text-center"><a href="https://github.com/summernote/summernote">GitHub Project</a> · <a href="https://github.com/summernote/summernote/issues">Issues</a></p>
 </footer>
 
 

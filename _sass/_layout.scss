@@ -1,11 +1,7 @@
 /* Fixed header and Sticky footer
 -------------------------------------------------- */
-
 $header-height: 80px;
 $footer-height: 272px;
-$footer-padding: 40px;
-
-$jumbotron-top-padding: 42px;
 $main-title-margin: 100px;
 
 html {
@@ -14,52 +10,40 @@ html {
 }
 
 body {
-  margin-top: 80px;
-  margin-bottom: $footer-height + $footer-padding;
-
-  &.index {
-    margin-top: 0px;
-    background-image: url(/img/img_main_picture.png);
-    background-repeat: no-repeat;
-  }
+  margin-top: $header-height;
+  margin-bottom: $footer-height;
 }
 
 header.navbar {
+  margin-bottom: 0;
+  padding-top: 15px;
   height: $header-height;
-  margin-bottom:0px;
-  padding-top:15px;
   background: #3fc6f7;
   opacity: .9;
-  border:0px;
-  border-radius: 0px;
-  position:absolute;
-  top:0px;
-  left:0px;
-  right:0px;
-
-  .page-link {
-    font-size: 18px;
-    color: #c6f3ff !important;
-  }
+  border: 0;
+  border-radius: 0;
 }
 
-.jumbotron {
-  background-color: transparent;
-  margin-bottom: 0px;
-  padding-bottom: 60px;
+.page-container {
+  max-width: 1000px;
 }
 
-.main-title {
-  margin-top: $main-title-margin + $header-height;
-  margin-bottom: $main-title-margin;
+.header-page-link {
+  font-size: 18px;
+  color: #c6f3ff !important;
+}
+
+.header-bi {
+  @include img('/img/img_gnb_bi', 132px, 16px);
 }
 
 .footer {
+  position: absolute;
   padding-top: 60px;
   padding-bottom: 60px;
-  text-align:center;
   width: 100%;
   height: $footer-height;
+  text-align:center;
   background: rgba(183, 203, 216, 0.16);
   font-size: 15px;
 }
