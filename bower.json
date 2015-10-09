@@ -1,11 +1,11 @@
 {
   "name": "summernote.github.io",
-  "version": "2.0.0",
+  "version": "0.7.0",
   "homepage": "http://summernote.org",
   "authors": [
     "Alan Hong <susukang98@gmail.com>"
   ],
-  "description": "Homepage of Super Simple WYSIWYG Editor Summernote",
+  "description": "Homepage of super simple WYSIWYG editor, Summernote",
   "keywords": [
     "summernote",
     "WYSIWYG",
