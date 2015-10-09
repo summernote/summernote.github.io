@@ -6,6 +6,8 @@
   max-width: 1000px; }
 
 .btn-important {
+  display: inline-block;
+  margin: 18px 0;
   padding: 10px 20px;
   background: #f86466;
   border: 1px solid #f86466;
@@ -13,6 +15,9 @@
   font-size: 18px;
   font-weight: bold;
   border-radius: 1px; }
+  .btn-important:hover {
+    color: white;
+    text-decoration: underline; }
 
 /* Retina image
 -------------------------------------------------- */
@@ -75,6 +80,9 @@ body {
 
 .highlight .hll {
   background-color: #ffffcc; }
+
+.highlight pre {
+  opacity: 0.8; }
 
 .highlight .c {
   color: #60a0b0;
@@ -482,12 +490,45 @@ body.index {
     .img-index-backend {
       background-image: url("/img/img_main_backend_2x.png"); } }
 
+/* Page layout
+-------------------------------------------------- */
+body.page {
+  margin-top: 120px; }
+
+.page-content {
+  margin-bottom: 150px; }
+
 /* Page typography
 -------------------------------------------------- */
-body.page h3 {
-  font-size: 18px;
-  font-weight: bold;
+body.page h2 {
+  margin: 30px 0;
+  font-size: 26px;
   color: #42515f; }
-body.page p {
+body.page h3 {
+  margin: 22px 0;
+  font-size: 18px;
+  color: #42515f; }
+body.page p, body.page li {
   font-size: 13px;
   color: #6b717a; }
+body.page blockquote {
+  background: white; }
+
+/* Page layout
+-------------------------------------------------- */
+body.team {
+  margin-top: 150px; }
+
+/* Page typography
+-------------------------------------------------- */
+body.team h2 {
+  margin: 30px 0;
+  font-size: 26px;
+  color: #42515f; }
+body.team p {
+  font-size: 13px;
+  color: #6b717a; }
+
+.fix-thumbnail {
+  border: 0;
+  background-color: transparent; }

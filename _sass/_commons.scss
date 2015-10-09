@@ -7,6 +7,8 @@
 }
 
 .btn-important {
+  display: inline-block;
+  margin: 18px 0;
   padding: 10px 20px;
   background: #f86466;
   border: 1px solid #f86466;
@@ -14,4 +16,9 @@
   font-size: 18px;
   font-weight: bold;
   border-radius: 1px;
+
+  &:hover {
+    color: white;
+    text-decoration: underline;
+  }
 }

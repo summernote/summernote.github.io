@@ -1,34 +1,25 @@
 /* Page layout
 -------------------------------------------------- */
-body.page {
-  margin-top: $header-height + 40px;
-}
-
-.page-content {
-  margin-bottom: 150px;
+body.team {
+  margin-top: $header-height + 70px;
 }
 
 /* Page typography
 -------------------------------------------------- */
-body.page {
+body.team {
   h2 {
     margin: 30px 0;
     font-size: 26px;
     color: #42515f;
   }
 
-  h3 {
-    margin: 22px 0;
-    font-size: 18px;
-    color: #42515f;
-  }
-
-  p, li {
+  p {
     font-size: 13px;
     color: #6b717a;
   }
+}
 
-  blockquote {
-    background: white;
-  }
+.fix-thumbnail {
+  border: 0;
+  background-color: transparent;
 }
