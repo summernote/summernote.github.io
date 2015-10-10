@@ -91,7 +91,7 @@
     </div>
     <div class="col-md-9">
       <div class="page-content" role="main">
-        <h2 id="api">API</h2>
+        <h2 id="external-api">External API</h2>
 
 <p>You can initialize summernote with <code>summernote</code>.</p>
 
@@ -108,6 +108,8 @@
 <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#summernote&#39;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">(</span><span class="s1">&#39;insertText&#39;</span><span class="p">,</span> <span class="s1">&#39;hello world&#39;</span><span class="p">);</span></code></pre></div>
 
 <p>A module named <code>editor</code> supports several methods for editor’s basic behavior</p>
+
+<h2 id="api-for-range">API for range</h2>
 
 <h3 id="createrange">createRange</h3>
 
@@ -142,6 +144,8 @@
 
 <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#summernote&#39;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">(</span><span class="s1">&#39;focus&#39;</span><span class="p">);</span></code></pre></div>
 
+<h2 id="api-for-font-style">API for font style</h2>
+
 <h3 id="bold-italic-underline-strikethrough">bold, italic, underline, strikethrough</h3>
 
 <p>Set font style</p>
@@ -157,15 +161,6 @@
 
 <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#summernote&#39;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">(</span><span class="s1">&#39;superscript&#39;</span><span class="p">);</span>
 <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#summernote&#39;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">(</span><span class="s1">&#39;subscript&#39;</span><span class="p">);</span></code></pre></div>
-
-<h3 id="justifyleft-justifyright-justifycenter-justifyfull">justifyLeft, justifyRight, justifyCenter, justifyFull</h3>
-
-<p>Set paragraph align</p>
-
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#summernote&#39;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">(</span><span class="s1">&#39;justifyLeft&#39;</span><span class="p">);</span>
-<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#summernote&#39;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">(</span><span class="s1">&#39;justifyRight&#39;</span><span class="p">);</span>
-<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#summernote&#39;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">(</span><span class="s1">&#39;justifyCenter&#39;</span><span class="p">);</span>
-<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#summernote&#39;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">(</span><span class="s1">&#39;justifyFull&#39;</span><span class="p">);</span></code></pre></div>
 
 <h3 id="removeformat">removeFormat</h3>
 
@@ -197,6 +192,17 @@
 <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// @param {Number} font size - unit is px</span>
 <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#summernote&#39;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">(</span><span class="s1">&#39;fontSize&#39;</span><span class="p">,</span> <span class="mi">20</span><span class="p">);</span></code></pre></div>
 
+<h2 id="api-for-paragraph">API for paragraph</h2>
+
+<h3 id="justifyleft-justifyright-justifycenter-justifyfull">justifyLeft, justifyRight, justifyCenter, justifyFull</h3>
+
+<p>Set paragraph align</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#summernote&#39;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">(</span><span class="s1">&#39;justifyLeft&#39;</span><span class="p">);</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#summernote&#39;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">(</span><span class="s1">&#39;justifyRight&#39;</span><span class="p">);</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#summernote&#39;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">(</span><span class="s1">&#39;justifyCenter&#39;</span><span class="p">);</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#summernote&#39;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">(</span><span class="s1">&#39;justifyFull&#39;</span><span class="p">);</span></code></pre></div>
+
 <h3 id="insertparagraph">insertParagraph</h3>
 
 <p>insert paragraph</p>
@@ -215,17 +221,34 @@
 
 <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#summernote&#39;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">(</span><span class="s1">&#39;insertUnorderedList&#39;</span><span class="p">);</span></code></pre></div>
 
-<h3 id="indent">indent</h3>
+<h3 id="indent-and-outdent">indent and outdent</h3>
 
-<p>indent on current paragraph</p>
+<p>indent and outdent on current paragraph</p>
 
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#summernote&#39;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">(</span><span class="s1">&#39;indent&#39;</span><span class="p">);</span></code></pre></div>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#summernote&#39;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">(</span><span class="s1">&#39;indent&#39;</span><span class="p">);</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#summernote&#39;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">(</span><span class="s1">&#39;outdent&#39;</span><span class="p">);</span></code></pre></div>
 
-<h3 id="outdent">outdent</h3>
+<h3 id="formatpara">formatPara</h3>
 
-<p>outdent on current paragraph</p>
+<p>Change current paragraph as a <code>&lt;p&gt;</code>.</p>
 
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#summernote&#39;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">(</span><span class="s1">&#39;outdent&#39;</span><span class="p">);</span></code></pre></div>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#summernote&#39;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">(</span><span class="s1">&#39;formatPara&#39;</span><span class="p">);</span></code></pre></div>
+
+<h3 id="formath1--formath6">formatH1 ~ formatH6</h3>
+
+<p>Change current paragraph as a <code>&lt;h1&gt; ~ &lt;h6&gt;</code>.</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#summernote&#39;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">(</span><span class="s1">&#39;formatH2&#39;</span><span class="p">);</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#summernote&#39;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">(</span><span class="s1">&#39;formatH6&#39;</span><span class="p">);</span></code></pre></div>
+
+<h3 id="lineheight">lineHeight</h3>
+
+<p>Set line height</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// @param {Number} line height - unit is px</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#summernote&#39;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">(</span><span class="s1">&#39;lineHeight&#39;</span><span class="p">,</span> <span class="mi">20</span><span class="p">);</span></code></pre></div>
+
+<h2 id="api-for-insertion">API for insertion</h2>
 
 <h3 id="insertimage">insertImage</h3>
 
@@ -249,26 +272,6 @@
 
 <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// @param {String} text</span>
 <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#summernote&#39;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">(</span><span class="s1">&#39;insertText&#39;</span><span class="p">,</span> <span class="s1">&#39;Hello, world&#39;</span><span class="p">);</span></code></pre></div>
-
-<h3 id="formatpara">formatPara</h3>
-
-<p>Change current paragraph as a <code>&lt;p&gt;</code>.</p>
-
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#summernote&#39;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">(</span><span class="s1">&#39;formatPara&#39;</span><span class="p">);</span></code></pre></div>
-
-<h3 id="formath1--formath6">formatH1 ~ formatH6</h3>
-
-<p>Change current paragraph as a <code>&lt;h1&gt; ~ &lt;h6&gt;</code>.</p>
-
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#summernote&#39;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">(</span><span class="s1">&#39;formatH2&#39;</span><span class="p">);</span>
-<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#summernote&#39;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">(</span><span class="s1">&#39;formatH6&#39;</span><span class="p">);</span></code></pre></div>
-
-<h3 id="lineheight">lineHeight</h3>
-
-<p>Set line height</p>
-
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// @param {Number} line height - unit is px</span>
-<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#summernote&#39;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">(</span><span class="s1">&#39;lineHeight&#39;</span><span class="p">,</span> <span class="mi">20</span><span class="p">);</span></code></pre></div>
 
 <h3 id="createlink-unlink">createLink, unlink</h3>
 
@@ -380,7 +383,7 @@
   <span class="p">}</span>
 <span class="p">});</span></code></pre></div>
 
-<h2 id="callbacks">callbacks</h2>
+<h2 id="callbacks">Callbacks</h2>
 <p>Summernote support initialize callbacks and jquery’s custom event style callbacks.</p>
 
 <blockquote>

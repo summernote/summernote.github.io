@@ -498,6 +498,8 @@ body.page {
 .page-content {
   margin-bottom: 150px; }
 
+/* Page table of contents
+-------------------------------------------------- */
 /* Page typography
 -------------------------------------------------- */
 body.page h2 {
@@ -513,6 +515,16 @@ body.page p, body.page li {
   color: #6b717a; }
 body.page blockquote {
   background: white; }
+
+/* Janky fix for preventing navbar from overlapping
+-------------------------------------------------- */
+h2[id] {
+  margin-top: -80px !important;
+  padding-top: 110px; }
+
+h3[id], h4[id] {
+  margin-top: -80px !important;
+  padding-top: 102px; }
 
 /* Page layout
 -------------------------------------------------- */

@@ -5,7 +5,7 @@ description: Customize summernote's components, toolbar, plugins to get your ver
 permalink: /deep-dive/
 ---
 
-## API
+## External API
 
 You can initialize summernote with `summernote`.
 
@@ -28,6 +28,8 @@ $('#summernote').summernote('insertText', 'hello world');
 {% endhighlight %}
 
 A module named `editor` supports several methods for editor's basic behavior
+
+## API for range
 
 ### createRange
 
@@ -72,6 +74,8 @@ Set a focus in current summernote
 $('#summernote').summernote('focus');
 {% endhighlight %}
 
+## API for font style
+
 ### bold, italic, underline, strikethrough
 
 Set font style
@@ -90,17 +94,6 @@ Set superscript or subscript
 {% highlight javascript %}
 $('#summernote').summernote('superscript');
 $('#summernote').summernote('subscript');
-{% endhighlight %}
-
-### justifyLeft, justifyRight, justifyCenter, justifyFull
-
-Set paragraph align
-
-{% highlight javascript %}
-$('#summernote').summernote('justifyLeft');
-$('#summernote').summernote('justifyRight');
-$('#summernote').summernote('justifyCenter');
-$('#summernote').summernote('justifyFull');
 {% endhighlight %}
 
 ### removeFormat
@@ -141,6 +134,19 @@ Set font size
 $('#summernote').summernote('fontSize', 20);
 {% endhighlight %}
 
+## API for paragraph
+
+### justifyLeft, justifyRight, justifyCenter, justifyFull
+
+Set paragraph align
+
+{% highlight javascript %}
+$('#summernote').summernote('justifyLeft');
+$('#summernote').summernote('justifyRight');
+$('#summernote').summernote('justifyCenter');
+$('#summernote').summernote('justifyFull');
+{% endhighlight %}
+
 ### insertParagraph
 
 insert paragraph
@@ -165,21 +171,42 @@ toggle unordered list
 $('#summernote').summernote('insertUnorderedList');
 {% endhighlight %}
 
-### indent
+### indent and outdent
 
-indent on current paragraph
+indent and outdent on current paragraph
 
 {% highlight javascript %}
 $('#summernote').summernote('indent');
-{% endhighlight %}
-
-### outdent
-
-outdent on current paragraph
-
-{% highlight javascript %}
 $('#summernote').summernote('outdent');
 {% endhighlight %}
+
+### formatPara
+
+Change current paragraph as a `<p>`.
+
+{% highlight javascript %}
+$('#summernote').summernote('formatPara');
+{% endhighlight %}
+
+### formatH1 ~ formatH6
+
+Change current paragraph as a `<h1> ~ <h6>`.
+
+{% highlight javascript %}
+$('#summernote').summernote('formatH2');
+$('#summernote').summernote('formatH6');
+{% endhighlight %}
+
+### lineHeight
+
+Set line height
+
+{% highlight javascript %}
+// @param {Number} line height - unit is px
+$('#summernote').summernote('lineHeight', 20);
+{% endhighlight %}
+
+## API for insertion
 
 ### insertImage
 
@@ -210,31 +237,6 @@ Insert a text
 $('#summernote').summernote('insertText', 'Hello, world');
 {% endhighlight %}
 
-### formatPara
-
-Change current paragraph as a `<p>`.
-
-{% highlight javascript %}
-$('#summernote').summernote('formatPara');
-{% endhighlight %}
-
-### formatH1 ~ formatH6
-
-Change current paragraph as a `<h1> ~ <h6>`.
-
-{% highlight javascript %}
-$('#summernote').summernote('formatH2');
-$('#summernote').summernote('formatH6');
-{% endhighlight %}
-
-### lineHeight
-
-Set line height
-
-{% highlight javascript %}
-// @param {Number} line height - unit is px
-$('#summernote').summernote('lineHeight', 20);
-{% endhighlight %}
 
 ### createLink, unlink
 
@@ -338,7 +340,7 @@ $('#summernote').summernote({
 });
 {% endhighlight %}
 
-## callbacks
+## Callbacks
 Summernote support initialize callbacks and jquery's custom event style callbacks.
 
 > Callback only works with camel case string.

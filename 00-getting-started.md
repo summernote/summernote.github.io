@@ -12,17 +12,15 @@ The fastest way to get Summernote is to download the precompiled and minified ve
 
 <a href="{{ site.repository }}/releases/download/{{ site.version }}/summernote-{{ site.version }}-dist.zip" class="btn-important ">Download compiled</a>
 
-### Additional downloads
-
-#### [Download source code]({{ site.repository }}/archive/master.zip)
+### [Download source code]({{ site.repository }}/archive/master.zip)
 
 Get the latest Summernote LESS and Javascript source code by downloading it directly from GitHub.
 
-#### [Clone or fork via Github]({{ site.repository }})
+### [Clone or fork via Github]({{ site.repository }})
 
 Visit us on GitHub to clone or fork the summernote project.
 
-#### Install with [Bower](http://bower.io)
+### Install with [Bower](http://bower.io)
 
 Install and manage Summernote's styles, JavaScript, and documentation using Bower.
 
@@ -81,8 +79,6 @@ $(document).ready(function() {
 
 ## Basic API
 
-### summernote
-
 Initialize Summernote
 
 {% highlight javascript %}
@@ -91,7 +87,7 @@ $('#summernote').summernote();
 
 Initialize Summernote with options
 
-#### Height and Focus
+### Height and Focus
 If you set focus option, cursor will focus editable area after initialize summernote.
 
 {% highlight javascript %}
@@ -121,7 +117,7 @@ If you don't set the height, editable area's height will change according to con
   });
 </script>
 
-#### Destroy
+### Destroy
 
 Destroy Summernote.
 
@@ -129,7 +125,7 @@ Destroy Summernote.
 $('#summernote').summernote('destroy');
 {% endhighlight %}
 
-#### get &amp; set Code
+### get &amp; set Code
 
 Get the HTML contents of the first summernote in the set of matched elements.
 
