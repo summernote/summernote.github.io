@@ -90,7 +90,7 @@ body {
 
 /* Comment */
 .highlight .err {
-  border: 1px solid #FF0000; }
+  border: 1px solid red; }
 
 /* Error */
 .highlight .k {
@@ -122,7 +122,7 @@ body {
 
 /* Comment.Special */
 .highlight .gd {
-  color: #A00000; }
+  color: #a00000; }
 
 /* Generic.Deleted */
 .highlight .ge {
@@ -130,7 +130,7 @@ body {
 
 /* Generic.Emph */
 .highlight .gr {
-  color: #FF0000; }
+  color: red; }
 
 /* Generic.Error */
 .highlight .gh {
@@ -139,11 +139,11 @@ body {
 
 /* Generic.Heading */
 .highlight .gi {
-  color: #00A000; }
+  color: #00a000; }
 
 /* Generic.Inserted */
 .highlight .go {
-  color: #808080; }
+  color: gray; }
 
 /* Generic.Output */
 .highlight .gp {
@@ -161,7 +161,7 @@ body {
 
 /* Generic.Subheading */
 .highlight .gt {
-  color: #0040D0; }
+  color: #0040d0; }
 
 /* Generic.Traceback */
 .highlight .kc {
