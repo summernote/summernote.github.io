@@ -5,7 +5,7 @@ description: Customize summernote's components, toolbar, plugins to get your ver
 permalink: /deep-dive/
 ---
 
-## Customizing
+## Customization
 
 Customize by Initializing various options and modules.
 
