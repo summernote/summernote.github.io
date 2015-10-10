@@ -591,6 +591,7 @@ body.page p, body.page li {
   font-size: 13px;
   color: #6b717a; }
 body.page blockquote {
+  border-left: 5px solid #f86466;
   background: white; }
 
 /* Janky fix for preventing navbar from overlapping

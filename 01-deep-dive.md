@@ -92,6 +92,56 @@ $('#summernote').summernote({
 });
 {% endhighlight %}
 
+## Module system
+> ##### Plugins replaced by module after `v0.7.0`
+> We decided to merge plugin and module together and did restructuring every eventHandler and rendering system. Old plugin system was hard to control states of editor(eg, range, history, document, ...), so we did it.
+
+### Define module
+{% highlight javascript %}
+// Module Name is AutoLink
+// @param {Object} context - states of editor
+var AutoLink = function (context) {
+
+  // you can get current editor's elements from layoutInfo
+  var layoutInfo = context.layoutInfo;
+  var $editor = layoutInfo.editor;
+  var $editable = layoutInfo.editable;
+  var $toolbar = layoutInfo.toolbar;
+
+  // ui is a set of renderers to build ui elements.
+  var ui = $.summernote.ui;
+
+  // this method will be called when editor is initialized by $('..').summernote();
+  // You can attach events and created elements on editor elements(eg, editable, ...).
+  this.initialize = function () {
+    // create button
+    var button = ui.button({
+      className: 'note-btn-bold',
+      contents: '<i class="fa fa-bold">'
+      click: function (e) {
+        context.invoke('editor.bold'); // invoke bold method of a module named editor
+      }
+    });
+
+    // generate jQuery element from button instance.
+    this.$button = button.render();
+    $toolbar.append(this.$button);
+  }
+
+  // this method will be called when editor is destroyed by $('..').summernote('destroy');
+  // You should detach events and remove elements on `initialize`.
+  this.destroy = function () {
+    this.$button.remove();
+    this.$button = null;
+  }
+};
+{% endhighlight %}
+
+For more module examples: [modules]({{ site.repository }}/tree/develop/src/js/bs3/module)
+
+### Initalize with module
+
+blah blah blah~
 
 ## About API
 
@@ -346,9 +396,8 @@ $('#summernote').summernote('unlink');
 ## Callbacks
 Summernote support initialize callbacks and jquery's custom event style callbacks.
 
-> Callback only works with camel case string.
+> ##### Callback only works with camel case string after v0.6.5
 > Lowercase string has been used for basic event name(ex: `oninit`, `onenter`, `onfocus`, `onblur`, `onkeyup`, `onkeydown`, `onpaste`). In contrast, callbacks name for advanced feature has been used with camel case string. This is inconsistent and confusing to use. So we rename all lowercase callback to camel case string.
-> You can use only camel case string for callback's name after `v0.6.5`.
 
 ### onInit
 {% highlight javascript %}

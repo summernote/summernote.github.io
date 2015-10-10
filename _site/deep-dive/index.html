@@ -188,6 +188,58 @@
   <span class="p">}</span>
 <span class="p">});</span></code></pre></div>
 
+<h2 id="module-system">Module system</h2>
+<blockquote>
+  <h5 id="plugins-replaced-by-module-after-v070">Plugins replaced by module after <code>v0.7.0</code></h5>
+  <p>We decided to merge plugin and module together and did restructuring every eventHandler and rendering system. Old plugin system was hard to control states of editor(eg, range, history, document, …), so we did it.</p>
+</blockquote>
+
+<h3 id="define-module">Define module</h3>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// Module Name is AutoLink</span>
+<span class="c1">// @param {Object} context - states of editor</span>
+<span class="kd">var</span> <span class="nx">AutoLink</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
+
+  <span class="c1">// you can get current editor&#39;s elements from layoutInfo</span>
+  <span class="kd">var</span> <span class="nx">layoutInfo</span> <span class="o">=</span> <span class="nx">context</span><span class="p">.</span><span class="nx">layoutInfo</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">$editor</span> <span class="o">=</span> <span class="nx">layoutInfo</span><span class="p">.</span><span class="nx">editor</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">$editable</span> <span class="o">=</span> <span class="nx">layoutInfo</span><span class="p">.</span><span class="nx">editable</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">$toolbar</span> <span class="o">=</span> <span class="nx">layoutInfo</span><span class="p">.</span><span class="nx">toolbar</span><span class="p">;</span>
+
+  <span class="c1">// ui is a set of renderers to build ui elements.</span>
+  <span class="kd">var</span> <span class="nx">ui</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">summernote</span><span class="p">.</span><span class="nx">ui</span><span class="p">;</span>
+
+  <span class="c1">// this method will be called when editor is initialized by $(&#39;..&#39;).summernote();</span>
+  <span class="c1">// You can attach events and created elements on editor elements(eg, editable, ...).</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">initialize</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// create button</span>
+    <span class="kd">var</span> <span class="nx">button</span> <span class="o">=</span> <span class="nx">ui</span><span class="p">.</span><span class="nx">button</span><span class="p">({</span>
+      <span class="nx">className</span><span class="o">:</span> <span class="s1">&#39;note-btn-bold&#39;</span><span class="p">,</span>
+      <span class="nx">contents</span><span class="o">:</span> <span class="s1">&#39;&lt;i class=&quot;fa fa-bold&quot;&gt;&#39;</span>
+      <span class="nx">click</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">context</span><span class="p">.</span><span class="nx">invoke</span><span class="p">(</span><span class="s1">&#39;editor.bold&#39;</span><span class="p">);</span> <span class="c1">// invoke bold method of a module named editor</span>
+      <span class="p">}</span>
+    <span class="p">});</span>
+
+    <span class="c1">// generate jQuery element from button instance.</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">$button</span> <span class="o">=</span> <span class="nx">button</span><span class="p">.</span><span class="nx">render</span><span class="p">();</span>
+    <span class="nx">$toolbar</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">$button</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="c1">// this method will be called when editor is destroyed by $(&#39;..&#39;).summernote(&#39;destroy&#39;);</span>
+  <span class="c1">// You should detach events and remove elements on `initialize`.</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">destroy</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">$button</span><span class="p">.</span><span class="nx">remove</span><span class="p">();</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">$button</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">};</span></code></pre></div>
+
+<p>For more module examples: <a href="https://github.com/summernote/summernote/tree/develop/src/js/bs3/module">modules</a></p>
+
+<h3 id="initalize-with-module">Initalize with module</h3>
+
+<p>blah blah blah~</p>
+
 <h2 id="about-api">About API</h2>
 
 <p>You can initialize summernote with <code>summernote</code>.</p>
@@ -389,9 +441,8 @@
 <p>Summernote support initialize callbacks and jquery’s custom event style callbacks.</p>
 
 <blockquote>
-  <p>Callback only works with camel case string.
-Lowercase string has been used for basic event name(ex: <code>oninit</code>, <code>onenter</code>, <code>onfocus</code>, <code>onblur</code>, <code>onkeyup</code>, <code>onkeydown</code>, <code>onpaste</code>). In contrast, callbacks name for advanced feature has been used with camel case string. This is inconsistent and confusing to use. So we rename all lowercase callback to camel case string.
-You can use only camel case string for callback’s name after <code>v0.6.5</code>.</p>
+  <h5 id="callback-only-works-with-camel-case-string-after-v065">Callback only works with camel case string after v0.6.5</h5>
+  <p>Lowercase string has been used for basic event name(ex: <code>oninit</code>, <code>onenter</code>, <code>onfocus</code>, <code>onblur</code>, <code>onkeyup</code>, <code>onkeydown</code>, <code>onpaste</code>). In contrast, callbacks name for advanced feature has been used with camel case string. This is inconsistent and confusing to use. So we rename all lowercase callback to camel case string.</p>
 </blockquote>
 
 <h3 id="oninit">onInit</h3>
