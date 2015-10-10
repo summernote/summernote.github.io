@@ -5,7 +5,7 @@ description: Customize summernote's components, toolbar, plugins to get your ver
 permalink: /deep-dive/
 ---
 
-## External API
+## About API
 
 You can initialize summernote with `summernote`.
 
@@ -29,7 +29,7 @@ $('#summernote').summernote('insertText', 'hello world');
 
 A module named `editor` supports several methods for editor's basic behavior
 
-## API for range
+## Range API
 
 ### createRange
 
@@ -74,7 +74,7 @@ Set a focus in current summernote
 $('#summernote').summernote('focus');
 {% endhighlight %}
 
-## API for font style
+## Font style API
 
 ### bold, italic, underline, strikethrough
 
@@ -134,7 +134,7 @@ Set font size
 $('#summernote').summernote('fontSize', 20);
 {% endhighlight %}
 
-## API for paragraph
+## Paragraph API
 
 ### justifyLeft, justifyRight, justifyCenter, justifyFull
 
@@ -188,7 +188,7 @@ Change current paragraph as a `<p>`.
 $('#summernote').summernote('formatPara');
 {% endhighlight %}
 
-### formatH1 ~ formatH6
+### formatH1-H6
 
 Change current paragraph as a `<h1> ~ <h6>`.
 
@@ -206,7 +206,7 @@ Set line height
 $('#summernote').summernote('lineHeight', 20);
 {% endhighlight %}
 
-## API for insertion
+## Insertion API
 
 ### insertImage
 

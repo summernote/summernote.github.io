@@ -27,7 +27,7 @@
     }
 
     var level = getLevel($headers[0]);
-    var html = '<ul>';
+    var html = '<ul class="nav">';
 
     $headers.each(function (idx, header) {
       var $header = $(header);
@@ -43,7 +43,7 @@
       } else if (this_level > level) {
         // lower level than before; expand the previous to contain a ol
         for (i = this_level; i > level; i--) {
-          html += '<ul><li>';
+          html += '<ul class="nav"><li>';
         }
       }
 

@@ -12,16 +12,15 @@ The fastest way to get Summernote is to download the precompiled and minified ve
 
 <a href="{{ site.repository }}/releases/download/{{ site.version }}/summernote-{{ site.version }}-dist.zip" class="btn-important ">Download compiled</a>
 
-### [Download source code]({{ site.repository }}/archive/master.zip)
-
+### Download source code
 Get the latest Summernote LESS and Javascript source code by downloading it directly from GitHub.
+[Download]({{ site.repository }}/archive/master.zip)
 
-### [Clone or fork via Github]({{ site.repository }})
-
+### Clone or fork via Github
 Visit us on GitHub to clone or fork the summernote project.
+[project]({{ site.repository }})
 
-### Install with [Bower](http://bower.io)
-
+### Install with Bower
 Install and manage Summernote's styles, JavaScript, and documentation using Bower.
 
 {% highlight bash %}

@@ -500,6 +500,81 @@ body.page {
 
 /* Page table of contents
 -------------------------------------------------- */
+/* sidebar with affix
+-------------------------------------------------- */
+/* By default it's not affixed in mobile views, so undo that */
+.bs-page-sidebar.affix {
+  position: static; }
+
+/* First level of nav */
+.bs-page-sidenav {
+  margin: auto 30px;
+  padding: auto 10px;
+  text-shadow: 0 1px 0 #fff;
+  border-radius: 5px; }
+
+/* All levels of nav */
+.bs-page-sidebar .nav > li > a {
+  font-size: 16px;
+  display: block;
+  color: #99a2ac;
+  padding: 5px 20px;
+  cursor: pointer; }
+
+.bs-page-sidebar .nav > li > a:hover,
+.bs-page-sidebar .nav > li > a:focus {
+  text-decoration: none;
+  border-left: 4px solid #57c3f5; }
+
+.bs-page-sidebar .nav > .active > a,
+.bs-page-sidebar .nav > .active:hover > a,
+.bs-page-sidebar .nav > .active:focus > a {
+  font-weight: bold;
+  color: #42515f;
+  border-left: 4px solid #57c3f5; }
+
+/* Nav: second level (shown on .active) */
+.bs-page-sidebar .nav .nav {
+  display: none;
+  /* Hide by default, but at >768px, show it */ }
+
+.bs-page-sidebar .nav .nav > li > a {
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-left: 30px;
+  font-size: 90%; }
+
+/* Nav: third level (shown on .active) */
+.bs-page-sidebar .nav .nav .nav > li > a {
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-left: 40px;
+  font-size: 80%; }
+
+/* Show and affix the side nav when space allows it */
+@media screen and (min-width: 992px) {
+  .bs-page-sidebar .nav > .active > ul {
+    display: block; }
+
+  .bs-page-sidebar.affix,
+  .bs-page-sidebar.affix-bottom {
+    width: 272px; }
+
+  .bs-page-sidebar.affix {
+    position: fixed;
+    top: 100px; }
+
+  .bs-page-sidebar.affix-bottom {
+    position: absolute; }
+
+  .bs-page-sidebar.affix-bottom .nav,
+  .bs-page-sidebar.affix .nav {
+    margin: auto 0; } }
+@media screen and (min-width: 1000px) {
+  /* Widen the fixed sidebar again */
+  .bs-page-sidebar.affix-bottom,
+  .bs-page-sidebar.affix {
+    width: 220px; } }
 /* Page typography
 -------------------------------------------------- */
 body.page h2 {

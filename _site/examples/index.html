@@ -231,6 +231,28 @@ More bootstrap theme: <a href="&quot;http://bootswatch.com">Bootswatch</a></p>
 <script>
 $(function () {
   $('#toc').toc();
+  var $sidebar = $('.bs-page-sidebar');
+  var $body = $(document.body);
+  var $navbar = $('.navbar');
+
+  if ($sidebar.length) {
+    $body.scrollspy({
+      target: '.bs-page-sidebar',
+      offset: $navbar.height()
+    });
+
+    $sidebar.affix({
+      offset: {
+        top: function() {
+          var offsetTop = $sidebar.offset().top;
+          var nPadding = 40;
+          return (this.top = offsetTop - nPadding - $navbar.height());
+        }, bottom: function() {
+          return (this.bottom = $('.bs-page-footer').outerHeight(true));
+        }
+      } 
+    });
+  }
 });
 </script>
 

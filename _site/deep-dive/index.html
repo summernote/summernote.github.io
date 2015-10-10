@@ -91,7 +91,7 @@
     </div>
     <div class="col-md-9">
       <div class="page-content" role="main">
-        <h2 id="external-api">External API</h2>
+        <h2 id="about-api">About API</h2>
 
 <p>You can initialize summernote with <code>summernote</code>.</p>
 
@@ -109,7 +109,7 @@
 
 <p>A module named <code>editor</code> supports several methods for editor’s basic behavior</p>
 
-<h2 id="api-for-range">API for range</h2>
+<h2 id="range-api">Range API</h2>
 
 <h3 id="createrange">createRange</h3>
 
@@ -144,7 +144,7 @@
 
 <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#summernote&#39;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">(</span><span class="s1">&#39;focus&#39;</span><span class="p">);</span></code></pre></div>
 
-<h2 id="api-for-font-style">API for font style</h2>
+<h2 id="font-style-api">Font style API</h2>
 
 <h3 id="bold-italic-underline-strikethrough">bold, italic, underline, strikethrough</h3>
 
@@ -192,7 +192,7 @@
 <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// @param {Number} font size - unit is px</span>
 <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#summernote&#39;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">(</span><span class="s1">&#39;fontSize&#39;</span><span class="p">,</span> <span class="mi">20</span><span class="p">);</span></code></pre></div>
 
-<h2 id="api-for-paragraph">API for paragraph</h2>
+<h2 id="paragraph-api">Paragraph API</h2>
 
 <h3 id="justifyleft-justifyright-justifycenter-justifyfull">justifyLeft, justifyRight, justifyCenter, justifyFull</h3>
 
@@ -234,7 +234,7 @@
 
 <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#summernote&#39;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">(</span><span class="s1">&#39;formatPara&#39;</span><span class="p">);</span></code></pre></div>
 
-<h3 id="formath1--formath6">formatH1 ~ formatH6</h3>
+<h3 id="formath1-h6">formatH1-H6</h3>
 
 <p>Change current paragraph as a <code>&lt;h1&gt; ~ &lt;h6&gt;</code>.</p>
 
@@ -248,7 +248,7 @@
 <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// @param {Number} line height - unit is px</span>
 <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#summernote&#39;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">(</span><span class="s1">&#39;lineHeight&#39;</span><span class="p">,</span> <span class="mi">20</span><span class="p">);</span></code></pre></div>
 
-<h2 id="api-for-insertion">API for insertion</h2>
+<h2 id="insertion-api">Insertion API</h2>
 
 <h3 id="insertimage">insertImage</h3>
 
@@ -536,6 +536,28 @@ You can upload image to server or AWS S3: <a href="https://github.com/summernote
 <script>
 $(function () {
   $('#toc').toc();
+  var $sidebar = $('.bs-page-sidebar');
+  var $body = $(document.body);
+  var $navbar = $('.navbar');
+
+  if ($sidebar.length) {
+    $body.scrollspy({
+      target: '.bs-page-sidebar',
+      offset: $navbar.height()
+    });
+
+    $sidebar.affix({
+      offset: {
+        top: function() {
+          var offsetTop = $sidebar.offset().top;
+          var nPadding = 40;
+          return (this.top = offsetTop - nPadding - $navbar.height());
+        }, bottom: function() {
+          return (this.bottom = $('.bs-page-footer').outerHeight(true));
+        }
+      } 
+    });
+  }
 });
 </script>
 

@@ -99,16 +99,15 @@
 
 <p><a href="https://github.com/summernote/summernote/releases/download/v0.7.0/summernote-v0.7.0-dist.zip" class="btn-important ">Download compiled</a></p>
 
-<h3 id="download-source-codehttpsgithubcomsummernotesummernotearchivemasterzip"><a href="https://github.com/summernote/summernote/archive/master.zip">Download source code</a></h3>
+<h3 id="download-source-code">Download source code</h3>
+<p>Get the latest Summernote LESS and Javascript source code by downloading it directly from GitHub.
+<a href="https://github.com/summernote/summernote/archive/master.zip">Download</a></p>
 
-<p>Get the latest Summernote LESS and Javascript source code by downloading it directly from GitHub.</p>
+<h3 id="clone-or-fork-via-github">Clone or fork via Github</h3>
+<p>Visit us on GitHub to clone or fork the summernote project.
+<a href="https://github.com/summernote/summernote">project</a></p>
 
-<h3 id="clone-or-fork-via-githubhttpsgithubcomsummernotesummernote"><a href="https://github.com/summernote/summernote">Clone or fork via Github</a></h3>
-
-<p>Visit us on GitHub to clone or fork the summernote project.</p>
-
-<h3 id="install-with-bowerhttpbowerio">Install with <a href="http://bower.io">Bower</a></h3>
-
+<h3 id="install-with-bower">Install with Bower</h3>
 <p>Install and manage Summernote’s styles, JavaScript, and documentation using Bower.</p>
 
 <div class="highlight"><pre><code class="language-bash" data-lang="bash">bower install summernote</code></pre></div>
@@ -283,6 +282,28 @@ Include the Following code in your HTML <code>&lt;HTML&gt;</code> tag</p>
 <script>
 $(function () {
   $('#toc').toc();
+  var $sidebar = $('.bs-page-sidebar');
+  var $body = $(document.body);
+  var $navbar = $('.navbar');
+
+  if ($sidebar.length) {
+    $body.scrollspy({
+      target: '.bs-page-sidebar',
+      offset: $navbar.height()
+    });
+
+    $sidebar.affix({
+      offset: {
+        top: function() {
+          var offsetTop = $sidebar.offset().top;
+          var nPadding = 40;
+          return (this.top = offsetTop - nPadding - $navbar.height());
+        }, bottom: function() {
+          return (this.bottom = $('.bs-page-footer').outerHeight(true));
+        }
+      } 
+    });
+  }
 });
 </script>
 
