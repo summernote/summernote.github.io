@@ -16,6 +16,7 @@ $h3-vertical-margin: 22px;
 
 /* sidebar with affix
 -------------------------------------------------- */
+$normal-border: 4px solid transparent;
 $active-border: 4px solid #57c3f5;
 /* By default it's not affixed in mobile views, so undo that */
 .bs-page-sidebar.affix {
@@ -32,6 +33,7 @@ $active-border: 4px solid #57c3f5;
 
 /* All levels of nav */
 .bs-page-sidebar .nav > li > a {
+  border-left: $normal-border;
   font-size: 16px;
   display: block;
   color: #99a2ac;
@@ -40,6 +42,7 @@ $active-border: 4px solid #57c3f5;
 }
 .bs-page-sidebar .nav > li > a:hover,
 .bs-page-sidebar .nav > li > a:focus {
+  background-color: transparent;
   text-decoration: none;
   border-left: $active-border;
 }

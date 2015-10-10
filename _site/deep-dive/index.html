@@ -91,7 +91,104 @@
     </div>
     <div class="col-md-9">
       <div class="page-content" role="main">
-        <h2 id="about-api">About API</h2>
+        <h2 id="customizing">Customizing</h2>
+
+<p>Customize by Initializing various options and modules.</p>
+
+<h3 id="custom-toolbar">Custom toolbar</h3>
+
+<p>Summernote allows you to make own custom toolbar.</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#summernote&#39;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">({</span>
+  <span class="nx">toolbar</span><span class="o">:</span> <span class="p">[</span>
+    <span class="c1">// [groupName, [list of button]]</span>
+    <span class="p">[</span><span class="s1">&#39;style&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="s1">&#39;italic&#39;</span><span class="p">,</span> <span class="s1">&#39;underline&#39;</span><span class="p">,</span> <span class="s1">&#39;clear&#39;</span><span class="p">]],</span>
+    <span class="p">[</span><span class="s1">&#39;font&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;strikethrough&#39;</span><span class="p">,</span> <span class="s1">&#39;superscript&#39;</span><span class="p">,</span> <span class="s1">&#39;subscript&#39;</span><span class="p">]],</span>
+    <span class="p">[</span><span class="s1">&#39;fontsize&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;fontsize&#39;</span><span class="p">]],</span>
+    <span class="p">[</span><span class="s1">&#39;color&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;color&#39;</span><span class="p">]],</span>
+    <span class="p">[</span><span class="s1">&#39;para&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;ul&#39;</span><span class="p">,</span> <span class="s1">&#39;ol&#39;</span><span class="p">,</span> <span class="s1">&#39;paragraph&#39;</span><span class="p">]],</span>
+    <span class="p">[</span><span class="s1">&#39;height&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;height&#39;</span><span class="p">]],</span>
+  <span class="p">]</span>
+<span class="p">});</span></code></pre></div>
+
+<p>This is a toolbar with font style only.</p>
+<div class="custom-toolbar"></div>
+<script>
+  $(function() {
+    $('.custom-toolbar').summernote({
+      toolbar: [
+        ['style', ['bold', 'italic', 'underline', 'clear']],
+        ['font', ['strikethrough', 'superscript', 'subscript']],
+        ['fontsize', ['fontsize']],
+        ['color', ['color']],
+        ['para', ['ul', 'ol', 'paragraph']],
+        ['height', ['height']]
+      ]
+    });
+  });
+</script>
+
+<p>You can compose a toolbar with pre-shipped buttons.</p>
+
+<ul>
+  <li>Insert
+    <ul>
+      <li><code>picture</code>: open image dialog</li>
+      <li><code>link</code>: open link dialog</li>
+      <li><code>video</code>: open video dialog</li>
+      <li><code>table</code>: insert a table</li>
+      <li><code>hr</code>: insert a horizontal rule</li>
+    </ul>
+  </li>
+  <li>Font Style
+    <ul>
+      <li><code>fontname</code>: set font family</li>
+      <li><code>fontsize</code>: set font size</li>
+      <li><code>color</code>: set foreground and background color</li>
+      <li><code>bold</code>: toggle font weight</li>
+      <li><code>italic</code>: toggle italic</li>
+      <li><code>underline</code>: toggle underline</li>
+      <li><code>strikethrough</code>: toggle strikethrough</li>
+      <li><code>clear</code>: clear font style</li>
+    </ul>
+  </li>
+  <li>Paragraph style
+    <ul>
+      <li><code>style</code>: format selected block</li>
+      <li><code>ol</code>: toggle ordered list</li>
+      <li><code>ul</code>: toggle unordered list</li>
+      <li><code>paragraph</code>: dropdown for paragraph align</li>
+      <li><code>height</code>: set line height</li>
+    </ul>
+  </li>
+  <li>Misc
+    <ul>
+      <li><code>fullscreen</code>: toggle fullscreen editing mode</li>
+      <li><code>codeview</code>: toggle wysiwyg and html editing mode</li>
+      <li><code>undo</code>: undo</li>
+      <li><code>redo</code>: redo</li>
+      <li><code>help</code>: open help dialog</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="custom-popover-for-air-mode">Custom popover for air-mode</h3>
+
+<p>Air-mode has its own popover, not toolbar. You can customize it with <code>popover.air</code> option.</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#summernote&#39;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">({</span>
+  <span class="nx">popover</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">air</span><span class="o">:</span> <span class="p">[</span>
+      <span class="p">[</span><span class="s1">&#39;color&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;color&#39;</span><span class="p">]],</span>
+      <span class="p">[</span><span class="s1">&#39;font&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="s1">&#39;underline&#39;</span><span class="p">,</span> <span class="s1">&#39;clear&#39;</span><span class="p">]],</span>
+      <span class="p">[</span><span class="s1">&#39;para&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;ul&#39;</span><span class="p">,</span> <span class="s1">&#39;paragraph&#39;</span><span class="p">]],</span>
+      <span class="p">[</span><span class="s1">&#39;table&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;table&#39;</span><span class="p">]],</span>
+      <span class="p">[</span><span class="s1">&#39;insert&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;link&#39;</span><span class="p">,</span> <span class="s1">&#39;picture&#39;</span><span class="p">]]</span>
+    <span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">});</span></code></pre></div>
+
+<h2 id="about-api">About API</h2>
 
 <p>You can initialize summernote with <code>summernote</code>.</p>
 
@@ -194,7 +291,7 @@
 
 <h2 id="paragraph-api">Paragraph API</h2>
 
-<h3 id="justifyleft-justifyright-justifycenter-justifyfull">justifyLeft, justifyRight, justifyCenter, justifyFull</h3>
+<h3 id="justify-left-right-and-more">justify left, right and more</h3>
 
 <p>Set paragraph align</p>
 
@@ -287,101 +384,6 @@
 <span class="p">});</span>
 
 <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#summernote&#39;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">(</span><span class="s1">&#39;unlink&#39;</span><span class="p">);</span></code></pre></div>
-
-<h2 id="customizing">Customizing</h2>
-
-<h3 id="custom-toolbar">Custom toolbar</h3>
-
-<p>Summernote allows you to make own custom toolbar.</p>
-
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#summernote&#39;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">({</span>
-  <span class="nx">toolbar</span><span class="o">:</span> <span class="p">[</span>
-    <span class="c1">// [groupName, [list of button]]</span>
-    <span class="p">[</span><span class="s1">&#39;style&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="s1">&#39;italic&#39;</span><span class="p">,</span> <span class="s1">&#39;underline&#39;</span><span class="p">,</span> <span class="s1">&#39;clear&#39;</span><span class="p">]],</span>
-    <span class="p">[</span><span class="s1">&#39;font&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;strikethrough&#39;</span><span class="p">,</span> <span class="s1">&#39;superscript&#39;</span><span class="p">,</span> <span class="s1">&#39;subscript&#39;</span><span class="p">]],</span>
-    <span class="p">[</span><span class="s1">&#39;fontsize&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;fontsize&#39;</span><span class="p">]],</span>
-    <span class="p">[</span><span class="s1">&#39;color&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;color&#39;</span><span class="p">]],</span>
-    <span class="p">[</span><span class="s1">&#39;para&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;ul&#39;</span><span class="p">,</span> <span class="s1">&#39;ol&#39;</span><span class="p">,</span> <span class="s1">&#39;paragraph&#39;</span><span class="p">]],</span>
-    <span class="p">[</span><span class="s1">&#39;height&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;height&#39;</span><span class="p">]],</span>
-  <span class="p">]</span>
-<span class="p">});</span></code></pre></div>
-
-<p>This is a toolbar with font style only.</p>
-<div class="custom-toolbar"></div>
-<script>
-  $(function() {
-    $('.custom-toolbar').summernote({
-      toolbar: [
-        ['style', ['bold', 'italic', 'underline', 'clear']],
-        ['font', ['strikethrough', 'superscript', 'subscript']],
-        ['fontsize', ['fontsize']],
-        ['color', ['color']],
-        ['para', ['ul', 'ol', 'paragraph']],
-        ['height', ['height']]
-      ]
-    });
-  });
-</script>
-
-<p>You can compose a toolbar with pre-shipped buttons.</p>
-
-<ul>
-  <li>Insert
-    <ul>
-      <li><code>picture</code>: open image dialog</li>
-      <li><code>link</code>: open link dialog</li>
-      <li><code>video</code>: open video dialog</li>
-      <li><code>table</code>: insert a table</li>
-      <li><code>hr</code>: insert a horizontal rule</li>
-    </ul>
-  </li>
-  <li>Font Style
-    <ul>
-      <li><code>fontname</code>: set font family</li>
-      <li><code>fontsize</code>: set font size</li>
-      <li><code>color</code>: set foreground and background color</li>
-      <li><code>bold</code>: toggle font weight</li>
-      <li><code>italic</code>: toggle italic</li>
-      <li><code>underline</code>: toggle underline</li>
-      <li><code>strikethrough</code>: toggle strikethrough</li>
-      <li><code>clear</code>: clear font style</li>
-    </ul>
-  </li>
-  <li>Paragraph style
-    <ul>
-      <li><code>style</code>: format selected block</li>
-      <li><code>ol</code>: toggle ordered list</li>
-      <li><code>ul</code>: toggle unordered list</li>
-      <li><code>paragraph</code>: dropdown for paragraph align</li>
-      <li><code>height</code>: set line height</li>
-    </ul>
-  </li>
-  <li>Misc
-    <ul>
-      <li><code>fullscreen</code>: toggle fullscreen editing mode</li>
-      <li><code>codeview</code>: toggle wysiwyg and html editing mode</li>
-      <li><code>undo</code>: undo</li>
-      <li><code>redo</code>: redo</li>
-      <li><code>help</code>: open help dialog</li>
-    </ul>
-  </li>
-</ul>
-
-<h3 id="custom-popover-for-air-mode">Custom popover for air-mode</h3>
-
-<p>Air-mode has its own popover, not toolbar. You can customize it with <code>popover.air</code> option.</p>
-
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#summernote&#39;</span><span class="p">).</span><span class="nx">summernote</span><span class="p">({</span>
-  <span class="nx">popover</span><span class="o">:</span> <span class="p">{</span>
-    <span class="nx">air</span><span class="o">:</span> <span class="p">[</span>
-      <span class="p">[</span><span class="s1">&#39;color&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;color&#39;</span><span class="p">]],</span>
-      <span class="p">[</span><span class="s1">&#39;font&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="s1">&#39;underline&#39;</span><span class="p">,</span> <span class="s1">&#39;clear&#39;</span><span class="p">]],</span>
-      <span class="p">[</span><span class="s1">&#39;para&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;ul&#39;</span><span class="p">,</span> <span class="s1">&#39;paragraph&#39;</span><span class="p">]],</span>
-      <span class="p">[</span><span class="s1">&#39;table&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;table&#39;</span><span class="p">]],</span>
-      <span class="p">[</span><span class="s1">&#39;insert&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;link&#39;</span><span class="p">,</span> <span class="s1">&#39;picture&#39;</span><span class="p">]]</span>
-    <span class="p">]</span>
-  <span class="p">}</span>
-<span class="p">});</span></code></pre></div>
 
 <h2 id="callbacks">Callbacks</h2>
 <p>Summernote support initialize callbacks and jquery’s custom event style callbacks.</p>

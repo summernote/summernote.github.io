@@ -9,7 +9,7 @@ permalink: /examples/
 Style changed accroding to bootstrap theme.
 More bootstrap theme: [Bootswatch]("http://bootswatch.com)
 
-<iframe src="/themes.html" width="100%" height="400" frameborder="0"></iframe>
+<iframe src="/themes.html" width="100%" height="300" frameborder="0"></iframe>
 
 ## Air-mode
 Air-mode gives clearer interface with hiddened toolbar. To reveal toolbar, select a text where you want to shape up. Simply turn on `airMode` and just focus on text.

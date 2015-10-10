@@ -5,6 +5,94 @@ description: Customize summernote's components, toolbar, plugins to get your ver
 permalink: /deep-dive/
 ---
 
+## Customizing
+
+Customize by Initializing various options and modules.
+
+### Custom toolbar
+
+Summernote allows you to make own custom toolbar.
+
+{% highlight javascript %}
+$('#summernote').summernote({
+  toolbar: [
+    // [groupName, [list of button]]
+    ['style', ['bold', 'italic', 'underline', 'clear']],
+    ['font', ['strikethrough', 'superscript', 'subscript']],
+    ['fontsize', ['fontsize']],
+    ['color', ['color']],
+    ['para', ['ul', 'ol', 'paragraph']],
+    ['height', ['height']],
+  ]
+});
+{% endhighlight %}
+
+This is a toolbar with font style only.
+<div class="custom-toolbar"></div>
+<script>
+  $(function() {
+    $('.custom-toolbar').summernote({
+      toolbar: [
+        ['style', ['bold', 'italic', 'underline', 'clear']],
+        ['font', ['strikethrough', 'superscript', 'subscript']],
+        ['fontsize', ['fontsize']],
+        ['color', ['color']],
+        ['para', ['ul', 'ol', 'paragraph']],
+        ['height', ['height']]
+      ]
+    });
+  });
+</script>
+
+You can compose a toolbar with pre-shipped buttons.
+
+* Insert
+  * `picture`: open image dialog
+  * `link`: open link dialog
+  * `video`: open video dialog
+  * `table`: insert a table
+  * `hr`: insert a horizontal rule
+* Font Style
+  * `fontname`: set font family
+  * `fontsize`: set font size
+  * `color`: set foreground and background color
+  * `bold`: toggle font weight
+  * `italic`: toggle italic
+  * `underline`: toggle underline
+  * `strikethrough`: toggle strikethrough
+  * `clear`: clear font style
+* Paragraph style
+  * `style`: format selected block
+  * `ol`: toggle ordered list
+  * `ul`: toggle unordered list
+  * `paragraph`: dropdown for paragraph align
+  * `height`: set line height
+* Misc
+  * `fullscreen`: toggle fullscreen editing mode
+  * `codeview`: toggle wysiwyg and html editing mode
+  * `undo`: undo
+  * `redo`: redo
+  * `help`: open help dialog
+
+### Custom popover for air-mode
+
+Air-mode has its own popover, not toolbar. You can customize it with <code>popover.air</code> option.
+
+{% highlight javascript %}
+$('#summernote').summernote({
+  popover: {
+    air: [
+      ['color', ['color']],
+      ['font', ['bold', 'underline', 'clear']],
+      ['para', ['ul', 'paragraph']],
+      ['table', ['table']],
+      ['insert', ['link', 'picture']]
+    ]
+  }
+});
+{% endhighlight %}
+
+
 ## About API
 
 You can initialize summernote with `summernote`.
@@ -136,7 +224,7 @@ $('#summernote').summernote('fontSize', 20);
 
 ## Paragraph API
 
-### justifyLeft, justifyRight, justifyCenter, justifyFull
+### justify left, right and more
 
 Set paragraph align
 
@@ -253,91 +341,6 @@ $('#summernote').summernote('createLink', {
 });
 
 $('#summernote').summernote('unlink');
-{% endhighlight %}
-
-## Customizing
-
-### Custom toolbar
-
-Summernote allows you to make own custom toolbar.
-
-{% highlight javascript %}
-$('#summernote').summernote({
-  toolbar: [
-    // [groupName, [list of button]]
-    ['style', ['bold', 'italic', 'underline', 'clear']],
-    ['font', ['strikethrough', 'superscript', 'subscript']],
-    ['fontsize', ['fontsize']],
-    ['color', ['color']],
-    ['para', ['ul', 'ol', 'paragraph']],
-    ['height', ['height']],
-  ]
-});
-{% endhighlight %}
-
-This is a toolbar with font style only.
-<div class="custom-toolbar"></div>
-<script>
-  $(function() {
-    $('.custom-toolbar').summernote({
-      toolbar: [
-        ['style', ['bold', 'italic', 'underline', 'clear']],
-        ['font', ['strikethrough', 'superscript', 'subscript']],
-        ['fontsize', ['fontsize']],
-        ['color', ['color']],
-        ['para', ['ul', 'ol', 'paragraph']],
-        ['height', ['height']]
-      ]
-    });
-  });
-</script>
-
-You can compose a toolbar with pre-shipped buttons.
-
-* Insert
-  * `picture`: open image dialog
-  * `link`: open link dialog
-  * `video`: open video dialog
-  * `table`: insert a table
-  * `hr`: insert a horizontal rule
-* Font Style
-  * `fontname`: set font family
-  * `fontsize`: set font size
-  * `color`: set foreground and background color
-  * `bold`: toggle font weight
-  * `italic`: toggle italic
-  * `underline`: toggle underline
-  * `strikethrough`: toggle strikethrough
-  * `clear`: clear font style
-* Paragraph style
-  * `style`: format selected block
-  * `ol`: toggle ordered list
-  * `ul`: toggle unordered list
-  * `paragraph`: dropdown for paragraph align
-  * `height`: set line height
-* Misc
-  * `fullscreen`: toggle fullscreen editing mode
-  * `codeview`: toggle wysiwyg and html editing mode
-  * `undo`: undo
-  * `redo`: redo
-  * `help`: open help dialog
-
-### Custom popover for air-mode
-
-Air-mode has its own popover, not toolbar. You can customize it with <code>popover.air</code> option.
-
-{% highlight javascript %}
-$('#summernote').summernote({
-  popover: {
-    air: [
-      ['color', ['color']],
-      ['font', ['bold', 'underline', 'clear']],
-      ['para', ['ul', 'paragraph']],
-      ['table', ['table']],
-      ['insert', ['link', 'picture']]
-    ]
-  }
-});
 {% endhighlight %}
 
 ## Callbacks

@@ -515,6 +515,7 @@ body.page {
 
 /* All levels of nav */
 .bs-page-sidebar .nav > li > a {
+  border-left: 4px solid transparent;
   font-size: 16px;
   display: block;
   color: #99a2ac;
@@ -523,6 +524,7 @@ body.page {
 
 .bs-page-sidebar .nav > li > a:hover,
 .bs-page-sidebar .nav > li > a:focus {
+  background-color: transparent;
   text-decoration: none;
   border-left: 4px solid #57c3f5; }
 
