@@ -8,17 +8,23 @@ body.page {
   margin-bottom: 150px;
 }
 
+/* Page table of contents
+-------------------------------------------------- */
+
+$h2-vertical-margin: 30px;
+$h3-vertical-margin: 22px;
+
 /* Page typography
 -------------------------------------------------- */
 body.page {
   h2 {
-    margin: 30px 0;
+    margin: $h2-vertical-margin 0;
     font-size: 26px;
     color: #42515f;
   }
 
   h3 {
-    margin: 22px 0;
+    margin: $h3-vertical-margin 0;
     font-size: 18px;
     color: #42515f;
   }
@@ -31,4 +37,16 @@ body.page {
   blockquote {
     background: white;
   }
+}
+
+/* Janky fix for preventing navbar from overlapping
+-------------------------------------------------- */
+h2[id] {
+  margin-top: $header-height * -1 !important;
+  padding-top: $header-height + $h2-vertical-margin;
+}
+
+h3[id], h4[id] {
+  margin-top: $header-height * -1 !important;
+  padding-top: $header-height + $h3-vertical-margin;
 }
