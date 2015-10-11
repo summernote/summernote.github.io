@@ -1,7 +1,11 @@
-/* Page layout
+/* Index layout
 -------------------------------------------------- */
 body.index {
   margin-top: 0 !important;
+
+  .page-content {
+    padding-bottom: 0 !important;
+  }
 }
 
 /* Index typography
@@ -39,7 +43,7 @@ $index-title-margin: 120px;
   margin-bottom: $index-title-margin;
 }
 
-/* Index page section 1
+/* Index section 1
 -------------------------------------------------- */
 .index-section-1 {
   margin-bottom: 60px;
@@ -67,9 +71,8 @@ $index-title-margin: 120px;
   }
 }
 
-/* Index page section 2
+/* Index section 2
 -------------------------------------------------- */
-
 .index-section-2 {
   padding-top: 68px;
   padding-bottom: 60px;

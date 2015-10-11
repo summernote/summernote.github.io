@@ -1,8 +1,6 @@
-/* Fixed header and Sticky footer
+/* Fixed header
 -------------------------------------------------- */
 $header-height: 80px;
-$footer-height: 272px;
-
 html {
   position: relative;
   min-height: 100%;
@@ -42,21 +40,4 @@ body {
 
 .header-bi {
   @include img('/img/img_gnb_bi', 132px, 16px);
-}
-
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: $footer-height;
-  padding-top: 60px;
-  padding-bottom: 60px;
-  background: rgb(225, 231, 239);
-  background-image: linear-gradient($grid-color 1px, transparent 1px), linear-gradient(90deg, $grid-color 1px, transparent 1px);
-  background-size: 10px 10px;
-  text-align:center;
-  p {
-    color: #7f95a9 !important;
-    font-size: 15px !important;
-  }
 }

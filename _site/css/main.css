@@ -21,7 +21,7 @@
 
 /* Retina image
 -------------------------------------------------- */
-/* Fixed header and Sticky footer
+/* Fixed header
 -------------------------------------------------- */
 html {
   position: relative;
@@ -61,21 +61,6 @@ body {
   @media all and (-webkit-min-device-pixel-ratio: 1.5), all and (-o-min-device-pixel-ratio: 3 / 2), all and (min--moz-device-pixel-ratio: 1.5), all and (min-device-pixel-ratio: 1.5) {
     .header-bi {
       background-image: url("/img/img_gnb_bi_2x.png"); } }
-
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 272px;
-  padding-top: 60px;
-  padding-bottom: 60px;
-  background: #e1e7ef;
-  background-image: linear-gradient(rgba(218, 224, 232, 0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(218, 224, 232, 0.5) 1px, transparent 1px);
-  background-size: 10px 10px;
-  text-align: center; }
-  .footer p {
-    color: #7f95a9 !important;
-    font-size: 15px !important; }
 
 .highlight .hll {
   background-color: #ffffcc; }
@@ -345,10 +330,12 @@ body {
   color: #40a070; }
 
 /* Literal.Number.Integer.Long */
-/* Page layout
+/* Index layout
 -------------------------------------------------- */
 body.index {
   margin-top: 0 !important; }
+  body.index .page-content {
+    padding-bottom: 0 !important; }
 
 /* Index typography
 -------------------------------------------------- */
@@ -379,7 +366,7 @@ body.index p, body.index li {
   margin-top: 200px;
   margin-bottom: 120px; }
 
-/* Index page section 1
+/* Index section 1
 -------------------------------------------------- */
 .index-section-1 {
   margin-bottom: 60px; }
@@ -400,7 +387,7 @@ body.index p, body.index li {
   .card-item:last-child {
     margin-right: 0; }
 
-/* Index page section 2
+/* Index section 2
 -------------------------------------------------- */
 .index-section-2 {
   padding-top: 68px;
@@ -496,10 +483,20 @@ body.index p, body.index li {
     .img-index-backend {
       background-image: url("/img/img_main_backend_2x.png"); } }
 
-/* Doc layout
+/* Doc layout and footer
 -------------------------------------------------- */
 body.doc {
   margin-top: 120px; }
+
+/* Doc footer
+-------------------------------------------------- */
+.doc-footer {
+  margin-top: 150px;
+  padding: 30px 0;
+  border-top: 2px solid #f3f6f9; }
+  .doc-footer p {
+    color: #7f95a9 !important;
+    font-size: 15px !important; }
 
 /* Doc table of contents
 -------------------------------------------------- */
@@ -561,10 +558,6 @@ body.doc {
   .bs-page-sidebar .nav > .active > ul {
     display: block; }
 
-  .bs-page-sidebar.affix,
-  .bs-page-sidebar.affix-bottom {
-    width: 272px; }
-
   .bs-page-sidebar.affix {
     position: fixed;
     top: 100px; }
@@ -607,11 +600,29 @@ h3[id], h4[id] {
   margin-top: -80px !important;
   padding-top: 102px; }
 
-/* Page layout
+/* Page layout and Sticky footer
 -------------------------------------------------- */
 body.page {
   margin-top: 120px;
   margin-bottom: 272px; }
+
+.page-content {
+  padding-bottom: 60px; }
+
+.page-footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 272px;
+  padding-top: 60px;
+  padding-bottom: 60px;
+  background: #e1e7ef;
+  background-image: linear-gradient(rgba(218, 224, 232, 0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(218, 224, 232, 0.5) 1px, transparent 1px);
+  background-size: 10px 10px;
+  text-align: center; }
+  .page-footer p {
+    color: #7f95a9 !important;
+    font-size: 15px !important; }
 
 /* Page typography
 -------------------------------------------------- */
