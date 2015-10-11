@@ -1,47 +1,6 @@
 ---
 layout: default
-layoutType: page
 ---
-<div class="page-container">
-  <div class="row">
-    <div class="col-md-3">
-      <h2>{{ page.title }}</h2>
-      <p class="muted">{{ page.description }}</p>
-      <div class="bs-page-sidebar" side-navbar role="complementary">
-        <div id="toc"></div>
-      </div>
-    </div>
-    <div class="col-md-9">
-      <div class="page-content" role="main">
-        {{ content }}
-      </div>
-    </div>
-  </div>
-</div>
-<script>
-$(function () {
-  $('#toc').toc();
-  var $sidebar = $('.bs-page-sidebar');
-  var $body = $(document.body);
-  var $navbar = $('.navbar');
 
-  if ($sidebar.length) {
-    $body.scrollspy({
-      target: '.bs-page-sidebar',
-      offset: $navbar.height()
-    });
-
-    $sidebar.affix({
-      offset: {
-        top: function() {
-          var offsetTop = $sidebar.offset().top;
-          var nPadding = 40;
-          return (this.top = offsetTop - nPadding - $navbar.height());
-        }, bottom: function() {
-          return (this.bottom = $('.bs-page-footer').outerHeight(true));
-        }
-      } 
-    });
-  }
-});
-</script>
+{{ content }}
+{% include footer.html %}

@@ -1,16 +1,15 @@
 <!DOCTYPE html>
 <html>
 
-  {% include head.html %}
+  <head>
+    {% include head.html %}
+    <link rel="stylesheet" href="{{ "/css/main.css" | prepend: site.baseurl }}">
+  </head>
 
   <body class="{{ page.layoutType }}">
     {% include header.html %}
     
-    <div>
-        {{ content }}
-    </div>
-    
-    {% include footer.html %}
+    {{ content }}
 
     <!-- Google Analytics -->
     <script type="text/javascript">

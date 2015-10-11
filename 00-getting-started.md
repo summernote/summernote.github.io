@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: doc
 title: Getting started
 description: An overview of summernote, how to download and use, basic features and examples, and more.
 permalink: /getting-started/

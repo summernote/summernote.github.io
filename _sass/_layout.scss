@@ -12,7 +12,6 @@ $grid-color: rgba(218, 224, 232, 0.5);
 
 body {
   margin-top: $header-height;
-  margin-bottom: $footer-height;
   background: rgb(240, 243, 249);
   background-image: linear-gradient($grid-color 1px, transparent 1px), linear-gradient(90deg, $grid-color 1px, transparent 1px);
   background-size: 10px 10px;
