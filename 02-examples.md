@@ -7,7 +7,7 @@ permalink: /examples/
 
 ## Themes with booswatch
 Style changed accroding to bootstrap theme.
-More bootstrap theme: [Bootswatch]("http://bootswatch.com)
+More bootstrap theme: [Bootswatch](http://bootswatch.com)
 
 <div class="well" style="background-color:white;">
   <iframe src="/themes.html" width="100%" height="300" frameborder="0"></iframe>
