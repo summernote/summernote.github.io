@@ -1,0 +1,55 @@
+---
+layout: default
+layoutType: page
+---
+<div class="page-container">
+  <div class="row">
+    <!--
+    <div class="col-md-3">
+      <h2>{{ page.title }}</h2>
+      <p class="muted">{{ page.description }}</p>
+      <div class="bs-page-sidebar" side-navbar role="complementary">
+        <div id="toc"></div>
+      </div>
+    </div> -->
+    <div class="col-sm-12 col-md-12">
+      <div class="row">
+        <div class="col-md-3 col-sm-3"><a href="/examples/basic.html" class="btn btn-default btn-block">Themes with booswatch</a></div>
+        <div class="col-md-3 col-sm-3"><a href="/examples/airmode.html" class="btn btn-default btn-block">Air Mode</a></div>
+        <div class="col-md-3 col-sm-3"><a href="/examples/multiple.html" class="btn btn-default btn-block">Multiple Editor</a></div>
+        <div class="col-md-3 col-sm-3"><a href="/examples/click-to-editor.html" class="btn btn-default btn-block">Click to Editor</a></div>
+
+      </div>
+      <div class="page-content" role="main">
+        {{ content }}
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+$(function () {
+  $('#toc').toc();
+  var $sidebar = $('.bs-page-sidebar');
+  var $body = $(document.body);
+  var $navbar = $('.navbar');
+
+  if ($sidebar.length) {
+    $body.scrollspy({
+      target: '.bs-page-sidebar',
+      offset: $navbar.height()
+    });
+
+    $sidebar.affix({
+      offset: {
+        top: function() {
+          var offsetTop = $sidebar.offset().top;
+          var nPadding = 40;
+          return (this.top = offsetTop - nPadding - $navbar.height());
+        }, bottom: function() {
+          return (this.bottom = $('.bs-page-footer').outerHeight(true));
+        }
+      } 
+    });
+  }
+});
+</script>

@@ -5,6 +5,10 @@ description: See all useful features of summernote in action.
 permalink: /examples/
 ---
 
+<script>
+location.href = '/examples/basic.html';
+</script>
+
 ## Themes with booswatch
 Style changed accroding to bootstrap theme.
 More bootstrap theme: [Bootswatch](http://bootswatch.com)
