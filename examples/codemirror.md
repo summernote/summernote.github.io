@@ -2,7 +2,6 @@
 layout: example
 ---
 
-
 ## Codemirror as codeview
 
 If you include a `CodeMirror` on a page, you can use CodeMirror to Codeview. Include jQuery, Bootstrap, font-awesome and CodeMirror with summernote.
@@ -27,7 +26,6 @@ If you include a `CodeMirror` on a page, you can use CodeMirror to Codeview. Inc
 {% endhighlight %}
 
 Initialize Summernote with codemirror options
-
 
 {% highlight javascript %}
 $('.summernote').summernote({

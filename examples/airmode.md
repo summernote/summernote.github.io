@@ -1,7 +1,6 @@
 ---
 layout: example
 ---
-
 ## Air-mode
 Air-mode gives clearer interface with hiddened toolbar. To reveal toolbar, select a text where you want to shape up. Simply turn on `airMode` and just focus on text.
 
@@ -29,5 +28,3 @@ $('.summernote').summernote({
     });
   });
 </script>
-
-
