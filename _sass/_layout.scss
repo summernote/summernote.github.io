@@ -41,3 +41,7 @@ body {
 .header-bi {
   @include img('/img/img_gnb_bi', 132px, 16px);
 }
+
+.show-grid {
+  margin-bottom: 15px;
+}
