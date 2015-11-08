@@ -11,7 +11,7 @@ body.index {
 /* Index typography
 -------------------------------------------------- */
 body.index {
-  h3 {
+  h3 img_main_picture{
     font-size: 18px;
     font-weight: bold;
     color: #42515f;
@@ -27,7 +27,7 @@ body.index {
 -------------------------------------------------- */
 .index-main-background {
   position: absolute;
-  @include at2x('/img/img_main_picture');
+  @include at2x('/img/img_main_picture', 'jpg');
   z-index: -1;
   width: 100%;
   height: 466px;
@@ -61,7 +61,11 @@ $index-title-margin: 120px;
   height: 174px;
   vertical-align: middle;
 
-  h3 {
+  a {
+    display: inline-block;
+  }
+
+  .card-title {
     margin-top: 13px;
     margin-bottom: 5px;
   }
@@ -100,15 +104,29 @@ $index-title-margin: 120px;
   width: 152px;
 }
 
+.summary-section {
+  padding-top: 12px;
+
+  h3 {
+    margin-bottom: 8px;
+  }
+
+}
+
 .twitter-list {
   padding: 36px 38px !important;
   background: #ffffff;
+
+  .twitter-title {
+    padding-left: 2px;
+    margin-bottom: 14px;
+  }
 }
 
 /* Index page image sprites
 -------------------------------------------------- */
 .img-index-title {
-  margin-right: 48px;
+  margin-right: 36px;
   @include img('/img/img_main_title', 432px, 84px);
 }
 
