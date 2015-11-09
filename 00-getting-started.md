@@ -147,7 +147,7 @@ $('#summernote').summernote('code', markupStr);
 
 for more detail api: [deep dive with api](/deep-dive/#api)
 
-## I18n support
+## i18n support
 
 ### Language
 
