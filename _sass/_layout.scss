@@ -56,3 +56,43 @@ body {
 .show-grid {
   margin-bottom: 15px;
 }
+
+.navbar-default {
+  .header-social > li > a,
+  .header-social > li > a:hover,
+  .header-social > li > a:focus,
+  .header-social > li > a:visited {
+    font-size: 15px;
+    color: #d5f6ff;
+  }
+}
+
+.header-social {
+  .tweet {
+    &:before {
+      content: "";
+      display: inline-block;
+      @include at2x('/img/img_gnb_twitter');
+      width: 22px;
+      height: 22px;
+      background-repeat: no-repeat;
+      background-size: 22px 22px;
+      vertical-align: bottom;
+      margin-right: 2px;
+    }
+  }
+
+  .github {
+    &:before {
+      content: "";
+      display: inline-block;
+      @include at2x('/img/img_gnb_github');
+      width: 22px;
+      height: 22px;
+      background-repeat: no-repeat;
+      background-size: 22px 22px;
+      vertical-align: bottom;
+      margin-right: 2px;
+    }
+  }
+}
