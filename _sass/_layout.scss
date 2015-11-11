@@ -1,6 +1,9 @@
 /* Fixed header
 -------------------------------------------------- */
 $header-height: 80px;
+$header-height-xs: 100px;
+
+$screen-width-xs: 767px;
 html {
   position: relative;
   min-height: 100%;
@@ -23,6 +26,9 @@ body {
   opacity: .9;
   border: 0;
   border-radius: 0;
+  @media screen and (max-width: $screen-width-xs) {
+    height: $header-height-xs;
+  }
 }
 
 .fix-header-brand {
@@ -43,6 +49,11 @@ body {
   margin-top: 15px;
   margin-right: 25px;
   background-repeat: no-repeat;
+  @media screen and (max-width: $screen-width-xs) {
+    position: absolute;
+    left: 50%;
+    margin-left: -66px;
+  }
 }
 
 .ir {
@@ -93,6 +104,22 @@ body {
       background-size: 22px 22px;
       vertical-align: bottom;
       margin-right: 2px;
+    }
+  }
+}
+
+@media screen and (max-width: $screen-width-xs) {
+  .navbar-default {
+    .navbar-toggle {
+      float: left;
+      margin-left: 30px;
+      background-color: transparent;
+      border: none;
+      padding-left: 0;
+      padding-right: 0;
+      .icon-bar {
+        background-color: #fff;
+      }
     }
   }
 }

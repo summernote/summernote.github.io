@@ -37,10 +37,15 @@ body.index {
 }
 
 $index-title-margin: 120px;
+$index-title-margin-xs: 65px;
 
 .index-title {
   margin-top: $index-title-margin + $header-height;
   margin-bottom: $index-title-margin;
+  @media screen and (max-width: $screen-width-xs) {
+    margin-top: $index-title-margin-xs + $header-height;
+    margin-bottom: $index-title-margin-xs;
+  }
 }
 
 /* Index section 1
@@ -152,4 +157,16 @@ $index-title-margin: 120px;
 
 .img-index-backend {
   @include img('/img/img_main_backend', 76px, 76px);
+}
+
+/* Index page download button
+-------------------------------------------------- */
+#download {
+  display: inline-block;
+  @media screen and (max-width: $screen-width-xs) {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 10000;
+  }
 }
