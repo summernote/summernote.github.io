@@ -1,7 +1,7 @@
 /* Fixed header
 -------------------------------------------------- */
 $header-height: 80px;
-$header-height-xs: 100px;
+$header-height-xs: 50px;
 
 $screen-width-xs: 767px;
 html {
@@ -28,6 +28,7 @@ body {
   border-radius: 0;
   @media screen and (max-width: $screen-width-xs) {
     height: $header-height-xs;
+    padding-top: 0;
   }
 }
 
@@ -37,6 +38,9 @@ body {
 
 .header-page-container {
   margin-top: 10px;
+  @media screen and (max-width: $screen-width-xs) {
+    margin-top: 0;
+  }
 }
 
 .header-page-link {
@@ -49,10 +53,13 @@ body {
   margin-top: 15px;
   margin-right: 25px;
   background-repeat: no-repeat;
+  @include img_media('/img/m_gnb_bi', 120px, 34px, $screen-width-xs);
   @media screen and (max-width: $screen-width-xs) {
     position: absolute;
     left: 50%;
-    margin-left: -66px;
+    margin-left: -60px;
+    padding: 0;
+    margin-top: 8px;
   }
 }
 
@@ -112,13 +119,15 @@ body {
   .navbar-default {
     .navbar-toggle {
       float: left;
-      margin-left: 30px;
+      margin-left: 15px;
       background-color: transparent;
       border: none;
+      padding-top: 10px;
       padding-left: 0;
       padding-right: 0;
       .icon-bar {
         background-color: #fff;
+        width: 20px
       }
     }
   }

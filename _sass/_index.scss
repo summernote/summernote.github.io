@@ -34,16 +34,20 @@ body.index {
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
+  @include at2x_media('/img/m_main_bg', $screen-width-xs, 'jpg');
+  @media screen and (max-width: $screen-width-xs){
+    height: 210px;
+  }
 }
 
 $index-title-margin: 120px;
-$index-title-margin-xs: 65px;
+$index-title-margin-xs: 59px;
 
 .index-title {
   margin-top: $index-title-margin + $header-height;
   margin-bottom: $index-title-margin;
   @media screen and (max-width: $screen-width-xs) {
-    margin-top: $index-title-margin-xs + $header-height;
+    margin-top: $index-title-margin-xs + $header-height-xs;
     margin-bottom: $index-title-margin-xs;
   }
 }
@@ -133,6 +137,10 @@ $index-title-margin-xs: 65px;
 .img-index-title {
   margin-right: 36px;
   @include img('/img/img_main_title', 432px, 84px);
+  @include img_media('/img/m_main_title', 242px, 42px, $screen-width-xs);
+  @media screen and (max-width: $screen-width-xs) {
+    margin-right: 0;
+  }
 }
 
 .img-index-download {
@@ -165,8 +173,12 @@ $index-title-margin-xs: 65px;
   display: inline-block;
   @media screen and (max-width: $screen-width-xs) {
     position: absolute;
-    top: 0;
-    right: 0;
-    z-index: 10000;
+    padding: 0;
+    top: 8px;
+    right: 8px;
+    z-index: 1100;
+  }
+  .img-index-download {
+    @include img_media('/img/m_gnb_download', 34px, 34px, $screen-width-xs);
   }
 }
