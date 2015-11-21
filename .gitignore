@@ -8,6 +8,9 @@ node_modules
 # sass cache
 .sass-cache
 
+# bower
+components/
+
 # intellij
 *.iml
 *.ipr
