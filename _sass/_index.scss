@@ -56,10 +56,18 @@ $index-title-margin-xs: 59px;
 -------------------------------------------------- */
 .index-section-1 {
   margin-bottom: 60px;
+  @media screen and (max-width: $screen-width-xs) {
+    margin-bottom: 30px;
+  }
 }
 
 .card-list {
   margin-top: 60px;
+  position: relative;
+  @media screen and (max-width: $screen-width-xs) {
+    margin-top: 33px;
+    margin-left: 12px;
+  }
 }
 
 .card-item {
@@ -69,6 +77,15 @@ $index-title-margin-xs: 59px;
   width: 184px;
   height: 174px;
   vertical-align: middle;
+  @media screen and (max-width: $screen-width-xs) {
+    margin-right: 9px;
+    margin-left: 10px;
+    box-sizing: content-box;
+    height: auto;
+    &:first-child {
+      padding-left: 41px;
+    }
+  }
 
   a {
     display: inline-block;
@@ -77,11 +94,56 @@ $index-title-margin-xs: 59px;
   .card-title {
     margin-top: 13px;
     margin-bottom: 5px;
+    @media screen and (max-width: $screen-width-xs) {
+      font-size: 16px;
+    }
+  }
+
+  .card-body {
+    @media screen and (max-width: $screen-width-xs) {
+      font-size: 16px;
+    }
   }
 
   &:last-child {
     margin-right: 0;
   }
+}
+// slick carousel
+.card-arrow {
+  display: none;
+  @media screen and (max-width: $screen-width-xs) {
+    display: block;
+  }
+
+  .slick-prev {
+    position: absolute;
+    top: 50%;
+    padding: 0;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: transparent;
+    background-repeat: no-repeat;
+    font-size: 0;
+    line-height: 0;
+    display: none !important;
+    opacity: 0;
+    @include transition(opacity .5s ease-in-out);
+    @include img_media('/img/m_main_arrow_left', 18px, 32px, $screen-width-xs);
+    &.slick-disabled {
+      display: block !important;
+      opacity: 1;
+    }
+  }
+
+  .slick-next {
+    display: none !important;
+  }
+}
+
+.slick-slide {
+  width: 152px
 }
 
 /* Index section 2
@@ -145,26 +207,32 @@ $index-title-margin-xs: 59px;
 
 .img-index-download {
   @include img('/img/img_main_download', 100px, 100px);
+  @include img_media('/img/m_gnb_download', 34px, 34px, $screen-width-xs);
 }
 
 .img-index-install {
   @include img('/img/img_main_install', 76px, 76px);
+  @include img_media('/img/m_main_install', 61px, 61px, $screen-width-xs);
 }
 
 .img-index-customizing {
   @include img('/img/img_main_customizing', 76px, 76px);
+  @include img_media('/img/m_main_customizing', 61px, 61px, $screen-width-xs);
 }
 
 .img-index-shortcuts {
   @include img('/img/img_main_shortcuts', 76px, 76px);
+  @include img_media('/img/m_main_shortcuts', 61px, 61px, $screen-width-xs);
 }
 
 .img-index-opensource {
   @include img('/img/img_main_opensource', 76px, 76px);
+  @include img_media('/img/m_main_opensource', 61px, 61px, $screen-width-xs);
 }
 
 .img-index-backend {
   @include img('/img/img_main_backend', 76px, 76px);
+  @include img_media('/img/m_main_backend', 61px, 61px, $screen-width-xs);
 }
 
 /* Index page download button
@@ -177,8 +245,5 @@ $index-title-margin-xs: 59px;
     top: 8px;
     right: 8px;
     z-index: 1100;
-  }
-  .img-index-download {
-    @include img_media('/img/m_gnb_download', 34px, 34px, $screen-width-xs);
   }
 }

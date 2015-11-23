@@ -46,3 +46,11 @@
   }
   @include at2x_media($path, $max_width, $ext)
 }
+
+@mixin transition($args...) {
+  -webkit-transition: $args;
+  -moz-transition: $args;
+  -ms-transition: $args;
+  -o-transition: $args;
+  transition: $args;
+}
