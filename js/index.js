@@ -1,12 +1,12 @@
 $(document).ready(function() {
   if ($('.card-list').length) {
-    $('.card-list-inner').slick({
-      speed: 300,
-      infinite: false,
-      slidesToShow: 1,
-      slidesToScroll: 1,
-      appendArrows: $('.card-arrow'),
-      variableWidth: true
+    var $cardArrow = $('.card-arrow'),
+        $cardListInner = $('.card-list-inner');
+    $cardListInner.scroll(function() {
+      $cardArrow.addClass('disappear');
+      if ($cardListInner.scrollLeft() < 20) {
+        $cardArrow.removeClass('disappear');
+      }
     });
   }
 });

@@ -13,7 +13,6 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "summernote": "develop",
-    "slick-carousel": "~1.5.8"
+    "summernote": "develop"
   }
 }
