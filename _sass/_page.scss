@@ -5,6 +5,9 @@ $footer-height: 272px;
 body.page {
   margin-top: $header-height + 40px;
   margin-bottom: $footer-height;
+  @media screen and (max-width: $screen-width-xs) {
+    margin-bottom: 0;
+  }
 }
 
 .page-content {
@@ -22,9 +25,24 @@ body.page {
   background-image: linear-gradient($grid-color 1px, transparent 1px), linear-gradient(90deg, $grid-color 1px, transparent 1px);
   background-size: 10px 10px;
   text-align:center;
+  @media screen and (max-width: $screen-width-xs) {
+    position: static;
+    height: auto;
+    padding: 40px 20px 45px;
+    background-image: none;
+    background: rgba(182, 203, 217, 0.25);
+
+    a {
+      color: #5293c1;
+    }
+  }
+
   p {
     color: #7f95a9 !important;
     font-size: 15px !important;
+    @media screen and (max-width: $screen-width-xs) {
+      font-size: 12px !important;
+    }
   }
 }
 

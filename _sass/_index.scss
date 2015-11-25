@@ -152,6 +152,10 @@ $index-title-margin-xs: 59px;
   padding-top: 68px;
   padding-bottom: 60px;
   background: rgba(183, 203, 216, 0.16);
+  @media screen and (max-width: $screen-width-xs) {
+    padding: 49px 17px 0;
+    background: rgba(182, 203, 217, 0.15);
+  }
 
   .col-sm-6 {
     margin-top: 68px;
@@ -164,6 +168,10 @@ $index-title-margin-xs: 59px;
 
   h3 {
     margin-top: 40px;
+    @media screen and (max-width: $screen-width-xs) {
+      margin-top: 29px;
+      font-size: 16px !important;
+    }
 
     &:first-child {
       margin-top: 0;
@@ -173,10 +181,21 @@ $index-title-margin-xs: 59px;
 
 .btn-donate {
   width: 152px;
+  @media screen and (max-width: $screen-width-xs) {
+    width: 100%;
+    margin-top: 6px;
+    margin-bottom: 51px;
+    padding: 9px 20px;
+  }
 }
 
 .summary-section {
   padding-top: 12px;
+  @media screen and (max-width: $screen-width-xs) {
+    padding-top: 0;
+    padding-left: 17px;
+    padding-right: 17px;
+  }
 
   h3 {
     margin-bottom: 8px;
@@ -187,10 +206,17 @@ $index-title-margin-xs: 59px;
 .twitter-list {
   padding: 36px 38px !important;
   background: #ffffff;
+  @media screen and (max-width: $screen-width-xs) {
+    padding: 26px 16px !important;
+  }
 
   .twitter-title {
     padding-left: 2px;
     margin-bottom: 14px;
+    @media screen and (max-width: $screen-width-xs) {
+      padding-left: 1px;
+      margin-bottom: 13px;
+    }
   }
 }
 
