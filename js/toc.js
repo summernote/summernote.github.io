@@ -12,7 +12,7 @@
 
   $.fn.toc = function (options) {
     var $container = $(this);
-    var $headers = $('h1, h2, h3, h4, h5, h6').filter(function () {
+    var $headers = $('h1, h2, h3, h4').filter(function () {
       var $header = $(this);
       var prevName = $header.prev().attr('name');
       if (!$header.attr('id') && prevName) {
