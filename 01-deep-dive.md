@@ -83,65 +83,34 @@ $('#summernote').summernote({
   popover: {
     air: [
       ['color', ['color']],
-      ['font', ['bold', 'underline', 'clear']],
-      ['para', ['ul', 'paragraph']],
-      ['table', ['table']],
-      ['insert', ['link', 'picture']]
+      ['font', ['bold', 'underline', 'clear']]
     ]
   }
 });
 {% endhighlight %}
 
-## Module system
-> ##### Plugins replaced by module after `v0.7.0`
-> We decided to merge plugin and module together and did restructuring every eventHandler and rendering system. Old plugin system was hard to control states of editor(eg, range, history, document, ...), so we did it.
+You can also setup buttons of the other popovers in the same way. Below settings are default options for popovers.
 
-### Define module
 {% highlight javascript %}
-// Module Name is AutoLink
-// @param {Object} context - states of editor
-var AutoLink = function (context) {
-
-  // you can get current editor's elements from layoutInfo
-  var layoutInfo = context.layoutInfo;
-  var $editor = layoutInfo.editor;
-  var $editable = layoutInfo.editable;
-  var $toolbar = layoutInfo.toolbar;
-
-  // ui is a set of renderers to build ui elements.
-  var ui = $.summernote.ui;
-
-  // this method will be called when editor is initialized by $('..').summernote();
-  // You can attach events and created elements on editor elements(eg, editable, ...).
-  this.initialize = function () {
-    // create button
-    var button = ui.button({
-      className: 'note-btn-bold',
-      contents: '<i class="fa fa-bold">'
-      click: function (e) {
-        context.invoke('editor.bold'); // invoke bold method of a module named editor
-      }
-    });
-
-    // generate jQuery element from button instance.
-    this.$button = button.render();
-    $toolbar.append(this.$button);
-  }
-
-  // this method will be called when editor is destroyed by $('..').summernote('destroy');
-  // You should detach events and remove elements on `initialize`.
-  this.destroy = function () {
-    this.$button.remove();
-    this.$button = null;
-  }
-};
+popover: {
+  image: [
+    ['imagesize', ['imageSize100', 'imageSize50', 'imageSize25']],
+    ['float', ['floatLeft', 'floatRight', 'floatNone']],
+    ['remove', ['removeMedia']]
+  ],
+  link: [
+    ['link', ['linkDialogShow', 'unlink']]
+  ],
+  air: [
+    ['color', ['color']],
+    ['font', ['bold', 'underline', 'clear']],
+    ['para', ['ul', 'paragraph']],
+    ['table', ['table']],
+    ['insert', ['link', 'picture']]
+  ]
+}
 {% endhighlight %}
 
-For more module examples: [modules]({{ site.repository }}/tree/develop/src/js/bs3/module)
-
-### Initalize with module
-
-blah blah blah~
 
 ## About API
 
@@ -543,3 +512,111 @@ $('#summernote').on('summernote.change', function(we, contents, $editable) {
   console.log('summernote\'s content is changed.');
 });
 {% endhighlight %}
+
+## Module system
+
+For supporting expandable features, summernote was assembled by module system. This module system was built inspired by spring framework.
+
+### Key terms
+
+* Module: This is a component for supporting feature.
+* Context: Context is a kind of container. It has modules and editor's states.
+* Renderer: Renderer is a function for creating element.
+* UI: UI is a set of renderers to build ui elements.
+
+### Module
+
+Module is a component for implementing feature and it has lifecycle. Module also has helper methods or methods related with lifecycle.
+
+#### initialize
+
+This method will be called when editor is initialized by $('..').summernote();. You can attach events and created elements on editor elements(eg, editable, ...).
+
+{% highlight javascript %}
+this.initialize = function () {
+  // create button
+  var button = ui.button({
+    className: 'note-btn-bold',
+    contents: '<i class="fa fa-bold">'
+    click: function (e) {
+      context.invoke('editor.bold'); // invoke bold method of a module named editor
+    }
+  });
+
+  // generate jQuery element from button instance.
+  this.$button = button.render();
+  $toolbar.append(this.$button);
+}
+{% endhighlight %}
+
+#### destroy
+this method will be called when editor is destroyed by $('..').summernote('destroy'); You should detach events and remove elements on `initialize`.
+
+{% highlight javascript %}
+this.destroy = function () {
+  this.$button.remove();
+  this.$button = null;
+}
+{% endhighlight %}
+
+#### shouldInitialize
+This method used for deciding whether module will be initialized or not.
+
+{% highlight javascript %}
+// AirPopover's shouldInitialize
+this.shouldInitialize = function () {
+  return options.airMode && !list.isEmpty(options.popover.air);
+};
+{% endhighlight %}
+
+Below are full codes of AutoLink module.
+
+{% highlight javascript %}
+// Module Name is AutoLink
+// @param {Object} context - states of editor
+var AutoLink = function (context) {
+
+  // you can get current editor's elements from layoutInfo
+  var layoutInfo = context.layoutInfo;
+  var $editor = layoutInfo.editor;
+  var $editable = layoutInfo.editable;
+  var $toolbar = layoutInfo.toolbar;
+
+  // ui is a set of renderers to build ui elements.
+  var ui = $.summernote.ui;
+
+  // this method will be called when editor is initialized by $('..').summernote();
+  // You can attach events and created elements on editor elements(eg, editable, ...).
+  this.initialize = function () {
+    // create button
+    var button = ui.button({
+      className: 'note-btn-bold',
+      contents: '<i class="fa fa-bold">'
+      click: function (e) {
+        // invoke bold method of a module named editor
+        context.invoke('editor.bold');
+      }
+    });
+
+    // generate jQuery element from button instance.
+    this.$button = button.render();
+    $toolbar.append(this.$button);
+  }
+
+  // this method will be called when editor is destroyed by $('..').summernote('destroy');
+  // You should detach events and remove elements on `initialize`.
+  this.destroy = function () {
+    this.$button.remove();
+    this.$button = null;
+  }
+};
+{% endhighlight %}
+
+For more module examples: [modules]({{ site.repository }}/tree/develop/src/js/bs3/module)
+
+### External module
+
+blah blah blah...
+
+> ##### Plugins replaced by module after `v0.7.0`
+> We decided to merge plugin and module together and did restructuring every eventHandler and rendering system. Old plugin system was hard to control states of editor(eg, range, history, document, ...), so we did it.
