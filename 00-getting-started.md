@@ -147,6 +147,9 @@ $('#summernote').summernote('code', markupStr);
 
 for more detail api: [deep dive with api](/deep-dive/#api)
 
+> ##### destroy and code
+> After v0.7.0, direct jquery methods, `destroy` and `code` were removed for avoiding conflict with other jquery libraries. You can call this methods with summernote api.
+
 ## i18n support
 
 ### Language
