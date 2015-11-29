@@ -112,7 +112,7 @@ popover: {
 {% endhighlight %}
 
 
-## About API
+## Range API
 
 You can initialize summernote with `summernote`.
 
@@ -135,8 +135,6 @@ $('#summernote').summernote('insertText', 'hello world');
 {% endhighlight %}
 
 A module named `editor` supports several methods for editor's basic behavior
-
-## Range API
 
 ### createRange
 
@@ -264,15 +262,11 @@ $('#summernote').summernote('insertParagraph');
 
 ### insertOrderedList
 
-toggle ordered list
+toggle ordered list and unordered list
 
 {% highlight javascript %}
 $('#summernote').summernote('insertOrderedList');
 {% endhighlight %}
-
-### insertUnorderedList
-
-toggle unordered list
 
 {% highlight javascript %}
 $('#summernote').summernote('insertUnorderedList');
@@ -398,7 +392,7 @@ $('#summernote').on('summernote.enter', function() {
 });
 {% endhighlight %}
 
-### onFocus
+### onFocus, onBlur
 {% highlight javascript %}
 // onFocus callback
 $('#summernote').summernote({
@@ -413,7 +407,6 @@ $('#summernote').on('summernote.focus', function() {
 });
 {% endhighlight %}
 
-### onBlur
 {% highlight javascript %}
 // onBlur callback
 $('#summernote').summernote({
@@ -428,7 +421,7 @@ $('#summernote').on('summernote.blur', function() {
 });
 {% endhighlight %}
 
-### onKeyup
+### onKeyup, onKeydown
 {% highlight javascript %}
 // onKeyup callback
 $('#summernote').summernote({
@@ -443,7 +436,6 @@ $('#summernote').on('summernote.keyup', function(we, e) {
 });
 {% endhighlight %}
 
-### onKeydown
 {% highlight javascript %}
 // onKeydown callback
 $('#summernote').summernote({
