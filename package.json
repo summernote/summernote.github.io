@@ -1,0 +1,23 @@
+{
+  "name": "summernote.github.io",
+  "version": "1.0.0",
+  "description": "An official website for summernote WYSIWYG editor.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/summernote/summernote.github.io.git"
+  },
+  "author": {
+    "name": "hackerwins",
+    "email": "<susukang98@gmail.com>"
+  },
+  "license": "MIT",
+  "private": true,
+  "bugs": {
+    "url": "https://github.com/summernote/summernote.github.io/issues"
+  },
+  "homepage": "http://summernote.org/"
+}
