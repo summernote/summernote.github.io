@@ -162,7 +162,7 @@ Summernote support autocomplete features, hint for helping typing. You can defin
 </colgroup>
 <thead>
   <tr>
-    <th>Property</th>
+    <th>Key</th>
     <th>Type</th>
     <th>Description</th>
   </tr>
