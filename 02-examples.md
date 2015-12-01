@@ -5,14 +5,6 @@ description: See all useful features of summernote in action.
 permalink: /examples/
 ---
 
-## Themes with booswatch
-Style changed accroding to bootstrap theme.
-More bootstrap theme: [Bootswatch](http://bootswatch.com)
-
-<div class="well" style="background-color:white;">
-  <iframe src="/themes.html" width="100%" height="300" frameborder="0"></iframe>
-</div>
-
 ## Air-mode
 Air-mode gives clearer interface with hiddened toolbar. To reveal toolbar, select a text where you want to shape up. Simply turn on `airMode` and just focus on text.
 
@@ -41,57 +33,11 @@ $('.summernote').summernote({
   });
 </script>
 
-## Codemirror as codeview
+## Themes with booswatch
+Style changed accroding to bootstrap theme.
+More bootstrap theme: [Bootswatch]("http://bootswatch.com)
 
-If you include a `CodeMirror` on a page, you can use CodeMirror to Codeview. Include jQuery, Bootstrap, font-awesome and CodeMirror with summernote.
-
-{% highlight html %}
-<!-- include libraries(jQuery, bootstrap, fontawesome) -->
-<link href="{{ site.bootstrap_css }}" rel="stylesheet"> 
-<link href="{{ site.fontawesome_css }}" rel="stylesheet">
-<script src="{{ site.jquery_js }}"></script> 
-<script src="{{ site.bootstrap_js }}"></script> 
-
-<!-- include codemirror (codemirror.css, codemirror.js, xml.js, formatting.js) -->
-<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/codemirror.css">
-<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/theme/monokai.css">
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/codemirror.js"></script>
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/mode/xml/xml.js"></script>
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/2.36.0/formatting.js"></script>
-
-<!-- include summernote css/js-->
-<link href="summernote.css">
-<script src="summernote.js"></script>
-{% endhighlight %}
-
-Initialize Summernote with codemirror options
-
-
-{% highlight javascript %}
-$('.summernote').summernote({
-  height: 150,   //set editable area's height
-  codemirror: { // codemirror options
-    theme: 'monokai'
-  }
-});
-{% endhighlight %}
-
-<textarea class="codemirror">Click <b>Code View</b>!!!</textarea>
-<script>
-  $(function() {
-    $('.codemirror').summernote({
-      height: 150,
-      codemirror: { // codemirror options
-        mode: 'text/html',
-        htmlMode: true,
-        lineNumbers: true,
-        theme: 'monokai'
-      }
-    });
-  });
-</script>
-
-[CodeMirror](http://codemirror.net) is a versatile text editor implemented in JavaScript for the browser. It is specialized for editing code, and comes with a number of language modes and addons that implement more advanced editing functionaly.
+<iframe src="/themes.html" width="100%" height="300" frameborder="0"></iframe>
 
 ## Multiple Editor
 To display multiple editors on a page, you need to place more than two `<div>` elements in HTML.
@@ -116,6 +62,7 @@ $(document).ready(function() {
     $('.multiple').summernote();
   });
 </script>
+
 
 ## Click to edit
 You can edit content on the fly.
@@ -153,3 +100,246 @@ var save = function() {
     $('.click2edit').summernote('destroy');
   };
 </script>
+
+## Codemirror as codeview
+
+If you include a `CodeMirror` on a page, you can use CodeMirror to Codeview. Include jQuery, Bootstrap, font-awesome and CodeMirror with summernote.
+
+{% highlight html %}
+<!-- include libraries(jQuery, bootstrap, fontawesome) -->
+<link href="{{ site.bootstrap_css }}" rel="stylesheet"> 
+<link href="{{ site.fontawesome_css }}" rel="stylesheet">
+<script src="{{ site.jquery_js }}"></script> 
+<script src="{{ site.bootstrap_js }}"></script> 
+
+<!-- include codemirror (codemirror.css, codemirror.js, xml.js, formatting.js) -->
+<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/codemirror.css">
+<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/theme/monokai.css">
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/codemirror.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/mode/xml/xml.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/2.36.0/formatting.js"></script>
+
+<!-- include summernote css/js-->
+<link href="summernote.css">
+<script src="summernote.js"></script>
+{% endhighlight %}
+
+Initialize Summernote with codemirror options
+
+{% highlight javascript %}
+$('.summernote').summernote({
+  height: 150,   //set editable area's height
+  codemirror: { // codemirror options
+    theme: 'monokai'
+  }
+});
+{% endhighlight %}
+
+<textarea class="codemirror">Click <b>Code View</b>!!!</textarea>
+<script>
+  $(function() {
+    $('.codemirror').summernote({
+      height: 150,
+      codemirror: { // codemirror options
+        mode: 'text/html',
+        htmlMode: true,
+        lineNumbers: true,
+        theme: 'monokai'
+      }
+    });
+  });
+</script>
+
+[CodeMirror](http://codemirror.net) is a versatile text editor implemented in JavaScript for the browser. It is specialized for editing code, and comes with a number of language modes and addons that implement more advanced editing functionaly.
+
+## Hint 
+
+Summernote support autocomplete features, hint for helping typing. You can define custom hint with options. Hint options can be object or array for multiple hints.
+<table class="table"> 
+<colgroup>
+  <col />
+  <col width="200px;" />
+</colgroup>
+<thead>
+  <tr>
+    <th>Property</th>
+    <th>Type</th>
+    <th>Description</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>match</td>
+    <td>RegExp <code>required</code></td>
+    <td>Regular expression for checking trigger pattern.</td>
+  </tr>
+  <tr>
+    <td>search</td>
+    <td>Function <code>required</code></td>
+    <td>Handler for matched keyword. You can passed suggestion items with callback. First argument is keyword and second is callback.</td>
+  </tr>
+  <tr>
+    <td>template</td>
+    <td>Function <code>optional</code></td>
+    <td>Item template on suggestion popover. This function get item as argument and should return String type.</td>
+  </tr>      
+  <tr>
+    <td>content</td>
+    <td>Function <code>optional</code></td>
+    <td>Template function for insertion. You can switch item with node for insertion with this function. This function get item as first argument and should return Element or String.</td>
+  </tr>      
+</tbody>
+</table>
+
+### hint for words
+
+<div class="hint2basic"></div>
+<script type="text/javascript">
+$(".hint2basic").summernote({
+  height: 100,
+  toolbar: false,
+  placeholder: 'type with apple, orange, watermelon, lemon',
+  hint: {
+    words: ['apple', 'orange', 'watermelon', 'lemon'],
+    match: /\b(\w{1,})$/,
+    search: function (keyword, callback) {
+      callback($.grep(this.words, function (item) {
+        return item.indexOf(keyword) === 0;
+      }));
+    }
+  }
+});
+</script>
+{% highlight javascript %}
+$(".hint2basic").summernote({
+  height: 100,
+  toolbar: false,
+  placeholder: 'type with apple, orange, watermelon and lemon',
+  hint: {
+    words: ['apple', 'orange', 'watermelon', 'lemon'],
+    match: /\b(\w{1,})$/,
+    search: function (keyword, callback) {
+      callback($.grep(this.words, function (item) {
+        return item.indexOf(keyword) === 0;
+      }));
+    }
+  }
+});
+{% endhighlight %}
+
+### hint for emoji
+emoji: use `https://api.github.com/emojis`
+
+<div class="hint2emoji"></div>
+<script type="text/javascript">
+
+$.ajax({
+  url: 'https://api.github.com/emojis',
+  async: false
+}).then(function(data) {
+  window.emojis = Object.keys(data);
+  window.emojiUrls = data; 
+});;
+
+$(".hint2emoji").summernote({
+  height: 100,
+  toolbar: false,
+  placeholder: 'type starting with : and any alphabet',
+  hint: {
+    match: /\B:([\-+\w]+)$/,
+    search: function (keyword, callback) {
+      callback($.grep(emojis, function (item) {
+        return item.indexOf(keyword)  === 0;
+      }));
+    },
+    template: function (item) {
+      var content = emojiUrls[item];
+      return '<img src="' + content + '" width="20" /> :' + item + ':';
+    },
+    content: function (item) {
+      var url = emojiUrls[item];
+      if (url) {
+        return $('<img />').attr('src', url).css('width', 20)[0];
+      }
+      return '';
+    }
+  }
+});
+</script>
+{% highlight javascript %}
+
+$.ajax({
+  url: 'https://api.github.com/emojis',
+  async: false 
+}).then(function(data) {
+  window.emojis = Object.keys(data);
+  window.emojiUrls = data; 
+});;
+
+$(".hint2emoji").summernote({
+  height: 100,
+  toolbar: false,
+  placeholder: 'type starting with : and any alphabet',
+  hint: {
+    match: /:([\-+\w]+)$/,
+    search: function (keyword, callback) {
+      callback($.grep(emojis, function (item) {
+        return item.indexOf(keyword)  === 0;
+      }));
+    },
+    template: function (item) {
+      var content = emojiUrls[item];
+      return '<img src="' + content + '" width="20" /> :' + item + ':';
+    },
+    content: function (item) {
+      var url = emojiUrls[item];
+      if (url) {
+        return $('<img />').attr('src', url).css('width', 20)[0];
+      }
+      return '';
+    }
+  }
+});
+{% endhighlight %}
+
+### hint for mention
+mention: [jayden, sam, alvin, david] 
+
+<div class="hint2mention"></div>
+<script type="text/javascript">
+$(".hint2mention").summernote({
+  height: 100,
+  toolbar: false,
+  placeholder: 'type starting with @',
+  hint: {
+    mentions: ['jayden', 'sam', 'alvin', 'david'],
+    match: /@(\w*)$/,
+    search: function (keyword, callback) {
+      callback($.grep(this.mentions, function (item) {
+        return item.indexOf(keyword) == 0;
+      }));
+    },
+    content: function (item) {
+      return '@' + item;
+    }    
+  }
+});
+</script>
+{% highlight javascript %}
+$(".hint2mention").summernote({
+  height: 100,
+  toolbar: false,
+  hint: {
+    mentions: ['jayden', 'sam', 'alvin', 'david'],
+    match: /\B@(\w*)$/,
+    search: function (keyword, callback) {
+      callback($.grep(this.mentions, function (item) {
+        return item.indexOf(keyword) == 0;
+      }));
+    },
+    content: function (item) {
+      return '@' + item;
+    }    
+  }
+});
+{% endhighlight %}
