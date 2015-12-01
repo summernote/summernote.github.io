@@ -74,7 +74,7 @@ You can compose a toolbar with pre-shipped buttons.
   * `redo`: redo
   * `help`: open help dialog
 
-### Custom popover for air-mode
+### Custom popover
 
 Air-mode has its own popover, not toolbar. You can customize it with <code>popover.air</code> option.
 

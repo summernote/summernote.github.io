@@ -191,7 +191,7 @@ Summernote support autocomplete features, hint for helping typing. You can defin
 </tbody>
 </table>
 
-### hint for words
+### Hint for words
 
 <div class="hint2basic"></div>
 <script type="text/javascript">
@@ -227,7 +227,7 @@ $(".hint2basic").summernote({
 });
 {% endhighlight %}
 
-### hint for emoji
+### Hint for emoji
 emoji: use `https://api.github.com/emojis`
 
 <div class="hint2emoji"></div>
@@ -302,7 +302,7 @@ $(".hint2emoji").summernote({
 });
 {% endhighlight %}
 
-### hint for mention
+### Hint for mention
 mention: [jayden, sam, alvin, david] 
 
 <div class="hint2mention"></div>
