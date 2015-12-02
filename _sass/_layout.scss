@@ -22,13 +22,45 @@ body {
   margin-bottom: 0;
   padding-top: 15px;
   height: $header-height;
-  background: #3fc6f7;
+  background-color: #3fc6f7;
   opacity: .9;
   border: 0;
   border-radius: 0;
   @media screen and (max-width: $screen-width-xs) {
     height: $header-height-xs;
     padding-top: 0;
+    background-color: transparent;
+
+    .navbar-toggle {
+      float: left;
+      margin-left: 15px;
+      background-color: transparent;
+      border: none;
+      padding-top: 10px;
+      padding-left: 0;
+      padding-right: 0;
+      .icon-bar {
+        background-color: #fff;
+        width: 20px
+      }
+    }
+
+    .navbar-header {
+      background-color: #3fc6f7;
+      padding-top: 1px;
+    }
+
+    .collapse {
+      border: none;
+      background-color: #000;
+      opacity: 0.88;
+      max-height: 2000px;
+      height: 2000px;
+      width: 90%;
+      margin-left: -90%;
+      display: block;
+      @include transition(margin-left 0.4s ease-in-out);
+    }
   }
 }
 
@@ -83,6 +115,11 @@ body {
     font-size: 15px;
     color: #d5f6ff;
   }
+
+  .navbar-toggle:hover,
+  .navbar-toggle:focus {
+    background-color: transparent;
+  }
 }
 
 .header-social {
@@ -111,24 +148,6 @@ body {
       background-size: 22px 22px;
       vertical-align: bottom;
       margin-right: 2px;
-    }
-  }
-}
-
-@media screen and (max-width: $screen-width-xs) {
-  .navbar-default {
-    .navbar-toggle {
-      float: left;
-      margin-left: 15px;
-      background-color: transparent;
-      border: none;
-      padding-top: 10px;
-      padding-left: 0;
-      padding-right: 0;
-      .icon-bar {
-        background-color: #fff;
-        width: 20px
-      }
     }
   }
 }
