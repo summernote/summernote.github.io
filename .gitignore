@@ -9,7 +9,7 @@ node_modules
 .sass-cache
 
 # bower
-components/
+bower_components/
 
 # intellij
 *.iml
