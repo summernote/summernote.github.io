@@ -199,12 +199,10 @@ Handy update for your django admin page.
 * [django-summernote](https://github.com/summernote/django-summernote)
 * [Summernote plugin for Django](https://pypi.python.org/pypi/django-summernote)
 
-### summernote-rails (gem)
+### Ruby On Rails
 This gem was built to gemify the assets used in Summernote.
 
-* [summernote-rails](http://summernote.org/summernote-rails)
-* [summernote-test for Rails v4](https://github.com/rorlab/summernote-test)
-* [summernote-test-r3 for Rails v3.2.14](https://github.com/rorlab/summernote-test-r3)
+* [summernote-rails](https://github.com/summernote/summernote-rails)
 
 ### angular-summernote
 AngularJS directive to Summernote.
