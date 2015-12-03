@@ -39,15 +39,26 @@ body {
       padding-top: 10px;
       padding-left: 0;
       padding-right: 0;
+      @include transition(background-image 0.4s ease);
       .icon-bar {
         background-color: #fff;
         width: 20px
+      }
+      &.in {
+        @include img('/img/m_gnb_close', 34px, 34px);
+        margin-left: 8px;
+        .icon-bar {
+          display: none;
+        }
       }
     }
 
     .navbar-header {
       background-color: #3fc6f7;
+      opacity: 0.9;
       padding-top: 1px;
+      position: relative;
+      z-index: 9999;
     }
 
     .collapse {
@@ -59,7 +70,27 @@ body {
       width: 90%;
       margin-left: -90%;
       display: block;
+      position: relative;
+      z-index: 9000;
+      margin-top: -$header-height-xs;
+      padding-top: $header-height-xs;
       @include transition(margin-left 0.4s ease-in-out);
+
+      .navbar-nav {
+        margin-top: 28px;
+        & > li > a {
+          color: #fff !important;
+          font-size: 25px;
+          padding: 25px 22px;
+
+          &:hover {
+            color: #35c2f5 !important;
+          }
+        }
+      }
+      .header-social {
+        display: none;
+      }
     }
   }
 }

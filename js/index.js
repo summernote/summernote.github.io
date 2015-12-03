@@ -12,19 +12,23 @@ $(document).ready(function() {
 
   // sliding sidebar
   var $sidebar = $('.navbar-collapse'),
+      $navbarButton = $('.navbar-toggle'),
       defaultSidebarMargin = $sidebar.css('margin-left');
+
   var toggleSidebar = function() {
-     if ($sidebar.css('margin-left') === defaultSidebarMargin) {
-      $sidebar.css('margin-left', '0%');
-    } else if ($sidebar.css('margin-left') === '0px') {
+     if ($sidebar.css('margin-left') === defaultSidebarMargin) { // closed
+       $navbarButton.addClass('in');
+       $sidebar.css('margin-left', '0%');
+    } else if ($sidebar.css('margin-left') === '0px') { // opened
+       $navbarButton.removeClass('in');
       $sidebar.css('margin-left', defaultSidebarMargin);
     }
   };
-  $('.navbar-toggle').click(function() {
+  $navbarButton.click(function() {
     toggleSidebar();
   });
 
-  if ($('.navbar-toggle').css('display') === 'block') {
+  if ($navbarButton.css('display') === 'block') {
     $(document.body).click(function(e) {
       if (!$(e.target).closest('.collapse').length) {
         toggleSidebar();
