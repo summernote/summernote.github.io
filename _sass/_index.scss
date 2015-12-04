@@ -34,7 +34,6 @@ body.index {
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
-  @include at2x_media('/img/m_main_bg', $screen-width-xs, 'jpg');
   @media screen and (max-width: $screen-width-xs){
     height: 210px;
   }
