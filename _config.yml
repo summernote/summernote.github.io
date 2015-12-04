@@ -4,7 +4,7 @@ email: summernoteis@gmail.com
 description: > # this means to ignore newlines until "baseurl:"
   Super Simple WYSIWYG Editor on Bootstrap
   Summernote is a JavaScript library that helps you create WYSIWYG editors online.
-author: https://github.com/hackerwins
+author: https://github.com/summernote
 baseurl: "" # the subpath of your site, e.g. /blog/
 url: "http://summernote.org" # the base hostname & protocol for your site
 github_username: summernote

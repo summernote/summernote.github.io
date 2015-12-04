@@ -193,18 +193,18 @@ More summernote languages: [languages]({{ site.repository }}/tree/master/lang)
 ## Integration
 3rd parties available in django, rails, angular.
 
-### Django-summernote
+### Django
 Handy update for your django admin page.
 
-* [django-summernote](https://github.com/summernote/django-summernote)
-* [Summernote plugin for Django](https://pypi.python.org/pypi/django-summernote)
+* [django-summernote](https://github.com/summernote/django-summernote){:target="_blank"}
+* [summernote plugin for Django](https://pypi.python.org/pypi/django-summernote){:target="_blank"}
 
 ### Ruby On Rails
 This gem was built to gemify the assets used in Summernote.
 
-* [summernote-rails](https://github.com/summernote/summernote-rails)
+* [summernote-rails](https://github.com/summernote/summernote-rails){:target="_blank"}
 
-### angular-summernote
+### AngularJS
 AngularJS directive to Summernote.
 
 * [angular-summernote](https://github.com/summernote/angular-summernote)

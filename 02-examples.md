@@ -35,7 +35,7 @@ $('.summernote').summernote({
 
 ## Themes with booswatch
 Style changed accroding to bootstrap theme.
-More bootstrap theme: [Bootswatch]("http://bootswatch.com)
+More bootstrap theme: [Bootswatch](http://bootswatch.com){:target="_blank"}
 
 <iframe src="/themes.html" width="100%" height="300" frameborder="0"></iframe>
 
@@ -150,7 +150,7 @@ $('.summernote').summernote({
   });
 </script>
 
-[CodeMirror](http://codemirror.net) is a versatile text editor implemented in JavaScript for the browser. It is specialized for editing code, and comes with a number of language modes and addons that implement more advanced editing functionaly.
+[CodeMirror](http://codemirror.net){:target="_blank"} is a versatile text editor implemented in JavaScript for the browser. It is specialized for editing code, and comes with a number of language modes and addons that implement more advanced editing functionaly.
 
 ## Hint 
 
