@@ -5,7 +5,7 @@ description: Customize summernote's components, toolbar, plugins to get your ver
 permalink: /deep-dive/
 ---
 
-## Customization
+## Initialization options
 
 Customize by Initializing various options and modules.
 
@@ -111,6 +111,14 @@ popover: {
 }
 {% endhighlight %}
 
+### Custom placeholder
+You can define placeholder with placeholder options.
+
+{% highlight javascript %}
+$('#summernote').summernote({
+  placeholder: 'write here...'
+});
+{% endhighlight %}
 
 ## Basic API
 
