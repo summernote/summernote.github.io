@@ -55,8 +55,41 @@ $index-title-margin-xs: 59px;
 -------------------------------------------------- */
 .index-section-1 {
   margin-bottom: 60px;
+  position: relative;
   @media screen and (max-width: $screen-width-xs) {
     margin-bottom: 0;
+  }
+
+  .placeholder {
+    position: absolute;
+    top: 90px;
+    left: 95px;
+    font-size: 34px;
+    color: #e4e5e7;
+    display: none;
+
+    &:before {
+      content: "";
+      display: inline-block;
+      width: 3px;
+      height: 40px;
+      background-color: #53c3e8;
+      position: absolute;
+      left: -14px;
+      top: 3px;
+    }
+
+    @media screen and (max-width: $screen-width-xs) {
+      top: 140px;
+      left: 20px;
+      font-size: 24px;
+      width: 90%;
+      &:before {
+        top: 4px;
+        left: -6px;
+        height: 26px;
+      }
+    }
   }
 }
 
