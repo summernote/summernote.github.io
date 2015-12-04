@@ -359,6 +359,9 @@ $('#summernote').summernote('unlink');
 ## Callbacks
 Summernote support initialize callbacks and jquery's custom event style callbacks.
 
+> ##### Position of callbacks in options is changed after v0.7.0
+> After v0.7.0, every callbacks should be wrapped by `callbacks` object.
+
 > ##### Callback only works with camel case string after v0.6.5
 > Lowercase string has been used for basic event name(ex: `oninit`, `onenter`, `onfocus`, `onblur`, `onkeyup`, `onkeydown`, `onpaste`). In contrast, callbacks name for advanced feature has been used with camel case string. This is inconsistent and confusing to use. So we rename all lowercase callback to camel case string.
 
@@ -366,8 +369,10 @@ Summernote support initialize callbacks and jquery's custom event style callback
 {% highlight javascript %}
 // onInit callback
 $('#summernote').summernote({
-  onInit: function() {
-    console.log('Summernote is launched');
+  callbacks: {
+    onInit: function() {
+      console.log('Summernote is launched');
+    }
   }
 });
 
@@ -381,8 +386,10 @@ $('#summernote').on('summernote.init', function() {
 {% highlight javascript %}
 // onEnter callback
 $('#summernote').summernote({
-  onEnter: function() {
-    console.log('Enter/Return key pressed');
+  callbacks: {
+    onEnter: function() {
+      console.log('Enter/Return key pressed');
+    }
   }
 });
 
@@ -396,8 +403,10 @@ $('#summernote').on('summernote.enter', function() {
 {% highlight javascript %}
 // onFocus callback
 $('#summernote').summernote({
-  onFocus: function() {
-    console.log('Editable area is focused');
+  callbacks: {
+    onFocus: function() {
+      console.log('Editable area is focused');
+    }
   }
 });
 
@@ -410,8 +419,10 @@ $('#summernote').on('summernote.focus', function() {
 {% highlight javascript %}
 // onBlur callback
 $('#summernote').summernote({
-  onBlur: function() {
-    console.log('Editable area loses focus');
+  callbacks: {
+    onBlur: function() {
+      console.log('Editable area loses focus');
+    }
   }
 });
 
@@ -425,8 +436,10 @@ $('#summernote').on('summernote.blur', function() {
 {% highlight javascript %}
 // onKeyup callback
 $('#summernote').summernote({
-  onKeyup: function(e) {
-    console.log('Key is released:', e.keyCode);
+  callbacks: {
+    onKeyup: function(e) {
+      console.log('Key is released:', e.keyCode);
+    }
   }
 });
 
@@ -439,8 +452,10 @@ $('#summernote').on('summernote.keyup', function(we, e) {
 {% highlight javascript %}
 // onKeydown callback
 $('#summernote').summernote({
-  onKeydown: function(e) {
-    console.log('Key is downed:', e.keyCode);
+  callbacks: {
+    onKeydown: function(e) {
+      console.log('Key is downed:', e.keyCode);
+    }
   }
 });
 
@@ -454,8 +469,10 @@ $('#summernote').on('summernote.keydown', function(we, e) {
 {% highlight javascript %}
 // onPaste callback
 $('#summernote').summernote({
-  onPaste: function(e) {
-    console.log('Called event paste');
+  callbacks: {
+    onPaste: function(e) {
+      console.log('Called event paste');
+    }
   }
 });
 
@@ -473,9 +490,11 @@ You can upload image to server or AWS S3: [more...]({{ site.repository }}/issues
 {% highlight javascript %}
 // onImageUpload callback
 $('#summernote').summernote({
-  onImageUpload: function(files) {
-    // upload image to server and create imgNode...
-    $summernote.summernote('insertNode', imgNode);
+  callbacks: {
+    onImageUpload: function(files) {
+      // upload image to server and create imgNode...
+      $summernote.summernote('insertNode', imgNode);
+    }
   }
 });
 
@@ -494,8 +513,10 @@ $('#summernote').on('summernote.image.upload', function(we, files) {
 {% highlight javascript %}
 // onChange callback
 $('#summernote').summernote({
-  onChange: function(contents, $editable) {
-    console.log('onChange:', contents, $editable);
+  callbacks: {
+    onChange: function(contents, $editable) {
+      console.log('onChange:', contents, $editable);
+    }
   }
 });
 
