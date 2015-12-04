@@ -112,7 +112,7 @@ popover: {
 {% endhighlight %}
 
 
-## Range API
+## Basic API
 
 You can initialize summernote with `summernote`.
 
@@ -177,6 +177,18 @@ Set a focus in current summernote
 
 {% highlight javascript %}
 $('#summernote').summernote('focus');
+{% endhighlight %}
+
+### isEmpty
+
+Returns whether contents is empty or not.
+
+Editing area needs `<p><br></p>` for focus, even if contents is empty. So summernote support this method for helping to check contents is empty.
+
+{% highlight javascript %}
+if ($('#summernote').summernote('isEmpty')) {
+  alert('contents is empty');
+}
 {% endhighlight %}
 
 ## Font style API
