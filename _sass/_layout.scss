@@ -4,6 +4,7 @@ $header-height: 80px;
 $header-height-xs: 50px;
 
 $screen-width-xs: 767px;
+$screen-width-sm: 1024px;
 html {
   position: relative;
   min-height: 100%;
@@ -26,6 +27,10 @@ body {
   opacity: .9;
   border: 0;
   border-radius: 0;
+  @media screen and (max-width: $screen-width-sm) {
+    padding-left: 2%;
+    padding-right: 2%;
+  }
   @media screen and (max-width: $screen-width-xs) {
     height: $header-height-xs;
     padding-top: 0;
@@ -165,6 +170,15 @@ body {
       background-size: 22px 22px;
       vertical-align: bottom;
       margin-right: 2px;
+    }
+    @media screen and (max-width: 880px) {
+      width: 22px;
+      position: relative;
+      left: -9000px;
+      &:before {
+        position: relative;
+        left: 8980px;
+      }
     }
   }
 

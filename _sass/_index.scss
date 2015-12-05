@@ -56,7 +56,11 @@ $index-title-margin-xs: 59px;
 .index-section-1 {
   margin-bottom: 60px;
   position: relative;
+  @media screen and (max-width: $screen-width-sm) {
+    width: 96%;
+  }
   @media screen and (max-width: $screen-width-xs) {
+    width: 100%;
     margin-bottom: 0;
   }
 
@@ -96,6 +100,13 @@ $index-title-margin-xs: 59px;
 .card-list {
   margin-top: 60px;
   position: relative;
+  @media screen and (max-width: $screen-width-sm) {
+    .card-list-inner {
+      text-align: center;
+      width: 98%;
+      margin: 0 auto;
+    }
+  }
   @media screen and (max-width: $screen-width-xs) {
     margin-top: 33px;
     margin-right: 0;
@@ -107,6 +118,9 @@ $index-title-margin-xs: 59px;
       padding-left: 53px;
       padding-bottom: 35px;
       -webkit-overflow-scrolling: touch;
+      text-align: left;
+      width: 100%;
+      margin: 0;
 
       &::-webkit-scrollbar {
         width: 0;
@@ -127,6 +141,10 @@ $index-title-margin-xs: 59px;
   width: 184px;
   height: 174px;
   vertical-align: middle;
+  @media screen and (max-width: $screen-width-sm) {
+    margin-right: 14px;
+    width: 18%;
+  }
   @media screen and (max-width: $screen-width-xs) {
     white-space: normal;
     margin-right: 9px;
@@ -184,7 +202,13 @@ $index-title-margin-xs: 59px;
   padding-top: 68px;
   padding-bottom: 60px;
   background: rgba(183, 203, 216, 0.16);
+  @media screen and (max-width: $screen-width-sm) {
+    padding-left: 2%;
+    padding-right: 3%;
+  }
   @media screen and (max-width: $screen-width-xs) {
+    width: 100%;
+    margin: 0;
     padding: 49px 17px 0;
     background: rgba(182, 203, 217, 0.15);
   }
@@ -238,6 +262,9 @@ $index-title-margin-xs: 59px;
 .twitter-list {
   padding: 36px 38px !important;
   background: #ffffff;
+  @media screen and (max-width: $screen-width-sm) {
+    padding: 36px 20px !important;
+  }
   @media screen and (max-width: $screen-width-xs) {
     padding: 26px 16px !important;
   }
