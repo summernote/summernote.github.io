@@ -70,10 +70,10 @@ body {
       opacity: 0.88;
       max-height: 2000px;
       height: 2000px;
-      width: 90%;
+      width: 80%;
       margin-left: -90%;
       display: block;
-      position: relative;
+      position: absolute;
       z-index: 9000;
       margin-top: -$header-height-xs;
       padding-top: $header-height-xs;
