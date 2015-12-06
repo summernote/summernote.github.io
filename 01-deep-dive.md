@@ -663,9 +663,13 @@ var AutoLink = function (context) {
 
 For more module examples: [modules]({{ site.repository }}/tree/develop/src/js/bs3/module)
 
-### External module
+### Plugin
 
-blah blah blah...
+Plugin is a kind of external module. You can define your own module with plugin. Below link is a example of external module.
 
-> ##### Plugins replaced by module after `v0.7.0`
-> We decided to merge plugin and module together and did restructuring every eventHandler and rendering system. Old plugin system was hard to control states of editor(eg, range, history, document, ...), so we did it.
+* [plugin-hello](https://github.com/summernote/summernote/blob/v0.7.0/examples/plugin-hello.html)
+
+> ##### Plugin was redesigned by new module system after `v0.7.0`
+> Old plugin was hard to control editor states(eg, range, layout so on). After v0.7.0 plugin is redesigned by new module system. It is exactly same with module except surrounding module pattern.
+
+
