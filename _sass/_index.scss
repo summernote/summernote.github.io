@@ -322,7 +322,7 @@ $index-title-margin-xs: 59px;
 
 /* Index page download button
 -------------------------------------------------- */
-#download {
+.index-title #download {
   display: inline-block;
   @media screen and (max-width: $screen-width-xs) {
     position: fixed;

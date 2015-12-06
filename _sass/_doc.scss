@@ -14,15 +14,35 @@ body.doc {
     background-color: #fff;
     z-index: -1;
   }
+
+  @media screen and (max-width: $screen-width-sm) {
+    background-color: #fff;
+    background-image: none;
+  }
 }
 
 .doc-content-wrap {
   background-color: #fff;
   padding-left: 50px;
+
+  @media screen and (max-width: $screen-width-sm) {
+    width: 92%;
+    padding-left: 0;
+    padding-right: 0;
+    margin: 0 auto;
+  }
+
+  @media screen and (max-width: $screen-width-xs) {
+    width: 86%;
+  }
 }
 
 .doc-content {
   padding-top: 24px;
+
+  @media screen and (max-width: $screen-width-sm) {
+    padding-top: 0;
+  }
 }
 
 /* Doc footer
@@ -35,6 +55,10 @@ body.doc {
   p {
     color: #7f95a9 !important;
     font-size: 15px !important;
+  }
+
+  @media screen and (max-width: $screen-width-sm) {
+    margin-top: 70px;
   }
 }
 
@@ -196,6 +220,11 @@ $active-line-color: #57c3f5;
   .muted {
     font-size: 14px;
     color: #68747f;
+  }
+
+
+  @media screen and (max-width: $screen-width-sm) {
+    display: none;
   }
 }
 
