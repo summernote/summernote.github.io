@@ -1,87 +1,58 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>Summernote</title>
-    <meta name="description" content="Super simple wysiwyg editor on bootstrap">
-    <meta name="author" content="Summernote team">
+---
+layout: basic
+---
 
-    <!-- include libs stylesheets -->
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" />
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.css" />
-    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/codemirror.css" />
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/theme/blackboard.css">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/theme/monokai.css">
-
-    <script src="bower_components/jquery/dist/jquery.js"></script>
-    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
-
-    <!-- summernote with less and requirejs -->
-    <link href="bower_components/summernote/dist/summernote.css" rel="stylesheet">
-    <script src="bower_components/summernote/dist/summernote.js"></script>
-  </head>
-  <body>
-    <div class="row">
-      <div class="well bs-component">
-        <form class="form-horizontal" action="#">
-          <fieldset>
-            <legend>Forms</legend>
-            <div class="form-group">
-              <label for="select" class="col-lg-2 control-label">Themes</label>
-              <div class="col-lg-10">
-                <select class="form-control" id="select">
-                </select>
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="textArea" class="col-lg-2 control-label">Textarea</label>
-              <div class="col-lg-10">
-                 <div id="summernote"></div>
-              </div>
-            </div>
-          </fieldset>
-        </form>
-        <div id="source-button" class="btn btn-primary btn-xs" style="display: none;">&lt; &gt;</div></div>
-    </div><!-- /.container -->
-    <script>
-      var themes = {
-        "default": "//netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css",
-        "cerulean" : "//bootswatch.com/cerulean/bootstrap.css",
-        "cosmo" : "//bootswatch.com/cosmo/bootstrap.css",
-        "cyborg" : "//bootswatch.com/cyborg/bootstrap.css",
-        "darkly" : "//bootswatch.com/darkly/bootstrap.css",
-        "flatly" : "//bootswatch.com/flatly/bootstrap.css",
-        "lumen" : "//bootswatch.com/lumen/bootstrap.css",
-        "paper" : "//bootswatch.com/paper/bootstrap.css",
-        "journal" : "//bootswatch.com/journal/bootstrap.css",
-        "readable" : "//bootswatch.com/readable/bootstrap.css",
-        "sandstone" : "//bootswatch.com/sandstone/bootstrap.css",
-        "simplex" : "//bootswatch.com/simplex/bootstrap.css",
-        "slate" : "//bootswatch.com/slate/bootstrap.css",
-        "spacelab" : "//bootswatch.com/spacelab/bootstrap.css",
-        "superhero" : "//bootswatch.com/superhero/bootstrap.css",
-        "united" : "//bootswatch.com/united/bootstrap.css",
-        "yeti" : "//bootswatch.com/yeti/bootstrap.css",
-      }
-
-      $(function () {
-        var $themesheet = $('<link href="'+themes['default']+'" rel="stylesheet" />')
-        $themesheet.appendTo('head');
-
-        var options = $.map(themes, function (url, theme) {
-          return '<option value="' + theme + '">' + theme + '</option>';
-        }).join('');
-
-        $('#select').html(options).on('change', function(){
-          $themesheet.attr('href', themes[$(this).val()]);
-        });
-
-        $('#summernote').summernote({
-          tabsize: 2,
-          height: 200
-        });
-      });
-      </script>
-  </body>
-</html>
+<div class="container">
+  <div class="row">
+  <form class="form-horizontal" action="#">
+      <div class="form-group">
+        <label for="select" class="col-lg-2 control-label">Themes</label>
+        <div class="col-lg-10">
+          <select class="form-control" id="select">
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="textArea" class="col-lg-2 control-label">Textarea</label>
+        <div class="col-lg-10">
+           <div id="summernote"></div>
+        </div>
+      </div>
+  </form>
+  </div>
+</div><!-- /.container -->
+<script>
+  var themes = {
+    "default": "//netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css",
+    "cerulean" : "//bootswatch.com/cerulean/bootstrap.css",
+    "cosmo" : "//bootswatch.com/cosmo/bootstrap.css",
+    "cyborg" : "//bootswatch.com/cyborg/bootstrap.css",
+    "darkly" : "//bootswatch.com/darkly/bootstrap.css",
+    "flatly" : "//bootswatch.com/flatly/bootstrap.css",
+    "lumen" : "//bootswatch.com/lumen/bootstrap.css",
+    "paper" : "//bootswatch.com/paper/bootstrap.css",
+    "journal" : "//bootswatch.com/journal/bootstrap.css",
+    "readable" : "//bootswatch.com/readable/bootstrap.css",
+    "sandstone" : "//bootswatch.com/sandstone/bootstrap.css",
+    "simplex" : "//bootswatch.com/simplex/bootstrap.css",
+    "slate" : "//bootswatch.com/slate/bootstrap.css",
+    "spacelab" : "//bootswatch.com/spacelab/bootstrap.css",
+    "superhero" : "//bootswatch.com/superhero/bootstrap.css",
+    "united" : "//bootswatch.com/united/bootstrap.css",
+    "yeti" : "//bootswatch.com/yeti/bootstrap.css",
+  }
+  $(function () {
+    var $themesheet = $('<link href="'+themes['default']+'" rel="stylesheet" />')
+    $themesheet.appendTo('head');
+    var options = $.map(themes, function (url, theme) {
+      return '<option value="' + theme + '">' + theme + '</option>';
+    }).join('');
+    $('#select').html(options).on('change', function(){
+      $themesheet.attr('href', themes[$(this).val()]);
+    });
+    $('#summernote').summernote({
+      tabsize: 2,
+      height: 100
+    });
+  });
+</script>

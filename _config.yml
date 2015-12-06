@@ -1,0 +1,21 @@
+# Site settings
+title: Summernote - Super Simple WYSIWYG editor
+email: summernoteis@gmail.com
+description: > # this means to ignore newlines until "baseurl:"
+  Super Simple WYSIWYG Editor on Bootstrap
+  Summernote is a JavaScript library that helps you create WYSIWYG editors online.
+author: https://github.com/summernote
+baseurl: "" # the subpath of your site, e.g. /blog/
+url: "http://summernote.org" # the base hostname & protocol for your site
+github_username: summernote
+
+# Summernote settings
+version: v0.7.0
+repository: "https://github.com/summernote/summernote"
+jquery_js: "//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery"
+bootstrap_css: "//netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css"
+bootstrap_js: "//netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"
+fontawesome_css: "//netdna.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.css"  
+
+# Build settings
+markdown: kramdown

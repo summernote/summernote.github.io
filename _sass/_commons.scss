@@ -1,0 +1,36 @@
+/* Page container for 1000px
+-------------------------------------------------- */
+.page-container {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1000px;
+}
+
+.btn-important {
+  display: inline-block;
+  margin: 18px 0 41px;
+  padding: 10px 20px;
+  background: #f86466;
+  border: 1px solid #f86466;
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 1px;
+
+  &:after {
+    content: "";
+    display: inline-block;
+    @include at2x('/img/img_sub_download');
+    width: 14px;
+    height: 16px;
+    background-repeat: no-repeat;
+    background-size: 14px 16px;
+    vertical-align: middle;
+    margin-left: 10px;
+  }
+
+  &:hover {
+    color: white;
+    text-decoration: underline;
+  }
+}

@@ -1,0 +1,27 @@
+<header class="navbar navbar-default navbar-fixed-top fix-navbar" role="navigation">
+  <div class="page-container header-page-container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand fix-header-brand header-bi" href="/"><span class="ir">summernote</span></a>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        {% for page in site.pages %}
+          {% if page.title %}
+          <li><a class="header-page-link" href="{{ page.url | prepend: site.baseurl }}">{{ page.title }}</a></li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+      <ul class="nav navbar-nav navbar-right header-social">
+        <li><a href="https://twitter.com/intent/tweet?button_hashtag=summernote" class="tweet">#summernote</a></li>
+        <li><a href="https://github.com/summernote/summernote/" class="github">0,000</a></li>
+      </ul>
+    </div>
+  </div>
+</header>

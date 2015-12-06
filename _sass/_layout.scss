@@ -1,0 +1,196 @@
+/* Fixed header
+-------------------------------------------------- */
+$header-height: 80px;
+$header-height-xs: 50px;
+
+$screen-width-xs: 767px;
+$screen-width-sm: 1024px;
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+$grid-color: rgba(218, 224, 232, 0.5);
+
+body {
+  margin-top: $header-height;
+  background: rgb(240, 243, 249);
+  background-image: linear-gradient($grid-color 1px, transparent 1px), linear-gradient(90deg, $grid-color 1px, transparent 1px);
+  background-size: 10px 10px;
+}
+
+.fix-navbar {
+  margin-bottom: 0;
+  padding-top: 15px;
+  height: $header-height;
+  background-color: #3fc6f7;
+  opacity: .9;
+  border: 0;
+  border-radius: 0;
+  @media screen and (max-width: $screen-width-sm) {
+    padding: 0 2%;
+  }
+  @media screen and (max-width: $screen-width-xs) {
+    height: $header-height-xs;
+    padding: 0;
+    background-color: transparent;
+
+    .navbar-toggle {
+      float: left;
+      margin-left: 15px;
+      background-color: transparent;
+      border: none;
+      padding: 10px 0;
+      height: 34px;
+      @include transition(background-image 0.4s ease);
+      .icon-bar {
+        background-color: #fff;
+        width: 20px
+      }
+      &.in {
+        @include img('/img/m_gnb_close', 34px, 34px);
+        margin-left: 8px;
+        .icon-bar {
+          display: none;
+        }
+      }
+    }
+
+    .navbar-header {
+      background-color: #3fc6f7;
+      opacity: 0.9;
+      padding-top: 1px;
+      position: relative;
+      z-index: 9999;
+    }
+
+    .collapse {
+      border: none;
+      background-color: #000;
+      opacity: 0.88;
+      max-height: 2000px;
+      height: 2000px;
+      width: 80%;
+      margin-left: -90%;
+      display: block;
+      position: absolute;
+      z-index: 9000;
+      margin-top: -$header-height-xs;
+      padding-top: $header-height-xs;
+      @include transition(margin-left 0.4s ease-in-out);
+
+      .navbar-nav {
+        margin-top: 28px;
+        & > li > a {
+          color: #fff !important;
+          font-size: 25px;
+          padding: 25px 22px;
+
+          &:hover {
+            color: #35c2f5 !important;
+          }
+        }
+      }
+      .header-social {
+        display: none;
+      }
+    }
+  }
+}
+
+.fix-header-brand {
+  padding-left: 0;
+}
+
+.header-page-container {
+  margin-top: 10px;
+  @media screen and (max-width: $screen-width-xs) {
+    margin-top: 0;
+  }
+}
+
+.header-page-link {
+  font-size: 18px;
+  color: #c6f3ff !important;
+}
+
+.header-bi {
+  @include img('/img/img_gnb_bi', 132px, 16px);
+  margin-top: 15px;
+  margin-right: 25px;
+  background-repeat: no-repeat;
+  @include img_media('/img/m_gnb_bi', 120px, 34px, $screen-width-xs);
+  @media screen and (max-width: $screen-width-xs) {
+    position: absolute;
+    left: 50%;
+    margin-left: -60px;
+    padding: 0;
+    margin-top: 8px;
+  }
+}
+
+.ir {
+  border:0;
+  font: 0/0 a;
+  text-shadow: none;
+  color: transparent;
+  background-color: transparent;
+}
+
+.show-grid {
+  margin-bottom: 15px;
+}
+
+.navbar-default {
+  .header-social > li > a,
+  .header-social > li > a:hover,
+  .header-social > li > a:focus,
+  .header-social > li > a:visited {
+    font-size: 15px;
+    color: #d5f6ff;
+  }
+
+  .navbar-toggle:hover,
+  .navbar-toggle:focus {
+    background-color: transparent;
+  }
+}
+
+.header-social {
+  .tweet {
+    &:before {
+      content: "";
+      display: inline-block;
+      @include at2x('/img/img_gnb_twitter');
+      width: 22px;
+      height: 22px;
+      background-repeat: no-repeat;
+      background-size: 22px 22px;
+      vertical-align: bottom;
+      margin-right: 2px;
+    }
+    @media screen and (max-width: 880px) {
+      width: 22px;
+      position: relative;
+      left: -9000px;
+      &:before {
+        position: relative;
+        left: 8980px;
+      }
+    }
+  }
+
+  .github {
+    &:before {
+      content: "";
+      display: inline-block;
+      @include at2x('/img/img_gnb_github');
+      width: 22px;
+      height: 22px;
+      background-repeat: no-repeat;
+      background-size: 22px 22px;
+      vertical-align: bottom;
+      margin-right: 2px;
+    }
+  }
+}

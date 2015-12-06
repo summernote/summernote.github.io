@@ -1,0 +1,241 @@
+/* Doc layout and footer
+-------------------------------------------------- */
+body.doc {
+  margin-top: $header-height;
+
+
+  &:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    right: 0;
+    background-color: #fff;
+    z-index: -1;
+  }
+
+  @media screen and (max-width: $screen-width-sm) {
+    background-color: #fff;
+    background-image: none;
+  }
+}
+
+.doc-content-wrap {
+  background-color: #fff;
+  padding-left: 50px;
+
+  @media screen and (max-width: $screen-width-sm) {
+    width: 92%;
+    padding-left: 0;
+    padding-right: 0;
+    margin: 0 auto;
+  }
+
+  @media screen and (max-width: $screen-width-xs) {
+    width: 86%;
+  }
+}
+
+.doc-content {
+  padding-top: 24px;
+
+  @media screen and (max-width: $screen-width-sm) {
+    padding-top: 0;
+  }
+}
+
+/* Doc footer
+-------------------------------------------------- */
+.doc-footer {
+  margin-top: 150px;
+  padding: 30px 0;
+  border-top: 2px solid #f3f6f9;
+
+  p {
+    color: #7f95a9 !important;
+    font-size: 15px !important;
+  }
+
+  @media screen and (max-width: $screen-width-sm) {
+    margin-top: 70px;
+  }
+}
+
+/* Doc table of contents
+-------------------------------------------------- */
+$h2-vertical-margin: 30px;
+$h2-vertical-margin-top: 50px;
+$h2-vertical-margin-bottom: 30px;
+$h3-vertical-margin-top: 16px;
+$h3-vertical-margin-bottom: 8px;
+
+/* sidebar with affix
+-------------------------------------------------- */
+$active-line-color: #57c3f5;
+.bs-page-sidebar {
+  margin-top: 48px;
+
+}
+/* By default it's not affixed in mobile views, so undo that */
+.bs-page-sidebar.affix {
+  position: static;
+}
+
+/* First level of nav */
+.bs-page-sidenav {
+  margin: auto 30px;
+  padding: auto 10px;
+  text-shadow: 0 1px 0 #fff;
+  border-radius: 5px;
+}
+
+/* All levels of nav */
+.bs-page-sidebar .nav > li > a {
+  font-size: 16px;
+  display: block;
+  color: #99a2ac;
+  padding: 10px;
+  cursor: pointer;
+}
+.bs-page-sidebar .nav > li > a:hover,
+.bs-page-sidebar .nav > li > a:focus {
+  background-color: transparent;
+  text-decoration: none;
+  position: relative;
+
+  &:before {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 4px;
+    height: 18px;
+    top: 50%;
+    left: 0;
+    margin-top: -9px;
+    background-color: $active-line-color;
+  }
+}
+.bs-page-sidebar .nav > .active > a,
+.bs-page-sidebar .nav > .active:hover > a,
+.bs-page-sidebar .nav > .active:focus > a {
+  font-weight: bold;
+  color: #42515f;
+  position: relative;
+
+  &:before {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 4px;
+    height: 18px;
+    top: 50%;
+    left: 0;
+    margin-top: -9px;
+    background-color: $active-line-color;
+  }
+}
+
+/* Nav: second level (shown on .active) */
+.bs-page-sidebar .nav .nav {
+  display: none; /* Hide by default, but at >768px, show it */
+}
+.bs-page-sidebar .nav .nav > li > a {
+  padding-top: 6px;
+  padding-bottom: 6px;
+  padding-left: 30px;
+  font-size: 90%;
+}
+
+/* Nav: third level (shown on .active) */
+.bs-page-sidebar .nav .nav .nav > li > a {
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-left: 40px;
+  font-size: 80%;
+}
+
+/* Show and affix the side nav when space allows it */
+@media screen and (min-width: 992px) {
+  .bs-page-sidebar .nav > .active > ul {
+    display: block;
+  }
+
+  .bs-page-sidebar.affix {
+    position: fixed;
+    top: $header-height + 20;
+  }
+
+  .bs-page-sidebar.affix-bottom {
+    position: absolute;
+  }
+
+  .bs-page-sidebar.affix-bottom .nav,
+  .bs-page-sidebar.affix .nav {
+    margin: auto 0;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  /* Widen the fixed sidebar again */
+  .bs-page-sidebar.affix-bottom,
+  .bs-page-sidebar.affix {
+    width: 220px;
+  }
+}
+
+/* Doc typography
+-------------------------------------------------- */
+.doc {
+  h2 {
+    margin: $h2-vertical-margin-top 0 $h2-vertical-margin-bottom;
+    font-size: 26px;
+    color: #42515f;
+  }
+
+  h3 {
+    margin: $h3-vertical-margin-top 0 $h3-vertical-margin-bottom;
+    font-size: 18px;
+    color: #42515f;
+  }
+
+  p, li {
+    font-size: 14px;
+    color: #68747f;
+  }
+
+  blockquote {
+    border-left: 5px solid #f86466;
+    background: white;
+  }
+}
+
+/* Doc sidebar
+-------------------------------------------------- */
+.doc-nav {
+  h2 {
+    margin: 74px 0 8px;
+  }
+
+  .muted {
+    font-size: 14px;
+    color: #68747f;
+  }
+
+
+  @media screen and (max-width: $screen-width-sm) {
+    display: none;
+  }
+}
+
+/* Janky fix for preventing navbar from overlapping
+-------------------------------------------------- */
+h2[id] {
+  margin-top: $header-height * -1 !important;
+  padding-top: $header-height + $h2-vertical-margin-top;
+}
+
+h3[id], h4[id] {
+  margin-top: $header-height * -1 !important;
+  padding-top: $header-height + $h3-vertical-margin-top;
+}

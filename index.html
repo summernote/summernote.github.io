@@ -1,90 +1,145 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>Summernote - Super Simple WYSIWYG editor on Bootstrap</title>
-  <meta name="description" content="Super Simple WYSIWYG Editor on Bootstrap">
-  <meta name="author" content="https://github.com/HackerWins">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
-  <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
-  <!--[if lt IE 9]>
-    <script src="//twitter.github.io/bootstrap/assets/js/html5shiv.js"></script>
-  <![endif]-->
+---
+layout: page
+layoutType: page index
+---
 
-  <!-- jquery, bootstrap, font-awesome -->
-  <script src="bower_components/jquery/dist/jquery.js"></script>
-  <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
-  <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
-  <link href="bower_components/fontawesome/css/font-awesome.css" rel="stylesheet">
+<div class="index-main-background"></div>
 
-  <!-- codemirror -->
-  <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/codemirror.min.css" />
-  <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/theme/monokai.min.css" />
-  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/codemirror.min.js"></script>
-  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/mode/xml/xml.min.js"></script>
-  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/2.36.0/formatting.min.js"></script>
+<div class="container">
+  <h1 class="text-center index-title">
+    <span class="img-index-title"></span>
+    <a href="{{ site.repository }}/archive/master.zip" id="download">
+      <span class="img-index-download"></span>
+    </a>
+  </h1>
+</div>
 
-  <!-- highlight -->
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/7.3/styles/tomorrow.min.css"/>
-  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/7.3/highlight.min.js"></script>
-
-  <!-- add summernote -->
-  <link href="bower_components/summernote/dist/summernote.css" rel="stylesheet">
-  <script src="bower_components/summernote/dist/summernote.js"></script>
-
-  <!-- angular -->
-  <script src="bower_components/angular/angular.js"></script>
-  <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
-
-  <!-- language ko-KR -->
-  <script src="bower_components/summernote/lang/summernote-ko-KR.js"></script>
-
-  <script src="js/app.js"></script>
-  <link href="css/page.css" rel="stylesheet">
-</head>
-<body ng-app="summernote-page">
-<!-- navbar -->
-<div class="navbar navbar-default navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" ui-sref="app.home"><i class="fa fa-sun-o"></i> Summernote</a>
-    </div>
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse navbar-ex1-collapse">
-      <ul class="nav navbar-nav">
-        <li><a ui-sref="app.gettingstarted">Getting started</a></li>
-        <li><a ui-sref="app.deepdive">Deep dive</a></li>
-        <li><a ui-sref="app.example">Example</a></li>
-        <li><a ui-sref="app.team">Team</a></li>
-        <li><a href="/jsduck/" target="_blank">API Docs&nbsp; <i class="fa fa-external-link" style="font-size:12px"></i></a></li>
-      </ul>
+<div class="page-container index-section-1">
+  <div id="summernote"><p><br></p></div>
+  <div class="placeholder">
+    hi,<br>
+    we are summernote.<br>
+    please, write text here!<br>
+    super simple WISIWIG editor on Bootstrap
+  </div>
+  <div class="row card-list">
+    <div class="card-arrow"></div>
+    <div class="card-list-inner">
+      <div class="card-item">
+        <a href="/getting-started/#installation">
+          <span class="img-index-install"></span>
+          <h3 class="card-title">Easy to Install</h3>
+          <p class="card-body">Simply download and attach your js, css with bootstrap. </p>
+        </a>
+      </div>
+      <div class="card-item">
+        <a href="/deep-dive/#customization">
+          <span class="img-index-customizing"></span>
+          <h3 class="card-title">Customization</h3>
+          <p class="card-body">Customize by Initializing various options and modules.<br></p>
+        </a>
+      </div>
+      <div class="card-item">
+        <a href="/examples">
+          <span class="img-index-shortcuts"></span>
+          <h3 class="card-title">Examples</h3>
+          <p class="card-body">See all useful features of summernote in action.</p>
+        </a>
+      </div>
+      <div class="card-item">
+        <a href="{{ site.repository }}">
+          <span class="img-index-opensource"></span>
+          <h3 class="card-title">Open Source</h3>
+          <p class="card-body">Summernote is licensed under MIT and maintained by the community on.</p>
+        </a>
+      </div>
+      <div class="card-item">
+        <a href="/getting-started/#integration">
+          <span class="img-index-backend"></span>
+          <h3 class="card-title">Integration</h3>
+          <p class="card-body">Integrate it with any back-end. 3rd parties available in django, rails, angular.</p>
+        </a>
+      </div>
     </div>
   </div>
 </div>
-<div ui-view></div>
-<footer class="footer">
-  <div class="container">
-    <p><i class="fa fa-sun-o"></i> Summernote v0.6 · Created and Maintained by <a href="https://github.com/summernote">Summernote team</a>.</p>
-    <p>Based on <a href="http://twitter.github.io/bootstrap/">Bootstrap</a> and <a href="http://jquery.com/">jQuery</a>. Icons from <a href="http://fontawesome.io/">Font Awesome</a>. Theme from <a href="http://bootswatch.com">bootswatch</a>.</p>
-    <p>Summernote distributed under the MIT license.</p>
-    <p></p>
-    <p><a href="https://github.com/summernote/summernote">GitHub Project</a> · <a href="https://github.com/summernote/summernote/issues">Issues</a></p>
+
+<div class="index-section-2">
+  <div class="page-container">
+    <div class="row">
+      <div class="col-sm-5 summary-section">
+        <h3>Worldwide Bootstrap</h3>
+        <p>Meet the world's best WYSIWYG editor on bootstrap.<br>Summernote support bootstrap <strong>3.x.x</strong>.</p>
+
+        <h3>Trend-leading Features</h3>
+        <ul style="list-style:none;padding:0;">
+          <li>Lightweight (js+css: 80Kb)</li>
+          <li>Smart User Interaction</li>
+          <li>Safari, Chrome, Firefox, Opera</li>
+          <li>Internet Explorer 9+ (IE8 support coming soon)</li>
+        </ul>
+        <h3>Donate</h3>
+        <div class="row">
+          <div class="col-sm-12" >
+            <div style="height:24px;margin-bottom:16px;overflow:hidden;">
+              <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" style="margin-top:-30px;">
+            </div>
+
+            <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+              <input type="hidden" name="cmd" value="_s-xclick">
+              <input type="hidden" name="hosted_button_id" value="S8F8AAD3YSD6Q">
+              <input type="submit" name="submit" alt="PayPal - The safer, easier way to pay online!" value="Donate" class="btn-important btn-donate">
+
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-7 twitter-list">
+        <h3 class="twitter-title">Folks say it's awesome</h3>
+        <a class="twitter-timeline" height="260" width="640" data-chrome="noheader nofooter" href="https://twitter.com/search?q=summernote" data-widget-id="356967600934240256">"summernote" Tweets</a>
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+      </div>
+    </div>
   </div>
-</footer>
-<!-- Google Analytics -->
+</div>
 <script type="text/javascript">
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-  ga('create', 'UA-42438082-1', 'github.com');
+$(function() {
+  // index page card list
+  if ($('.card-list').length) {
+    var $cardArrow = $('.card-arrow');
+    var $cardListInner = $('.card-list-inner');
+
+    $cardListInner.scroll(function () {
+      $cardArrow.addClass('disappear');
+      if ($cardListInner.scrollLeft() < 20) {
+        $cardArrow.removeClass('disappear');
+      }
+    });
+  }
+
+  // main summernote with custom placeholder
+  var $placeholder = $('.placeholder');
+  $('#summernote').summernote({
+    height: 300,
+    codemirror: {
+      mode: 'text/html',
+      htmlMode: true,
+      lineNumbers: true,
+      theme: 'monokai'
+    },
+    callbacks: {
+      onInit: function() {
+        $placeholder.show();
+      },
+      onFocus: function() {
+        $placeholder.hide();
+      },
+      onBlur: function() {
+        if ($(this).summernote('isEmpty')) {
+          $placeholder.show();
+        }
+      }
+    }
+  });
+});
 </script>
-</body>
-</html>

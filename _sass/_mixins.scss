@@ -1,0 +1,56 @@
+/* Retina image
+-------------------------------------------------- */
+@mixin at2x($path, $ext: "png") {
+  $at1x_path: "#{$path}.#{$ext}";
+  $at2x_path: "#{$path}_2x.#{$ext}";
+
+  background-image: url("#{$at1x_path}");
+
+  @media all and (-webkit-min-device-pixel-ratio : 1.5),
+         all and (-o-min-device-pixel-ratio: 3/2),
+         all and (min--moz-device-pixel-ratio: 1.5),
+         all and (min-device-pixel-ratio: 1.5) {
+           background-image: url("#{$at2x_path}");
+  }
+}
+
+@mixin at2x_media($path, $max_width, $ext: "png") {
+  $at1x_path: "#{$path}.#{$ext}";
+  $at2x_path: "#{$path}_2x.#{$ext}";
+
+  @media screen and (max-width: $max_width) {
+    background-image: url("#{$at1x_path}");
+  }
+  @media screen and (max-width: $max_width) and (-webkit-min-device-pixel-ratio : 1.5),
+         screen and (max-width: $max_width) and (-o-min-device-pixel-ratio: 3/2),
+         screen and (max-width: $max_width) and (min--moz-device-pixel-ratio: 1.5),
+         screen and (max-width: $max_width) and (min-device-pixel-ratio: 1.5) {
+           background-image: url("#{$at2x_path}");
+  }
+}
+
+@mixin img($path, $w, $h) {
+  display: inline-block;
+  width: $w;
+  height: $h;
+  @include at2x($path, png);
+  background-size: $w $h;
+}
+
+@mixin img_media($path, $w, $h, $max_width, $ext: "png") {
+  @media screen and (max-width: $max_width) {
+    display: inline-block;
+    width: $w;
+    height: $h;
+    background-size: $w $h;
+  }
+  @include at2x_media($path, $max_width, $ext)
+}
+
+@mixin transition($args...) {
+  -webkit-transition: $args;
+  -moz-transition: $args;
+  -ms-transition: $args;
+  -o-transition: $args;
+  transition: $args;
+}

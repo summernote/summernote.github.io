@@ -1,0 +1,72 @@
+/* Page layout and Sticky footer
+-------------------------------------------------- */
+$footer-height: 272px;
+
+body.page {
+  margin-top: $header-height + 40px;
+  margin-bottom: $footer-height;
+  @media screen and (max-width: $screen-width-xs) {
+    margin-bottom: 0;
+  }
+}
+
+.page-content {
+  padding-bottom: 60px;
+}
+
+.page-footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: $footer-height;
+  padding-top: 60px;
+  padding-bottom: 60px;
+  background: rgb(225, 231, 239);
+  background-image: linear-gradient($grid-color 1px, transparent 1px), linear-gradient(90deg, $grid-color 1px, transparent 1px);
+  background-size: 10px 10px;
+  text-align:center;
+  @media screen and (max-width: $screen-width-xs) {
+    position: static;
+    height: auto;
+    padding: 40px 20px 45px;
+    background-image: none;
+    background: rgba(182, 203, 217, 0.25);
+
+    a {
+      color: #5293c1;
+    }
+  }
+
+  p {
+    color: #7f95a9 !important;
+    font-size: 15px !important;
+    @media screen and (max-width: $screen-width-xs) {
+      font-size: 12px !important;
+    }
+  }
+}
+
+/* Page typography
+-------------------------------------------------- */
+body.page {
+  h2 {
+    margin: $h2-vertical-margin 0;
+    font-size: 26px;
+    color: #42515f;
+  }
+
+  h3 {
+    font-size: 18px;
+    color: #42515f;
+  }
+
+  p, li {
+    font-size: 13px;
+    color: #6b717a;
+  }
+
+  blockquote {
+    border-left: 5px solid #f86466;
+    background: white;
+  }
+}
