@@ -28,12 +28,11 @@ body {
   border: 0;
   border-radius: 0;
   @media screen and (max-width: $screen-width-sm) {
-    padding-left: 2%;
-    padding-right: 2%;
+    padding: 0 2%;
   }
   @media screen and (max-width: $screen-width-xs) {
     height: $header-height-xs;
-    padding-top: 0;
+    padding: 0;
     background-color: transparent;
 
     .navbar-toggle {

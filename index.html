@@ -104,6 +104,20 @@ layoutType: page index
 </div>
 <script type="text/javascript">
 $(function() {
+  // index page card list
+  if ($('.card-list').length) {
+    var $cardArrow = $('.card-arrow');
+    var $cardListInner = $('.card-list-inner');
+
+    $cardListInner.scroll(function () {
+      $cardArrow.addClass('disappear');
+      if ($cardListInner.scrollLeft() < 20) {
+        $cardArrow.removeClass('disappear');
+      }
+    });
+  }
+
+  // main summernote with custom placeholder
   var $placeholder = $('.placeholder');
   $('#summernote').summernote({
     height: 300,
