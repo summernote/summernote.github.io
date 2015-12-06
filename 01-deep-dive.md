@@ -112,11 +112,27 @@ popover: {
 {% endhighlight %}
 
 ### Custom placeholder
-You can define placeholder with placeholder options.
+You can define placeholder with `placeholder` option.
 
 {% highlight javascript %}
 $('#summernote').summernote({
   placeholder: 'write here...'
+});
+{% endhighlight %}
+
+### Disable drag and drop
+You can disable drag and drop with `disableDragAndDrop` option.
+{% highlight javascript %}
+$('#summernote').summernote({
+  disableDragAndDrop: true
+});
+{% endhighlight %}
+
+### Disable shortcuts
+You can disable custom shortcuts with shortcuts
+{% highlight javascript %}
+$('#summernote').summernote({
+  shortcuts: false
 });
 {% endhighlight %}
 
@@ -552,7 +568,7 @@ For supporting expandable features, summernote was assembled by module system. T
 
 ### Key terms
 
-* Module: This is a component for supporting feature.
+* Module: Module is a component.
 * Context: Context is a kind of container. It has modules and editor's states.
 * Renderer: Renderer is a function for creating element.
 * UI: UI is a set of renderers to build ui elements.
