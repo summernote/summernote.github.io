@@ -40,9 +40,8 @@ body {
       margin-left: 15px;
       background-color: transparent;
       border: none;
-      padding-top: 10px;
-      padding-left: 0;
-      padding-right: 0;
+      padding: 10px 0;
+      height: 34px;
       @include transition(background-image 0.4s ease);
       .icon-bar {
         background-color: #fff;
