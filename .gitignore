@@ -20,3 +20,4 @@ bower_components/
 #jekyll
 _site/
 dist/
+.publish/

@@ -2,6 +2,7 @@ var gulp = require('gulp');
 var bower = require('gulp-bower');
 var runSequence = require('run-sequence');
 var del = require('del');
+var ghPages = require('gulp-gh-pages');
 
 var DEPLOY_DIR = 'dist'
 
@@ -25,4 +26,9 @@ gulp.task('build', function(cb) {
   runSequence('clean',
               ['bower', 'copy'],
               cb);
+});
+
+gulp.task('deploy', ['build'], function() {
+  return gulp.src(DEPLOY_DIR + '/**/*')
+    .pipe(ghPages({}));
 });
