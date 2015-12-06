@@ -71,6 +71,7 @@ $index-title-margin-xs: 59px;
     font-size: 34px;
     color: #e4e5e7;
     display: none;
+    pointer-events: none;
 
     &:before {
       content: "";
