@@ -30,5 +30,7 @@ gulp.task('build', function(cb) {
 
 gulp.task('deploy', ['build'], function() {
   return gulp.src(DEPLOY_DIR + '/**/*')
-    .pipe(ghPages({}));
+    .pipe(ghPages({
+      push: false
+    }));
 });
