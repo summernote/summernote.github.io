@@ -191,7 +191,7 @@ $(document).ready(function() {
 More summernote languages: [languages]({{ site.repository }}/tree/master/lang)
 
 ## Integration
-3rd parties available in django, rails, angular.
+3rd parties available in django, rails, angular and so on.
 
 ### Django
 Handy update for your django admin page.
@@ -208,3 +208,10 @@ This gem was built to gemify the assets used in Summernote.
 AngularJS directive to Summernote.
 
 * [angular-summernote](https://github.com/summernote/angular-summernote)
+
+### Apache Wicket
+Summernote widget for Wicket Bootstrap.
+
+* [demo](http://wb-mgrigorov.rhcloud.com/summernote){:target="_blank"}
+* [source code](https://github.com/l0rdn1kk0n/wicket-bootstrap/tree/4f97ca783f7279ca43f9e2ee790703161f59fa40/bootstrap-extensions/src/main/java/de/agilecoders/wicket/extensions/markup/html/bootstrap/editor){:target="_blank"}
+
