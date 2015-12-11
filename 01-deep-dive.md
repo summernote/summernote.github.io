@@ -347,12 +347,20 @@ $('#summernote').summernote('lineHeight', 20);
 
 ### insertImage
 
-insert a image
+Insert a image
 
 {% highlight javascript %}
 // @param {String} url
-// @param {String} filename - optional
+// @param {String|Function} filename - optional
 $('#summernote').summernote('insertImage', url, filename);
+{% endhighlight %}
+
+You can modify image with passing callback as second argument.
+{% highlight javascript %}
+$('#summernote').summernote('insertImage', url, function ($image) {
+  $image.css('width', $image.width() / 3);
+  $image.attr('data-filename', 'retriever');
+});
 {% endhighlight %}
 
 ### insertNode
