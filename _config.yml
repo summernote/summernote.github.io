@@ -10,7 +10,7 @@ url: "http://summernote.org" # the base hostname & protocol for your site
 github_username: summernote
 
 # Summernote settings
-version: v0.7.0
+version: 0.7.0
 repository: "https://github.com/summernote/summernote"
 jquery_js: "//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery"
 bootstrap_css: "//netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css"

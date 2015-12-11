@@ -10,7 +10,7 @@ permalink: /getting-started/
 
 The fastest way to get Summernote is to download the precompiled and minified versions of our CSS, JavaScript. No documentation or original source code files are included.
 
-<a href="{{ site.repository }}/releases/download/{{ site.version }}/summernote-{{ site.version }}-dist.zip" class="btn-important ">Download compiled</a>
+<a href="{{ site.repository }}/releases/download/v{{ site.version }}/summernote-{{ site.version }}-dist.zip" class="btn-important ">Download compiled</a>
 
 ### Download source code
 Get the latest Summernote LESS and Javascript source code by downloading it directly from GitHub.
