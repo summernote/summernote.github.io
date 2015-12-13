@@ -81,8 +81,9 @@ Javascript:
 var edit = function() {
   $('.click2edit').summernote({focus: true});
 };
+
 var save = function() {
-  var aHTML = $('.click2edit').code(); //save HTML If you need(aHTML: array).
+  var makrup = $('.click2edit').summernote('code');
   $('.click2edit').summernote('destroy');
 };
 {% endhighlight %}
