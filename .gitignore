@@ -16,5 +16,4 @@ node_modules
 
 #jekyll
 _site/
-dist/
 .publish/
