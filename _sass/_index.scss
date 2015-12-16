@@ -202,7 +202,6 @@ $index-title-margin-xs: 59px;
 -------------------------------------------------- */
 .index-section-2 {
   padding-top: 68px;
-  padding-bottom: 60px;
   background: rgba(183, 203, 216, 0.16);
   @media screen and (max-width: $screen-width-sm) {
     padding-left: 2%;
@@ -238,6 +237,8 @@ $index-title-margin-xs: 59px;
 }
 
 .btn-donate {
+  margin-top: 0;
+  margin-bottom: 0;
   width: 152px;
   @media screen and (max-width: $screen-width-xs) {
     width: 100%;

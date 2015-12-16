@@ -102,14 +102,23 @@ body.team {
   }
 
   .profile-hover {
-    background-color: #000;
-    opacity: 0.6;
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
     display: none;
+
+    &:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #000;
+      opacity: 0.6;
+    }
 
     .social {
       height: 60px;
