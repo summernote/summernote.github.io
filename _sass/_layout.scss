@@ -202,3 +202,20 @@ body {
     }
   }
 }
+
+/* header download button for small screen
+-------------------------------------------------- */
+#download {
+  display: none;
+  @media screen and (max-width: $screen-width-xs) {
+    position: absolute;
+    padding: 0;
+    top: 8px;
+    right: 8px;
+    display: block;
+  }
+
+  .img-mobile-download {
+    @include img('/img/m_gnb_download', 34px, 34px);
+  }
+}
