@@ -3,7 +3,7 @@
 <p><a href="{{ site.repository }}">GitHub Project</a> · <a href="{{ site.repository }}/issues">Issues</a></p>
 <script>
   if (localStorage && localStorage.getItem && localStorage.getItem('github_expire') && localStorage.getItem('github_expire')>(new Date()).getTime()) {
-    $('.github').text(localStorage.getItem('github_star').toLocaleString());
+    $('.github').text((+localStorage.getItem('github_star')).toLocaleString());
   } else {
     $.getJSON('https://api.github.com/repos/summernote/summernote',function(d) {
       if (localStorage && localStorage.setItem) {
