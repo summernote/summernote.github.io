@@ -208,7 +208,7 @@ $index-title-margin-xs: 59px;
 /* Index section 2
 -------------------------------------------------- */
 .index-section-2 {
-  padding-top: 68px;
+  padding: 68px 0;
   background: rgba(183, 203, 216, 0.16);
   @media screen and (max-width: $screen-width-sm) {
     padding-left: 2%;
