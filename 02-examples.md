@@ -233,14 +233,12 @@ emoji: use `https://api.github.com/emojis`
 
 <div class="hint2emoji"></div>
 <script type="text/javascript">
-
 $.ajax({
-  url: 'https://api.github.com/emojis',
-  async: false
+  url: 'https://api.github.com/emojis'
 }).then(function(data) {
   window.emojis = Object.keys(data);
   window.emojiUrls = data; 
-});;
+});
 
 $(".hint2emoji").summernote({
   height: 100,
