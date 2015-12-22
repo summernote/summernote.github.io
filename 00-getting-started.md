@@ -53,8 +53,8 @@ Include the Following code in your HTML <code>&lt;HTML&gt;</code> tag
 <script src="{{ site.bootstrap_js }}"></script> 
 
 <!-- include summernote css/js-->
-<link href="summernote.css" rel="stylesheet">
-<script src="summernote.min.js"></script>
+<link href="{{ site.summernote_css }}" rel="stylesheet">
+<script src="{{ site.summernote_js }}"></script>
 {% endhighlight %}
 
 Don't forget to change the file's path if you downloaded summernote in a different folders.
