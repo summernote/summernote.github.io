@@ -120,6 +120,24 @@ $('#summernote').summernote({
 });
 {% endhighlight %}
 
+### Custom fontNames
+You can define fontNames items with `fontNames` option.
+
+{% highlight javascript %}
+$('#summernote').summernote({
+  fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New']
+});
+{% endhighlight %}
+
+Summernote tests font in fontNames before adding them to dropdown. This is problem while using web fonts. It's not easy picking up nice time to check availabilities of web fonts. You can define a list for web fonts to be ignored with `fontNamesIgnoreCheck`.
+
+{% highlight javascript %}
+$('#summernote').summernote({
+  fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Merriweather'],
+  fontNamesIgnoreCheck: ['Merriweather']
+});
+{% endhighlight %}
+
 ### Disable drag and drop
 You can disable drag and drop with `disableDragAndDrop` option.
 {% highlight javascript %}
