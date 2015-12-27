@@ -9,7 +9,7 @@ permalink: /deep-dive/
 
 Customize by Initializing various options and modules.
 
-### Custom toolbar
+### Custom toolbar, popover
 
 Summernote allows you to make own custom toolbar.
 
@@ -73,8 +73,6 @@ You can compose a toolbar with pre-shipped buttons.
   * `undo`: undo
   * `redo`: redo
   * `help`: open help dialog
-
-### Custom popover
 
 Air-mode has its own popover, not toolbar. You can customize it with <code>popover.air</code> option.
 
@@ -168,15 +166,13 @@ create a range object for current user selection.
 var range = $('#summernote').summernote('createRange');
 {% endhighlight %}
 
-### saveRange
+### saveRange, restoreRange
 
 save current user selection internally.
 
 {% highlight javascript %}
 $('#summernote').summernote('saveRange');
 {% endhighlight %}
-
-### restoreRange
 
 restore currently saved range
 
@@ -213,6 +209,20 @@ Editing area needs `<p><br></p>` for focus, even if contents is empty. So summer
 if ($('#summernote').summernote('isEmpty')) {
   alert('contents is empty');
 }
+{% endhighlight %}
+
+### disable, enable
+
+You can disable editor by API.
+
+{% highlight javascript %}
+$('#summernote').summernote('disable');
+{% endhighlight %}
+
+If you want to enable editor again, call API with enable.
+
+{% highlight javascript %}
+$('#summernote').summernote('enable');
 {% endhighlight %}
 
 ## Font style API
