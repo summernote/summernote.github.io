@@ -94,7 +94,7 @@ You can also test running example. Save below code as `index.html` and open it w
   <script src="{{ site.summernote_js }}"></script>
 </head>
 <body>
-  <div id="summernote">Hello Summernote</div>
+  <div id="summernote"><p>Hello Summernote</p></div>
   <script>
     $(document).ready(function() {
         $('#summernote').summernote();
@@ -128,7 +128,7 @@ $('#summernote').summernote({
 
 If you set height, you can see resizebar below.
 
-<div class="height">blah blah~<br/>blah blah~<br/>blah blah~<br/>blah blah~<br/>blah blah~<br/>blah blah~<br/>blah blah~<br/>blah blah~<br/>blah blah~<br/>blah blah~<br/>blah blah~<br/>blah blah~<br/>blah blah~<br/>blah blah~<br/>blah blah~<br/>blah blah~<br/>blah blah~<br/>blah blah~<br/>blah blah~<br/>blah blah~<br/>blah blah~<br/>blah blah~<br/>blah blah~<br/>blah blah~</div>
+<div class="height"><p>blah blah~<br/>blah blah~<br/>blah blah~<br/>blah blah~<br/>blah blah~<br/>blah blah~<br/>blah blah~<br/>blah blah~<br/>blah blah~<br/>blah blah~<br/>blah blah~<br/>blah blah~<br/>blah blah~<br/>blah blah~<br/>blah blah~<br/>blah blah~<br/>blah blah~<br/>blah blah~<br/>blah blah~<br/>blah blah~<br/>blah blah~<br/>blah blah~<br/>blah blah~<br/>blah blah~</p></div>
 <script>
   $(function() {
     $('.height').summernote({height: 150});
@@ -211,7 +211,8 @@ $(document).ready(function() {
 <script>
   $(document).ready(function() {
     $('.lang').summernote({
-      lang: 'ko-KR'
+      lang: 'ko-KR',
+      placeholder: 'move your mouse on toolbar...'
     });
   });
 </script>

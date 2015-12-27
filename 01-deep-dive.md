@@ -39,7 +39,8 @@ This is a toolbar with font style only.
         ['color', ['color']],
         ['para', ['ul', 'ol', 'paragraph']],
         ['height', ['height']]
-      ]
+      ],
+      placeholder: 'Toolbar for font style...'
     });
   });
 </script>

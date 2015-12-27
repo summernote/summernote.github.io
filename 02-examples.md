@@ -55,8 +55,8 @@ $(document).ready(function() {
 });
 {% endhighlight %}
 
-<div class="multiple">summernote 1</div>
-<div class="multiple">summernote 2</div>
+<div class="multiple"><p>summernote 1</p></div>
+<div class="multiple"><p>summernote 2</p></div>
 <script>
   $(function() {
     $('.multiple').summernote();
@@ -92,7 +92,7 @@ var save = function() {
   <button id="edit" class="btn btn-primary" onclick="edit()">Edit</button>
   <button id="save" class="btn btn-primary" onclick="save()">Save</button>
 </p>
-<div class="click2edit">Hello world~!</div>
+<div class="click2edit"><p>Hello world~!</p></div>
 <script>
   var edit = function() {
     $('.click2edit').summernote({focus: true});
@@ -136,7 +136,7 @@ $('.summernote').summernote({
 });
 {% endhighlight %}
 
-<textarea class="codemirror">Click <b>Code View</b>!!!</textarea>
+<textarea class="codemirror"><p>Click <b>Code View</b>!!!</p></textarea>
 <script>
   $(function() {
     $('.codemirror').summernote({
