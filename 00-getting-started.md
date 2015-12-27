@@ -76,6 +76,34 @@ $(document).ready(function() {
 });
 {% endhighlight %}
 
+### Simple example
+
+You can also test running example. Save below code as `index.html` and open it with your browser.
+
+{% highlight html %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Summernote</title>
+  <link href="{{ site.bootstrap_css }}" rel="stylesheet">
+  <link href="{{ site.fontawesome_css }}" rel="stylesheet">
+  <script src="{{ site.jquery_js }}"></script> 
+  <script src="{{ site.bootstrap_js }}"></script> 
+  <link href="{{ site.summernote_css }}" rel="stylesheet">
+  <script src="{{ site.summernote_js }}"></script>
+</head>
+<body>
+  <div id="summernote">Hello Summernote</div>
+  <script>
+    $(document).ready(function() {
+        $('#summernote').summernote();
+    });
+  </script>
+</body>
+</html>
+{% endhighlight %}
+
 ## Basic API
 
 Initialize Summernote
