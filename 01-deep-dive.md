@@ -599,6 +599,61 @@ $('#summernote').on('summernote.change', function(we, contents, $editable) {
 });
 {% endhighlight %}
 
+## Custom button
+
+Summernote also support custom button. If you want to create your own button, you can simply define and use with options.
+
+### Define button 
+
+You can create button object with $.summernote.ui. This button objects have below properties.
+
+* contents: contents to be displayed on the button
+* tooltip: tooltip text when mouse over
+* click:  callback function be called when mouse is clicked
+
+Below codes is about simple button for inserting text 'hello'.
+
+{% highlight javascript %}
+var HelloButton = function (context) {
+  var ui = $.summernote.ui;
+  
+  // create button
+  var button = ui.button({
+    contents: '<i class="fa fa-child"/> Hello',
+    tooltip: 'hello',
+    click: function () {
+      // invoke insertText method with 'hello' on editor module.
+      context.invoke('editor.insertText', 'hello');
+    }
+  });
+
+  return button.render();   // return button as jquery object 
+}
+{% endhighlight %}
+
+You can see `render()` which returns jquery object as button.
+
+### Using button with options
+
+Let's learn how to use the button on toolbar.
+
+First, You can define buttons with option named `buttons` which is a set of key-value. You can define custom button on toolbar options.
+
+{% highlight javascript %}
+$('.summernote').summernote({
+  toolbar: [
+    ['mybutton', ['hello']]
+  ],
+  
+  buttons: {
+    hello: HelloButton
+  }
+});
+{% endhighlight %}
+
+You can also use custom button on `popover` in the same way.
+
+
 ## Module system
 
 For supporting expandable features, summernote was assembled by module system. This module system was built inspired by spring framework.
@@ -700,213 +755,41 @@ var AutoLink = function (context) {
 
 For more module examples: [modules]({{ site.repository }}/tree/develop/src/js/bs3/module)
 
+### Module with option
 
-### Plugin
-
-Plugin is a kind of external module. You can define your own module with plugin. Below link is a example of external module.
-
-* [plugin-hello](https://github.com/summernote/summernote/blob/v0.7.0/examples/plugin-hello.html)
-
-> ##### Plugin was redesigned by new module system after `v0.7.0`
-> Old plugin was hard to control editor states(eg, range, layout so on). After v0.7.0 plugin is redesigned by new module system. It is exactly same with module except surrounding module pattern.
-
-## Button 과 Module 
-
-Summernote 는 버튼과 모듈 형태로 기능을 확장할 수 있다. 
-
-Toolbar 에 간단한 버튼 하나를 추가 하고 싶을 때는 Button 을 쓰면 좋고 
-
-그외 복잡한 기능을 모아놓고 싶으면 Module 을 쓰는 것이 좋다. 
-
-### Button 
-
-먼저 버튼을 정의해보자.  summernote 는  $.summernote.ui 를 기준으로 button 객체를 생성할 수 있다. 
-
-button 객체는 기본적으로 jquery object 기반으로 이루어진다. 
-
-* contents : 버튼에 표시될 내용을 지정한다. 
-* tooltip : 마우스 오버했을 때 나오는 tooltip 을 지정한다. 
-* click :  클릭 이벤트 발생시 실행할 callback 을 지정한다. 
-
-간단하게 3가지의 변수를 가지고 아래와 같이 설정할 수 있다. 
-
-{% highlight javascript %}
-var HelloButton = function (context) {
-  var ui = $.summernote.ui;
-  
-  // create button
-  var button = ui.button({
-    contents: '<i class="fa fa-child"/> Hello',
-    tooltip: 'hello',
-    click: function () {
-      // invoke insertText method with 'hello' on editor module.
-      context.invoke('editor.insertText', 'hello');
-    }
-  });
-
-  return button.render();   // return button's jquery object 
-}
-{% endhighlight %}
-
-마지막에 render() 메소드를 통해서 완전한 jquery 객체로 변환해서 리턴한다. 
-
-자 지금까지 간단한 버튼을 만들었다. 
-
-버튼을 Toolbar 에서 어떻게 쓰는지 알아보자. 
-
-#### `옵션`으로 정의하는 방법 
-
-먼저 버튼은 `buttons` 라는 옵션으로 정의할 수 있다.  buttons 라는 옵션에 원하는 이름으로 지정을 하면 된다. 
-
-{% highlight javascript %}
-$(".summernote").summernote({
-  toolbar : [
-    ['mybutton', [ 'hello' ]]     // set a button named 'hello'
-  ],
-  
-  buttons : {
-    hello : HelloButton
-  }
-});
-{% endhighlight %}
-
-자 이제 버튼을 완전히 정의했다. 
-toolbar 에 표시될 영역에 버튼 이름을 적어주면 나타난다. 
-
-기타 popover(airmode, image 등의 기능)에 버튼을 추가 할때도 이름만 추가 해주면 자동으로 버튼이 추가된다. 
-
-### Module 
-
-모듈은 버튼이 아니라 좀 더 복잡한 기능이나 summernote 에 최적화된 기능을 만들고 싶을 때 사용된다. 
-
-내부에서 정의하는 것을 기본적으로 모듈이라고 부르며 외부에서 정의하는 것은 플러그인이라 부른다. 
-
-구조는 같고 선언하는 방법만 다르다. 
-
-#### 라이프 사이클 
-
-모듈은 기본적으로 라이프사이클이 존재한다. 
-
-summernote 가 실행되어질때 생성되며 소멸될때 같이 소멸된다. 
-
-#### 모듈함수 정의  
-
-{% highlight javascript %}
-
-// 객체를 정의한다. 버튼과 동일하다. 
-function MyModule (context) {
-  var ui = $.summernote.ui;
-  
-  // summernote 를 생성할때 지정한 옵션을 가지고 올 수 있다. 
-  var options = context.options;
-
-  // summernote 에서 제공하는 이벤트를 간단히 정의할 수 있다.  
-  this.events = {
-    'summernote.init' : function () {
-      console.log('summernote is inited');
-    }
-  }
-  
-  // 버튼을 정의 할 수 있다. 
-  context.memo('button.mybutton', function () {
-    return ui.button({
-      contents : 'My Button',
-      click : function () {
-          console.log('my button clicked');
-      }
-    }).render();
-  });
-  
-  // 이 모듈이 초기화(initialize) 될지 안될지 지정한다. 
-  // 만약 runMyModule 이라는 옵션이 없으면 이 모듈은  summernote 안에서 실행되지 않는다. 
-  // 선언을 하지 않으면 기본적으로 모듈을 초기화 한다. 
-  this.shouldInitialize = function () {
-    return options.runMyModule;
-  }
-  
-  //초기화 함수를 지정
-  // 서머노트가 생성되어 질 때 실행된다. 
-  this.initialize = function () {
-    
-    
-  }
-  
-  // 소멸자 
-  // $(".summernote").summernote("destroy");  를 실행할때 같이 실행된다. 
-  // 모듈의 필요없는 자원은 여기서 제거한다. 
-  this.destroy = function () {
-    
-  }
-  
-  // 그외 여러가지 메소드들을 정의한다. 
-  // 이렇게 정의된 메소드는 외부에서 external api 형태로 호출이 가능하다. 
-  // ex) $(".summernote").summernote("mymodule.method");
-  this.method = function () {
-    context.invoke('editor.focus'); // 포커스를 준다. 
-  }
-  
-}
-{% endhighlight %}
-
-#### 옵션으로 모듈 정의하기  
-
-아래와 같이 modules 라는 옵션에 이름을 지정해서 정의할 수 있다.
+You can define custom module with options.
  
 {% highlight javascript %}
 $(".summernote").summernote({
-  modules : {
-    mymodule : MyModule     // mymodule 이름으로 모듈을 정의한다. 
+  modules: {
+    myModule: MyModule
   }
 });
 {% endhighlight %}
 
-여기에 지정된 이름은 external api 의 사용 대상이 된다. 
-
-만약 mymdoule 에 정의된 method 를 실행하고 싶으면 아래와 같이 하면 된다. 
+You can called module's method with external API.
 
 {% highlight javascript %}
-$(".summernote").summernote("mymodule.method", x, y);   
+$(".summernote").summernote("myModule.method", 'hello');
 {% endhighlight %}
 
-#### 플러그인으로 정의하기 
+### Plugin
 
-옵션은 매번 실행할때마다 지정해줘야하기 때문에 실제 사용은 불편할 수 있다. 
-
-그럴 때는 플러그인 형태로 정의하면 좋다. 
+Plugin is a kind of external module. You can also define your own module with plugin.
 
 {% highlight javascript %}
-
 // src/mymodule.js 
 $.extend($.summernote.plugins, {
-  mymodule : function (context) {
+  myModule: function (context) {
     // define module 
     ... 
   }
 });
 {% endhighlight %}
 
-이렇게 하면 외부 파일로 따로 정의해서 사용할 수 있다. 
+Below link is a example of external module.
 
-### 모듈의 동적 추가, 삭제 
+* [plugin-hello](https://github.com/summernote/summernote/blob/v0.7.0/examples/plugin-hello.html)
 
-간혹 모듈을 동적으로 추가하거나 삭제하고 싶을 때가 있다. 
-
-기본적으로 summernote 의 모든 기능이 모듈 베이스로 움직이며 모듈은 언제나 추가하거나 삭제할 수 있다. 
-
-#### 모듈을 동적으로 추가하는 방법
-
-summernote 실행 중에 모듈을 추가 하고 싶다면 아래와 같이 하면 된다. 
-
-{% highlight javascript %}
-$(".summernote").summernote("module", "mymodule" /* module name */, function (context) { 
-  /* define module */ 
-}); 
-{% endhighlight %}
-
-#### 모듈을 지우는 방법 
-
-필요없는 모듈은 아래와 같이 지울 수도 있다. 
-
-{% highlight javascript %}
-$(".summernote").summernote("removeModule", "mymodule"); 
-{% endhighlight %}
+> ##### Plugin was redesigned by new module system after `v0.7.0`
+> Old plugin was hard to control editor states(eg, range, layout so on). After v0.7.0 plugin is redesigned by new module system. It is exactly same with module except surrounding module pattern.
