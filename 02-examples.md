@@ -55,8 +55,8 @@ $(document).ready(function() {
 });
 {% endhighlight %}
 
-<div class="multiple">summernote 1</div>
-<div class="multiple">summernote 2</div>
+<div class="multiple"><p>summernote 1</p></div>
+<div class="multiple"><p>summernote 2</p></div>
 <script>
   $(function() {
     $('.multiple').summernote();
@@ -81,8 +81,9 @@ Javascript:
 var edit = function() {
   $('.click2edit').summernote({focus: true});
 };
+
 var save = function() {
-  var aHTML = $('.click2edit').code(); //save HTML If you need(aHTML: array).
+  var makrup = $('.click2edit').summernote('code');
   $('.click2edit').summernote('destroy');
 };
 {% endhighlight %}
@@ -91,7 +92,7 @@ var save = function() {
   <button id="edit" class="btn btn-primary" onclick="edit()">Edit</button>
   <button id="save" class="btn btn-primary" onclick="save()">Save</button>
 </p>
-<div class="click2edit">Hello world~!</div>
+<div class="click2edit"><p>Hello world~!</p></div>
 <script>
   var edit = function() {
     $('.click2edit').summernote({focus: true});
@@ -135,7 +136,7 @@ $('.summernote').summernote({
 });
 {% endhighlight %}
 
-<textarea class="codemirror">Click <b>Code View</b>!!!</textarea>
+<textarea class="codemirror"><p>Click <b>Code View</b>!!!</p></textarea>
 <script>
   $(function() {
     $('.codemirror').summernote({
@@ -232,14 +233,12 @@ emoji: use `https://api.github.com/emojis`
 
 <div class="hint2emoji"></div>
 <script type="text/javascript">
-
 $.ajax({
-  url: 'https://api.github.com/emojis',
-  async: false
+  url: 'https://api.github.com/emojis'
 }).then(function(data) {
   window.emojis = Object.keys(data);
   window.emojiUrls = data; 
-});;
+});
 
 $(".hint2emoji").summernote({
   height: 100,

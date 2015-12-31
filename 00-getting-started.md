@@ -53,8 +53,8 @@ Include the Following code in your HTML <code>&lt;HTML&gt;</code> tag
 <script src="{{ site.bootstrap_js }}"></script> 
 
 <!-- include summernote css/js-->
-<link href="summernote.css" rel="stylesheet">
-<script src="summernote.min.js"></script>
+<link href="{{ site.summernote_css }}" rel="stylesheet">
+<script src="{{ site.summernote_js }}"></script>
 {% endhighlight %}
 
 Don't forget to change the file's path if you downloaded summernote in a different folders.
@@ -74,6 +74,34 @@ Run the script below when document is ready!
 $(document).ready(function() {
   $('#summernote').summernote();
 });
+{% endhighlight %}
+
+### Simple example
+
+You can also test running example. Save below code as `index.html` and open it with your browser.
+
+{% highlight html %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Summernote</title>
+  <link href="{{ site.bootstrap_css }}" rel="stylesheet">
+  <link href="{{ site.fontawesome_css }}" rel="stylesheet">
+  <script src="{{ site.jquery_js }}"></script> 
+  <script src="{{ site.bootstrap_js }}"></script> 
+  <link href="{{ site.summernote_css }}" rel="stylesheet">
+  <script src="{{ site.summernote_js }}"></script>
+</head>
+<body>
+  <div id="summernote"><p>Hello Summernote</p></div>
+  <script>
+    $(document).ready(function() {
+        $('#summernote').summernote();
+    });
+  </script>
+</body>
+</html>
 {% endhighlight %}
 
 ## Basic API
@@ -100,7 +128,7 @@ $('#summernote').summernote({
 
 If you set height, you can see resizebar below.
 
-<div class="height">blah blah~<br/>blah blah~<br/>blah blah~<br/>blah blah~<br/>blah blah~<br/>blah blah~<br/>blah blah~<br/>blah blah~<br/>blah blah~<br/>blah blah~<br/>blah blah~<br/>blah blah~<br/>blah blah~<br/>blah blah~<br/>blah blah~<br/>blah blah~<br/>blah blah~<br/>blah blah~<br/>blah blah~<br/>blah blah~<br/>blah blah~<br/>blah blah~<br/>blah blah~<br/>blah blah~</div>
+<div class="height"><p>blah blah~<br/>blah blah~<br/>blah blah~<br/>blah blah~<br/>blah blah~<br/>blah blah~<br/>blah blah~<br/>blah blah~<br/>blah blah~<br/>blah blah~<br/>blah blah~<br/>blah blah~<br/>blah blah~<br/>blah blah~<br/>blah blah~<br/>blah blah~<br/>blah blah~<br/>blah blah~<br/>blah blah~<br/>blah blah~<br/>blah blah~<br/>blah blah~<br/>blah blah~<br/>blah blah~</p></div>
 <script>
   $(function() {
     $('.height').summernote({height: 150});
@@ -183,7 +211,8 @@ $(document).ready(function() {
 <script>
   $(document).ready(function() {
     $('.lang').summernote({
-      lang: 'ko-KR'
+      lang: 'ko-KR',
+      placeholder: 'move your mouse on toolbar...'
     });
   });
 </script>

@@ -15,7 +15,7 @@ $grid-color: rgba(218, 224, 232, 0.5);
 body {
   margin-top: $header-height;
   background: rgb(240, 243, 249);
-  background-image: linear-gradient($grid-color 1px, transparent 1px), linear-gradient(90deg, $grid-color 1px, transparent 1px);
+  @include at2x('/img/img_bg_pattern');
   background-size: 10px 10px;
 }
 
@@ -23,12 +23,11 @@ body {
   margin-bottom: 0;
   padding-top: 15px;
   height: $header-height;
-  background-color: #3fc6f7;
-  opacity: .9;
+  background-color: rgba(63, 198, 247, 0.9);
   border: 0;
   border-radius: 0;
   @media screen and (max-width: $screen-width-sm) {
-    padding: 0 2%;
+    padding: 15px 2%;
   }
   @media screen and (max-width: $screen-width-xs) {
     height: $header-height-xs;
@@ -57,8 +56,7 @@ body {
     }
 
     .navbar-header {
-      background-color: #3fc6f7;
-      opacity: 0.9;
+      background-color: rgba(63, 198, 247, 0.9);
       padding-top: 1px;
       position: relative;
       z-index: 9999;
@@ -104,6 +102,7 @@ body {
 
 .header-page-container {
   margin-top: 10px;
+  font-weight: 200;
   @media screen and (max-width: $screen-width-xs) {
     margin-top: 0;
   }
@@ -112,6 +111,11 @@ body {
 .header-page-link {
   font-size: 18px;
   color: #c6f3ff !important;
+
+  &:hover,
+  &:focus {
+    color: #fff !important;
+  }
 }
 
 .header-bi {
@@ -143,11 +147,13 @@ body {
 
 .navbar-default {
   .header-social > li > a,
-  .header-social > li > a:hover,
-  .header-social > li > a:focus,
   .header-social > li > a:visited {
     font-size: 15px;
-    color: #d5f6ff;
+    color: #c6f3ff;
+  }
+  .header-social > li > a:hover,
+  .header-social > li > a:focus {
+    color: #fff;
   }
 
   .navbar-toggle:hover,
@@ -158,6 +164,7 @@ body {
 
 .header-social {
   .tweet {
+    line-height: 22px;
     &:before {
       content: "";
       display: inline-block;
@@ -181,6 +188,7 @@ body {
   }
 
   .github {
+    line-height: 22px;
     &:before {
       content: "";
       display: inline-block;
@@ -192,5 +200,22 @@ body {
       vertical-align: bottom;
       margin-right: 2px;
     }
+  }
+}
+
+/* header download button for small screen
+-------------------------------------------------- */
+#download {
+  display: none;
+  @media screen and (max-width: $screen-width-xs) {
+    position: absolute;
+    padding: 0;
+    top: 8px;
+    right: 8px;
+    display: block;
+  }
+
+  .img-mobile-download {
+    @include img('/img/m_gnb_download', 34px, 34px);
   }
 }

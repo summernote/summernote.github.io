@@ -21,9 +21,6 @@ body.page {
   height: $footer-height;
   padding-top: 60px;
   padding-bottom: 60px;
-  background: rgb(225, 231, 239);
-  background-image: linear-gradient($grid-color 1px, transparent 1px), linear-gradient(90deg, $grid-color 1px, transparent 1px);
-  background-size: 10px 10px;
   text-align:center;
   @media screen and (max-width: $screen-width-xs) {
     position: static;
