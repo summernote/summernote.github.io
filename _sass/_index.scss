@@ -313,9 +313,20 @@ $index-title-margin-xs: 59px;
 .img-index-title {
   margin-right: 36px;
   @include img('/img/img_main_title', 432px, 84px);
-  @include img_media('/img/m_main_title', 242px, 42px, $screen-width-xs);
   @media screen and (max-width: $screen-width-xs) {
-    margin-right: 0;
+    display: none;
+  }
+}
+.img-index-title-mobile {
+  display: none;
+}
+@media screen and (max-width: $screen-width-xs) {
+  .img-index-title-mobile {
+    display: block;
+    color: #fff;
+    opacity: .6;
+    font-size: 18px;
+    font-weight: 300;
   }
 }
 
