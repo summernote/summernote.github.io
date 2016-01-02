@@ -187,9 +187,6 @@ $index-title-margin-xs: 59px;
   }
 
   &:hover {
-    .img-index-download {
-      @include img('/img/img_main_download_over', 100px, 100px);
-    }
     .img-index-install {
       @include img('/img/img_main_install_over', 76px, 76px);
     }
@@ -324,6 +321,10 @@ $index-title-margin-xs: 59px;
 
 .img-index-download {
   @include img('/img/img_main_download', 100px, 100px);
+}
+.img-index-download:hover {
+  @include img('/img/img_main_download', 100px, 100px);
+  @include img('/img/img_main_download_over', 100px, 100px);
 }
 
 .img-index-install {
