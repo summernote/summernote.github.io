@@ -8,24 +8,25 @@
   ],
   "ignore": [
     "**/.*",
+    "Gruntfile.js",
+    "MAINTAIN.md",
+    "grunts",
     "node_modules",
     "bower_components",
-    "test",
-    "tests"
+    "test"
   ],
   "dependencies": {
     "jquery": ">= 1.9.0",
     "bootstrap": ">= 3.0.1",
     "font-awesome": ">=4.2.0"
   },
-  "version": "0.7.0",
-  "_release": "0.7.0",
+  "_release": "827d215238",
   "_resolution": {
-    "type": "version",
-    "tag": "v0.7.0",
-    "commit": "16a68e8122a6b7c12c35a39fae6c09b0c66938a7"
+    "type": "branch",
+    "branch": "master",
+    "commit": "827d2152385ff9735e284f5d193c82aeaaa998e1"
   },
   "_source": "git://github.com/summernote/summernote.git",
-  "_target": "v0.7.0",
+  "_target": "master",
   "_originalSource": "summernote"
 }

@@ -163,7 +163,7 @@ body {
 }
 
 .header-social {
-  .tweet {
+  .twitter {
     line-height: 22px;
     &:before {
       content: "";
@@ -185,6 +185,11 @@ body {
         left: 8980px;
       }
     }
+    &:hover {
+      &:before {
+        @include at2x('/img/img_gnb_twitter_over');
+      }
+    }
   }
 
   .github {
@@ -199,6 +204,11 @@ body {
       background-size: 22px 22px;
       vertical-align: bottom;
       margin-right: 2px;
+    }
+    &:hover {
+      &:before {
+        @include at2x('/img/img_gnb_github_over');
+      }
     }
   }
 }

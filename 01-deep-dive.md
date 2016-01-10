@@ -9,7 +9,7 @@ permalink: /deep-dive/
 
 Customize by Initializing various options and modules.
 
-### Custom toolbar
+### Custom toolbar, popover
 
 Summernote allows you to make own custom toolbar.
 
@@ -74,8 +74,6 @@ You can compose a toolbar with pre-shipped buttons.
   * `undo`: undo
   * `redo`: redo
   * `help`: open help dialog
-
-### Custom popover
 
 Air-mode has its own popover, not toolbar. You can customize it with <code>popover.air</code> option.
 
@@ -187,15 +185,13 @@ create a range object for current user selection.
 var range = $('#summernote').summernote('createRange');
 {% endhighlight %}
 
-### saveRange
+### saveRange, restoreRange
 
 save current user selection internally.
 
 {% highlight javascript %}
 $('#summernote').summernote('saveRange');
 {% endhighlight %}
-
-### restoreRange
 
 restore currently saved range
 
@@ -232,6 +228,20 @@ Editing area needs `<p><br></p>` for focus, even if contents is empty. So summer
 if ($('#summernote').summernote('isEmpty')) {
   alert('contents is empty');
 }
+{% endhighlight %}
+
+### disable, enable
+
+You can disable editor by API.
+
+{% highlight javascript %}
+$('#summernote').summernote('disable');
+{% endhighlight %}
+
+If you want to enable editor again, call API with enable.
+
+{% highlight javascript %}
+$('#summernote').summernote('enable');
 {% endhighlight %}
 
 ## Font style API
@@ -366,12 +376,20 @@ $('#summernote').summernote('lineHeight', 20);
 
 ### insertImage
 
-insert a image
+Insert a image
 
 {% highlight javascript %}
 // @param {String} url
-// @param {String} filename - optional
+// @param {String|Function} filename - optional
 $('#summernote').summernote('insertImage', url, filename);
+{% endhighlight %}
+
+You can modify image with passing callback as second argument.
+{% highlight javascript %}
+$('#summernote').summernote('insertImage', url, function ($image) {
+  $image.css('width', $image.width() / 3);
+  $image.attr('data-filename', 'retriever');
+});
 {% endhighlight %}
 
 ### insertNode
@@ -581,6 +599,61 @@ $('#summernote').on('summernote.change', function(we, contents, $editable) {
 });
 {% endhighlight %}
 
+## Custom button
+
+Summernote also support custom button. If you want to create your own button, you can simply define and use with options.
+
+### Define button 
+
+You can create button object with $.summernote.ui. This button objects have below properties.
+
+* contents: contents to be displayed on the button
+* tooltip: tooltip text when mouse over
+* click:  callback function be called when mouse is clicked
+
+Below codes is about simple button for inserting text 'hello'.
+
+{% highlight javascript %}
+var HelloButton = function (context) {
+  var ui = $.summernote.ui;
+  
+  // create button
+  var button = ui.button({
+    contents: '<i class="fa fa-child"/> Hello',
+    tooltip: 'hello',
+    click: function () {
+      // invoke insertText method with 'hello' on editor module.
+      context.invoke('editor.insertText', 'hello');
+    }
+  });
+
+  return button.render();   // return button as jquery object 
+}
+{% endhighlight %}
+
+You can see `render()` which returns jquery object as button.
+
+### Using button with options
+
+Let's learn how to use the button on toolbar.
+
+First, You can define buttons with option named `buttons` which is a set of key-value. You can define custom button on toolbar options.
+
+{% highlight javascript %}
+$('.summernote').summernote({
+  toolbar: [
+    ['mybutton', ['hello']]
+  ],
+  
+  buttons: {
+    hello: HelloButton
+  }
+});
+{% endhighlight %}
+
+You can also use custom button on `popover` in the same way.
+
+
 ## Module system
 
 For supporting expandable features, summernote was assembled by module system. This module system was built inspired by spring framework.
@@ -682,13 +755,41 @@ var AutoLink = function (context) {
 
 For more module examples: [modules]({{ site.repository }}/tree/develop/src/js/bs3/module)
 
+### Module with option
+
+You can define custom module with options.
+ 
+{% highlight javascript %}
+$(".summernote").summernote({
+  modules: {
+    myModule: MyModule
+  }
+});
+{% endhighlight %}
+
+You can called module's method with external API.
+
+{% highlight javascript %}
+$(".summernote").summernote("myModule.method", 'hello');
+{% endhighlight %}
+
 ### Plugin
 
-Plugin is a kind of external module. You can define your own module with plugin. Below link is a example of external module.
+Plugin is a kind of external module. You can also define your own module with plugin.
+
+{% highlight javascript %}
+// src/mymodule.js 
+$.extend($.summernote.plugins, {
+  myModule: function (context) {
+    // define module 
+    ... 
+  }
+});
+{% endhighlight %}
+
+Below link is a example of external module.
 
 * [plugin-hello](https://github.com/summernote/summernote/blob/v0.7.0/examples/plugin-hello.html)
 
 > ##### Plugin was redesigned by new module system after `v0.7.0`
 > Old plugin was hard to control editor states(eg, range, layout so on). After v0.7.0 plugin is redesigned by new module system. It is exactly same with module except surrounding module pattern.
-
-
