@@ -230,6 +230,14 @@ if ($('#summernote').summernote('isEmpty')) {
 }
 {% endhighlight %}
 
+### reset
+
+Clear contents and remove all stored history.
+
+{% highlight javascript %}
+$('#summernote').summernote('disable');
+{% endhighlight %}
+
 ### disable, enable
 
 You can disable editor by API.
