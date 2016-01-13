@@ -237,7 +237,7 @@ if ($('#summernote').summernote('isEmpty')) {
 Clear contents and remove all stored history.
 
 {% highlight javascript %}
-$('#summernote').summernote('disable');
+$('#summernote').summernote('reset');
 {% endhighlight %}
 
 ### disable, enable
