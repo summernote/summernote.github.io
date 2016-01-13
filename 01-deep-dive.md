@@ -22,7 +22,7 @@ $('#summernote').summernote({
     ['fontsize', ['fontsize']],
     ['color', ['color']],
     ['para', ['ul', 'ol', 'paragraph']],
-    ['height', ['height']],
+    ['height', ['height']]
   ]
 });
 {% endhighlight %}
