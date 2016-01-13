@@ -33,7 +33,7 @@ $('.summernote').summernote({
   });
 </script>
 
-## Themes with booswatch
+## Themes with bootswatch
 Style changed accroding to bootstrap theme.
 More bootstrap theme: [Bootswatch](http://bootswatch.com){:target="_blank"}
 

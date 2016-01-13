@@ -195,6 +195,7 @@ body.team {
     text-align: left;
     padding: 24px 40px 24px;
     position: relative;
+    text-decoration: none;
     @media screen and (max-width: $screen-width-xs) {
       width: 100%;
       margin-bottom: 20px;
@@ -211,19 +212,27 @@ body.team {
 
     h4 {
       font-size: 20px;
+      margin-top: 6px;
     }
 
     p {
       font-size: 14px;
       color: #fff;
+      opacity: 0.5;
     }
   }
 
   .team-goal {
     background-color: #2db7f1;
+    &:hover {
+      background-color: #28a4d8;
+    }
   }
   .team-helpus {
     background-color: #516170;
+    &:hover {
+      background-color: #495765;
+    }
   }
 
   @media screen and (max-width: $screen-width-xs) {

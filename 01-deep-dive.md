@@ -22,7 +22,7 @@ $('#summernote').summernote({
     ['fontsize', ['fontsize']],
     ['color', ['color']],
     ['para', ['ul', 'ol', 'paragraph']],
-    ['height', ['height']],
+    ['height', ['height']]
   ]
 });
 {% endhighlight %}
@@ -61,6 +61,8 @@ You can compose a toolbar with pre-shipped buttons.
   * `italic`: toggle italic
   * `underline`: toggle underline
   * `strikethrough`: toggle strikethrough
+  * `superscript`: toggle superscript
+  * `subscript`: toggle subscript
   * `clear`: clear font style
 * Paragraph style
   * `style`: format selected block
@@ -228,6 +230,14 @@ Editing area needs `<p><br></p>` for focus, even if contents is empty. So summer
 if ($('#summernote').summernote('isEmpty')) {
   alert('contents is empty');
 }
+{% endhighlight %}
+
+### reset
+
+Clear contents and remove all stored history.
+
+{% highlight javascript %}
+$('#summernote').summernote('disable');
 {% endhighlight %}
 
 ### disable, enable
