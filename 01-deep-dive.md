@@ -61,6 +61,8 @@ You can compose a toolbar with pre-shipped buttons.
   * `italic`: toggle italic
   * `underline`: toggle underline
   * `strikethrough`: toggle strikethrough
+  * `superscript`: toggle superscript
+  * `subscript`: toggle subscript
   * `clear`: clear font style
 * Paragraph style
   * `style`: format selected block
