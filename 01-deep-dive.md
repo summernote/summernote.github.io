@@ -139,6 +139,21 @@ $('#summernote').summernote({
 });
 {% endhighlight %}
 
+### Dialogs
+Dialogs can be placed in `body`, not in summernote.
+{% highlight javascript %}
+$('#summernote').summernote({
+  dialogsInBody: true
+});
+{% endhighlight %}
+
+By default, dialogs are shown and hidden without fading effect. But you can turn it on by `dialogsFade`.
+{% highlight javascript %}
+$('#summernote').summernote({
+  dialogsFade: true  // Add fade effect on dialogs
+});
+{% endhighlight %}
+
 ### Disable drag and drop
 You can disable drag and drop with `disableDragAndDrop` option.
 {% highlight javascript %}
