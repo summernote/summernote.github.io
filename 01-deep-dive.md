@@ -575,7 +575,7 @@ $('#summernote').summernote({
 });
 
 // summernote.paste
-$('#summernote').on('summernote.keydown', function(we, e) {
+$('#summernote').on('summernote.paste', function(e) {
   console.log('Called event paste');
 });
 {% endhighlight %}
