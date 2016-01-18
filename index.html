@@ -136,9 +136,12 @@ $(function() {
         $placeholder.hide();
       },
       onBlur: function() {
-        if ($(this).summernote('isEmpty')) {
-          $placeholder.show();
-        }
+        var $self = $(this);
+        setTimeout(function() {
+          if ($self.summernote('isEmpty') && !$self.summernote('codeview.isActivated')) {
+            $placeholder.show();
+          }
+        }, 300);
       }
     }
   });
