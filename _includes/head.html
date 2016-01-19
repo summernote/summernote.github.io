@@ -5,6 +5,25 @@
 <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
 <meta name="author" content="{{ site.author }}">
 <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?">
+<link rel="apple-touch-icon" sizes="57x57" href="/img/icons/icon_ios_57x57.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/img/icons/icon_ios_76x76.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/img/icons/icon_ios_120x120.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/img/icons/icon_ios_152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/img/icons/icon_ios_180x180.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/img/icons/android_icon_192x192.png">
+<meta property="og:site_name" content="{{ site.title }}">
+<meta property="og:type" content="website">
+<meta property="og:title" content="{{ site.title }}">
+<meta property="og:url" content="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
+<meta property="og:image" content="/img/icons/1200x630.png">
+<meta property="og:description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:url" content="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
+<meta name="twitter:title" content="{{ site.title }}">
+<meta name="twitter:description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
+<meta name="twitter:image" content="/img/icons/icon_200x200.png">
+<meta name="twitter:site" content="@hackerwins">
+<meta name="twitter:domain" content="http://summernote.org/">
 
 <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
 <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ "/feed.xml" | prepend: site.baseurl | prepend: site.url }}" />
