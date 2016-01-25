@@ -109,7 +109,6 @@ If you include a `CodeMirror` on a page, you can use CodeMirror to Codeview. Inc
 {% highlight html %}
 <!-- include libraries(jQuery, bootstrap, fontawesome) -->
 <link href="{{ site.bootstrap_css }}" rel="stylesheet"> 
-<link href="{{ site.fontawesome_css }}" rel="stylesheet">
 <script src="{{ site.jquery_js }}"></script> 
 <script src="{{ site.bootstrap_js }}"></script> 
 
@@ -191,6 +190,7 @@ Summernote support autocomplete features, hint for helping typing. You can defin
   </tr>      
 </tbody>
 </table>
+
 
 ### Hint for words
 
@@ -340,5 +340,37 @@ $(".hint2mention").summernote({
       return '@' + item;
     }    
   }
+});
+{% endhighlight %}
+
+
+### Hint Direction
+ 
+ You can set hint direction (top or bottom), default value is bottom. 
+
+<div class="hint2direction"></div>
+<script type="text/javascript">
+$(".hint2direction").on('summernote.init', function(e, layoutInfo) {
+  layoutInfo.statusbar.hide();
+}).summernote({
+  height: 40,
+  toolbar: false,
+  placeholder: 'type with apple, orange, watermelon, lemon',
+  hintDirection : 'top',
+  statusbar: false,
+  hint: {
+    words: ['apple', 'orange', 'watermelon', 'lemon'],
+    match: /\b(\w{1,})$/,
+    search: function (keyword, callback) {
+      callback($.grep(this.words, function (item) {
+        return item.indexOf(keyword) === 0;
+      }));
+    }
+  }
+});
+</script>
+{% highlight javascript %}
+$(".hint2direction").summernote({
+  hintDirection : 'top'
 });
 {% endhighlight %}

@@ -9,6 +9,126 @@ permalink: /deep-dive/
 
 Customize by Initializing various options and modules.
 
+### Custom Icon
+
+
+You can define icon list by your icon set. 
+
+{% highlight javascript %}
+$('#summernote').summernote({
+  icons : {
+    font : 'fa fa-font',
+    ...
+  }
+});
+{% endhighlight %}
+
+#### Summernote Icon Set
+
+
+> After v0.7.4, summernote use own icon set. 
+
+summernote icon has note-icon-* prefix.
+ 
+{% highlight javascript %}
+  icons: {
+    'align': 'note-icon-align',
+    'alignCenter': 'note-icon-align-center',
+    'alignJustify': 'note-icon-align-justify',
+    'alignLeft': 'note-icon-align-left',
+    'alignRight': 'note-icon-align-right',
+    'indent': 'note-icon-align-indent',
+    'outdent': 'note-icon-align-outdent',
+    'arrowsAlt': 'note-icon-arrows-alt',
+    'bold': 'note-icon-bold',
+    'caret': 'note-icon-caret',
+    'circle': 'note-icon-circle',
+    'close': 'note-icon-close',
+    'code': 'note-icon-code',
+    'eraser': 'note-icon-eraser',
+    'font': 'note-icon-font',
+    'frame': 'note-icon-frame',
+    'italic': 'note-icon-italic',
+    'link': 'note-icon-link',
+    'unlink': 'note-icon-chain-broken',
+    'magic': 'note-icon-magic',
+    'menuCheck': 'note-icon-check',
+    'minus': 'note-icon-minus',
+    'orderedlist': 'note-icon-orderedlist',
+    'pencil': 'note-icon-pencil',
+    'picture': 'note-icon-picture',
+    'question': 'note-icon-question',
+    'redo': 'note-icon-redo',
+    'square': 'note-icon-square',
+    'strikethrough': 'note-icon-strikethrough',
+    'subscript': 'note-icon-subscript',
+    'superscript': 'note-icon-superscript',
+    'table': 'note-icon-table',
+    'textHeight': 'note-icon-text-height',
+    'trash': 'note-icon-trash',
+    'underline': 'note-icon-underline',
+    'undo': 'note-icon-undo',
+    'unorderedlist': 'note-icon-unorderedlist',
+    'video': 'note-icon-video'
+  }
+{% endhighlight %}
+
+#### Font-Awesome Icon Set
+
+you also can use font-awesome icons.
+
+> First, load font-awesome css file.
+
+{% highlight html %}
+<link href="{{ site.fontawesome_css }}" rel="stylesheet"> 
+{% endhighlight %}
+ 
+please set icon option. 
+ 
+{% highlight javascript %}
+  icons: {
+   'align': 'fa fa-align',
+   'alignCenter': 'fa fa-align-center',
+   'alignJustify': 'fa fa-align-justify',
+   'alignLeft': 'fa fa-align-left',
+   'alignRight': 'fa fa-align-right',
+   'indent': 'fa fa-indent',
+   'outdent': 'fa fa-outdent',
+   'arrowsAlt': 'fa fa-arrows-alt',
+   'bold': 'fa fa-bold',
+   'caret': 'caret',
+   'circle': 'fa fa-circle',
+   'close': 'fa fa-close',
+   'code': 'fa fa-code',
+   'eraser': 'fa fa-eraser',
+   'font': 'fa fa-font',
+   'frame': 'fa fa-frame',
+   'italic': 'fa fa-italic',
+   'link': 'fa fa-link',
+   'unlink': 'fa fa-chain-broken',
+   'magic': 'fa fa-magic',
+   'menuCheck': 'fa fa-check',
+   'minus': 'fa fa-minus',
+   'orderedlist': 'fa fa-list-ol',
+   'pencil': 'fa fa-pencil',
+   'picture': 'fa fa-picture-o',
+   'question': 'fa fa-question',
+   'redo': 'fa fa-repeat',
+   'square': 'fa fa-square',
+   'strikethrough': 'fa fa-strikethrough',
+   'subscript': 'fa fa-subscript',
+   'superscript': 'fa fa-superscript',
+   'table': 'fa fa-table',
+   'textHeight': 'fa fa-text-height',
+   'trash': 'fa fa-trash',
+   'underline': 'fa fa-underline',
+   'undo': 'fa fa-undo',
+   'unorderedlist': 'fa fa-list-ul',
+   'video': 'fa fa-video-camera'
+  }
+{% endhighlight %} 
+
+
 ### Custom toolbar, popover
 
 Summernote allows you to make own custom toolbar.
@@ -70,6 +190,12 @@ You can compose a toolbar with pre-shipped buttons.
   * `ul`: toggle unordered list
   * `paragraph`: dropdown for paragraph align
   * `height`: set line height
+  * `justifyCenter`: set align center   
+  * `justifyLeft`: set align left 
+  * `justifyRight`: set align right 
+  * `justifyFull`: set align jusitfy 
+  * `outdent`: set outdent
+  * `indent`: set indent
 * Misc
   * `fullscreen`: toggle fullscreen editing mode
   * `codeview`: toggle wysiwyg and html editing mode
@@ -111,6 +237,17 @@ popover: {
   ]
 }
 {% endhighlight %}
+
+#### Hide toolbar
+
+You can hide summernote toolbar. 
+
+{% highlight javascript %}
+$('#summernote').summernote({
+  toolbar: false
+});
+{% endhighlight %} 
+ 
 
 ### Custom placeholder
 You can define placeholder with `placeholder` option.
