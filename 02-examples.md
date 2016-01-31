@@ -342,3 +342,11 @@ $(".hint2mention").summernote({
   }
 });
 {% endhighlight %}
+
+## Plugin list
+
+Below is useful plugin list.
+
+ - Print: [demo](http://lqez.github.io/summernote-ext-print){:target="_blank"}, [repo](https://github.com/lqez/summernote-ext-print){:target="_blank"}
+
+For more plugin lists, visit to [awesome-summernote](https://github.com/summernote/awesome-summernote){:target="_blank"}.
