@@ -42,13 +42,12 @@ Bootstrap uses certain HTML elements and CSS properties which require HTML5 doct
 
 ### Include js/css
 
-Summernote uses open source libraries(jQuery, Bootstrap, font-awesome).
+Summernote uses open source libraries(jQuery, Bootstrap).
 Include the Following code in your HTML <code>&lt;HTML&gt;</code> tag
 
 {% highlight html %}
-<!-- include libraries(jQuery, bootstrap, fontawesome) -->
+<!-- include libraries(jQuery, bootstrap) -->
 <link href="{{ site.bootstrap_css }}" rel="stylesheet">
-<link href="{{ site.fontawesome_css }}" rel="stylesheet">
 <script src="{{ site.jquery_js }}"></script> 
 <script src="{{ site.bootstrap_js }}"></script> 
 
@@ -58,6 +57,9 @@ Include the Following code in your HTML <code>&lt;HTML&gt;</code> tag
 {% endhighlight %}
 
 Don't forget to change the file's path if you downloaded summernote in a different folders.
+
+> ##### Fontawesome dependancy
+> After v0.8.0, You don't have to include fontawesome for displaying summernote's icon. But You can still use fontawesome for your custom icon. For more detail, please visit to [custom button](/deep-dive/#custom-button) section.
 
 ### Insert
 
@@ -87,7 +89,6 @@ You can also test running example. Save below code as `index.html` and open it w
   <meta charset="UTF-8">
   <title>Summernote</title>
   <link href="{{ site.bootstrap_css }}" rel="stylesheet">
-  <link href="{{ site.fontawesome_css }}" rel="stylesheet">
   <script src="{{ site.jquery_js }}"></script> 
   <script src="{{ site.bootstrap_js }}"></script> 
   <link href="{{ site.summernote_css }}" rel="stylesheet">
@@ -186,7 +187,6 @@ Include libraries with lang file. eg) <code>summernote-ko-KR.js</code>
 
 {% highlight html %}
 <link href="{{ site.bootstrap_css }}" rel="stylesheet"> 
-<link href="{{ site.fontawesome_css }}" rel="stylesheet">
 <script src="{{ site.jquery_js }}"></script> 
 <script src="{{ site.bootstrap_js }}"></script> 
 

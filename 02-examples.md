@@ -104,12 +104,11 @@ var save = function() {
 
 ## Codemirror as codeview
 
-If you include a `CodeMirror` on a page, you can use CodeMirror to Codeview. Include jQuery, Bootstrap, font-awesome and CodeMirror with summernote.
+If you include a `CodeMirror` on a page, you can use CodeMirror to Codeview. Include jQuery, Bootstrap and CodeMirror with summernote.
 
 {% highlight html %}
-<!-- include libraries(jQuery, bootstrap, fontawesome) -->
+<!-- include libraries(jQuery, bootstrap) -->
 <link href="{{ site.bootstrap_css }}" rel="stylesheet"> 
-<link href="{{ site.fontawesome_css }}" rel="stylesheet">
 <script src="{{ site.jquery_js }}"></script> 
 <script src="{{ site.bootstrap_js }}"></script> 
 
