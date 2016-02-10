@@ -106,6 +106,8 @@ You can also test running example. Save below code as `index.html` and open it w
 </html>
 {% endhighlight %}
 
+{% include ad-doc.html %}
+
 ## Basic API
 
 Initialize Summernote
@@ -179,6 +181,8 @@ for more detail api: [deep dive with api](/deep-dive/#api)
 
 > ##### destroy and code
 > After v0.7.0, direct jquery methods, `destroy` and `code` were removed for avoiding conflict with other jquery libraries. You can call this methods with summernote api.
+
+{% include ad-doc.html %}
 
 ## i18n support
 

@@ -39,6 +39,8 @@ More bootstrap theme: [Bootswatch](http://bootswatch.com){:target="_blank"}
 
 <iframe src="/themes.html" width="100%" height="300" frameborder="0"></iframe>
 
+{% include ad-doc.html %}
+
 ## Multiple Editor
 To display multiple editors on a page, you need to place more than two `<div>` elements in HTML.
 
@@ -151,6 +153,8 @@ $('.summernote').summernote({
 </script>
 
 [CodeMirror](http://codemirror.net){:target="_blank"} is a versatile text editor implemented in JavaScript for the browser. It is specialized for editing code, and comes with a number of language modes and addons that implement more advanced editing functionaly.
+
+{% include ad-doc.html %}
 
 ## Hint 
 

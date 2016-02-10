@@ -170,6 +170,8 @@ $('#summernote').summernote({
 });
 {% endhighlight %}
 
+{% include ad-doc.html %}
+
 ## Basic API
 
 You can initialize summernote with `summernote`.
@@ -454,6 +456,8 @@ $('#summernote').summernote('createLink', {
 $('#summernote').summernote('unlink');
 {% endhighlight %}
 
+{% include ad-doc.html %}
+
 ## Callbacks
 Summernote support initialize callbacks and jquery's custom event style callbacks.
 
@@ -678,6 +682,7 @@ $('.summernote').summernote({
 
 You can also use custom button on `popover` in the same way.
 
+{% include ad-doc.html %}
 
 ## Module system
 
