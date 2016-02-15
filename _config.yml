@@ -10,13 +10,13 @@ url: "http://summernote.org" # the base hostname & protocol for your site
 github_username: summernote
 
 # Summernote settings
-version: 0.8.0
+version: 0.8.1
 repository: "https://github.com/summernote/summernote"
 jquery_js: "http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"
 bootstrap_css: "http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css"
 bootstrap_js: "http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"
-summernote_js: "http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.0/summernote.js"
-summernote_css: "http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.0/summernote.css"
+summernote_js: "http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.1/summernote.js"
+summernote_css: "http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.1/summernote.css"
 
 # Build settings
 markdown: kramdown

@@ -249,3 +249,12 @@ Summernote widget for Wicket Bootstrap.
 * [demo](http://wb-mgrigorov.rhcloud.com/summernote){:target="_blank"}
 * [source code](https://github.com/l0rdn1kk0n/wicket-bootstrap/tree/4f97ca783f7279ca43f9e2ee790703161f59fa40/bootstrap-extensions/src/main/java/de/agilecoders/wicket/extensions/markup/html/bootstrap/editor){:target="_blank"}
 
+### Webpack
+Example about using summernote with webpack.
+
+* [summernote-webpack-example](https://github.com/hackerwins/summernote-webpack-example){:target="_blank"}
+
+### Meteor
+Example about using summernote with meteor.
+
+* [summernote-meteor-example](https://github.com/hackerwins/summernote-meteor-example){:target="_blank"}
