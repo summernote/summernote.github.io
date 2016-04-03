@@ -446,11 +446,11 @@ Create link and unlink
 {% highlight javascript %}
 // @param {String} text - link text
 // @param {String} url - link url
-// @param {Boolean} newWindow - whether link's target is new window or not
+// @param {Boolean} isNewWindow - whether link's target is new window or not
 $('#summernote').summernote('createLink', {
   text: 'This is the Summernote's Official Site',
   url: 'http://summernote.org',
-  newWindow: true
+  isNewWindow: true
 });
 
 $('#summernote').summernote('unlink');
