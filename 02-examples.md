@@ -85,7 +85,7 @@ var edit = function() {
 };
 
 var save = function() {
-  var makrup = $('.click2edit').summernote('code');
+  var markup = $('.click2edit').summernote('code');
   $('.click2edit').summernote('destroy');
 };
 {% endhighlight %}
