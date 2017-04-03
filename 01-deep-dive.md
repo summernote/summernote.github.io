@@ -3,6 +3,7 @@ layout: doc
 title: Deep dive
 description: Customize summernote's components, toolbar, plugins to get your very own version
 permalink: /deep-dive/
+menu: true
 ---
 
 ## Initialization options

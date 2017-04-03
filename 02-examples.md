@@ -3,6 +3,7 @@ layout: doc
 title: Examples
 description: See all useful features of summernote in action.
 permalink: /examples/
+menu: true
 ---
 
 ## Air-mode
