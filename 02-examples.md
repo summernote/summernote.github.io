@@ -1,5 +1,6 @@
 ---
 layout: doc
+bodyClass: doc
 title: Examples
 description: See all useful features of summernote in action.
 permalink: /examples/
