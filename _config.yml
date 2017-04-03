@@ -23,6 +23,3 @@ markdown: kramdown
 
 gems:
   - jekyll-sitemap
-
-exclude:
-  - bower_components
