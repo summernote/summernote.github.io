@@ -239,6 +239,7 @@ Handy update for your django admin page.
 This gem was built to gemify the assets used in Summernote.
 
 * [summernote-rails](https://github.com/summernote/summernote-rails){:target="_blank"}
+* [how to use summernote on rails](https://www.youtube.com/watch?v=A3vDRdfEyKs&feature=youtu.be&t=75){:target="_blank"}
 
 ### AngularJS
 AngularJS directive to Summernote.
