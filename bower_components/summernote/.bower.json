@@ -19,14 +19,14 @@
     "jquery": ">= 1.9.0",
     "bootstrap": ">= 3.0.1"
   },
-  "version": "0.8.3",
-  "_release": "0.8.3",
+  "version": "0.8.4",
+  "_release": "0.8.4",
   "_resolution": {
     "type": "version",
-    "tag": "v0.8.3",
-    "commit": "f6c2d1c42b9911ec41a63dd75adbb65def86ece8"
+    "tag": "v0.8.4",
+    "commit": "1fd70214331b12ec50299287152748f7358a79dd"
   },
   "_source": "https://github.com/summernote/summernote.git",
-  "_target": "0.8.3",
+  "_target": "0.8.4",
   "_originalSource": "summernote"
 }
