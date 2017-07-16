@@ -11,8 +11,9 @@ npm install -g bower
 # install libraries
 bower install
 
-# install jekyll
+# install jekyll and jekyll-sitemap
 gem install jekyll
+gem install jekyll-sitemap
 
 # run local server on 4000 port
 jekyll s

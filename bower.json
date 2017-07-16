@@ -1,6 +1,6 @@
 {
   "name": "summernote.github.io",
-  "version": "0.8.4",
+  "version": "0.8.6",
   "homepage": "http://summernote.org",
   "authors": [
     "Alan Hong <susukang98@gmail.com>"
@@ -13,6 +13,6 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "summernote": "0.8.4"
+    "summernote": "0.8.6"
   }
 }
