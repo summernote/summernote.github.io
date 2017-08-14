@@ -21,5 +21,5 @@ summernote_css: "http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.6/summerno
 # Build settings
 markdown: kramdown
 
-plugins:
+plugins_dir:
   - jekyll-sitemap
