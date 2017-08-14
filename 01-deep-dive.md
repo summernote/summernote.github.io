@@ -764,7 +764,7 @@ var AutoLink = function (context) {
     // create button
     var button = ui.button({
       className: 'note-btn-bold',
-      contents: '<i class="fa fa-bold">'
+      contents: '<i class="fa fa-bold">',
       click: function (e) {
         // invoke bold method of a module named editor
         context.invoke('editor.bold');
