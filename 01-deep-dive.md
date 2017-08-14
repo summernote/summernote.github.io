@@ -634,7 +634,7 @@ $('#summernote').on('summernote.change', function(we, contents, $editable) {
 
 Summernote also support custom button. If you want to create your own button, you can simply define and use with options.
 
-### Define button 
+### Define button
 
 You can create button object with $.summernote.ui. This button objects have below properties.
 
@@ -647,7 +647,7 @@ Below codes is about simple button for inserting text 'hello'.
 {% highlight javascript %}
 var HelloButton = function (context) {
   var ui = $.summernote.ui;
-  
+
   // create button
   var button = ui.button({
     contents: '<i class="fa fa-child"/> Hello',
@@ -658,7 +658,7 @@ var HelloButton = function (context) {
     }
   });
 
-  return button.render();   // return button as jquery object 
+  return button.render();   // return button as jquery object
 }
 {% endhighlight %}
 
@@ -675,7 +675,7 @@ $('.summernote').summernote({
   toolbar: [
     ['mybutton', ['hello']]
   ],
-  
+
   buttons: {
     hello: HelloButton
   }
@@ -710,7 +710,7 @@ this.initialize = function () {
   // create button
   var button = ui.button({
     className: 'note-btn-bold',
-    contents: '<i class="fa fa-bold">'
+    contents: '<i class="fa fa-bold">',
     click: function (e) {
       context.invoke('editor.bold'); // invoke bold method of a module named editor
     }
@@ -790,7 +790,7 @@ For more module examples: [modules]({{ site.repository }}/tree/develop/src/js/bs
 ### Module with option
 
 You can define custom module with options.
- 
+
 {% highlight javascript %}
 $(".summernote").summernote({
   modules: {
@@ -810,11 +810,11 @@ $(".summernote").summernote("myModule.method", 'hello');
 Plugin is a kind of external module. You can also define your own module with plugin.
 
 {% highlight javascript %}
-// src/mymodule.js 
+// src/mymodule.js
 $.extend($.summernote.plugins, {
   myModule: function (context) {
-    // define module 
-    ... 
+    // define module
+    ...
   }
 });
 {% endhighlight %}
