@@ -110,6 +110,38 @@ You can also test running example. Save below code as `index.html` and open it w
 
 {% include ad-doc.html %}
 
+### For bootstrap 4
+
+You can also use summernote in bootstrap 4 using summernote-bs4.js and summernote-bs4.css. This is also beta version, as Bootstrap 4 is in beta.
+
+<iframe src="/bs4.html" width="100%" height="200" frameborder="0"></iframe>
+
+{% highlight html %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>bootstrap4</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote-bs4.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote-bs4.js"></script>
+  </head>
+  <body>
+    <div id="summernote"></div>
+    <script>
+      $('#summernote').summernote({
+        placeholder: 'Hello bootstrap 4',
+        tabsize: 2,
+        height: 100
+      });
+    </script>
+  </body>
+</html>
+{% endhighlight %}
+
 ## Basic API
 
 Initialize Summernote
