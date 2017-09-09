@@ -112,7 +112,7 @@ You can also test running example. Save below code as `index.html` and open it w
 
 ### For bootstrap 4
 
-You can also use summernote in bootstrap 4 using summernote-bs4.js and summernote-bs4.css. This is also beta version, as Bootstrap 4 is in beta.
+You can also use summernote in bootstrap 4 using `summernote-bs4.js` and `summernote-bs4.css`. This is also beta version, as Bootstrap 4 is in beta. Below is an code example using bootstrap 4.
 
 <iframe src="/bs4.html" width="100%" height="200" frameborder="0"></iframe>
 
