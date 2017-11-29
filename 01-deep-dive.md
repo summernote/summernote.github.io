@@ -142,7 +142,7 @@ $('#summernote').summernote({
 {% endhighlight %}
 
 ### Dialogs
-Dialogs can be placed in `body`, not in summernote.
+Dialogs can be placed in `body`, not in summernote. If you're using summernote within a modal dialog, please set this option as `true`.
 {% highlight javascript %}
 $('#summernote').summernote({
   dialogsInBody: true
