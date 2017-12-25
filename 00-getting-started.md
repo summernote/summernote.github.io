@@ -137,7 +137,7 @@ You can also use summernote in bootstrap 4 using `summernote-bs4.js` and `summer
 
 ### Without bootstrap
 
-You can use summernote without bootstrap using `summernote-lite.js` and `summernote-lite.css`. This is beta. Below is an code example using bootstrap 4.
+You can use summernote without bootstrap using `summernote-lite.js` and `summernote-lite.css`. This is beta. Below is an code example using summernote lite.
 
 <iframe src="/lite.html" width="100%" height="200" frameborder="0"></iframe>
 
