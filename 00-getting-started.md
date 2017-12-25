@@ -23,13 +23,6 @@ Get the latest Summernote LESS and Javascript source code by downloading it dire
 Visit us on GitHub to clone or fork the summernote project.
 [project]({{ site.repository }})
 
-### Install with Bower
-Install and manage Summernote's styles, JavaScript, and documentation using Bower.
-
-{% highlight bash %}
-bower install summernote
-{% endhighlight %}
-
 ## Installation
 
 ### Requires HTML5 doctype
@@ -110,11 +103,6 @@ You can also test running example. Save below code as `index.html` and open it w
 
 {% include ad-doc.html %}
 
-### For lightweight usage
-
-<iframe src="/lite.html" width="100%" height="200" frameborder="0"></iframe>
-
-
 ### For bootstrap 4
 
 You can also use summernote in bootstrap 4 using `summernote-bs4.js` and `summernote-bs4.css`. This is also beta version, as Bootstrap 4 is in beta. Below is an code example using bootstrap 4.
@@ -131,14 +119,43 @@ You can also use summernote in bootstrap 4 using `summernote-bs4.js` and `summer
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote-bs4.css" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote-bs4.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.js"></script>
   </head>
   <body>
     <div id="summernote"></div>
     <script>
       $('#summernote').summernote({
         placeholder: 'Hello bootstrap 4',
+        tabsize: 2,
+        height: 100
+      });
+    </script>
+  </body>
+</html>
+{% endhighlight %}
+
+### Without bootstrap
+
+You can use summernote without bootstrap using `summernote-lite.js` and `summernote-lite.css`. This is beta. Below is an code example using bootstrap 4.
+
+<iframe src="/lite.html" width="100%" height="200" frameborder="0"></iframe>
+
+{% highlight html %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>bootstrap4</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-lite.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-lite.js"></script>
+  </head>
+  <body>
+    <div id="summernote"></div>
+    <script>
+      $('#summernote').summernote({
+        placeholder: 'Hello stand alone ui',
         tabsize: 2,
         height: 100
       });

@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <title>without bootstrap</title>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <link href="/bower_components/summernote/dist/summernote-lite.css" rel="stylesheet">
-    <script src="/bower_components/summernote/dist/summernote-lite.js"></script>
+    <link href="/vendors/summernote/dist/summernote-lite.css" rel="stylesheet">
+    <script src="/vendors/summernote/dist/summernote-lite.js"></script>
   </head>
   <body>
     <div id="summernote"></div>
@@ -13,7 +13,16 @@
       $('#summernote').summernote({
         placeholder: 'Hello stand alone ui',
         tabsize: 2,
-        height: 100
+        height: 100,
+        toolbar: [
+          ['style', ['style']],
+          ['font', ['bold', 'underline', 'clear']],
+          ['color', ['color']],
+          ['para', ['ul', 'ol', 'paragraph']],
+          ['table', ['table']],
+          ['insert', ['link', 'picture', 'video']],
+          ['view', ['fullscreen', 'codeview', 'help']]
+        ]
       });
     </script>
   </body>
