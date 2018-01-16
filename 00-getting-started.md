@@ -47,7 +47,7 @@ Include the Following code in the <code>head</code> area of your HTML page.
 <script src="{{ site.jquery_js }}"></script> 
 <script src="{{ site.bootstrap_js }}"></script> 
 
-<!-- include summernote css/js-->
+<!-- include summernote css/js -->
 <link href="{{ site.summernote_css }}" rel="stylesheet">
 <script src="{{ site.summernote_js }}"></script>
 {% endhighlight %}
