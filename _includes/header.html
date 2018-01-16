@@ -14,21 +14,6 @@
     </div>
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse">
-      <!-- Links are Hardcoded as I couldn't work out how to do dropdown dynamically -->
-      <ul class="nav navbar-nav">
-        <li><a class="header-page-link" href="https://summernote.org/getting-started/">Getting Started</a><li>
-        <li><a class="header-page-link" href="https://summernote.org/deep-dive/">Deep Dive</a><li>
-        <li class="dropdown">
-          <a href="#" class="header-page-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="https://summernote.org/deep-dive/components">Components</a></li>
-            <li><a href="https://summernote.org/deep-dive/plugins">Plugins</a></li>
-          </ul>
-        </li>
-        <li><a class="header-page-link" href="https://summernote.org/examples/">Examples</a><li>
-        <li><a class="header-page-link" href="https://summernote.org/team/">Team</a><li>
-      </ul>
-<!-- The original Menu without Dropdown (Hopefully someone can implement a Dynamic Builder)
       <ul class="nav navbar-nav">
         {% for page in site.pages %}
           {% if page.title and page.menu == true %}
@@ -36,7 +21,6 @@
           {% endif %}
         {% endfor %}
       </ul>
--->
       <ul class="nav navbar-nav navbar-right header-social">
         <li><a href="https://twitter.com/intent/tweet?button_hashtag=summernote" class="twitter">#summernote</a></li>
         <li><a href="https://github.com/summernote/summernote/" class="github">0,000</a></li>
