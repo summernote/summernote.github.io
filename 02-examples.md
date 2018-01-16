@@ -8,7 +8,7 @@ menu: true
 ---
 
 ## Air-mode
-Air-mode gives clearer interface with hiddened toolbar. To reveal toolbar, select a text where you want to shape up. Simply turn on `airMode` and just focus on text.
+Air-mode give an interface without the Toolbar. To reveal popover Toolbar, select a text where you want to modify. Simply turn on `airMode` and just focus on text.
 
 {% highlight javascript %}
 $('.summernote').summernote({
@@ -36,10 +36,12 @@ $('.summernote').summernote({
 </script>
 
 ## Themes with bootswatch
-Style changed accroding to bootstrap theme.
-More bootstrap theme: [Bootswatch](http://bootswatch.com){:target="_blank"}
+Styles change according to Bootstraps Theme.
+The editor below editor uses the Bootswatch Themes based on Bootstrap 3, you can also do the same with Bootstrap 4: [Bootswatch](http://bootswatch.com){:target="_blank"}
 
 <iframe src="/themes.html" width="100%" height="300" frameborder="0"></iframe>
+
+If you wish to use the Lite version of Summernote and change it's theme, you can look at or use the Themes at [summernote-themes](https://github.com/DiemenDesign/summernote-themes).
 
 {% include ad-doc.html %}
 
@@ -66,7 +68,6 @@ $(document).ready(function() {
     $('.multiple').summernote();
   });
 </script>
-
 
 ## Click to edit
 You can edit content on the fly.
@@ -107,8 +108,7 @@ var save = function() {
 </script>
 
 ## Codemirror as codeview
-
-If you include a `CodeMirror` on a page, you can use CodeMirror to Codeview. Include jQuery, Bootstrap and CodeMirror with summernote.
+If you include a `CodeMirror` on a page, you can use CodeMirror to Codeview. Include jQuery, Bootstrap and CodeMirror with Summernote.
 
 {% highlight html %}
 <!-- include libraries(jQuery, bootstrap) -->
@@ -154,13 +154,12 @@ $('.summernote').summernote({
   });
 </script>
 
-[CodeMirror](http://codemirror.net){:target="_blank"} is a versatile text editor implemented in JavaScript for the browser. It is specialized for editing code, and comes with a number of language modes and addons that implement more advanced editing functionaly.
+[CodeMirror](http://codemirror.net){:target="_blank"} is a versatile text editor implemented in JavaScript for the browser. It is specialized for editing code, and comes with a number of language modes and addons that implement more advanced editing functions.
 
 {% include ad-doc.html %}
 
 ## Hint 
-
-Summernote support autocomplete features, hint for helping typing. You can define custom hint with options. Hint options can be object or array for multiple hints.
+Summernote supports autocomplete features, hint to help typing. You can define custom hints with options. Hint options can be an object or array for multiple hints.
 <table class="table"> 
 <colgroup>
   <col />
@@ -198,7 +197,6 @@ Summernote support autocomplete features, hint for helping typing. You can defin
 </table>
 
 ### Hint for words
-
 <div class="hint2basic"></div>
 <script type="text/javascript">
 $(".hint2basic").summernote({
@@ -216,6 +214,7 @@ $(".hint2basic").summernote({
   }
 });
 </script>
+
 {% highlight javascript %}
 $(".hint2basic").summernote({
   height: 100,
@@ -234,7 +233,7 @@ $(".hint2basic").summernote({
 {% endhighlight %}
 
 ### Hint for emoji
-emoji: use `https://api.github.com/emojis`
+For Emoji's you can use `https://api.github.com/emojis`
 
 <div class="hint2emoji"></div>
 <script type="text/javascript">
@@ -306,8 +305,8 @@ $(".hint2emoji").summernote({
 });
 {% endhighlight %}
 
-### Hint for mention
-mention: [jayden, sam, alvin, david] 
+### Hint for mentions
+For Mentions: [jayden, sam, alvin, david] 
 
 <div class="hint2mention"></div>
 <script type="text/javascript">
@@ -349,9 +348,10 @@ $(".hint2mention").summernote({
 {% endhighlight %}
 
 ## Plugin list
-
 Below is useful plugin list.
 
  - Print: [demo](http://lqez.github.io/summernote-ext-print){:target="_blank"}, [repo](https://github.com/lqez/summernote-ext-print){:target="_blank"}
 
-For more plugin lists, visit to [awesome-summernote](https://github.com/summernote/awesome-summernote){:target="_blank"}.
+For custom built plugins, please visit [awesome-summernote](https://github.com/summernote/awesome-summernote){:target="_blank"}.
+
+For more details on building Plugins view our [Plugins Documentation](https://summernote.org/deep-dive/plugins).

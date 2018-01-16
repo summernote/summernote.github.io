@@ -2,7 +2,7 @@
 layout: doc
 bodyClass: doc
 title: Deep dive
-description: Customize summernote's components, toolbar, plugins to get your very own version
+description: Customize Summernote's components, toolbar and plugins to get your very own version
 permalink: /deep-dive/
 menu: true
 ---
@@ -13,7 +13,7 @@ Customize by Initializing various options and modules.
 
 ### Custom toolbar, popover
 
-Summernote allows you to make own custom toolbar.
+Summernote allows you to customise the toolbar.
 
 {% highlight javascript %}
 $('#summernote').summernote({
@@ -92,7 +92,7 @@ $('#summernote').summernote({
 });
 {% endhighlight %}
 
-You can also setup buttons of the other popovers in the same way. Below settings are default options for popovers.
+You can also setup buttons of the other popovers in the same way. The below settings are default options for popovers.
 
 {% highlight javascript %}
 popover: {
@@ -115,7 +115,7 @@ popover: {
 {% endhighlight %}
 
 ### Custom placeholder
-You can define placeholder with `placeholder` option.
+You can define a placeholder with the `placeholder` option.
 
 {% highlight javascript %}
 $('#summernote').summernote({
@@ -124,7 +124,7 @@ $('#summernote').summernote({
 {% endhighlight %}
 
 ### Custom fontNames
-You can define fontNames items with `fontNames` option.
+You can define fontNames items with the `fontNames` option.
 
 {% highlight javascript %}
 $('#summernote').summernote({
@@ -132,7 +132,7 @@ $('#summernote').summernote({
 });
 {% endhighlight %}
 
-Summernote tests font in fontNames before adding them to dropdown. This is problem while using web fonts. It's not easy picking up nice time to check availabilities of web fonts. You can define a list for web fonts to be ignored with `fontNamesIgnoreCheck`.
+Summernote tests for fonts in fontNames before adding them to dropdown. This is a problem while using web fonts. It's not easy picking a nice time to check the availability of web fonts. You can define a list of web fonts to be ignored with the `fontNamesIgnoreCheck`.
 
 {% highlight javascript %}
 $('#summernote').summernote({
@@ -142,14 +142,15 @@ $('#summernote').summernote({
 {% endhighlight %}
 
 ### Dialogs
-Dialogs can be placed in `body`, not in summernote. If you're using summernote within a modal dialog, please set this option as `true`.
+Dialogs can be placed in `body`, not within Summernote. If you're using Summernote within a modal dialog, please set this option as `true`.
 {% highlight javascript %}
 $('#summernote').summernote({
   dialogsInBody: true
 });
 {% endhighlight %}
 
-By default, dialogs are shown and hidden without fading effect. But you can turn it on by `dialogsFade`.
+By default, dialogs are shown and hidden without a fading effect. But you can turn it on by `dialogsFade`.
+
 {% highlight javascript %}
 $('#summernote').summernote({
   dialogsFade: true  // Add fade effect on dialogs
@@ -157,7 +158,7 @@ $('#summernote').summernote({
 {% endhighlight %}
 
 ### Disable drag and drop
-You can disable drag and drop with `disableDragAndDrop` option.
+You can disable drag and drop with the `disableDragAndDrop` option.
 {% highlight javascript %}
 $('#summernote').summernote({
   disableDragAndDrop: true
@@ -165,7 +166,7 @@ $('#summernote').summernote({
 {% endhighlight %}
 
 ### Disable shortcuts
-You can disable custom shortcuts with shortcuts
+You can disable custom shortcuts with the `shortcuts` option.
 {% highlight javascript %}
 $('#summernote').summernote({
   shortcuts: false
@@ -175,22 +176,21 @@ $('#summernote').summernote({
 {% include ad-doc.html %}
 
 ## Basic API
-
-You can initialize summernote with `summernote`.
+You can initialize Summernote with `summernote`.
 
 {% highlight javascript %}
 $('#summernote').summernote();
 {% endhighlight %}
 
-Then You can use editor API through the `summernote` method. This is an example code for inserting 'hello world' text.
+Then You can use the editor API through the `summernote` method. This is an example code for inserting 'hello world' text.
 
 {% highlight javascript %}
 $('#summernote').summernote('editor.insertText', 'hello world'));
 {% endhighlight %}
 
-It calls the editor module's insertText method with 'hello world'. First argument is a string type which represents the module and its method. The rest are method's arguments.
+It calls the editor module's insertText method with 'hello world'. The first argument is a string type which represents the module and its method. The rest are method's arguments.
 
-If you call API without module name, `editor.methodName` will be called.
+If you call the API without module name, `editor.methodName` will be called.
 
 {% highlight javascript %}
 $('#summernote').summernote('insertText', 'hello world');
@@ -199,22 +199,20 @@ $('#summernote').summernote('insertText', 'hello world');
 A module named `editor` supports several methods for editor's basic behavior
 
 ### createRange
-
-create a range object for current user selection.
+Creates a range object for current user selection.
 
 {% highlight javascript %}
 var range = $('#summernote').summernote('createRange');
 {% endhighlight %}
 
 ### saveRange, restoreRange
-
-save current user selection internally.
+`saveRange` saves current user selection internally.
 
 {% highlight javascript %}
 $('#summernote').summernote('saveRange');
 {% endhighlight %}
 
-restore currently saved range
+`restoreRange` restores currently saved range
 
 {% highlight javascript %}
 $('#summernote').summernote('saveRange');
@@ -223,8 +221,7 @@ $('#summernote').summernote('restoreRange');
 {% endhighlight %}
 
 ### undo, redo
-
-Undoes and redoes the last command
+Undoes and Redoes the last command
 
 {% highlight javascript %}
 $('#summernote').summernote('undo');
@@ -232,42 +229,38 @@ $('#summernote').summernote('redo');
 {% endhighlight %}
 
 ### focus
-
-Set a focus in current summernote
+Sets focus in current summernote
 
 {% highlight javascript %}
 $('#summernote').summernote('focus');
 {% endhighlight %}
 
 ### isEmpty
+Returns whether editor content is empty or not.
 
-Returns whether contents is empty or not.
-
-Editing area needs `<p><br></p>` for focus, even if contents is empty. So summernote support this method for helping to check contents is empty.
+The editing area needs `<p><br></p>` for focus, even if the editor content is empty. So Summernote supports this method for helping to check if editor content is empty.
 
 {% highlight javascript %}
 if ($('#summernote').summernote('isEmpty')) {
-  alert('contents is empty');
+  alert('editor content is empty');
 }
 {% endhighlight %}
 
 ### reset
-
-Clear contents and remove all stored history.
+Clear the editor content and remove all stored history.
 
 {% highlight javascript %}
 $('#summernote').summernote('reset');
 {% endhighlight %}
 
 ### disable, enable
-
 You can disable editor by API.
 
 {% highlight javascript %}
 $('#summernote').summernote('disable');
 {% endhighlight %}
 
-If you want to enable editor again, call API with enable.
+If you want to enable editor again, call API with `enable`.
 
 {% highlight javascript %}
 $('#summernote').summernote('enable');
@@ -276,8 +269,7 @@ $('#summernote').summernote('enable');
 ## Font style API
 
 ### bold, italic, underline, strikethrough
-
-Set font style
+Set font style.
 
 {% highlight javascript %}
 $('#summernote').summernote('bold');
@@ -287,8 +279,7 @@ $('#summernote').summernote('strikethrough');
 {% endhighlight %}
 
 ### superscript, subscript
-
-Set superscript or subscript
+Set superscript or subscript.
 
 {% highlight javascript %}
 $('#summernote').summernote('superscript');
@@ -296,16 +287,14 @@ $('#summernote').summernote('subscript');
 {% endhighlight %}
 
 ### removeFormat
-
-Clean a style
+Clean a style.
 
 {% highlight javascript %}
 $('#summernote').summernote('removeFormat');
 {% endhighlight %}
 
 ### backColor, foreColor
-
-Set background and foreground color
+Set the Background or Foreground color.
 
 {% highlight javascript %}
 // @param {String} color
@@ -316,8 +305,7 @@ $('#summernote').summernote('foreColor', 'blue');
 {% endhighlight %}
 
 ### fontName
-
-Set font family
+Set font family.
 
 {% highlight javascript %}
 // @param {String} fontName
@@ -325,8 +313,7 @@ $('#summernote').summernote('fontName', 'Arial');
 {% endhighlight %}
 
 ### fontSize
-
-Set font size
+Set font size.
 
 {% highlight javascript %}
 // @param {Number} font size - unit is px
@@ -336,8 +323,7 @@ $('#summernote').summernote('fontSize', 20);
 ## Paragraph API
 
 ### justify left, right and more
-
-Set paragraph align
+Set the alignment of a Paragraph.
 
 {% highlight javascript %}
 $('#summernote').summernote('justifyLeft');
@@ -347,16 +333,14 @@ $('#summernote').summernote('justifyFull');
 {% endhighlight %}
 
 ### insertParagraph
-
-insert paragraph
+Insert a paragraph
 
 {% highlight javascript %}
 $('#summernote').summernote('insertParagraph');
 {% endhighlight %}
 
 ### insertOrderedList
-
-toggle ordered list and unordered list
+Toggle ordered list or unordered list
 
 {% highlight javascript %}
 $('#summernote').summernote('insertOrderedList');
@@ -367,8 +351,7 @@ $('#summernote').summernote('insertUnorderedList');
 {% endhighlight %}
 
 ### indent and outdent
-
-indent and outdent on current paragraph
+Indent or Outdent on current paragraph.
 
 {% highlight javascript %}
 $('#summernote').summernote('indent');
@@ -376,7 +359,6 @@ $('#summernote').summernote('outdent');
 {% endhighlight %}
 
 ### formatPara
-
 Change current paragraph as a `<p>`.
 
 {% highlight javascript %}
@@ -384,7 +366,6 @@ $('#summernote').summernote('formatPara');
 {% endhighlight %}
 
 ### formatH1-H6
-
 Change current paragraph as a `<h1> ~ <h6>`.
 
 {% highlight javascript %}
@@ -393,8 +374,7 @@ $('#summernote').summernote('formatH6');
 {% endhighlight %}
 
 ### lineHeight
-
-Set line height
+Set line height.
 
 {% highlight javascript %}
 // @param {Number} line height - unit is px
@@ -404,8 +384,7 @@ $('#summernote').summernote('lineHeight', 20);
 ## Insertion API
 
 ### insertImage
-
-Insert a image
+Insert an image.
 
 {% highlight javascript %}
 // @param {String} url
@@ -422,8 +401,7 @@ $('#summernote').summernote('insertImage', url, function ($image) {
 {% endhighlight %}
 
 ### insertNode
-
-Insert a element or textnode
+Insert an element or textnode.
 
 {% highlight javascript %}
 var node = document.createElement('div');
@@ -432,18 +410,15 @@ $('#summernote').summernote('insertNode', node);
 {% endhighlight %}
 
 ### insertText
-
-Insert a text
+Insert text.
 
 {% highlight javascript %}
 // @param {String} text
 $('#summernote').summernote('insertText', 'Hello, world');
 {% endhighlight %}
 
-
 ### createLink, unlink
-
-Create link and unlink
+Create link and unlink.
 
 {% highlight javascript %}
 // @param {String} text - link text
@@ -587,7 +562,6 @@ $('#summernote').on('summernote.paste', function(e) {
 {% endhighlight %}
 
 ### onImageUpload
-
 Override image upload handler(default: base64 dataURL on `IMG` tag).
 You can upload image to server or AWS S3: [more...]({{ site.repository }}/issues/72)
 
@@ -610,7 +584,6 @@ $('#summernote').on('summernote.image.upload', function(we, files) {
 {% endhighlight %}
 
 ### onChange
-
 * IE9-10: DOMCharacterDataModified, DOMSubtreeModified, DOMNodeInserted
 * Chrome, FF: input
 
@@ -631,16 +604,14 @@ $('#summernote').on('summernote.change', function(we, contents, $editable) {
 {% endhighlight %}
 
 ## Custom button
-
-Summernote also support custom button. If you want to create your own button, you can simply define and use with options.
+Summernote also supports custom buttons. If you want to create your own button, you can simply define and use with options.
 
 ### Define button
-
-You can create button object with $.summernote.ui. This button objects have below properties.
+You can create a button object with $.summernote.ui. This buttons objects have the below properties.
 
 * contents: contents to be displayed on the button
 * tooltip: tooltip text when mouse over
-* click:  callback function be called when mouse is clicked
+* click:  callback function to be called when mouse is clicked
 
 Below codes is about simple button for inserting text 'hello'.
 
@@ -665,10 +636,9 @@ var HelloButton = function (context) {
 You can see `render()` which returns jquery object as button.
 
 ### Using button with options
-
 Let's learn how to use the button on toolbar.
 
-First, You can define buttons with option named `buttons` which is a set of key-value. You can define custom button on toolbar options.
+First, you can define buttons with option named `buttons` which is a set of key-value. You can define custom button on toolbar options.
 
 {% highlight javascript %}
 $('.summernote').summernote({
@@ -687,22 +657,18 @@ You can also use custom button on `popover` in the same way.
 {% include ad-doc.html %}
 
 ## Module system
-
 For supporting expandable features, summernote was assembled by module system. This module system was built inspired by spring framework.
 
 ### Key terms
-
 * Module: Module is a component.
 * Context: Context is a kind of container. It has modules and editor's states.
 * Renderer: Renderer is a function for creating element.
 * UI: UI is a set of renderers to build ui elements.
 
 ### Module
-
 Module is a component for implementing feature and it has lifecycle. Module also has helper methods or methods related with lifecycle.
 
 #### initialize
-
 This method will be called when editor is initialized by $('..').summernote();. You can attach events and created elements on editor elements(eg, editable, ...).
 
 {% highlight javascript %}
@@ -723,7 +689,7 @@ this.initialize = function () {
 {% endhighlight %}
 
 #### destroy
-this method will be called when editor is destroyed by $('..').summernote('destroy'); You should detach events and remove elements on `initialize`.
+This method will be called when editor is destroyed by $('..').summernote('destroy'); You should detach events and remove elements on `initialize`.
 
 {% highlight javascript %}
 this.destroy = function () {
@@ -733,7 +699,7 @@ this.destroy = function () {
 {% endhighlight %}
 
 #### shouldInitialize
-This method used for deciding whether module will be initialized or not.
+This method is used for deciding whether module will be initialized or not.
 
 {% highlight javascript %}
 // AirPopover's shouldInitialize
@@ -788,7 +754,6 @@ var AutoLink = function (context) {
 For more module examples: [modules]({{ site.repository }}/tree/develop/src/js/bs3/module)
 
 ### Module with option
-
 You can define custom module with options.
 
 {% highlight javascript %}
@@ -806,7 +771,6 @@ $(".summernote").summernote("myModule.method", 'hello');
 {% endhighlight %}
 
 ### Plugin
-
 Plugin is a kind of external module. You can also define your own module with plugin.
 
 {% highlight javascript %}
@@ -825,3 +789,27 @@ Below link is a example of external module.
 
 > ##### Plugin was redesigned by new module system after `v0.7.0`
 > Old plugin was hard to control editor states(eg, range, layout so on). After v0.7.0 plugin is redesigned by new module system. It is exactly same with module except surrounding module pattern.
+
+## Components
+
+This page is about using built in Components of Summernote. (<abbr title="Work In Process">WIP</abbr>)
+
+### Notification / Information Area
+
+Summernote allows to add Notifications with Contextual Colouring to indicate the type of Notifcation, or to use the area for Informational Purposes.
+
+The area appears at the bottom of Summernote when used in Normal Mode, and at the top of the editing area when Summernote is used in Air Mode.
+
+To use the Notifcation area is simple and is useable by targetting the area using it's class name `.note-status-output`.
+
+Notification elements can use any markup, but we've added some styling along the lines of Bootstrap's Alerts. For e.g. to produce an error or danger alert you can use `<div class="alert alert-danger">This is an error</div>`. You can also use `alert-info`, `alert-warning`, `alert-success`.
+
+You can add the above message using jQuery or other Javascript method by targetting the output element, like (using jQuery):
+
+{% highlight javascript %}
+$('.note-status-output').html(
+  '<div class="alert alert-danger">' +
+    'This is an error using a Bootstrap alert that has been restyled to fit here.' +
+  '</div>'
+);
+{% endhighlight %}
