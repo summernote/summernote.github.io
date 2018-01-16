@@ -2,16 +2,16 @@
 layout: doc
 bodyClass: doc
 title: Getting started
-description: An overview of summernote, how to download and use, basic features and examples, and more.
+description: An overview of Summernote, how to download and use, basic features, examples, and more.
 permalink: /getting-started/
 menu: true
 ---
 
-## Get summernote
+## Get Summernote
 
 ### Compiled CSS, JS
 
-The fastest way to get Summernote is to download the precompiled and minified versions of our CSS, JavaScript. No documentation or original source code files are included.
+The fastest way to get Summernote is to download the precompiled and minified versions of our CSS and JavaScript. No documentation or original source code files are included.
 
 <a href="{{ site.repository }}/releases/download/v{{ site.version }}/summernote-{{ site.version }}-dist.zip" class="btn-important ">Download compiled</a>
 
@@ -19,8 +19,8 @@ The fastest way to get Summernote is to download the precompiled and minified ve
 Get the latest Summernote LESS and Javascript source code by downloading it directly from GitHub.
 [Download]({{ site.repository }}/archive/master.zip)
 
-### Clone or fork via Github
-Visit us on GitHub to clone or fork the summernote project.
+### Clone or Fork via Github
+Visit us on GitHub to clone or fork the Summernote project.
 [project]({{ site.repository }})
 
 ## Installation
@@ -38,8 +38,8 @@ Bootstrap uses certain HTML elements and CSS properties which require HTML5 doct
 
 ### Include js/css
 
-Summernote uses open source libraries(jQuery, Bootstrap).
-Include the Following code in your HTML <code>&lt;HTML&gt;</code> tag
+Summernote uses the Open Source libraries jQuery and Bootstrap, if you are using the Boostrap 3 or 4 versions of Summernote, or just jQuery if you use the Lite version of Summernote.
+Include the Following code in the <code>head</code> area of your HTML page.
 
 {% highlight html %}
 <!-- include libraries(jQuery, bootstrap) -->
@@ -54,15 +54,27 @@ Include the Following code in your HTML <code>&lt;HTML&gt;</code> tag
 
 Don't forget to change the file's path if you downloaded summernote in a different folders.
 
+You can however, and a lot of developers do these days, is include the stylesheet's within the <code>head</code> are of your page, and include the Javascript at the bottom of your page, but before the closing <code>body</code> tag.
+
 > ##### Fontawesome dependancy
-> After v0.8.0, You don't have to include fontawesome for displaying summernote's icon. But You can still use fontawesome for your custom icon. For more detail, please visit to [custom button](/deep-dive/#custom-button) section.
+> After v0.8.0, You don't have to include fontawesome for displaying Summernote's icons. But You can still use fontawesome for your custom icons. For more details, please visit [custom buttons](/deep-dive/#custom-button) section.
 
-### Insert
+### Embed
 
-Add <code>div</code> into <code>body</code>; this targeted element will later be rendered to summernote editing tool.
+Summernote can be used with or without a <code>form</code>.
+
+To use without a <code>form</code>, we suggest using a <code>div</code> in the <code>body</code>; this element will then be used where you want the Summernote editor to be rendered within your page.
 
 {% highlight html %}
 <div id="summernote">Hello Summernote</div>
+{% endhighlight %}
+
+To use within a <code>form</code>, is pretty much the same as above, but rather than a <code>div</code>, we recommend using a <code>textarea</code> element inside a <code>form</code>, which should include a name attribute so when the form is submitted you can use that name to process the editors data on your backend. Also, if using Summernote inside a <code>form</code> to set the attribute <code>method="post"</code> to allow larger sized editor content to parse to the backend, if you don't your data either may not parse, or will be truncated.
+
+{% highlight html %}
+<form method="post">
+  <textarea id="summernote" name="editordata"></textarea>
+</form>
 {% endhighlight %}
 
 ### Run summernote
@@ -73,6 +85,8 @@ $(document).ready(function() {
   $('#summernote').summernote();
 });
 {% endhighlight %}
+
+The <code>$(document).ready</code> function is particularly necessary if you include the Javascript at the end of the document.
 
 ### Simple example
 
@@ -105,7 +119,7 @@ You can also test running example. Save below code as `index.html` and open it w
 
 ### For bootstrap 4
 
-You can also use summernote in bootstrap 4 using `summernote-bs4.js` and `summernote-bs4.css`. This is also beta version, as Bootstrap 4 is in beta. Below is an code example using bootstrap 4.
+You can also use Summernote with Bootstrap 4 using `summernote-bs4.js` and `summernote-bs4.css`. This is also beta version, as Bootstrap 4 is in beta. Below is a code example using bootstrap 4.
 
 <iframe src="/bs4.html" width="100%" height="200" frameborder="0"></iframe>
 
@@ -135,9 +149,9 @@ You can also use summernote in bootstrap 4 using `summernote-bs4.js` and `summer
 </html>
 {% endhighlight %}
 
-### Without bootstrap
+### Without Bootstrap
 
-You can use summernote without bootstrap using `summernote-lite.js` and `summernote-lite.css`. This is beta. Below is an code example using summernote lite.
+You can use Summernote without Bootstrap using `summernote-lite.js` and `summernote-lite.css`. The Lite version is currently in Beta. Please report bugs so we can improve it. Below is a code example using summernote lite.
 
 <iframe src="/lite.html" width="100%" height="200" frameborder="0"></iframe>
 
@@ -175,7 +189,7 @@ $('#summernote').summernote();
 Initialize Summernote with options
 
 ### Height and Focus
-If you set focus option, cursor will focus editable area after initialize summernote.
+If you set focus option, cursor will focus editable area after initialize Summernote.
 
 {% highlight javascript %}
 $('#summernote').summernote({
@@ -244,7 +258,7 @@ for more detail api: [deep dive with api](/deep-dive/#api)
 
 ### Language
 
-Include libraries with lang file. eg) <code>summernote-ko-KR.js</code>
+Include libraries with lang file. eg) <code>summernote-ko-KR.js</code>.
 
 {% highlight html %}
 <link href="{{ site.bootstrap_css }}" rel="stylesheet"> 
@@ -278,7 +292,7 @@ $(document).ready(function() {
   });
 </script>
 
-More summernote languages: [languages]({{ site.repository }}/tree/master/lang)
+More Summernote languages: [languages]({{ site.repository }}/tree/master/lang)
 
 ## Integration
 3rd parties available in django, rails, angular and so on.
@@ -315,3 +329,8 @@ Example about using summernote with webpack.
 Example about using summernote with meteor.
 
 * [summernote-meteor-example](https://github.com/hackerwins/summernote-meteor-example){:target="_blank"}
+
+#### PHP
+Example for using Summernote with elFinder which uses a PHP Backend.
+
+* [summernote-elfinder-example](https://github.com/Studio-42/elFinder/wiki/Integration-with-Multiple-Summernote-%28fixed-functions%29){:target="_blank"}
