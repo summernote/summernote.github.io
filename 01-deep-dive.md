@@ -2,7 +2,7 @@
 layout: doc
 bodyClass: doc
 title: Deep dive
-description: Customize Summernote's components, toolbar and plugins to get your very own version
+description: Customize Summernote's modules, toolbar and plugins to get your very own version
 permalink: /deep-dive/
 menu: true
 ---
@@ -790,9 +790,9 @@ Below link is a example of external module.
 > ##### Plugin was redesigned by new module system after `v0.7.0`
 > Old plugin was hard to control editor states(eg, range, layout so on). After v0.7.0 plugin is redesigned by new module system. It is exactly same with module except surrounding module pattern.
 
-## Components
+## Modules
 
-This page is about using built in Components of Summernote. (<abbr title="Work In Process">WIP</abbr>)
+Below is about using built in modules of Summernote. (<abbr title="Work In Process">WIP</abbr>)
 
 ### Notification / Information Area
 

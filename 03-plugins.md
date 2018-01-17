@@ -46,8 +46,8 @@ Other things that may need to be loaded along with the plugin file, maybe langua
 
 For those new to using Javascript, loading Plugins after the main Summernote script, then loading language files if needed are done in this manner as some scripts are designed to execute upon loading and need to be done in order so they have access to functions they may need which would be available in the preceding script. This is more commonly the reason some scripts don't function correctly until they are put into an order that allows them to function correctly.
 
-### Adding the Interactive Components.
-Adding the Interactive Component to Summernote is as easy as calling the options available in Summernote when we initialize the Summernote Editor.
+### Adding the Interactive Modules.
+Adding the Interactive Module to Summernote is as easy as calling the options available in Summernote when we initialize the Summernote Editor.
 
 Adding interaction to the Toolbar.
 

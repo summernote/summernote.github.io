@@ -330,7 +330,7 @@ Example about using summernote with meteor.
 
 * [summernote-meteor-example](https://github.com/hackerwins/summernote-meteor-example){:target="_blank"}
 
-#### PHP
+### PHP
 Example for using Summernote with elFinder which uses a PHP Backend.
 
 * [summernote-elfinder-example](https://github.com/Studio-42/elFinder/wiki/Integration-with-Multiple-Summernote-%28fixed-functions%29){:target="_blank"}
