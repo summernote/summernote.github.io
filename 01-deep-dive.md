@@ -821,3 +821,5 @@ $('.note-status-output').html(
 {% endhighlight %}
 
 You can also place text to the right side by placing the Text within an element such as `div`, `span` or `small` and including the class `.pull-right`.
+
+You can also use Contextual Colours for your text using the classes `text-muted`, `text-primary`, 'text-success', `text-info`, `text-warning` and `text-danger`.
