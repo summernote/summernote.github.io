@@ -54,9 +54,9 @@ Adding interaction to the Toolbar.
 $(document).ready(function() {
   $('#summernote').summernote({
     toolbar:[
-// This is a Custom Button in a new Toolbar Area
+      // This is a Custom Button in a new Toolbar Area
       ['custom', ['examplePlugin']],
-// You can also add Interaction to an existing Toolbar Area
+      // You can also add Interaction to an existing Toolbar Area
       ['style', ['style' ,'examplePlugin']]
     ]
   });
@@ -95,13 +95,13 @@ For those uninitiated with script styling, we'd like to point out that comments 
 (function (factory) {
   /* Global define */
   if (typeof define === 'function' && define.amd) {
-// AMD. Register as an anonymous module.
+    // AMD. Register as an anonymous module.
     define(['jquery'], factory);
   } else if (typeof module === 'object' && module.exports) {
-// Node/CommonJS
+    // Node/CommonJS
     module.exports = factory(require('jquery'));
   } else {
-// Browser globals
+    // Browser globals
     factory(window.jQuery);
   }
 }(function ($) {
@@ -159,8 +159,8 @@ The vars below are not all needed, what you need depends on what your trying acc
 {% highlight javascript %}
       var self      = this,
 
-// ui has renders to build ui elements
-// for e.g. you can create a button with 'ui.button'
+         // ui has renders to build ui elements
+         // for e.g. you can create a button with 'ui.button'
           ui        = $.summernote.ui,
           $note     = context.layoutInfo.note,
 
@@ -169,20 +169,20 @@ The vars below are not all needed, what you need depends on what your trying acc
           $editable = context.layoutInfo.editable,
           $toolbar  = context.layoutInfo.toolbar,
           
-// options holds the Options Information from Summernote and what we extended above.
+          // options holds the Options Information from Summernote and what we extended above.
           options   = context.options,
           
-// lang holds the Language Information from Summernote and what we extended above.
+          // lang holds the Language Information from Summernote and what we extended above.
           lang      = options.langInfo;
 
       context.memo('button.examplePlugin', function () {
-// Here we create a button
+        // Here we create a button
         var button = ui.button({
 
-// icon for button
+          // icon for button
           contents: options.examplePlugin.icon,
 
-// tooltip for button
+          // tooltip for button
           tooltip: lang.examplePlugin.tooltip,
           click:function (e) {
             context.invoke('examplePlugin.show');
@@ -197,31 +197,31 @@ This section performs functions when the Plugin is first initialised. Note, this
 {% highlight javascript %}
       this.initialize = function() {
 
-// This is how we can add a Modal Dialog to allow users to interact with the Plugin.
+        // This is how we can add a Modal Dialog to allow users to interact with the Plugin.
 
-// get the correct container for the plugin how it's attached to the document DOM.
+        // get the correct container for the plugin how it's attached to the document DOM.
         var $container = options.dialogsInBody ? $(document.body) : $editor;
 
-// Build the Body HTML of the Dialog.
+        // Build the Body HTML of the Dialog.
         var body = '<div class="form-group">' +
                    '</div>';
 
-// Build the Footer HTML of the Dialog.
+        // Build the Footer HTML of the Dialog.
         var footer = '<button href="#" class="btn btn-primary note-examplePlugin-btn">' + lang.examplePlugin.okButton + '</button>'
       }
       this.$dialog = ui.dialog({
 
-// Set the title for the Dialog. Note: We don't need to build the markup for the Modal
-// Header, we only need to set the Title.
+        // Set the title for the Dialog. Note: We don't need to build the markup for the Modal
+        // Header, we only need to set the Title.
         title: lang.examplePlugin.dialogTitle,
 
-// Set the Body of the Dialog.
+        // Set the Body of the Dialog.
         body: body,
 
-// Set the Footer of the Dialog.
+        // Set the Footer of the Dialog.
         footer: footer
         
-// This adds the Modal to the DOM.
+      // This adds the Modal to the DOM.
       }).render().appendTo($container);
     };
     this.destroy = function () {
