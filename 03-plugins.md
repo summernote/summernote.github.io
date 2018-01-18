@@ -54,8 +54,10 @@ Adding interaction to the Toolbar.
 $(document).ready(function() {
   $('#summernote').summernote({
     toolbar:[
+
       // This is a Custom Button in a new Toolbar Area
       ['custom', ['examplePlugin']],
+
       // You can also add Interaction to an existing Toolbar Area
       ['style', ['style' ,'examplePlugin']]
     ]
@@ -70,7 +72,8 @@ $(document).ready(function() {
   $('#summernote').summernote({
     popover: {
       image: [
-// This is a Custom Button in a new Toolbar Area
+
+        // This is a Custom Button in a new Toolbar Area
         ['custom', ['examplePlugin']],
         ['imagesize', ['imageSize100', 'imageSize50', 'imageSize25']],
         ['float', ['floatLeft', 'floatRight', 'floatNone']],
@@ -176,6 +179,7 @@ The vars below are not all needed, what you need depends on what your trying acc
           lang      = options.langInfo;
 
       context.memo('button.examplePlugin', function () {
+
         // Here we create a button
         var button = ui.button({
 
