@@ -792,8 +792,6 @@ Below link is a example of external module.
 
 ## Modules
 
-Below is about using built in modules of Summernote. (<abbr title="Work In Process">WIP</abbr>)
-
 ### Notification / Information Area
 
 Summernote allows to add Notifications with Contextual Colouring to indicate the type of Notifcation, or to use the area for Informational Purposes.
@@ -802,7 +800,7 @@ The area appears at the bottom of Summernote when used in Normal Mode, and at th
 
 To use the Notifcation area is simple and is useable by targetting the area using it's class name `.note-status-output`.
 
-Notification elements can use any markup, but we've added some styling along the lines of Bootstrap's Alerts. For e.g. to produce an error or danger alert you can use `<div class="alert alert-danger">This is an error</div>`. You can also use `alert-info`, `alert-warning`, `alert-success`.
+Notification elements can use any markup, but we've added some styling along the lines of Bootstrap's Alerts. For e.g. to produce an Error or Danger alert you can use `<div class="alert alert-danger">This is an error</div>`. You can also use `alert-info`, `alert-warning`, `alert-success` and `alert-danger`.
 
 You can add the above message using jQuery or other Javascript method by targetting the output element, like (using jQuery):
 
@@ -813,3 +811,15 @@ $('.note-status-output').html(
   '</div>'
 );
 {% endhighlight %}
+
+If you want to display just Informational Text, you can also add Text without the Alert if you wish.
+
+{% highlight javascript %}
+$('.note-status-output').html(
+  'Text Information'
+);
+{% endhighlight %}
+
+You can also place text to the right side by placing the Text within an element such as `div`, `span` or `small` and including the class `.pull-right`.
+
+You can also use Contextual Colours for your text using the classes `text-muted`, `text-primary`, 'text-success', `text-info`, `text-warning` and `text-danger`.

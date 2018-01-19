@@ -9,19 +9,18 @@ menu: true
 
 ## Plugins
 
-This will be a page about how to create and use plugins. (<abbr title="Work In Process">WIP</abbr>)
+This page is currently a Work In Progress, we welcome contributions to update or add explanations. Please do so either by creating an [Issue](https://github.com/summernote/summernote.github.io/issues), or a [Pull Request](https://github.com/summernote/summernote.github.io/pulls).
 
 Before taking on the journey of building a custom plugin, please visit our official repository [awesome-summernote](https://github.com/summernote/awesome-summernote){:target="_blank"}. Which contains user contributed plugins. This may save you a lot of time building your own, or afford you the opportunity to contribute to an already existing plugin, making it better.
 
+### Adding a Plugin
 Adding a Plugin to Summernote is as easy as adding Summernote to the page you want Summernote to appear in.
 
-### Adding a Plugin
-Adding a Plugin Script is exactly the same as adding Summernote to your page.
-Most scripts don't require you to add a CSS file, although some plugins depending on the author and functionality of the script may require you to also add the necessary styles, either inline in the page, or by adding a link to the CSS file to add it's required styles.
+Most scripts don't require you to add a CSS file, although some plugins depending on the functionality of the script may require you to add necessary styles, either inline in the page, or by adding a link to the CSS file to add it's required styles. Some Plugins may also dynamically add styles to the DOM when initialised.
 
 We typically load the Plugin Script after loading the Summernote Script.
 
-Most commonly, most scripts are added in the head area of the typical HTML page. Lately though (maybe the last 1 or 2 years), a lot of developers add the script loading reference towards the bottom of the page. The reason is simple, "Page Loading", as loading javascript files blocks page loading, and as long as the content loads at a decent speed, most site visitors wouldn't notice the slight interruption to script loading. However, for our examples, we'll be loading the scripts into the page within the header.
+Most scripts are added in the head area of the typical HTML page.
 
 {% highlight html %}
 <!DOCTYPE html>
@@ -42,7 +41,7 @@ Most commonly, most scripts are added in the head area of the typical HTML page.
   <body>
 {% endhighlight %}
 
-Other things that may need to be loaded along with the plugin file, maybe language files, which should follow the plugin reference.
+Other things that may need to be loaded along with the plugin file, might be language files, which should follow the plugin inclusion.
 
 For those new to using Javascript, loading Plugins after the main Summernote script, then loading language files if needed are done in this manner as some scripts are designed to execute upon loading and need to be done in order so they have access to functions they may need which would be available in the preceding script. This is more commonly the reason some scripts don't function correctly until they are put into an order that allows them to function correctly.
 
@@ -55,8 +54,10 @@ Adding interaction to the Toolbar.
 $(document).ready(function() {
   $('#summernote').summernote({
     toolbar:[
+
       // This is a Custom Button in a new Toolbar Area
       ['custom', ['examplePlugin']],
+
       // You can also add Interaction to an existing Toolbar Area
       ['style', ['style' ,'examplePlugin']]
     ]
@@ -71,6 +72,7 @@ $(document).ready(function() {
   $('#summernote').summernote({
     popover: {
       image: [
+
         // This is a Custom Button in a new Toolbar Area
         ['custom', ['examplePlugin']],
         ['imagesize', ['imageSize100', 'imageSize50', 'imageSize25']],
@@ -114,7 +116,8 @@ For those uninitiated with script styling, we'd like to point out that comments 
 {% endhighlight %}
 
 #### Language
-We need to extend the Language `lang` references within the Summernote script to add our own language references.
+If your Plugin contains textual context we need to extend the Language `lang` references within the Summernote script to add our own language references.
+
 To access the language translations variables in your plugin script you can simply use `lang.examplePlugin.exampleText`.
 
 {% highlight javascript %}
@@ -129,10 +132,10 @@ To access the language translations variables in your plugin script you can simp
   });
 {% endhighlight %}
 
-You can also create language files to link into your pages just like adding language files into Summernote iteself, and using the format exactly as the code above.
+You can also create language files to link into your pages just like adding language files into Summernote itself, and using the format exactly like the code above.
 
 ### Plugin Options
-This section allows us to add options to our plugin to modify behaviour on a user based configuration.
+This allows us to add options to our plugin to modify behaviour on a user based configuration.
 
 {% highlight javascript %}
   $.extend($.summernote.options, {
@@ -143,7 +146,8 @@ This section allows us to add options to our plugin to modify behaviour on a use
   });
 {% endhighlight %}
 
-Extend Plugins for adding our example Plugin.
+### The Plugin Functionality
+This section is the Functional part of the Plugin.
 
 {% highlight javascript %}
   $.extend($.summernote.plugins, {
@@ -153,12 +157,13 @@ Extend Plugins for adding our example Plugin.
     'examplePlugin':function (context) {
 {% endhighlight %}
 
-The vars below are not all needed, what you need depends on what your trying accompish with your plugin. Most commonly you need self, ui, options, and lang.
+The vars below are not all needed, what you need depends on what your trying accompish with your plugin. Most commonly you need `self`, `ui`, `options`, and `lang`.
 
 {% highlight javascript %}
       var self      = this,
-          // ui has renders to build ui elements
-          // for e.g. you can create a button with 'ui.button'
+
+         // ui has renders to build ui elements
+         // for e.g. you can create a button with 'ui.button'
           ui        = $.summernote.ui,
           $note     = context.layoutInfo.note,
 
@@ -166,14 +171,21 @@ The vars below are not all needed, what you need depends on what your trying acc
           $editor   = context.layoutInfo.editor,
           $editable = context.layoutInfo.editable,
           $toolbar  = context.layoutInfo.toolbar,
+          
+          // options holds the Options Information from Summernote and what we extended above.
           options   = context.options,
+          
+          // lang holds the Language Information from Summernote and what we extended above.
           lang      = options.langInfo;
 
       context.memo('button.examplePlugin', function () {
-        // create button
+
+        // Here we create a button
         var button = ui.button({
+
           // icon for button
           contents: options.examplePlugin.icon,
+
           // tooltip for button
           tooltip: lang.examplePlugin.tooltip,
           click:function (e) {
@@ -182,24 +194,38 @@ The vars below are not all needed, what you need depends on what your trying acc
         });
         return button.render();
       });
+{% endhighlight %}
 
+This section performs functions when the Plugin is first initialised. Note, this is when the Plugin is loaded, not when the Plugin is used.
+
+{% highlight javascript %}
       this.initialize = function() {
-        // get the correct container for the plugin where's it's attached to the
-        // document DOM.
+
+        // This is how we can add a Modal Dialog to allow users to interact with the Plugin.
+
+        // get the correct container for the plugin how it's attached to the document DOM.
         var $container = options.dialogsInBody ? $(document.body) : $editor;
 
         // Build the Body HTML of the Dialog.
         var body = '<div class="form-group">' +
                    '</div>';
+
+        // Build the Footer HTML of the Dialog.
         var footer = '<button href="#" class="btn btn-primary note-examplePlugin-btn">' + lang.examplePlugin.okButton + '</button>'
       }
       this.$dialog = ui.dialog({
-        // Set the title for the Dialog.
+
+        // Set the title for the Dialog. Note: We don't need to build the markup for the Modal
+        // Header, we only need to set the Title.
         title: lang.examplePlugin.dialogTitle,
+
         // Set the Body of the Dialog.
         body: body,
+
         // Set the Footer of the Dialog.
         footer: footer
+        
+      // This adds the Modal to the DOM.
       }).render().appendTo($container);
     };
     this.destroy = function () {
