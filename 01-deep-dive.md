@@ -751,7 +751,7 @@ var AutoLink = function (context) {
 };
 {% endhighlight %}
 
-For more module examples: [modules]({{ site.repository }}/tree/develop/src/js/bs3/module)
+For more module examples: [modules]({{ site.repository }}/tree/develop/src/js/base/module)
 
 ### Module with option
 You can define custom module with options.
