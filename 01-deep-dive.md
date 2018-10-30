@@ -478,7 +478,7 @@ $('#summernote').on('summernote.enter', function() {
 });
 {% endhighlight %}
 
-### onFocus, onBlur
+### onFocus, onBlur, onBlurCodeview
 {% highlight javascript %}
 // onFocus callback
 $('#summernote').summernote({
@@ -508,6 +508,22 @@ $('#summernote').summernote({
 // summernote.blur
 $('#summernote').on('summernote.blur', function() {
   console.log('Editable area loses focus');
+});
+{% endhighlight %}
+
+{% highlight javascript %}
+// onBlurCodeview callback
+$('#summernote').summernote({
+  callbacks: {
+    onBlurCodeview: function() {
+      console.log('Codeview area loses focus');
+    }
+  }
+});
+
+// summernote.blur.codeview
+$('#summernote').on('summernote.blur.codeview', function() {
+  console.log('Codeview area loses focus');
 });
 {% endhighlight %}
 
