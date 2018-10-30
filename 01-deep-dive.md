@@ -59,6 +59,8 @@ You can compose a toolbar with pre-shipped buttons.
   * `fontname`: set font family
   * `fontsize`: set font size
   * `color`: set foreground and background color
+  * `forecolor`: set foreground color
+  * `backcolor`: set background color
   * `bold`: toggle font weight
   * `italic`: toggle italic
   * `underline`: toggle underline
