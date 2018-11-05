@@ -177,6 +177,22 @@ $('#summernote').summernote({
 
 {% include ad-doc.html %}
 
+### Blockquote breaking level
+You can set blockquote breaking level with `blockquoteBreakingLevel` option.
+
+Each configurable breaking level means:
+
+ * 0 - No break, the new paragraph remains inside the quote.
+ * 1 - Break the first blockquote in the ancestors list.
+ * 2 - Break all blockquotes, so that the new paragraph is not quoted. (default)
+
+{% highlight javascript %}
+$('#summernote').summernote({
+  blockquoteBreakingLevel: 2
+});
+{% endhighlight %}
+
+
 ## Basic API
 You can initialize Summernote with `summernote`.
 
