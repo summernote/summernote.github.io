@@ -787,7 +787,7 @@ var AutoLink = function (context) {
 
 For more module examples: [modules]({{ site.repository }}/tree/develop/src/js/base/module)
 
-### Module with option
+### Module with options
 You can define custom module with options.
 
 {% highlight javascript %}
