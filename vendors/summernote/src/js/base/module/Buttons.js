@@ -69,6 +69,161 @@ export default class Buttons {
     return ((name !== '') && this.isFontInstalled(name) && ($.inArray(name, genericFamilies) === -1));
   }
 
+  colorPalette(className, tooltip, backColor, foreColor) {
+    return this.ui.buttonGroup({
+      className: 'note-color ' + className,
+      children: [
+        this.button({
+          className: 'note-current-color-button',
+          contents: this.ui.icon(this.options.icons.font + ' note-recent-color'),
+          tooltip: tooltip,
+          click: (e) => {
+            const $button = $(e.currentTarget);
+            if (backColor && foreColor) {
+              this.context.invoke('editor.color', {
+                backColor: $button.attr('data-backColor'),
+                foreColor: $button.attr('data-foreColor')
+              });
+            } else if (backColor) {
+              this.context.invoke('editor.color', {
+                backColor: $button.attr('data-backColor')
+              });
+            } else if (foreColor) {
+              this.context.invoke('editor.color', {
+                foreColor: $button.attr('data-foreColor')
+              });
+            }
+          },
+          callback: ($button) => {
+            const $recentColor = $button.find('.note-recent-color');
+            if (backColor) {
+              $recentColor.css('background-color', '#FFFF00');
+              $button.attr('data-backColor', '#FFFF00');
+            }
+            if (!foreColor) {
+              $recentColor.css('color', 'transparent');
+            }
+          }
+        }),
+        this.button({
+          className: 'dropdown-toggle',
+          contents: this.ui.dropdownButtonContents('', this.options),
+          tooltip: this.lang.color.more,
+          data: {
+            toggle: 'dropdown'
+          }
+        }),
+        this.ui.dropdown({
+          items: (backColor ? [
+            '<div class="note-palette">',
+            '  <div class="note-palette-title">' + this.lang.color.background + '</div>',
+            '  <div>',
+            '    <button type="button" class="note-color-reset btn btn-light" data-event="backColor" data-value="inherit">',
+            this.lang.color.transparent,
+            '    </button>',
+            '  </div>',
+            '  <div class="note-holder" data-event="backColor"/>',
+            '  <div>',
+            '    <button type="button" class="note-color-select btn" data-event="openPalette" data-value="backColorPicker">',
+            this.lang.color.cpSelect,
+            '    </button>',
+            '    <input type="color" id="backColorPicker" class="note-btn note-color-select-btn" value="#FFFF00" data-event="backColorPalette">',
+            '  </div>',
+            '  <div class="note-holder-custom" id="backColorPalette" data-event="backColor"/>',
+            '</div>'
+          ].join('') : '') +
+          (foreColor ? [
+            '<div class="note-palette">',
+            '  <div class="note-palette-title">' + this.lang.color.foreground + '</div>',
+            '  <div>',
+            '    <button type="button" class="note-color-reset btn btn-light" data-event="removeFormat" data-value="foreColor">',
+            this.lang.color.resetToDefault,
+            '    </button>',
+            '  </div>',
+            '  <div class="note-holder" data-event="foreColor"/>',
+            '  <div>',
+            '    <button type="button" class="note-color-select btn" data-event="openPalette" data-value="foreColorPicker">',
+            this.lang.color.cpSelect,
+            '    </button>',
+            '    <input type="color" id="foreColorPicker" class="note-btn note-color-select-btn" value="#000000" data-event="foreColorPalette">',
+            '  <div class="note-holder-custom" id="foreColorPalette" data-event="foreColor"/>',
+            '</div>'
+          ].join('') : ''),
+          callback: ($dropdown) => {
+            $dropdown.find('.note-holder').each((idx, item) => {
+              const $holder = $(item);
+              $holder.append(this.ui.palette({
+                colors: this.options.colors,
+                colorsName: this.options.colorsName,
+                eventName: $holder.data('event'),
+                container: this.options.container,
+                tooltip: this.options.tooltip
+              }).render());
+            });
+            /* TODO: do we have to record recent custom colors within cookies? */
+            var customColors = [
+              ['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF']
+            ];
+            $dropdown.find('.note-holder-custom').each((idx, item) => {
+              const $holder = $(item);
+              $holder.append(this.ui.palette({
+                colors: customColors,
+                colorsName: customColors,
+                eventName: $holder.data('event'),
+                container: this.options.container,
+                tooltip: this.options.tooltip
+              }).render());
+            });
+            $dropdown.find('input[type=color]').each((idx, item) => {
+              $(item).change(function() {
+                const $chip = $dropdown.find('#' + $(this).data('event')).find('.note-color-btn').first();
+                const color = this.value.toUpperCase();
+                $chip.css('background-color', color)
+                  .attr('aria-label', color)
+                  .attr('data-value', color)
+                  .attr('data-original-title', color);
+                $chip.click();
+              });
+            });
+          },
+          click: (event) => {
+            event.stopPropagation();
+
+            const $parent = $('.' + className);
+            const $button = $(event.target);
+            const eventName = $button.data('event');
+            let value = $button.attr('data-value');
+
+            if (eventName === 'openPalette') {
+              const $picker = $parent.find('#' + value);
+              const $palette = $($parent.find('#' + $picker.data('event')).find('.note-color-row')[0]);
+
+              // Shift palette chips
+              const $chip = $palette.find('.note-color-btn').last().detach();
+
+              // Set chip attributes
+              const color = $picker.val();
+              $chip.css('background-color', color)
+                .attr('aria-label', color)
+                .attr('data-value', color)
+                .attr('data-original-title', color);
+              $palette.prepend($chip);
+              $picker.click();
+            } else if (lists.contains(['backColor', 'foreColor'], eventName)) {
+              const key = eventName === 'backColor' ? 'background-color' : 'color';
+              const $color = $button.closest('.note-color').find('.note-recent-color');
+              const $currentButton = $button.closest('.note-color').find('.note-current-color-button');
+
+              $color.css(key, value);
+              $currentButton.attr('data-' + eventName, value);
+              this.context.invoke('editor.' + eventName, value);
+            }
+          }
+        })
+      ]
+    }).render();
+  }
+
   addToolbarButtons() {
     this.context.memo('button.style', () => {
       return this.ui.buttonGroup([
@@ -85,6 +240,7 @@ export default class Buttons {
         this.ui.dropdown({
           className: 'dropdown-style',
           items: this.options.styleTags,
+          title: this.lang.style.style,
           template: (item) => {
             if (typeof item === 'string') {
               item = { tag: item, title: (this.lang.style.hasOwnProperty(item) ? this.lang.style[item] : item) };
@@ -109,7 +265,7 @@ export default class Buttons {
         return this.button({
           className: 'note-btn-style-' + item,
           contents: '<div data-value="' + item + '">' + item.toUpperCase() + '</div>',
-          tooltip: item.toUpperCase(),
+          tooltip: this.lang.style[item],
           click: this.context.createInvokeHandler('editor.formatBlock')
         }).render();
       });
@@ -205,6 +361,7 @@ export default class Buttons {
           className: 'dropdown-fontname',
           checkClassName: this.options.icons.menuCheck,
           items: this.options.fontNames.filter(this.isFontInstalled.bind(this)),
+          title: this.lang.font.name,
           template: (item) => {
             return '<span style="font-family: \'' + item + '\'">' + item + '</span>';
           },
@@ -227,90 +384,22 @@ export default class Buttons {
           className: 'dropdown-fontsize',
           checkClassName: this.options.icons.menuCheck,
           items: this.options.fontSizes,
+          title: this.lang.font.size,
           click: this.context.createInvokeHandlerAndUpdateState('editor.fontSize')
         })
       ]).render();
     });
 
     this.context.memo('button.color', () => {
-      return this.ui.buttonGroup({
-        className: 'note-color',
-        children: [
-          this.button({
-            className: 'note-current-color-button',
-            contents: this.ui.icon(this.options.icons.font + ' note-recent-color'),
-            tooltip: this.lang.color.recent,
-            click: (e) => {
-              const $button = $(e.currentTarget);
-              this.context.invoke('editor.color', {
-                backColor: $button.attr('data-backColor'),
-                foreColor: $button.attr('data-foreColor')
-              });
-            },
-            callback: ($button) => {
-              const $recentColor = $button.find('.note-recent-color');
-              $recentColor.css('background-color', '#FFFF00');
-              $button.attr('data-backColor', '#FFFF00');
-            }
-          }),
-          this.button({
-            className: 'dropdown-toggle',
-            contents: this.ui.dropdownButtonContents('', this.options),
-            tooltip: this.lang.color.more,
-            data: {
-              toggle: 'dropdown'
-            }
-          }),
-          this.ui.dropdown({
-            items: [
-              '<div class="note-palette">',
-              '  <div class="note-palette-title">' + this.lang.color.background + '</div>',
-              '  <div>',
-              '    <button type="button" class="note-color-reset btn btn-light" data-event="backColor" data-value="inherit">',
-              this.lang.color.transparent,
-              '    </button>',
-              '  </div>',
-              '  <div class="note-holder" data-event="backColor"/>',
-              '</div>',
-              '<div class="note-palette">',
-              '  <div class="note-palette-title">' + this.lang.color.foreground + '</div>',
-              '  <div>',
-              '    <button type="button" class="note-color-reset btn btn-light" data-event="removeFormat" data-value="foreColor">',
-              this.lang.color.resetToDefault,
-              '    </button>',
-              '  </div>',
-              '  <div class="note-holder" data-event="foreColor"/>',
-              '</div>'
-            ].join(''),
-            callback: ($dropdown) => {
-              $dropdown.find('.note-holder').each((idx, item) => {
-                const $holder = $(item);
-                $holder.append(this.ui.palette({
-                  colors: this.options.colors,
-                  eventName: $holder.data('event'),
-                  container: this.options.container,
-                  tooltip: this.options.tooltip
-                }).render());
-              });
-            },
-            click: (event) => {
-              const $button = $(event.target);
-              const eventName = $button.data('event');
-              const value = $button.data('value');
+      return this.colorPalette('note-color-all', this.lang.color.recent, true, true);
+    });
 
-              if (eventName && value) {
-                const key = eventName === 'backColor' ? 'background-color' : 'color';
-                const $color = $button.closest('.note-color').find('.note-recent-color');
-                const $currentButton = $button.closest('.note-color').find('.note-current-color-button');
+    this.context.memo('button.forecolor', () => {
+      return this.colorPalette('note-color-fore', this.lang.color.foreground, false, true);
+    });
 
-                $color.css(key, value);
-                $currentButton.attr('data-' + eventName, value);
-                this.context.invoke('editor.' + eventName, value);
-              }
-            }
-          })
-        ]
-      }).render();
+    this.context.memo('button.backcolor', () => {
+      return this.colorPalette('note-color-back', this.lang.color.background, true, false);
     });
 
     this.context.memo('button.ul', () => {
@@ -409,6 +498,7 @@ export default class Buttons {
           items: this.options.lineHeights,
           checkClassName: this.options.icons.menuCheck,
           className: 'dropdown-line-height',
+          title: this.lang.font.height,
           click: this.context.createInvokeHandler('editor.lineHeight')
         })
       ]).render();
@@ -425,6 +515,7 @@ export default class Buttons {
           }
         }),
         this.ui.dropdown({
+          title: this.lang.table.table,
           className: 'note-table',
           items: [
             '<div class="note-dimension-picker">',
@@ -483,7 +574,7 @@ export default class Buttons {
       return this.button({
         className: 'btn-fullscreen',
         contents: this.ui.icon(this.options.icons.arrowsAlt),
-        tooltip: this.options.fullscreen,
+        tooltip: this.lang.options.fullscreen,
         click: this.context.createInvokeHandler('fullscreen.toggle')
       }).render();
     });
@@ -492,7 +583,7 @@ export default class Buttons {
       return this.button({
         className: 'btn-codeview',
         contents: this.ui.icon(this.options.icons.code),
-        tooltip: this.options.codeview,
+        tooltip: this.lang.options.codeview,
         click: this.context.createInvokeHandler('codeview.toggle')
       }).render();
     });
@@ -516,7 +607,7 @@ export default class Buttons {
     this.context.memo('button.help', () => {
       return this.button({
         contents: this.ui.icon(this.options.icons.question),
-        tooltip: this.options.help,
+        tooltip: this.lang.options.help,
         click: this.context.createInvokeHandler('helpDialog.show')
       }).render();
     });

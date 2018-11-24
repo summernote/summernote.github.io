@@ -4,13 +4,14 @@ import DropdownUI from './ui/DropdownUI';
 import ModalUI from './ui/ModalUI';
 
 const editor = renderer.create('<div class="note-editor note-frame"/>');
-const toolbar = renderer.create('<div class="note-toolbar"/>');
+const toolbar = renderer.create('<div class="note-toolbar" role="toolbar"/>');
 const editingArea = renderer.create('<div class="note-editing-area"/>');
-const codable = renderer.create('<textarea class="note-codable"/>');
-const editable = renderer.create('<div class="note-editable" contentEditable="true"/>');
+const codable = renderer.create('<textarea class="note-codable" role="textbox" aria-multiline="true"/>');
+const editable = renderer.create('<div class="note-editable" contentEditable="true" role="textbox" aria-multiline="true"/>');
 const statusbar = renderer.create([
-  '<div class="note-statusbar">',
-  '  <div class="note-resizebar">',
+  '<output class="note-status-output" role="status" aria-live="polite"/>',
+  '<div class="note-statusbar" role="resize">',
+  '  <div class="note-resizebar" role="seperator" aria-orientation="horizontal" aria-label="resize">',
   '    <div class="note-icon-bar"/>',
   '    <div class="note-icon-bar"/>',
   '    <div class="note-icon-bar"/>',
@@ -19,12 +20,18 @@ const statusbar = renderer.create([
 ].join(''));
 
 const airEditor = renderer.create('<div class="note-editor"/>');
-const airEditable = renderer.create('<div class="note-editable" contentEditable="true"/>');
+const airEditable = renderer.create([
+  '<div class="note-editable" contentEditable="true" role="textbox" aria-multiline="true"/>',
+  '<output class="note-status-output" role="status" aria-live="polite"/>'
+].join(''));
 
 const buttonGroup = renderer.create('<div class="note-btn-group">');
-const button = renderer.create('<button type="button" class="note-btn">', function($node, options) {
+const button = renderer.create('<button type="button" class="note-btn" role="button" tabindex="-1">', function($node, options) {
   // set button type
   if (options && options.tooltip) {
+    $node.attr({
+      'aria-label': options.tooltip
+    });
     $node.data('_lite_tooltip', new TooltipUI($node, {
       title: options.tooltip,
       container: options.container
@@ -41,18 +48,18 @@ const button = renderer.create('<button type="button" class="note-btn">', functi
   }
 });
 
-const dropdown = renderer.create('<div class="note-dropdown-menu">', function($node, options) {
+const dropdown = renderer.create('<div class="note-dropdown-menu" role="list">', function($node, options) {
   const markup = $.isArray(options.items) ? options.items.map(function(item) {
     const value = (typeof item === 'string') ? item : (item.value || '');
     const content = options.template ? options.template(item) : item;
-    const $temp = $('<a class="note-dropdown-item" href="#" data-value="' + value + '"></a>');
+    const $temp = $('<a class="note-dropdown-item" href="#" data-value="' + value + '" role="listitem" aria-label="' + item + '"></a>');
 
     $temp.html(content).data('item', item);
 
     return $temp;
   }) : options.items;
 
-  $node.html(markup);
+  $node.html(markup).attr({ 'aria-label': options.title });
 
   $node.on('click', '> .note-dropdown-item', function(e) {
     const $a = $(this);
@@ -68,17 +75,17 @@ const dropdown = renderer.create('<div class="note-dropdown-menu">', function($n
   });
 });
 
-const dropdownCheck = renderer.create('<div class="note-dropdown-menu note-check">', function($node, options) {
+const dropdownCheck = renderer.create('<div class="note-dropdown-menu note-check" role="list">', function($node, options) {
   const markup = $.isArray(options.items) ? options.items.map(function(item) {
     const value = (typeof item === 'string') ? item : (item.value || '');
     const content = options.template ? options.template(item) : item;
 
-    const $temp = $('<a class="note-dropdown-item" href="#" data-value="' + value + '"></a>');
+    const $temp = $('<a class="note-dropdown-item" href="#" data-value="' + value + '" role="listitem" aria-label="' + item + '"></a>');
     $temp.html([icon(options.checkClassName), ' ', content]).data('item', item);
     return $temp;
   }) : options.items;
 
-  $node.html(markup);
+  $node.html(markup).attr({ 'aria-label': options.title });
 
   $node.on('click', '> .note-dropdown-item', function(e) {
     const $a = $(this);
@@ -243,15 +250,18 @@ const palette = renderer.create('<div class="note-color-palette"/>', function($n
   for (let row = 0, rowSize = options.colors.length; row < rowSize; row++) {
     const eventName = options.eventName;
     const colors = options.colors[row];
+    const colorsName = options.colorsName[row];
     const buttons = [];
     for (let col = 0, colSize = colors.length; col < colSize; col++) {
       const color = colors[col];
+      const colorName = colorsName[col];
       buttons.push([
         '<button type="button" class="note-btn note-color-btn"',
         'style="background-color:', color, '" ',
         'data-event="', eventName, '" ',
         'data-value="', color, '" ',
-        'title="', color, '" ',
+        'title="', colorName, '" ',
+        'aria-label="', colorName, '" ',
         'data-toggle="button" tabindex="-1"></button>'
       ].join(''));
     }
@@ -304,6 +314,12 @@ const colorDropdownButton = function(opt, type) {
           '    </button>',
           '  </div>',
           '  <div class="note-holder" data-event="backColor"/>',
+          '  <div class="btn-sm">',
+          '    <input type="color" id="html5bcp" class="note-btn btn-default" value="#21104A" style="width:100%;" data-value="cp">',
+          '    <button type="button" class="note-color-reset btn" data-event="backColor" data-value="cpbackColor">',
+          opt.lang.color.cpSelect,
+          '    </button>',
+          '  </div>',
           '</div>',
           '<div class="note-btn-group btn-foreground-color">',
           '  <div class="note-palette-title">' + opt.lang.color.foreground + '</div>',
@@ -314,6 +330,12 @@ const colorDropdownButton = function(opt, type) {
           '    </button>',
           '  </div>',
           '  <div class="note-holder" data-event="foreColor"/>',
+          '  <div class="btn-sm">',
+          '    <input type="color" id="html5fcp" class="note-btn btn-default" value="#21104A" style="width:100%;" data-value="cp">',
+          '    <button type="button" class="note-color-reset btn" data-event="foreColor" data-value="cpforeColor">',
+          opt.lang.color.cpSelect,
+          '    </button>',
+          '  </div>',
           '</div>',
           '</div>'
         ].join(''),
@@ -337,7 +359,16 @@ const colorDropdownButton = function(opt, type) {
         click: function(event) {
           const $button = $(event.target);
           const eventName = $button.data('event');
-          const value = $button.data('value');
+          let value = $button.data('value');
+          const foreinput = document.getElementById('html5fcp').value;
+          const backinput = document.getElementById('html5bcp').value;
+          if (value === 'cp') {
+            event.stopPropagation();
+          } else if (value === 'cpbackColor') {
+            value = backinput;
+          } else if (value === 'cpforeColor') {
+            value = foreinput;
+          }
 
           if (eventName && value) {
             const key = eventName === 'backColor' ? 'background-color' : 'color';
@@ -361,15 +392,18 @@ const colorDropdownButton = function(opt, type) {
   }).render();
 };
 
-const dialog = renderer.create('<div class="note-modal" tabindex="-1"/>', function($node, options) {
+const dialog = renderer.create('<div class="note-modal" aria-hidden="false" tabindex="-1" role="dialog"/>', function($node, options) {
   if (options.fade) {
     $node.addClass('fade');
   }
+  $node.attr({
+    'aria-label': options.title
+  });
   $node.html([
     '  <div class="note-modal-content">',
     (options.title
       ? '    <div class="note-modal-header">' +
-    '      <button type="button" class="close"><i class="note-icon-close"></i></button>' +
+    '      <button type="button" class="close" aria-label="Close" aria-hidden="true"><i class="note-icon-close"></i></button>' +
     '      <h4 class="note-modal-title">' + options.title + '</h4>' +
     '    </div>' : ''
     ),
@@ -461,7 +495,7 @@ const linkDialog = function(opt) {
 const popover = renderer.create([
   '<div class="note-popover bottom">',
   '  <div class="note-popover-arrow"/>',
-  '  <div class="note-popover-content note-children-container"/>',
+  '  <div class="popover-content note-children-container"/>',
   '</div>'
 ].join(''), function($node, options) {
   const direction = typeof options.direction !== 'undefined' ? options.direction : 'bottom';
@@ -475,9 +509,10 @@ const popover = renderer.create([
 
 const checkbox = renderer.create('<div class="checkbox"></div>', function($node, options) {
   $node.html([
-    ' <label' + (options.id ? ' for="' + options.id + '"' : '') + '>',
-    ' <input type="checkbox"' + (options.id ? ' id="' + options.id + '"' : ''),
-    (options.checked ? ' checked' : '') + '/>',
+    '<label' + (options.id ? ' for="' + options.id + '"' : '') + '>',
+    ' <input role="checkbox" type="checkbox"' + (options.id ? ' id="' + options.id + '"' : ''),
+    (options.checked ? ' checked' : ''),
+    ' aria-checked="' + (options.checked ? 'true' : 'false') + '"/>',
     (options.text ? options.text : ''),
     '</label>'
   ].join(''));
