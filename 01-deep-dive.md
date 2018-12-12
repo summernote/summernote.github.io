@@ -435,6 +435,15 @@ Insert text.
 $('#summernote').summernote('insertText', 'Hello, world');
 {% endhighlight %}
 
+### pasteHTML
+Paste HTML string.
+
+{% highlight javascript %}
+// @param {String} HTML string
+var HTMLstring = '<div><p>Hello, world</p><p>Summernote can insert HTML string</p></div>';
+$('#summernote').summernote('insertText', HTMLstring);
+{% endhighlight %}
+
 ### createLink, unlink
 Create link and unlink.
 
