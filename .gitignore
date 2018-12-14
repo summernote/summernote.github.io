@@ -15,6 +15,12 @@ node_modules
 *.iws
 .idea/
 
-#jekyll
+# jekyll
 _site/
 .publish/
+
+# rbenv
+.ruby-version
+
+# macOS
+.DS_Store
