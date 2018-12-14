@@ -291,10 +291,14 @@ $index-title-margin-xs: 59px;
     text-align: center;
   }
   padding: 20px 15px;
-}
 
-.ad img {
-  width: 100%;
+  .ad {
+    margin: 15px 0;
+    
+    img {
+      width: 60%;
+    }
+  }
 }
 
 .twitter-list {
