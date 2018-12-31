@@ -291,6 +291,15 @@ $index-title-margin-xs: 59px;
     text-align: center;
   }
   padding: 20px 15px;
+
+  .ad {
+    margin: 15px 0;
+
+    img {
+      width: 60%;
+      margin: 5px 0;
+    }
+  }
 }
 
 .twitter-list {
