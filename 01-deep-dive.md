@@ -441,7 +441,7 @@ Paste HTML string.
 {% highlight javascript %}
 // @param {String} HTML string
 var HTMLstring = '<div><p>Hello, world</p><p>Summernote can insert HTML string</p></div>';
-$('#summernote').summernote('insertText', HTMLstring);
+$('#summernote').summernote('pasteHTML', HTMLstring);
 {% endhighlight %}
 
 ### createLink, unlink
