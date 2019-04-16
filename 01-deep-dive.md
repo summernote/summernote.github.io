@@ -192,6 +192,26 @@ $('#summernote').summernote({
 });
 {% endhighlight %}
 
+### XSS protection for CodeView
+Summernote provides a XSS protection for CodeView. It consists of filtering tags and whitelist for `iframe`.
+
+Whitelist filter is turned on by default, but filtering tags is not. You can turn them on and off by options like below.
+{% highlight javascript %}
+$('#summernote').summernote({
+  codeviewFilter: false,
+  codeviewIframeFilter: true
+});
+{% endhighlight %}
+
+And, you can also add your own whitelist domains and use custom tag filters. Please check the [default filter](https://github.com/summernote/summernote/blob/a9512de7f2e20db866ba02708fb7209147f5dedf/src/js/base/settings.js#L209) before customizing.
+{% highlight javascript %}
+$('#summernote').summernote({
+  codeviewFilterRegex: 'custom-regex',
+  codeviewIframeWhitelistSrc: ['my-own-domainname']
+});
+{% endhighlight %}
+
+But you have to remember that this protection only affects on front-end side – to prevent attacks thoroughly, you have to check it on back-end side again.
 
 ## Basic API
 You can initialize Summernote with `summernote`.
