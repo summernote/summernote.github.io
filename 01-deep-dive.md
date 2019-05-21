@@ -99,7 +99,7 @@ You can also setup buttons of the other popovers in the same way. The below sett
 {% highlight javascript %}
 popover: {
   image: [
-    ['imagesize', ['imageSize100', 'imageSize50', 'imageSize25']],
+    ['image', ['resizeFull', 'resizeHalf', 'resizeQuarter', 'resizeNone']],
     ['float', ['floatLeft', 'floatRight', 'floatNone']],
     ['remove', ['removeMedia']]
   ],
