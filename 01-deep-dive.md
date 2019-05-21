@@ -81,6 +81,22 @@ You can compose a toolbar with pre-shipped buttons.
   * `redo`: redo
   * `help`: open help dialog
 
+The following settings are default options for toolbar buttons.
+
+{% highlight javascript %}
+toolbar: [
+  ['style', ['style']],
+  ['font', ['bold', 'underline', 'clear']],
+  ['fontname', ['fontname']],
+  ['color', ['color']],
+  ['para', ['ul', 'ol', 'paragraph']],
+  ['table', ['table']],
+  ['insert', ['link', 'picture', 'video']],
+  ['view', ['fullscreen', 'codeview', 'help']],
+],
+{% endhighlight %}
+
+
 Air-mode has its own popover, not toolbar. You can customize it with <code>popover.air</code> option.
 
 {% highlight javascript %}
