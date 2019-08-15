@@ -304,6 +304,13 @@ if ($('#summernote').summernote('isEmpty')) {
 }
 {% endhighlight %}
 
+### codeview
+You can toggle editable/codable view by API.
+
+{% highlight javascript %}
+$('#summernote').summernote('codeview.toggle');
+{% endhighlight %}
+
 ### reset
 Clear the editor content and remove all stored history.
 
