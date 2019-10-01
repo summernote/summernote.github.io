@@ -311,6 +311,13 @@ You can toggle editable/codable view by API.
 $('#summernote').summernote('codeview.toggle');
 {% endhighlight %}
 
+### fullscreen
+You can toggle Fullscreen view by API.
+
+{% highlight javascript %}
+$('#summernote').summernote('fullscreen.toggle');
+{% endhighlight %}
+
 ### reset
 Clear the editor content and remove all stored history.
 
