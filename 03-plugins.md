@@ -204,6 +204,10 @@ This section performs functions when the Plugin is first initialised. Note, this
         // This is how we can add a Modal Dialog to allow users to interact with the Plugin.
 
         // get the correct container for the plugin how it's attached to the document DOM.
+        // Using the current latest development branch, you can now use $.summernote.interface;
+        // to return which Summernote is being used to be able to adjust the modal layout to suit.
+        // using this.options.id will return a generated timestamp when Summernote was initiliased
+        // on page to allow using unique ID's.
         var $container = options.dialogsInBody ? $(document.body) : $editor;
 
         // Build the Body HTML of the Dialog.
