@@ -256,11 +256,71 @@ $('#summernote').summernote('insertText', 'hello world');
 
 A module named `editor` supports several methods for editor's basic behavior
 
+### codeview
+You can toggle editable/codable view by API.
+
+{% highlight javascript %}
+$('#summernote').summernote('codeview.toggle');
+{% endhighlight %}
+
 ### createRange
 Creates a range object for current user selection.
 
 {% highlight javascript %}
 var range = $('#summernote').summernote('createRange');
+{% endhighlight %}
+
+### disable, enable
+You can disable editor by API.
+
+{% highlight javascript %}
+$('#summernote').summernote('disable');
+{% endhighlight %}
+
+If you want to enable editor again, call API with `enable`.
+
+{% highlight javascript %}
+$('#summernote').summernote('enable');
+{% endhighlight %}
+
+### focus
+Sets focus in current summernote
+
+{% highlight javascript %}
+$('#summernote').summernote('focus');
+{% endhighlight %}
+
+### fullscreen
+You can toggle Fullscreen view by API.
+
+{% highlight javascript %}
+$('#summernote').summernote('fullscreen.toggle');
+{% endhighlight %}
+
+### interface
+You can find programmatically which Summernote you are using.
+This will return one of three values: `bs3`, `bs4` or `lite`.
+
+{% highlight javascript %}
+$.summernote.interface;
+{% endhighlight %}
+
+### isEmpty
+Returns whether editor content is empty or not.
+
+The editing area needs `<p><br></p>` for focus, even if the editor content is empty. So Summernote supports this method for helping to check if editor content is empty.
+
+{% highlight javascript %}
+if ($('#summernote').summernote('isEmpty')) {
+  alert('editor content is empty');
+}
+{% endhighlight %}
+
+### reset
+Clear the editor content and remove all stored history.
+
+{% highlight javascript %}
+$('#summernote').summernote('reset');
 {% endhighlight %}
 
 ### saveRange, restoreRange
@@ -286,84 +346,7 @@ $('#summernote').summernote('undo');
 $('#summernote').summernote('redo');
 {% endhighlight %}
 
-### focus
-Sets focus in current summernote
-
-{% highlight javascript %}
-$('#summernote').summernote('focus');
-{% endhighlight %}
-
-### isEmpty
-Returns whether editor content is empty or not.
-
-The editing area needs `<p><br></p>` for focus, even if the editor content is empty. So Summernote supports this method for helping to check if editor content is empty.
-
-{% highlight javascript %}
-if ($('#summernote').summernote('isEmpty')) {
-  alert('editor content is empty');
-}
-{% endhighlight %}
-
-### codeview
-You can toggle editable/codable view by API.
-
-{% highlight javascript %}
-$('#summernote').summernote('codeview.toggle');
-{% endhighlight %}
-
-### fullscreen
-You can toggle Fullscreen view by API.
-
-{% highlight javascript %}
-$('#summernote').summernote('fullscreen.toggle');
-{% endhighlight %}
-
-### reset
-Clear the editor content and remove all stored history.
-
-{% highlight javascript %}
-$('#summernote').summernote('reset');
-{% endhighlight %}
-
-### disable, enable
-You can disable editor by API.
-
-{% highlight javascript %}
-$('#summernote').summernote('disable');
-{% endhighlight %}
-
-If you want to enable editor again, call API with `enable`.
-
-{% highlight javascript %}
-$('#summernote').summernote('enable');
-{% endhighlight %}
-
 ## Font style API
-
-### bold, italic, underline, strikethrough
-Set font style.
-
-{% highlight javascript %}
-$('#summernote').summernote('bold');
-$('#summernote').summernote('italic');
-$('#summernote').summernote('underline');
-$('#summernote').summernote('strikethrough');
-{% endhighlight %}
-
-### superscript, subscript
-Set superscript or subscript.
-
-{% highlight javascript %}
-$('#summernote').summernote('superscript');
-$('#summernote').summernote('subscript');
-{% endhighlight %}
-
-### removeFormat
-Clean a style.
-
-{% highlight javascript %}
-$('#summernote').summernote('removeFormat');
-{% endhighlight %}
 
 ### backColor, foreColor
 Set the Background or Foreground color.
@@ -374,6 +357,16 @@ $('#summernote').summernote('backColor', 'red');
 
 // @param {String} color
 $('#summernote').summernote('foreColor', 'blue');
+{% endhighlight %}
+
+### bold, italic, underline, strikethrough
+Set font style.
+
+{% highlight javascript %}
+$('#summernote').summernote('bold');
+$('#summernote').summernote('italic');
+$('#summernote').summernote('underline');
+$('#summernote').summernote('strikethrough');
 {% endhighlight %}
 
 ### fontName
@@ -392,23 +385,44 @@ Set font size.
 $('#summernote').summernote('fontSize', 20);
 {% endhighlight %}
 
-## Paragraph API
-
-### justify left, right and more
-Set the alignment of a Paragraph.
+### removeFormat
+Clean a style.
 
 {% highlight javascript %}
-$('#summernote').summernote('justifyLeft');
-$('#summernote').summernote('justifyRight');
-$('#summernote').summernote('justifyCenter');
-$('#summernote').summernote('justifyFull');
+$('#summernote').summernote('removeFormat');
 {% endhighlight %}
 
-### insertParagraph
-Insert a paragraph
+### superscript, subscript
+Set superscript or subscript.
 
 {% highlight javascript %}
-$('#summernote').summernote('insertParagraph');
+$('#summernote').summernote('superscript');
+$('#summernote').summernote('subscript');
+{% endhighlight %}
+
+## Paragraph API
+
+### formatH1-H6
+Change current paragraph as a `<h1> ~ <h6>`.
+
+{% highlight javascript %}
+$('#summernote').summernote('formatH2');
+$('#summernote').summernote('formatH6');
+{% endhighlight %}
+
+### formatPara
+Change current paragraph as a `<p>`.
+
+{% highlight javascript %}
+$('#summernote').summernote('formatPara');
+{% endhighlight %}
+
+### indent and outdent
+Indent or Outdent on current paragraph.
+
+{% highlight javascript %}
+$('#summernote').summernote('indent');
+$('#summernote').summernote('outdent');
 {% endhighlight %}
 
 ### insertOrderedList
@@ -422,27 +436,21 @@ $('#summernote').summernote('insertOrderedList');
 $('#summernote').summernote('insertUnorderedList');
 {% endhighlight %}
 
-### indent and outdent
-Indent or Outdent on current paragraph.
+### insertParagraph
+Insert a paragraph
 
 {% highlight javascript %}
-$('#summernote').summernote('indent');
-$('#summernote').summernote('outdent');
+$('#summernote').summernote('insertParagraph');
 {% endhighlight %}
 
-### formatPara
-Change current paragraph as a `<p>`.
+### justify left, right and more
+Set the alignment of a Paragraph.
 
 {% highlight javascript %}
-$('#summernote').summernote('formatPara');
-{% endhighlight %}
-
-### formatH1-H6
-Change current paragraph as a `<h1> ~ <h6>`.
-
-{% highlight javascript %}
-$('#summernote').summernote('formatH2');
-$('#summernote').summernote('formatH6');
+$('#summernote').summernote('justifyLeft');
+$('#summernote').summernote('justifyRight');
+$('#summernote').summernote('justifyCenter');
+$('#summernote').summernote('justifyFull');
 {% endhighlight %}
 
 ### lineHeight
@@ -454,6 +462,24 @@ $('#summernote').summernote('lineHeight', 20);
 {% endhighlight %}
 
 ## Insertion API
+
+### createLink, unlink
+Create link and unlink.
+
+{% highlight javascript %}
+// @param {String} text - link text
+// @param {String} url - link url
+// @param {Boolean} isNewWindow - whether link's target is new window or not
+$('#summernote').summernote('createLink', {
+  text: "This is the Summernote's Official Site",
+  url: 'http://summernote.org',
+  isNewWindow: true
+});
+
+$('#summernote').summernote('unlink');
+{% endhighlight %}
+
+{% include ad-doc.html %}
 
 ### insertImage
 Insert an image.
@@ -498,24 +524,6 @@ var HTMLstring = '<div><p>Hello, world</p><p>Summernote can insert HTML string</
 $('#summernote').summernote('pasteHTML', HTMLstring);
 {% endhighlight %}
 
-### createLink, unlink
-Create link and unlink.
-
-{% highlight javascript %}
-// @param {String} text - link text
-// @param {String} url - link url
-// @param {Boolean} isNewWindow - whether link's target is new window or not
-$('#summernote').summernote('createLink', {
-  text: "This is the Summernote's Official Site",
-  url: 'http://summernote.org',
-  isNewWindow: true
-});
-
-$('#summernote').summernote('unlink');
-{% endhighlight %}
-
-{% include ad-doc.html %}
-
 ## Callbacks
 Summernote support initialize callbacks and jquery's custom event style callbacks.
 
@@ -525,20 +533,23 @@ Summernote support initialize callbacks and jquery's custom event style callback
 > ##### Callback only works with camel case string after v0.6.5
 > Lowercase string has been used for basic event name(ex: `oninit`, `onenter`, `onfocus`, `onblur`, `onkeyup`, `onkeydown`, `onpaste`). In contrast, callbacks name for advanced feature has been used with camel case string. This is inconsistent and confusing to use. So we rename all lowercase callback to camel case string.
 
-### onInit
+### onChange
+* IE9-10: DOMCharacterDataModified, DOMSubtreeModified, DOMNodeInserted
+* Chrome, FF: input
+
 {% highlight javascript %}
-// onInit callback
+// onChange callback
 $('#summernote').summernote({
   callbacks: {
-    onInit: function() {
-      console.log('Summernote is launched');
+    onChange: function(contents, $editable) {
+      console.log('onChange:', contents, $editable);
     }
   }
 });
 
-// summernote.init
-$('#summernote').on('summernote.init', function() {
-  console.log('Summernote is launched');
+// summernote.change
+$('#summernote').on('summernote.change', function(we, contents, $editable) {
+  console.log('summernote\'s content is changed.');
 });
 {% endhighlight %}
 
@@ -608,6 +619,45 @@ $('#summernote').on('summernote.blur.codeview', function() {
 });
 {% endhighlight %}
 
+### onImageUpload
+Override image upload handler(default: base64 dataURL on `IMG` tag).
+You can upload image to server or AWS S3: [more...]({{ site.repository }}/issues/72)
+
+{% highlight javascript %}
+// onImageUpload callback
+$('#summernote').summernote({
+  callbacks: {
+    onImageUpload: function(files) {
+      // upload image to server and create imgNode...
+      $summernote.summernote('insertNode', imgNode);
+    }
+  }
+});
+
+// summernote.image.upload
+$('#summernote').on('summernote.image.upload', function(we, files) {
+  // upload image to server and create imgNode...
+  $summernote.summernote('insertNode', imgNode);
+});
+{% endhighlight %}
+
+### onInit
+{% highlight javascript %}
+// onInit callback
+$('#summernote').summernote({
+  callbacks: {
+    onInit: function() {
+      console.log('Summernote is launched');
+    }
+  }
+});
+
+// summernote.init
+$('#summernote').on('summernote.init', function() {
+  console.log('Summernote is launched');
+});
+{% endhighlight %}
+
 ### onKeyup, onKeydown
 {% highlight javascript %}
 // onKeyup callback
@@ -655,48 +705,6 @@ $('#summernote').summernote({
 // summernote.paste
 $('#summernote').on('summernote.paste', function(e) {
   console.log('Called event paste');
-});
-{% endhighlight %}
-
-### onImageUpload
-Override image upload handler(default: base64 dataURL on `IMG` tag).
-You can upload image to server or AWS S3: [more...]({{ site.repository }}/issues/72)
-
-{% highlight javascript %}
-// onImageUpload callback
-$('#summernote').summernote({
-  callbacks: {
-    onImageUpload: function(files) {
-      // upload image to server and create imgNode...
-      $summernote.summernote('insertNode', imgNode);
-    }
-  }
-});
-
-// summernote.image.upload
-$('#summernote').on('summernote.image.upload', function(we, files) {
-  // upload image to server and create imgNode...
-  $summernote.summernote('insertNode', imgNode);
-});
-{% endhighlight %}
-
-### onChange
-* IE9-10: DOMCharacterDataModified, DOMSubtreeModified, DOMNodeInserted
-* Chrome, FF: input
-
-{% highlight javascript %}
-// onChange callback
-$('#summernote').summernote({
-  callbacks: {
-    onChange: function(contents, $editable) {
-      console.log('onChange:', contents, $editable);
-    }
-  }
-});
-
-// summernote.change
-$('#summernote').on('summernote.change', function(we, contents, $editable) {
-  console.log('summernote\'s content is changed.');
 });
 {% endhighlight %}
 
