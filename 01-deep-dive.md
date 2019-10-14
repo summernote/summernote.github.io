@@ -299,6 +299,22 @@ If you want to enable editor again, call API with `enable`.
 $('#summernote').summernote('enable');
 {% endhighlight %}
 
+### Disable Spellchecking
+You can disable Spellchecking in the Editing area with the `spellCheck` option.
+{% highlight javascript %}
+$('#summernote').summernote({
+  spellCheck: true
+});
+{% endhighlight %}
+
+### Disable Grammarly Browser Addon
+You can disable the Grammarly Browser Addon (currently researching other Grammar Addons for their disabling options) by using the `disableGrammar` option.
+{% highlight javascript %}
+$('#summernote').summernote({
+  disableGrammar: false
+});
+{% endhighlight %}
+
 ### focus
 Sets focus in current summernote
 
