@@ -136,12 +136,18 @@ popover: {
 }
 {% endhighlight %}
 
-### Custom placeholder
-You can define a placeholder with the `placeholder` option.
+### Blockquote breaking level
+You can set blockquote breaking level with `blockquoteBreakingLevel` option.
+
+Each configurable breaking level means:
+
+ * 0 - No break, the new paragraph remains inside the quote.
+ * 1 - Break the first blockquote in the ancestors list.
+ * 2 - Break all blockquotes, so that the new paragraph is not quoted. (default)
 
 {% highlight javascript %}
 $('#summernote').summernote({
-  placeholder: 'write here...'
+  blockquoteBreakingLevel: 2
 });
 {% endhighlight %}
 
@@ -160,6 +166,15 @@ Summernote tests for fonts in fontNames before adding them to dropdown. This is 
 $('#summernote').summernote({
   fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Merriweather'],
   fontNamesIgnoreCheck: ['Merriweather']
+});
+{% endhighlight %}
+
+### Custom placeholder
+You can define a placeholder with the `placeholder` option.
+
+{% highlight javascript %}
+$('#summernote').summernote({
+  placeholder: 'write here...'
 });
 {% endhighlight %}
 
@@ -195,20 +210,11 @@ $('#summernote').summernote({
 });
 {% endhighlight %}
 
-{% include ad-doc.html %}
-
-### Blockquote breaking level
-You can set blockquote breaking level with `blockquoteBreakingLevel` option.
-
-Each configurable breaking level means:
-
- * 0 - No break, the new paragraph remains inside the quote.
- * 1 - Break the first blockquote in the ancestors list.
- * 2 - Break all blockquotes, so that the new paragraph is not quoted. (default)
-
+### Disable TAB
+You can disable TAB key interaction with the `tabDisable` option within the editor to allow tabbing through Form Elements.
 {% highlight javascript %}
 $('#summernote').summernote({
-  blockquoteBreakingLevel: 2
+  tabDisable: false
 });
 {% endhighlight %}
 
