@@ -136,12 +136,18 @@ popover: {
 }
 {% endhighlight %}
 
-### Custom placeholder
-You can define a placeholder with the `placeholder` option.
+### Blockquote breaking level
+You can set blockquote breaking level with `blockquoteBreakingLevel` option.
+
+Each configurable breaking level means:
+
+ * 0 - No break, the new paragraph remains inside the quote.
+ * 1 - Break the first blockquote in the ancestors list.
+ * 2 - Break all blockquotes, so that the new paragraph is not quoted. (default)
 
 {% highlight javascript %}
 $('#summernote').summernote({
-  placeholder: 'write here...'
+  blockquoteBreakingLevel: 2
 });
 {% endhighlight %}
 
@@ -169,6 +175,15 @@ You can override the default list and specify a custom one.
 {% highlight javascript %}
 $('#summernote').summernote({
   lineHeights: ['0.2', '0.3', '0.4', '0.5', '0.6', '0.8', '1.0', '1.2', '1.4', '1.5', '2.0', '3.0']
+});
+{% endhighlight %}
+
+### Custom placeholder
+You can define a placeholder with the `placeholder` option.
+
+{% highlight javascript %}
+$('#summernote').summernote({
+  placeholder: 'write here...'
 });
 {% endhighlight %}
 
@@ -204,20 +219,12 @@ $('#summernote').summernote({
 });
 {% endhighlight %}
 
-{% include ad-doc.html %}
-
-### Blockquote breaking level
-You can set blockquote breaking level with `blockquoteBreakingLevel` option.
-
-Each configurable breaking level means:
-
- * 0 - No break, the new paragraph remains inside the quote.
- * 1 - Break the first blockquote in the ancestors list.
- * 2 - Break all blockquotes, so that the new paragraph is not quoted. (default)
-
+### Disable TAB
+You can disable TAB/Shift+Tab intereaction with the `tabDisable` option.
+This will allow tabbing through fields in Forms.
 {% highlight javascript %}
 $('#summernote').summernote({
-  blockquoteBreakingLevel: 2
+  tabDisable: false
 });
 {% endhighlight %}
 
