@@ -565,6 +565,9 @@ Summernote support initialize callbacks and jquery's custom event style callback
 > ##### Callback only works with camel case string after v0.6.5
 > Lowercase string has been used for basic event name(ex: `oninit`, `onenter`, `onfocus`, `onblur`, `onkeyup`, `onkeydown`, `onpaste`). In contrast, callbacks name for advanced feature has been used with camel case string. This is inconsistent and confusing to use. So we rename all lowercase callback to camel case string.
 
+#### onBeforeCommand
+WIP: Need to work on an explanation
+
 ### onChange
 * IE9-10: DOMCharacterDataModified, DOMSubtreeModified, DOMNodeInserted
 * Chrome, FF: input
@@ -584,6 +587,12 @@ $('#summernote').on('summernote.change', function(we, contents, $editable) {
   console.log('summernote\'s content is changed.');
 });
 {% endhighlight %}
+
+### onChangeCodeview
+WIP: Need to work on an explanation
+
+### onDialogShown
+WIP: Need to work on an explanation
 
 ### onEnter
 {% highlight javascript %}
@@ -651,6 +660,9 @@ $('#summernote').on('summernote.blur.codeview', function() {
 });
 {% endhighlight %}
 
+### onImageLinkInsert
+WIP: Need to work on an explanation
+
 ### onImageUpload
 Override image upload handler(default: base64 dataURL on `IMG` tag).
 You can upload image to server or AWS S3: [more...]({{ site.repository }}/issues/72)
@@ -672,6 +684,9 @@ $('#summernote').on('summernote.image.upload', function(we, files) {
   $summernote.summernote('insertNode', imgNode);
 });
 {% endhighlight %}
+
+### onImageUploadError
+WIP: Need to work on an explanation
 
 ### onInit
 {% highlight javascript %}
@@ -723,6 +738,8 @@ $('#summernote').on('summernote.keydown', function(we, e) {
 });
 {% endhighlight %}
 
+### onMouseDown,onMouseUp
+
 ### onPaste
 {% highlight javascript %}
 // onPaste callback
@@ -739,6 +756,9 @@ $('#summernote').on('summernote.paste', function(e) {
   console.log('Called event paste');
 });
 {% endhighlight %}
+
+### onScroll
+WIP: Need to work on an explanation
 
 ## Custom button
 Summernote also supports custom buttons. If you want to create your own button, you can simply define and use with options.
