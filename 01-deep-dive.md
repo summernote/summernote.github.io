@@ -58,6 +58,7 @@ You can compose a toolbar with pre-shipped buttons.
 * Font Style
   * `fontname`: set font family
   * `fontsize`: set font size
+  * `fontsizeunit`: set font size unit
   * `color`: set foreground and background color
   * `forecolor`: set foreground color
   * `backcolor`: set background color
@@ -166,6 +167,15 @@ Summernote tests for fonts in fontNames before adding them to dropdown. This is 
 $('#summernote').summernote({
   fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Merriweather'],
   fontNamesIgnoreCheck: ['Merriweather']
+});
+{% endhighlight %}
+
+### Custom font size units
+You can set the available font size units with the `fontSizeUnits` option.
+
+{% highlight javascript %}
+$('#summernote').summernote({
+  fontSizeUnits: ['px', 'pt']
 });
 {% endhighlight %}
 
@@ -413,8 +423,16 @@ $('#summernote').summernote('fontName', 'Arial');
 Set font size.
 
 {% highlight javascript %}
-// @param {Number} font size - unit is px
+// @param {Number} font size - unit is determined by selected font size unit.
 $('#summernote').summernote('fontSize', 20);
+{% endhighlight %}
+
+### fontSizeUnit
+Set font size unit.
+
+{% highlight javascript %}
+// @param {String} font size unit - defaults to px.
+$('#summernote').summernote('fontSizeUnit', 'pt');
 {% endhighlight %}
 
 ### removeFormat
