@@ -574,6 +574,221 @@ var HTMLstring = '<div><p>Hello, world</p><p>Summernote can insert HTML string</
 $('#summernote').summernote('pasteHTML', HTMLstring);
 {% endhighlight %}
 
+## Range & Selection API
+
+### saveRange
+refer to [#saveRange](#saverange-restorerange)
+
+### restoreRange
+refer to [#restorerange](#saverange-restorerange)
+
+### getLastRange 
+summernote is saving a range object(WrappedRange) on current cursor. 
+
+{% highlight javascript %}
+const rng = $('#summernote').summernote('editor.getLastRange');
+{% endhighlight %}
+
+> #### when summernote save a range with dom event 
+> * keydown
+> * keyup
+> * focus
+> * mouseup
+> * paste 
+
+> #### when summernote save a range with api 
+> * `editor.insertImage` -> Image 
+> * `editor.insertNode` -> Node 
+> * `editor.insertText` -> TextNode  
+> * `editor.pasteHTML` -> last Node of contents 
+> * `editor.insertHorizontalRule` -> next sibling node of hr node 
+> * `editor.createLink` -> link node 
+
+### setLastRange 
+
+You can define custom range in node of summernote editable element.  
+
+{% highlight javascript %}
+const range = $.summernote.range;  // range utility 
+// set my custom range 
+$('#summernote').summernote('editor.setLastRange', range.createFromNodeAfter(node).select());
+{% endhighlight %}
+
+### `range` utility 
+
+{% highlight javascript %}
+const range = $.summernote.range;  // range utility 
+{% endhighlight %}
+
+
+#### create WrappedRange Object   
+
+range utility make a WrappedRange Class's instance  
+
+##### create 
+
+create WrappedRange Object From arguments or Browser Selection
+
+{% highlight javascript %}
+const rng = range.create(startContainer, startOffset, endContainer, endOffset)
+
+// or 
+
+const rng = range.create() //  is equals range.createFromSelection()
+
+{% endhighlight %}
+
+
+##### createFromNode 
+
+create WrappedRange object from node  
+
+{% highlight javascript %}
+const rng = range.createFromNode(node)
+{% endhighlight %}
+
+##### createFromNodeBefore 
+
+create WrappedRange from node before position
+
+{% highlight javascript %}
+const rng = range.createFromNodeBefore(node)
+{% endhighlight %}
+
+##### createFromNodeAfter 
+
+create WrappedRange from node after position
+
+{% highlight javascript %}
+const rng = range.createFromNodeAfter(node)
+{% endhighlight %}
+
+
+##### createFromSelection 
+
+create WrappedRange object from selection  
+
+{% highlight javascript %}
+const rng = range.createFromSelection(node)
+{% endhighlight %}
+
+
+#### WrappedRange Object   
+
+##### select() 
+
+select update visible range
+
+```
+rng.select()
+```
+
+##### collapse(isCollapseToStart) 
+
+```
+const newRng = rng.collapse(true);   // to start rng  
+
+or 
+
+const newRng = rng.collapse();  // to end rng 
+```
+
+##### splitText() 
+
+splitText on range
+
+```
+const textRng = rng.splitText()
+```
+
+
+##### deleteContents() 
+
+delete contents on range
+
+```
+const newRng = rng.deleteContents()
+```
+
+
+##### isCollapsed() 
+
+returns whether range was collapsed or not
+
+```
+const isCollapsed = rng.isCollapsed()
+```
+
+
+##### wrapBodyInlineWithPara()
+
+wrap inline nodes which children of body with paragraph
+
+```
+const newRng = rng.wrapBodyInlineWithPara()
+```
+
+##### insertNode(node)
+
+insert node at current cursor
+
+```
+const node = rng.insertNode(document.createElement('div'))
+```
+
+
+##### pasteHTML(markup)
+
+insert html at current cursor
+
+```
+const nodes = rng.pasteHTML(`<div>summernote</div>`)
+```
+
+
+##### toString()
+
+returns text in range
+
+
+##### getWordRange(findAfter)   
+
+returns range for word before(or after) cursor
+
+```
+const newRng = rng.getWordRange();   // before cursor 
+
+// or 
+
+const newRng = rng.getWordRange(true);   // after cursor 
+```
+
+##### getWordsMatchRange(regex) 
+
+returns range for words before cursor that match with a Regex
+
+```
+// range : 'hi @Peter Pan'
+const rng = range.create() // or $('.summernote').summernote('getLastRange');
+
+const newRng = rng.getWordsMatchRange(/@[a-z ]+/i)
+
+console.log(newRng.toString())  // '@Peter Pan' 
+```
+
+
+##### getClientRects()
+
+returns a list of DOMRect objects representing the area of the screen occupied by the range.
+
+> ###### Range.getClientRects()
+> https://developer.mozilla.org/en-US/docs/Web/API/Range/getClientRects
+
+
+
+
+
+
 ## Callbacks
 Summernote support initialize callbacks and jquery's custom event style callbacks.
 
