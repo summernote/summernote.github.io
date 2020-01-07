@@ -6,17 +6,17 @@ description: > # this means to ignore newlines until "baseurl:"
   Summernote is a JavaScript library that helps you create WYSIWYG editors online.
 author: https://github.com/summernote
 baseurl: "" # the subpath of your site, e.g. /blog/
-url: "http://summernote.org" # the base hostname & protocol for your site
+url: "https://summernote.org" # the base hostname & protocol for your site
 github_username: summernote
 
 # Summernote settings
-version: 0.8.12
+version: 0.8.15
 repository: "https://github.com/summernote/summernote"
-jquery_js: "http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"
-bootstrap_css: "http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css"
-bootstrap_js: "http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"
-summernote_js: "http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.js"
-summernote_css: "http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.css"
+jquery_js: "https://code.jquery.com/jquery-3.4.1.min.js"
+bootstrap_css: "https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+bootstrap_js: "https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+summernote_css: "https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote.min.css"
+summernote_js: "https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote.min.js"
 
 # Build settings
 markdown: kramdown
