@@ -167,7 +167,7 @@ $('#summernote').summernote({
 {% endhighlight %}
 
 The tags can be specified just by tag name (as with `p` or `pre` or `h1`-`h6` above). It is also
-possible to customize the style in more defaul by providing an object looking like:
+possible to customize the style in more detail by providing an object looking like:
 
 {% highlight javascript %}
 {
