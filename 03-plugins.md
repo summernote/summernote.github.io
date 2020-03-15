@@ -28,13 +28,13 @@ Most scripts are added in the head area of the typical HTML page.
   <head>
     <!-- include libraries(jQuery, bootstrap) -->
     <link href="{{ site.bootstrap_css }}" rel="stylesheet">
-    <script src="{{ site.jquery_js }}"></script> 
-    <script src="{{ site.bootstrap_js }}"></script> 
+    <script src="{{ site.jquery_js }}"></script>
+    <script src="{{ site.bootstrap_js }}"></script>
 
     <!-- include summernote css/js -->
     <link href="{{ site.summernote_css }}" rel="stylesheet">
     <script src="{{ site.summernote_js }}"></script>
-    
+
     <!-- include plugin -->
     <script src="[folder where script is located]/[plugin script].js"></script>
   </head>
@@ -89,11 +89,11 @@ For those uninitiated with script styling, we'd like to point out that comments 
 
 {% highlight javascript %}
 /**
- * 
+ *
  * copyright [year] [your Business Name and/or Your Name].
  * email: your@email.com
  * license: Your chosen license, or link to a license file.
- * 
+ *
  */
 (function (factory) {
   /* Global define */
@@ -171,10 +171,10 @@ The vars below are not all needed, what you need depends on what your trying acc
           $editor   = context.layoutInfo.editor,
           $editable = context.layoutInfo.editable,
           $toolbar  = context.layoutInfo.toolbar,
-          
+
           // options holds the Options Information from Summernote and what we extended above.
           options   = context.options,
-          
+
           // lang holds the Language Information from Summernote and what we extended above.
           lang      = options.langInfo;
 
@@ -213,7 +213,11 @@ This section performs functions when the Plugin is first initialised. Note, this
         // Build the Body HTML of the Dialog.
         var body = '<div class="form-group">' +
                    '</div>';
+{% endhighlight %}
 
+See the section "Modal Markup" for element markup options inside Modals.
+
+{% highlight javascript %}
         // Build the Footer HTML of the Dialog.
         var footer = '<button href="#" class="btn btn-primary note-examplePlugin-btn">' + lang.examplePlugin.okButton + '</button>'
       }
@@ -228,7 +232,7 @@ This section performs functions when the Plugin is first initialised. Note, this
 
         // Set the Footer of the Dialog.
         footer: footer
-        
+
       // This adds the Modal to the DOM.
       }).render().appendTo($container);
     };
@@ -280,4 +284,57 @@ This section performs functions when the Plugin is first initialised. Note, this
     };
   }
 })));
+{% endhighlight %}
+
+### Modal Markup
+This section explains and shows example of the elements and classes that can be used inside Modals.
+
+Note: You can mix the classes from BS3, BS4 and Lite versions so plugins can be version to Bootstrap or no Bootstrap specific, or they can be made compatible to work with all (the preferred method).
+
+The main problem with using markup elements in Summernote Modals becomes evident when trying to work with layouts of the elements so they are compatible with all versions of Bootstrap or no Bootstrap as in the Lite version. To try and combat this there is a settings variable that can be checked `interface`, checking this setting in the plugin can allow the plugin to determine wich markup or behaviour the plugin needs to do for compatibility, or you can just use a standard layout for the elements and add the appropriate classes to cover all versions.
+
+Generally, the elements and classes for the version of Bootstrap you want to make a plugin for can use that version of Bootstraps elements, and we have tried, even with the Lite version to keep those as close as we can.
+
+We've included some examples below to facilitate constructing Modals a bit quicker for you.
+
+Any classes with `note-` at their start are primarily the Summernote classes to minimise interfering with other DOM classes that you may be using for other purposes, however, most of the modals use the Bootstrap classes as their primary styling.
+
+#### Form Layout
+{% highlight javascript %}
+var body = '<div class="form-group note-form-group">' +
+              '<div class="help-block note-help-block">Helpful text block</div>' +
+            '</div>' +
+            '<div class="form-group note-form-group">' +
+              '<label for="note-input-1" class="control-label note-form-label">Input Label 1</label>' +
+              '<div class="input-group note-input-group">' +
+                '<input type="text" id="note-input-1" class="form-contro note-input">' +
+              '</div>' +
+            '</div>';
+{% endhighlight %}
+
+#### Tabbed Panes Layout
+{% highlight javascript %}
+var body = '<ul class="nav note-nav nav-tabs note-nav-tabs">' +
+              '<li class="nav-item note-nav-item active">' +
+                '<a class="nav-link note-nav-link active" href="#note-pane-1" data-toggle="tab">Pane 1</a>' +
+              '</li>' +
+              '<li class="nav-item note-nav-item active">' +
+                '<a class="nav-link note-nav-link active" href="#note-pane-2" data-toggle="tab">Pane 2</a>' +
+              '</li>' +
+              '<li class="nav-item note-nav-item active">' +
+                '<a class="nav-link note-nav-link active" href="#note-pane-3" data-toggle="tab">Pane 3</a>' +
+              '</li>' +
+            '</ul>' +
+
+// Pane 2
+            '<div class="tab-content note-tabe-content" id="note-pane-2">' +
+            '</div>';
+
+// Pane 3
+            '<div class="tab-content note-tabe-content" id="note-pane-3">' +
+            '</div>';
+
+// Pane 1, is added last due to how the Styling works to make this Panel active and visible.
+            '<div class="tab-content note-tabe-content active" id="note-pane-1">' +
+            '</div>';
 {% endhighlight %}
