@@ -366,6 +366,13 @@ You can toggle Fullscreen view by API.
 $('#summernote').summernote('fullscreen.toggle');
 {% endhighlight %}
 
+### isFullscreen
+You can programmatically determine if the Summernote is in Fullscreen mode by using `isFullscreen`, which will return `true` or `false`.
+{% highlight javascript %}
+$('#summernote').summernote('fullscreen.isFullscreen');
+{% endhighlight %}
+
+
 ### interface
 You can find programmatically which Summernote you are using.
 This will return one of three values: `bs3`, `bs4` or `lite`.
@@ -609,42 +616,42 @@ refer to [#saveRange](#saverange-restorerange)
 ### restoreRange
 refer to [#restorerange](#saverange-restorerange)
 
-### getLastRange 
-summernote is saving a range object(WrappedRange) on current cursor. 
+### getLastRange
+summernote is saving a range object(WrappedRange) on current cursor.
 
 {% highlight javascript %}
 const rng = $('#summernote').summernote('editor.getLastRange');
 {% endhighlight %}
 
-> #### when summernote save a range with dom event 
+> #### when summernote save a range with dom event
 > * keydown
 > * keyup
 > * focus
 > * mouseup
-> * paste 
+> * paste
 
-> #### when summernote save a range with api 
-> * `editor.insertImage` -> Image 
-> * `editor.insertNode` -> Node 
+> #### when summernote save a range with api
+> * `editor.insertImage` -> Image
+> * `editor.insertNode` -> Node
 > * `editor.insertText` -> TextNode  
-> * `editor.pasteHTML` -> last Node of contents 
-> * `editor.insertHorizontalRule` -> next sibling node of hr node 
-> * `editor.createLink` -> link node 
+> * `editor.pasteHTML` -> last Node of contents
+> * `editor.insertHorizontalRule` -> next sibling node of hr node
+> * `editor.createLink` -> link node
 
-### setLastRange 
+### setLastRange
 
 You can define custom range in node of summernote editable element.  
 
 {% highlight javascript %}
-const range = $.summernote.range;  // range utility 
-// set my custom range 
+const range = $.summernote.range;  // range utility
+// set my custom range
 $('#summernote').summernote('editor.setLastRange', range.createFromNodeAfter(node).select());
 {% endhighlight %}
 
-### `range` utility 
+### `range` utility
 
 {% highlight javascript %}
-const range = $.summernote.range;  // range utility 
+const range = $.summernote.range;  // range utility
 {% endhighlight %}
 
 
@@ -652,21 +659,21 @@ const range = $.summernote.range;  // range utility
 
 range utility make a WrappedRange Class's instance  
 
-##### create 
+##### create
 
 create WrappedRange Object From arguments or Browser Selection
 
 {% highlight javascript %}
 const rng = range.create(startContainer, startOffset, endContainer, endOffset)
 
-// or 
+// or
 
 const rng = range.create() //  is equals range.createFromSelection()
 
 {% endhighlight %}
 
 
-##### createFromNode 
+##### createFromNode
 
 create WrappedRange object from node  
 
@@ -674,7 +681,7 @@ create WrappedRange object from node
 const rng = range.createFromNode(node)
 {% endhighlight %}
 
-##### createFromNodeBefore 
+##### createFromNodeBefore
 
 create WrappedRange from node before position
 
@@ -682,7 +689,7 @@ create WrappedRange from node before position
 const rng = range.createFromNodeBefore(node)
 {% endhighlight %}
 
-##### createFromNodeAfter 
+##### createFromNodeAfter
 
 create WrappedRange from node after position
 
@@ -691,7 +698,7 @@ const rng = range.createFromNodeAfter(node)
 {% endhighlight %}
 
 
-##### createFromSelection 
+##### createFromSelection
 
 create WrappedRange object from selection  
 
@@ -702,7 +709,7 @@ const rng = range.createFromSelection(node)
 
 #### WrappedRange Object   
 
-##### select() 
+##### select()
 
 select update visible range
 
@@ -710,17 +717,17 @@ select update visible range
 rng.select()
 ```
 
-##### collapse(isCollapseToStart) 
+##### collapse(isCollapseToStart)
 
 ```
 const newRng = rng.collapse(true);   // to start rng  
 
-or 
+or
 
-const newRng = rng.collapse();  // to end rng 
+const newRng = rng.collapse();  // to end rng
 ```
 
-##### splitText() 
+##### splitText()
 
 splitText on range
 
@@ -729,7 +736,7 @@ const textRng = rng.splitText()
 ```
 
 
-##### deleteContents() 
+##### deleteContents()
 
 delete contents on range
 
@@ -738,7 +745,7 @@ const newRng = rng.deleteContents()
 ```
 
 
-##### isCollapsed() 
+##### isCollapsed()
 
 returns whether range was collapsed or not
 
@@ -783,14 +790,14 @@ returns text in range
 returns range for word before(or after) cursor
 
 ```
-const newRng = rng.getWordRange();   // before cursor 
+const newRng = rng.getWordRange();   // before cursor
 
-// or 
+// or
 
-const newRng = rng.getWordRange(true);   // after cursor 
+const newRng = rng.getWordRange(true);   // after cursor
 ```
 
-##### getWordsMatchRange(regex) 
+##### getWordsMatchRange(regex)
 
 returns range for words before cursor that match with a Regex
 
@@ -800,7 +807,7 @@ const rng = range.create() // or $('.summernote').summernote('getLastRange');
 
 const newRng = rng.getWordsMatchRange(/@[a-z ]+/i)
 
-console.log(newRng.toString())  // '@Peter Pan' 
+console.log(newRng.toString())  // '@Peter Pan'
 ```
 
 
