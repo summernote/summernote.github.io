@@ -289,15 +289,15 @@ See the section "Modal Markup" for element markup options inside Modals.
 ### Modal Markup
 This section explains and shows example of the elements and classes that can be used inside Modals.
 
-Note: You can mix the classes from BS3, BS4 and Lite versions so plugins can be version to Bootstrap or no Bootstrap specific, or they can be made compatible to work with all (the preferred method).
+Note: You can mix the classes from BS3, BS4 (which are similar) and Lite versions so plugins can be version controlled to Bootstrap or not be Bootstrap specific, or they can be made compatible to work with all (the preferred method).
 
-The main problem with using markup elements in Summernote Modals becomes evident when trying to work with layouts of the elements so they are compatible with all versions of Bootstrap or no Bootstrap as in the Lite version. To try and combat this there is a settings variable that can be checked `interface`, checking this setting in the plugin can allow the plugin to determine wich markup or behaviour the plugin needs to do for compatibility, or you can just use a standard layout for the elements and add the appropriate classes to cover all versions.
+The main problem with using markup elements in Summernote Modals becomes evident when trying to work with elements so they are compatible with all versions of Bootstrap or the Lite version of Summernote. To try and aleviate this, there is a settings variable that can be checked `interface`, checking this setting within the plugin will return `BS3`, `BS4` or `Lite` which will allow adding logic control to determine which markup or behaviour the plugin needs use for compatibility, or you can just use a standard layout for the elements and add the appropriate classes to cover all versions (preferred).
 
 Generally, the elements and classes for the version of Bootstrap you want to make a plugin for can use that version of Bootstraps elements, and we have tried, even with the Lite version to keep those as close as we can.
 
 We've included some examples below to facilitate constructing Modals a bit quicker for you.
 
-Any classes with `note-` at their start are primarily the Summernote classes to minimise interfering with other DOM classes that you may be using for other purposes, however, most of the modals use the Bootstrap classes as their primary styling.
+Any classes with `note-` at their start are primarily the Summernote classes to minimise interfering with other DOM classes that you may be using for other purposes, however, most of the modals use the Bootstrap classes as their primary styling, except for in the Lite version of Summernote, it relies on the `note-*` classes to style elements.
 
 #### Form Layout
 {% highlight javascript %}
