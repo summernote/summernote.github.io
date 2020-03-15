@@ -44,8 +44,8 @@ Include the Following code in the <code>head</code> area of your HTML page.
 {% highlight html %}
 <!-- include libraries(jQuery, bootstrap) -->
 <link href="{{ site.bootstrap_css }}" rel="stylesheet">
-<script src="{{ site.jquery_js }}"></script> 
-<script src="{{ site.bootstrap_js }}"></script> 
+<script src="{{ site.jquery_js }}"></script>
+<script src="{{ site.bootstrap_js }}"></script>
 
 <!-- include summernote css/js -->
 <link href="{{ site.summernote_css }}" rel="stylesheet">
@@ -99,8 +99,8 @@ You can also test running example. Save below code as `index.html` and open it w
   <meta charset="UTF-8">
   <title>Summernote</title>
   <link href="{{ site.bootstrap_css }}" rel="stylesheet">
-  <script src="{{ site.jquery_js }}"></script> 
-  <script src="{{ site.bootstrap_js }}"></script> 
+  <script src="{{ site.jquery_js }}"></script>
+  <script src="{{ site.bootstrap_js }}"></script>
   <link href="{{ site.summernote_css }}" rel="stylesheet">
   <script src="{{ site.summernote_js }}"></script>
 </head>
@@ -119,63 +119,36 @@ You can also test running example. Save below code as `index.html` and open it w
 
 ### For bootstrap 4
 
-You can also use Summernote with Bootstrap 4 using `summernote-bs4.js` and `summernote-bs4.css`. This is also beta version, as Bootstrap 4 is in beta. Below is a code example using bootstrap 4.
+You can also use Summernote with Bootstrap 4 using `summernote-bs4.js` and `summernote-bs4.css`.
 
-<iframe src="/bs4.html" width="100%" height="200" frameborder="0"></iframe>
+<iframe id="bs4-frame" width="100%" height="200" frameborder="0">
+{% include bs4.html %}
+</iframe>
+<script>
+var bs4_frame = document.querySelector('#bs4-frame');
+bs4_frame.contentDocument.write(bs4_frame.innerHTML);
+bs4_frame.innerHTML = '';
+</script>
 
 {% highlight html %}
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <title>bootstrap4</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.css" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.js"></script>
-  </head>
-  <body>
-    <div id="summernote"></div>
-    <script>
-      $('#summernote').summernote({
-        placeholder: 'Hello bootstrap 4',
-        tabsize: 2,
-        height: 100
-      });
-    </script>
-  </body>
-</html>
+{% include bs4.html %}
 {% endhighlight %}
 
 ### Without Bootstrap
 
-You can use Summernote without Bootstrap using `summernote-lite.js` and `summernote-lite.css`. The Lite version is currently in Beta. Please report bugs so we can improve it. Below is a code example using summernote lite.
+You can use Summernote without Bootstrap using `summernote-lite.js` and `summernote-lite.css`.
 
-<iframe src="/lite.html" width="100%" height="200" frameborder="0"></iframe>
+<iframe id="lite-frame" width="100%" height="200" frameborder="0">
+{% include lite.html %}
+</iframe>
+<script>
+var lite_frame = document.querySelector('#lite-frame');
+lite_frame.contentDocument.write(lite_frame.innerHTML);
+lite_frame.innerHTML = '';
+</script>
 
 {% highlight html %}
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <title>Summernote Lite</title>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-lite.css" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-lite.js"></script>
-  </head>
-  <body>
-    <div id="summernote"></div>
-    <script>
-      $('#summernote').summernote({
-        placeholder: 'Hello stand alone ui',
-        tabsize: 2,
-        height: 100
-      });
-    </script>
-  </body>
-</html>
+{% include lite.html %}
 {% endhighlight %}
 
 ## Basic API
@@ -261,9 +234,9 @@ for more detail api: [deep dive with api](/deep-dive/#api)
 Include libraries with lang file. eg) <code>summernote-ko-KR.js</code>.
 
 {% highlight html %}
-<link href="{{ site.bootstrap_css }}" rel="stylesheet"> 
-<script src="{{ site.jquery_js }}"></script> 
-<script src="{{ site.bootstrap_js }}"></script> 
+<link href="{{ site.bootstrap_css }}" rel="stylesheet">
+<script src="{{ site.jquery_js }}"></script>
+<script src="{{ site.bootstrap_js }}"></script>
 
 <link href="summernote.css" rel="stylesheet">
 <script src="summernote.min.js"></script>

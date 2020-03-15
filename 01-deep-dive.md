@@ -58,6 +58,7 @@ You can compose a toolbar with pre-shipped buttons.
 * Font Style
   * `fontname`: set font family
   * `fontsize`: set font size
+  * `fontsizeunit`: set font size unit
   * `color`: set foreground and background color
   * `forecolor`: set foreground color
   * `backcolor`: set background color
@@ -151,6 +152,33 @@ $('#summernote').summernote({
 });
 {% endhighlight %}
 
+### Custom styles
+
+You can set your own selection of styles with the `styleTags` option.
+
+{% highlight javascript %}
+$('#summernote').summernote({
+  styleTags: [
+    'p',
+        { title: 'Blockquote', tag: 'blockquote', className: 'blockquote', value: 'blockquote' },
+        'pre', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'
+	],
+  });
+{% endhighlight %}
+
+The tags can be specified just by tag name (as with `p` or `pre` or `h1`-`h6` above). It is also
+possible to customize the style in more detail by providing an object looking like:
+
+{% highlight javascript %}
+{
+     tag : 'tag name ',
+     title : 'dropdown item title',
+     style : 'dropdown item style',
+     className : 'applyed element class name and dropdown item className',
+     value : 'Value to apply when clicked'
+}
+{% endhighlight %}
+
 ### Custom fontNames
 You can define fontNames items with the `fontNames` option.
 
@@ -166,6 +194,15 @@ Summernote tests for fonts in fontNames before adding them to dropdown. This is 
 $('#summernote').summernote({
   fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Merriweather'],
   fontNamesIgnoreCheck: ['Merriweather']
+});
+{% endhighlight %}
+
+### Custom font size units
+You can set the available font size units with the `fontSizeUnits` option.
+
+{% highlight javascript %}
+$('#summernote').summernote({
+  fontSizeUnits: ['px', 'pt']
 });
 {% endhighlight %}
 
@@ -413,8 +450,16 @@ $('#summernote').summernote('fontName', 'Arial');
 Set font size.
 
 {% highlight javascript %}
-// @param {Number} font size - unit is px
+// @param {Number} font size - unit is determined by selected font size unit.
 $('#summernote').summernote('fontSize', 20);
+{% endhighlight %}
+
+### fontSizeUnit
+Set font size unit.
+
+{% highlight javascript %}
+// @param {String} font size unit - defaults to px.
+$('#summernote').summernote('fontSizeUnit', 'pt');
 {% endhighlight %}
 
 ### removeFormat
@@ -555,6 +600,221 @@ Paste HTML string.
 var HTMLstring = '<div><p>Hello, world</p><p>Summernote can insert HTML string</p></div>';
 $('#summernote').summernote('pasteHTML', HTMLstring);
 {% endhighlight %}
+
+## Range & Selection API
+
+### saveRange
+refer to [#saveRange](#saverange-restorerange)
+
+### restoreRange
+refer to [#restorerange](#saverange-restorerange)
+
+### getLastRange 
+summernote is saving a range object(WrappedRange) on current cursor. 
+
+{% highlight javascript %}
+const rng = $('#summernote').summernote('editor.getLastRange');
+{% endhighlight %}
+
+> #### when summernote save a range with dom event 
+> * keydown
+> * keyup
+> * focus
+> * mouseup
+> * paste 
+
+> #### when summernote save a range with api 
+> * `editor.insertImage` -> Image 
+> * `editor.insertNode` -> Node 
+> * `editor.insertText` -> TextNode  
+> * `editor.pasteHTML` -> last Node of contents 
+> * `editor.insertHorizontalRule` -> next sibling node of hr node 
+> * `editor.createLink` -> link node 
+
+### setLastRange 
+
+You can define custom range in node of summernote editable element.  
+
+{% highlight javascript %}
+const range = $.summernote.range;  // range utility 
+// set my custom range 
+$('#summernote').summernote('editor.setLastRange', range.createFromNodeAfter(node).select());
+{% endhighlight %}
+
+### `range` utility 
+
+{% highlight javascript %}
+const range = $.summernote.range;  // range utility 
+{% endhighlight %}
+
+
+#### create WrappedRange Object   
+
+range utility make a WrappedRange Class's instance  
+
+##### create 
+
+create WrappedRange Object From arguments or Browser Selection
+
+{% highlight javascript %}
+const rng = range.create(startContainer, startOffset, endContainer, endOffset)
+
+// or 
+
+const rng = range.create() //  is equals range.createFromSelection()
+
+{% endhighlight %}
+
+
+##### createFromNode 
+
+create WrappedRange object from node  
+
+{% highlight javascript %}
+const rng = range.createFromNode(node)
+{% endhighlight %}
+
+##### createFromNodeBefore 
+
+create WrappedRange from node before position
+
+{% highlight javascript %}
+const rng = range.createFromNodeBefore(node)
+{% endhighlight %}
+
+##### createFromNodeAfter 
+
+create WrappedRange from node after position
+
+{% highlight javascript %}
+const rng = range.createFromNodeAfter(node)
+{% endhighlight %}
+
+
+##### createFromSelection 
+
+create WrappedRange object from selection  
+
+{% highlight javascript %}
+const rng = range.createFromSelection(node)
+{% endhighlight %}
+
+
+#### WrappedRange Object   
+
+##### select() 
+
+select update visible range
+
+```
+rng.select()
+```
+
+##### collapse(isCollapseToStart) 
+
+```
+const newRng = rng.collapse(true);   // to start rng  
+
+or 
+
+const newRng = rng.collapse();  // to end rng 
+```
+
+##### splitText() 
+
+splitText on range
+
+```
+const textRng = rng.splitText()
+```
+
+
+##### deleteContents() 
+
+delete contents on range
+
+```
+const newRng = rng.deleteContents()
+```
+
+
+##### isCollapsed() 
+
+returns whether range was collapsed or not
+
+```
+const isCollapsed = rng.isCollapsed()
+```
+
+
+##### wrapBodyInlineWithPara()
+
+wrap inline nodes which children of body with paragraph
+
+```
+const newRng = rng.wrapBodyInlineWithPara()
+```
+
+##### insertNode(node)
+
+insert node at current cursor
+
+```
+const node = rng.insertNode(document.createElement('div'))
+```
+
+
+##### pasteHTML(markup)
+
+insert html at current cursor
+
+```
+const nodes = rng.pasteHTML(`<div>summernote</div>`)
+```
+
+
+##### toString()
+
+returns text in range
+
+
+##### getWordRange(findAfter)   
+
+returns range for word before(or after) cursor
+
+```
+const newRng = rng.getWordRange();   // before cursor 
+
+// or 
+
+const newRng = rng.getWordRange(true);   // after cursor 
+```
+
+##### getWordsMatchRange(regex) 
+
+returns range for words before cursor that match with a Regex
+
+```
+// range : 'hi @Peter Pan'
+const rng = range.create() // or $('.summernote').summernote('getLastRange');
+
+const newRng = rng.getWordsMatchRange(/@[a-z ]+/i)
+
+console.log(newRng.toString())  // '@Peter Pan' 
+```
+
+
+##### getClientRects()
+
+returns a list of DOMRect objects representing the area of the screen occupied by the range.
+
+> ###### Range.getClientRects()
+> https://developer.mozilla.org/en-US/docs/Web/API/Range/getClientRects
+
+
+
+
+
 
 ## Callbacks
 Summernote support initialize callbacks and jquery's custom event style callbacks.

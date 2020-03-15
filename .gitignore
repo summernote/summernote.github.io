@@ -21,6 +21,7 @@ _site/
 
 # rbenv
 .ruby-version
+Gemfile.lock
 
 # macOS
 .DS_Store
