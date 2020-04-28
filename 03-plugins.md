@@ -189,7 +189,7 @@ The vars below are not all needed, what you need depends on what your trying acc
           // tooltip for button
           tooltip: lang.examplePlugin.tooltip,
 
-          // Stop button from being disabled when in CodeView
+          // Keep button from being disabled when in CodeView
           codeviewKeepButton: true,
 
           click:function (e) {
