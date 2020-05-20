@@ -10,5 +10,5 @@ gem install jekyll
 gem install jekyll-sitemap
 
 # run local server on 4000 port
-jekyll s
+bundle exec jekyll s
 ```
