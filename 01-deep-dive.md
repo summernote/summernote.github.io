@@ -928,7 +928,27 @@ $('#summernote').on('summernote.blur.codeview', function() {
 {% endhighlight %}
 
 ### onImageLinkInsert
-WIP: Need to work on an explanation
+Override insertion of image by url
+
+{% highlight javascript %}
+// onImageLinkInsert callback
+$('#summernote').summernote({
+  callbacks: {
+    onImageLinkInsert: function(url) {
+      // url is the image url from the dialog
+      $img = $('<img>').attr({ src: url })
+      $summernote.summernote('insertNode', $img[0]);
+    }
+  }
+});
+
+// summernote.image.link.insert
+$('#summernote').on('summernote.image.link.insert', function(we, url) {
+  // url is the image url from the dialog
+  $img = $('<img>').attr({ src: url })
+  $summernote.summernote('insertNode', $img[0]);
+});
+{% endhighlight %}
 
 ### onImageUpload
 Override image upload handler(default: base64 dataURL on `IMG` tag).
