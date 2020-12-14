@@ -1098,6 +1098,21 @@ $('.summernote').summernote({
 
 You can also use custom button on `popover` in the same way.
 
+## Custom icons
+Summernote supports the usage of your own custom icons. You can e.g. use SVG based icons instead of the default ones.
+
+### Define your own icons
+If you want to override the default icons, configure summernote like this:
+
+{% hightlight javascript %}
+$('.summernote').summernote({
+  icons: {
+    align: '<svg [...]>[...]</svg>',
+    // [...]
+  }
+});
+{% endhighlight %}
+
 {% include ad-doc.html %}
 
 ## Module system
