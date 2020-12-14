@@ -56,8 +56,9 @@ Don't forget to change the file's path if you downloaded summernote in a differe
 
 You can however, and a lot of developers do these days, is include the stylesheet's within the <code>head</code> are of your page, and include the Javascript at the bottom of your page, but before the closing <code>body</code> tag.
 
-> ##### Fontawesome dependancy
+> ##### Fontawesome dependency
 > After v0.8.0, You don't have to include fontawesome for displaying Summernote's icons. But You can still use fontawesome for your custom icons. For more details, please visit [custom buttons](/deep-dive/#custom-button) section.
+> After v0.8.18, You have the possibility to override summernote icons with your custom ones. For more details, please visit [custom icons](/deep-dive/#custom-icons) section.
 
 ### Embed
 
