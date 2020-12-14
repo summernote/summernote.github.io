@@ -1104,7 +1104,7 @@ Summernote supports the usage of your own custom icons. You can e.g. use SVG bas
 ### Define your own icons
 If you want to override the default icons, configure summernote like this:
 
-{% hightlight javascript %}
+{% highlight javascript %}
 $('.summernote').summernote({
   icons: {
     align: '<svg [...]>[...]</svg>',
