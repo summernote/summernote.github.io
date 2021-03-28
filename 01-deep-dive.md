@@ -197,6 +197,15 @@ $('#summernote').summernote({
 });
 {% endhighlight %}
 
+Summernote automatically populates the font dropdown with the available fonts that are given on `fontNames` option. This includes the font set on the current dom element. If you only want to display a specific list of fonts on the dropdown. You can set the `addDefaultFonts` option to `false` along with the `fontNames` option. Example settings below will only add Arial and Arial Black fonts to the dropdown.
+
+{% highlight javascript %}
+$('#summernote').summernote({
+  fontNames: ['Arial', 'Arial Black'],
+  addDefaultFonts: false
+});
+{% endhighlight %}
+
 ### Custom font size units
 You can set the available font size units with the `fontSizeUnits` option.
 
@@ -221,6 +230,21 @@ You can define a placeholder with the `placeholder` option.
 {% highlight javascript %}
 $('#summernote').summernote({
   placeholder: 'write here...'
+});
+{% endhighlight %}
+
+Summernote can also be set to inherit the placeholder from the `placeholder` attribute on the dom element.
+
+{% highlight html %}
+<div class="summernote" placeholder="first placeholder"></div>
+<div class="summernote" placeholder="second placeholder"></div>
+{% endhighlight %}
+
+And then set the `inheritPlaceholder` option as `true` during initialization.
+
+{% highlight javascript %}
+$('.summernote').summernote({
+  inheritPlaceholder: true
 });
 {% endhighlight %}
 
