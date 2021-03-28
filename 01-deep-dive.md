@@ -197,7 +197,7 @@ $('#summernote').summernote({
 });
 {% endhighlight %}
 
-Summernote automatically populates the font dropdown with the available fonts that are given on `fontNames` option. This includes the font set on the current dom element. If you only want to display a specific list of fonts on the dropdown. You can set the `addDefaultFonts` option to `false` along with the `fontNames` option. Example settings below will only add Arial and Arial Black fonts to the dropdown.
+Summernote automatically populates the font dropdown with the available fonts that are given on `fontNames` option. This includes the font set on the current dom element. If you only want to display a specific list of fonts on the dropdown, you can set the `addDefaultFonts` option to `false` along with the `fontNames` option. Example settings below will only add Arial and Arial Black fonts to the dropdown.
 
 {% highlight javascript %}
 $('#summernote').summernote({
