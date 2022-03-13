@@ -118,7 +118,7 @@ You can also test running example. Save below code as `index.html` and open it w
 
 {% include ad-doc.html %}
 
-### For bootstrap 4
+### For Bootstrap 4
 
 You can also use Summernote with Bootstrap 4 using `summernote-bs4.js` and `summernote-bs4.css`.
 
@@ -135,7 +135,24 @@ bs4_frame.innerHTML = '';
 {% include bs4.html %}
 {% endhighlight %}
 
-### Without Bootstrap
+### For bootstrap 5
+
+You can also use Summernote with Bootstrap 5 using `summernote-bs5.js` and `summernote-bs5.css`.
+
+<iframe id="bs5-frame" width="100%" height="200" frameborder="0">
+{% include bs5.html %}
+</iframe>
+<script>
+var bs5_frame = document.querySelector('#bs5-frame');
+bs4_frame.contentDocument.write(bs4_frame.innerHTML);
+bs4_frame.innerHTML = '';
+</script>
+
+{% highlight html %}
+{% include bs5.html %}
+{% endhighlight %}
+
+### Without Bootstrap (lite)
 
 You can use Summernote without Bootstrap using `summernote-lite.js` and `summernote-lite.css`.
 
