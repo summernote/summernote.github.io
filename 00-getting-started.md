@@ -125,8 +125,6 @@ You can also test running example. Save below code as `index.html` and open it w
 </html>
 {% endhighlight %}
 
-{% include ad-doc.html %}
-
 ### For Bootstrap 4
 
 You can also use Summernote with Bootstrap 4 using `summernote-bs4.js` and `summernote-bs4.css`.
@@ -253,8 +251,6 @@ for more detail api: [deep dive with api](/deep-dive/#api)
 > ##### destroy and code
 >
 > After v0.7.0, direct jquery methods, `destroy` and `code` were removed for avoiding conflict with other jquery libraries. You can call this methods with summernote api.
-
-{% include ad-doc.html %}
 
 ## i18n support
 

@@ -626,8 +626,6 @@ isNewWindow: true
 $('#summernote').summernote('unlink');
 {% endhighlight %}
 
-{% include ad-doc.html %}
-
 ### insertImage
 
 Insert an image.
@@ -1190,8 +1188,6 @@ align: '<svg [...]>[...]</svg>',
 }
 });
 {% endhighlight %}
-
-{% include ad-doc.html %}
 
 ## Module system
 
