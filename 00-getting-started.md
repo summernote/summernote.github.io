@@ -18,7 +18,7 @@ The fastest way to get Summernote is to download the precompiled and minified ve
 ### Download source code
 
 Get the latest Summernote LESS and Javascript source code by downloading it directly from GitHub.
-[Download]({{ site.repository }}/archive/master.zip)
+[Download]({{ site.repository }}/archive/main.zip)
 
 ### Clone or Fork via Github
 
