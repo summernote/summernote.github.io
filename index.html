@@ -8,19 +8,26 @@ bodyClass: page index
 <div class="container">
   <h1 class="text-center index-title">
     <span class="img-index-title"></span>
-    <span class="img-index-title-mobile">Super Simple WYSIWYG<br>Editor on Bootstrap</span>
-    <a href="{{ site.repository }}/releases/download/v{{ site.version }}/summernote-{{ site.version }}-dist.zip" class="index-download">
+    <span class="img-index-title-mobile"
+      >Super Simple WYSIWYG<br />Editor on Bootstrap</span
+    >
+    <a
+      href="{{ site.repository }}/releases/download/v{{ site.version }}/summernote-{{ site.version }}-dist.zip"
+      class="index-download"
+    >
       <span class="img-index-download"></span>
     </a>
   </h1>
 </div>
 
 <div class="page-container index-section-1">
-  <div id="summernote"><p><br></p></div>
+  <div id="summernote">
+    <p><br /></p>
+  </div>
   <div class="placeholder">
-    hi,<br>
-    we are summernote.<br>
-    please, write text here!<br>
+    hi,<br />
+    we are summernote.<br />
+    please, write text here!<br />
     super simple WYSIWYG editor on Bootstrap
   </div>
   <div class="row card-list">
@@ -30,35 +37,46 @@ bodyClass: page index
         <a href="/getting-started/#installation">
           <span class="img-index-install"></span>
           <h3 class="card-title">Easy to Install</h3>
-          <p class="card-body">Simply download and attach your js, css with bootstrap. </p>
+          <p class="card-body">
+            Simply download and attach your js, css with bootstrap.
+          </p>
         </a>
       </div>
       <div class="card-item">
         <a href="/deep-dive/#customization">
           <span class="img-index-customizing"></span>
           <h3 class="card-title">Customization</h3>
-          <p class="card-body">Customize by Initializing various options and modules.<br></p>
+          <p class="card-body">
+            Customize by Initializing various options and modules.<br />
+          </p>
         </a>
       </div>
       <div class="card-item">
         <a href="/examples">
           <span class="img-index-shortcuts"></span>
           <h3 class="card-title">Examples</h3>
-          <p class="card-body">See all useful features of summernote in action.</p>
+          <p class="card-body">
+            See all useful features of summernote in action.
+          </p>
         </a>
       </div>
       <div class="card-item">
         <a href="{{ site.repository }}">
           <span class="img-index-opensource"></span>
           <h3 class="card-title">Open Source</h3>
-          <p class="card-body">Summernote is licensed under MIT and maintained by the community.</p>
+          <p class="card-body">
+            Summernote is licensed under MIT and maintained by the community.
+          </p>
         </a>
       </div>
       <div class="card-item">
         <a href="/getting-started/#integration">
           <span class="img-index-backend"></span>
           <h3 class="card-title">Integration</h3>
-          <p class="card-body">Integrate it with any back-end. 3rd parties available in django, rails, angular.</p>
+          <p class="card-body">
+            Integrate it with any back-end. 3rd parties available in django,
+            rails, angular.
+          </p>
         </a>
       </div>
     </div>
@@ -70,84 +88,84 @@ bodyClass: page index
     <div class="row">
       <div class="col-sm-5 summary-section">
         <h3>Features</h3>
-        <ul style="list-style:none;padding:0;">
-          <li>Supports Bootstrap 3.x.x to 5.x.x</li>
-          <li>Lightweight (js+css: 100Kb)</li>
-          <li>Smart User Interaction</li>
-          <li>Works in all Major Browsers:
-            <ul style="list-style:none;padding:0 10px 0 0;">
-              <li>Safari, Chrome, Firefox, Opera, Edge and Internet Explorer 9+</li>
-            </ul>
-          </li>
-          <li>Works in all Major Operating Systems:
-            <ul style="list-style:none;padding:0 10px 0 0;">
-              <li>Windows, MacOS, Linux</li>
-            </ul>
-          </li>
+        <ul style="list-style: none; padding: 0">
+          <li>Simple and Easy to Use UI</li>
+          <li>Lightweight: 100KiB</li>
+          <li>Supports Browser: Safari, Chrome, Firefox, Edge</li>
+          <li>Supports OS: Windows, macOS, Linux</li>
+          <li>Supports Bootstrap: 3.x.x to 5.x.x</li>
         </ul>
         <h3>Donate</h3>
         <div class="row">
-          <div class="col-sm-12" >
+          <div class="col-sm-12">
             <div>
-              <a href="https://opencollective.com/summernote#backers" target="_blank"><img src="https://opencollective.com/summernote/backers.svg?width=890"></a>
+              <a
+                href="https://opencollective.com/summernote#backers"
+                target="_blank"
+                ><img
+                  src="https://opencollective.com/summernote/backers.svg?width=500"
+                  style="width: 100%; height: auto"
+              /></a>
             </div>
-          </div>
-        </div>
-        <h3>Ad</h3>
-        <div class="row">
-          <div class="col-sm-12 ad-section">
-            {% include ad-main.html %}
           </div>
         </div>
       </div>
       <div class="col-sm-7 twitter-list">
-        <h3 class="twitter-title">Much appreciate to all contributors! Together and further...</h3>
-        <a href="https://github.com/summernote/summernote/graphs/contributors">Contributors</a>
+        <h3 class="twitter-title">Our Amazing Contributors:</h3>
+        <a href="https://github.com/summernote/summernote/graphs/contributors"
+          ><img
+            src="https://contrib.rocks/image?repo=summernote/summernote"
+            alt="contributors"
+            style="width: 100%; height: auto"
+        /></a>
       </div>
     </div>
   </div>
 </div>
 <script type="text/javascript">
-$(function() {
-  // index page card list
-  if ($('.card-list').length) {
-    var $cardArrow = $('.card-arrow');
-    var $cardListInner = $('.card-list-inner');
+  $(function () {
+    // index page card list
+    if ($(".card-list").length) {
+      var $cardArrow = $(".card-arrow");
+      var $cardListInner = $(".card-list-inner");
 
-    $cardListInner.scroll(function () {
-      $cardArrow.addClass('disappear');
-      if ($cardListInner.scrollLeft() < 20) {
-        $cardArrow.removeClass('disappear');
-      }
-    });
-  }
-
-  // main summernote with custom placeholder
-  var $placeholder = $('.placeholder');
-  $('#summernote').summernote({
-    height: 300,
-    codemirror: {
-      mode: 'text/html',
-      htmlMode: true,
-      lineNumbers: true,
-      theme: 'monokai'
-    },
-    callbacks: {
-      onInit: function() {
-        $placeholder.show();
-      },
-      onFocus: function() {
-        $placeholder.hide();
-      },
-      onBlur: function() {
-        var $self = $(this);
-        setTimeout(function() {
-          if ($self.summernote('isEmpty') && !$self.summernote('codeview.isActivated')) {
-            $placeholder.show();
-          }
-        }, 300);
-      }
+      $cardListInner.scroll(function () {
+        $cardArrow.addClass("disappear");
+        if ($cardListInner.scrollLeft() < 20) {
+          $cardArrow.removeClass("disappear");
+        }
+      });
     }
+
+    // main summernote with custom placeholder
+    var $placeholder = $(".placeholder");
+    $("#summernote").summernote({
+      height: 300,
+      codemirror: {
+        mode: "text/html",
+        htmlMode: true,
+        lineNumbers: true,
+        theme: "monokai",
+      },
+      callbacks: {
+        onInit: function () {
+          $placeholder.show();
+        },
+        onFocus: function () {
+          $placeholder.hide();
+        },
+        onBlur: function () {
+          var $self = $(this);
+          setTimeout(function () {
+            if (
+              $self.summernote("isEmpty") &&
+              !$self.summernote("codeview.isActivated")
+            ) {
+              $placeholder.show();
+            }
+          }, 300);
+        },
+      },
+    });
   });
-});
 </script>

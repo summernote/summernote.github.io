@@ -16,10 +16,12 @@ The fastest way to get Summernote is to download the precompiled and minified ve
 <a href="{{ site.repository }}/releases/download/v{{ site.version }}/summernote-{{ site.version }}-dist.zip" class="btn-important ">Download compiled</a>
 
 ### Download source code
+
 Get the latest Summernote LESS and Javascript source code by downloading it directly from GitHub.
 [Download]({{ site.repository }}/archive/master.zip)
 
 ### Clone or Fork via Github
+
 Visit us on GitHub to clone or fork the Summernote project.
 [project]({{ site.repository }})
 
@@ -30,6 +32,7 @@ Visit us on GitHub to clone or fork the Summernote project.
 Bootstrap uses certain HTML elements and CSS properties which require HTML5 doctype. Include <code>&lt;!DOCTYPE html&gt;</code> in the beginning of all your projects.
 
 {% highlight html %}
+
 <!DOCTYPE html>
 <html lang="en">
 ...
@@ -42,6 +45,7 @@ Summernote uses the Open Source libraries jQuery and Bootstrap, if you are using
 Include the Following code in the <code>head</code> area of your HTML page.
 
 {% highlight html %}
+
 <!-- include libraries(jQuery, bootstrap) -->
 <link href="{{ site.bootstrap_css }}" rel="stylesheet">
 <script src="{{ site.jquery_js }}"></script>
@@ -57,6 +61,7 @@ Don't forget to change the file's path if you downloaded summernote in a differe
 You can however, and a lot of developers do these days, is include the stylesheet's within the <code>head</code> are of your page, and include the Javascript at the bottom of your page, but before the closing <code>body</code> tag.
 
 > ##### Fontawesome dependency
+>
 > After v0.8.0, You don't have to include fontawesome for displaying Summernote's icons. But You can still use fontawesome for your custom icons. For more details, please visit [custom buttons](/deep-dive/#custom-button) section.
 > After v0.8.18, You have the possibility to override summernote icons with your custom ones. For more details, please visit [custom icons](/deep-dive/#custom-icons) section.
 
@@ -67,23 +72,26 @@ Summernote can be used with or without a <code>form</code>.
 To use without a <code>form</code>, we suggest using a <code>div</code> in the <code>body</code>; this element will then be used where you want the Summernote editor to be rendered within your page.
 
 {% highlight html %}
+
 <div id="summernote">Hello Summernote</div>
 {% endhighlight %}
 
 To use within a <code>form</code>, is pretty much the same as above, but rather than a <code>div</code>, we recommend using a <code>textarea</code> element inside a <code>form</code>, which should include a name attribute so when the form is submitted you can use that name to process the editors data on your backend. Also, if using Summernote inside a <code>form</code> to set the attribute <code>method="post"</code> to allow larger sized editor content to parse to the backend, if you don't your data either may not parse, or will be truncated.
 
 {% highlight html %}
+
 <form method="post">
   <textarea id="summernote" name="editordata"></textarea>
 </form>
 {% endhighlight %}
 
 ### Run summernote
+
 Run the script below when document is ready!
 
 {% highlight javascript %}
 $(document).ready(function() {
-  $('#summernote').summernote();
+$('#summernote').summernote();
 });
 {% endhighlight %}
 
@@ -94,6 +102,7 @@ The <code>$(document).ready</code> function is particularly necessary if you inc
 You can also test running example. Save below code as `index.html` and open it with your browser.
 
 {% highlight html %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -180,14 +189,15 @@ $('#summernote').summernote();
 Initialize Summernote with options
 
 ### Height and Focus
+
 If you set focus option, cursor will focus editable area after initialize Summernote.
 
 {% highlight javascript %}
 $('#summernote').summernote({
-  height: 300,                 // set editor height
-  minHeight: null,             // set minimum height of editor
-  maxHeight: null,             // set maximum height of editor
-  focus: true                  // set focus to editable area after initializing summernote
+height: 300, // set editor height
+minHeight: null, // set minimum height of editor
+maxHeight: null, // set maximum height of editor
+focus: true // set focus to editable area after initializing summernote
 });
 {% endhighlight %}
 
@@ -241,6 +251,7 @@ $('#summernote').summernote('code', markupStr);
 for more detail api: [deep dive with api](/deep-dive/#api)
 
 > ##### destroy and code
+>
 > After v0.7.0, direct jquery methods, `destroy` and `code` were removed for avoiding conflict with other jquery libraries. You can call this methods with summernote api.
 
 {% include ad-doc.html %}
@@ -252,6 +263,7 @@ for more detail api: [deep dive with api](/deep-dive/#api)
 Include libraries with lang file. eg) <code>summernote-ko-KR.js</code>.
 
 {% highlight html %}
+
 <link href="{{ site.bootstrap_css }}" rel="stylesheet">
 <script src="{{ site.jquery_js }}"></script>
 <script src="{{ site.bootstrap_js }}"></script>
@@ -261,15 +273,16 @@ Include libraries with lang file. eg) <code>summernote-ko-KR.js</code>.
 
 <!-- include summernote-ko-KR -->
 <script src="lang/summernote-ko-KR.js"></script>
+
 {% endhighlight %}
 
 Run the script with locale option.
 
 {% highlight javascript %}
 $(document).ready(function() {
-  $('#summernote').summernote({
-    lang: 'ko-KR' // default: 'en-US'
-  });
+$('#summernote').summernote({
+lang: 'ko-KR' // default: 'en-US'
+});
 });
 {% endhighlight %}
 
@@ -283,45 +296,53 @@ $(document).ready(function() {
   });
 </script>
 
-More Summernote languages: [languages]({{ site.repository }}/tree/master/lang)
+More Summernote languages: [languages]({{ site.repository }}/tree/main/src/lang)
 
 ## Integration
+
 3rd parties available in django, rails, angular and so on.
 
 ### Django
+
 Handy update for your django admin page.
 
-* [django-summernote](https://github.com/summernote/django-summernote){:target="_blank"}
-* [summernote plugin for Django](https://pypi.python.org/pypi/django-summernote){:target="_blank"}
+- [django-summernote](https://github.com/summernote/django-summernote){:target="\_blank"}
+- [summernote plugin for Django](https://pypi.python.org/pypi/django-summernote){:target="\_blank"}
 
 ### Ruby On Rails
+
 This gem was built to gemify the assets used in Summernote.
 
-* [summernote-rails](https://github.com/summernote/summernote-rails){:target="_blank"}
-* [how to use summernote on rails](https://www.youtube.com/watch?v=A3vDRdfEyKs&feature=youtu.be&t=75){:target="_blank"}
+- [summernote-rails](https://github.com/summernote/summernote-rails){:target="\_blank"}
+- [how to use summernote on rails](https://www.youtube.com/watch?v=A3vDRdfEyKs&feature=youtu.be&t=75){:target="\_blank"}
 
 ### AngularJS
+
 AngularJS directive to Summernote.
 
-* [angular-summernote](https://github.com/summernote/angular-summernote)
+- [angular-summernote](https://github.com/summernote/angular-summernote)
 
 ### Apache Wicket
+
 Summernote widget for Wicket Bootstrap.
 
-* [demo](http://wb-mgrigorov.rhcloud.com/summernote){:target="_blank"}
-* [source code](https://github.com/l0rdn1kk0n/wicket-bootstrap/tree/4f97ca783f7279ca43f9e2ee790703161f59fa40/bootstrap-extensions/src/main/java/de/agilecoders/wicket/extensions/markup/html/bootstrap/editor){:target="_blank"}
+- [demo](http://wb-mgrigorov.rhcloud.com/summernote){:target="\_blank"}
+- [source code](https://github.com/l0rdn1kk0n/wicket-bootstrap/tree/4f97ca783f7279ca43f9e2ee790703161f59fa40/bootstrap-extensions/src/main/java/de/agilecoders/wicket/extensions/markup/html/bootstrap/editor){:target="\_blank"}
 
 ### Webpack
+
 Example about using summernote with webpack.
 
-* [summernote-webpack-example](https://github.com/hackerwins/summernote-webpack-example){:target="_blank"}
+- [summernote-webpack-example](https://github.com/hackerwins/summernote-webpack-example){:target="\_blank"}
 
 ### Meteor
+
 Example about using summernote with meteor.
 
-* [summernote-meteor-example](https://github.com/hackerwins/summernote-meteor-example){:target="_blank"}
+- [summernote-meteor-example](https://github.com/hackerwins/summernote-meteor-example){:target="\_blank"}
 
 ### PHP
+
 Example for using Summernote with elFinder which uses a PHP Backend.
 
-* [summernote-elfinder-example](https://github.com/Studio-42/elFinder/wiki/Integration-with-Multiple-Summernote-%28fixed-functions%29){:target="_blank"}
+- [summernote-elfinder-example](https://github.com/Studio-42/elFinder/wiki/Integration-with-Multiple-Summernote-%28fixed-functions%29){:target="\_blank"}

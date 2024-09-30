@@ -1,19 +1,42 @@
 <p>
-  Summernote v{{ site.version }} · Created and Maintained by <a href="https://github.com/{{ site.github_username }}">Summernote team</a>.<br>Based on <a href="http://getbootstrap.com">Bootstrap</a> and <a href="http://jquery.com">jQuery</a>.<br>Summernote distributed under the MIT license.</p>
-<p><a href="{{ site.repository }}">GitHub Project</a> · <a href="{{ site.repository }}/issues">Issues</a> · <a href="https://communityinviter.com/apps/summernote/summernote">Slack</a> · <a href="https://stackoverflow.com/search?q=summernote">Stackoverflow</a></p>
+  Summernote v{{ site.version }} · Created and Maintained by
+  <a href="https://github.com/{{ site.github_username }}">Summernote team</a
+  >.<br />Based on <a href="http://getbootstrap.com">Bootstrap</a> and
+  <a href="http://jquery.com">jQuery</a>.<br />Summernote distributed under the
+  MIT license.
+</p>
+<p>
+  <a href="{{ site.repository }}">GitHub</a> ·
+  <a href="https://discord.gg/7A64GBKwyu">Discord</a>
+</p>
 <script>
-  if (localStorage && localStorage.getItem && localStorage.getItem('github_expire') && localStorage.getItem('github_expire')>(new Date()).getTime()) {
-    $('.github').text((+localStorage.getItem('github_star')).toLocaleString());
+  if (
+    localStorage &&
+    localStorage.getItem &&
+    localStorage.getItem("github_expire") &&
+    localStorage.getItem("github_expire") > new Date().getTime()
+  ) {
+    $(".github").text((+localStorage.getItem("github_star")).toLocaleString());
   } else {
-    $.getJSON('https://api.github.com/repos/summernote/summernote',function(d) {
-      if (localStorage && localStorage.setItem) {
-        localStorage.setItem('github_star', d.stargazers_count);
-        localStorage.setItem('github_expire', (new Date()).getTime()+(10*60*1000)/*10 mins*/);
+    $.getJSON(
+      "https://api.github.com/repos/summernote/summernote",
+      function (d) {
+        if (localStorage && localStorage.setItem) {
+          localStorage.setItem("github_star", d.stargazers_count);
+          localStorage.setItem(
+            "github_expire",
+            new Date().getTime() + 10 * 60 * 1000 /*10 mins*/
+          );
+        }
+        $(".github").text(d.stargazers_count.toLocaleString());
       }
-      $('.github').text(d.stargazers_count.toLocaleString());
-    }).fail(function() {
-      if (localStorage && localStorage.getItem && localStorage.getItem('github_star')) {
-        $('.github').text(localStorage.getItem('github_star').toLocaleString());
+    ).fail(function () {
+      if (
+        localStorage &&
+        localStorage.getItem &&
+        localStorage.getItem("github_star")
+      ) {
+        $(".github").text(localStorage.getItem("github_star").toLocaleString());
       }
     });
   }
