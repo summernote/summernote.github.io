@@ -302,43 +302,11 @@ More Summernote languages: [languages]({{ site.repository }}/tree/main/src/lang)
 
 Handy update for your django admin page.
 
-- [django-summernote](https://github.com/summernote/django-summernote){:target="\_blank"}
+- [django-summernote](https://github.com/lqez/django-summernote){:target="\_blank"}
 - [summernote plugin for Django](https://pypi.python.org/pypi/django-summernote){:target="\_blank"}
 
-### Ruby On Rails
+### React
 
-This gem was built to gemify the assets used in Summernote.
+To use Summernote with React, you can use `react-summernote` package.
 
-- [summernote-rails](https://github.com/summernote/summernote-rails){:target="\_blank"}
-- [how to use summernote on rails](https://www.youtube.com/watch?v=A3vDRdfEyKs&feature=youtu.be&t=75){:target="\_blank"}
-
-### AngularJS
-
-AngularJS directive to Summernote.
-
-- [angular-summernote](https://github.com/summernote/angular-summernote)
-
-### Apache Wicket
-
-Summernote widget for Wicket Bootstrap.
-
-- [demo](http://wb-mgrigorov.rhcloud.com/summernote){:target="\_blank"}
-- [source code](https://github.com/l0rdn1kk0n/wicket-bootstrap/tree/4f97ca783f7279ca43f9e2ee790703161f59fa40/bootstrap-extensions/src/main/java/de/agilecoders/wicket/extensions/markup/html/bootstrap/editor){:target="\_blank"}
-
-### Webpack
-
-Example about using summernote with webpack.
-
-- [summernote-webpack-example](https://github.com/hackerwins/summernote-webpack-example){:target="\_blank"}
-
-### Meteor
-
-Example about using summernote with meteor.
-
-- [summernote-meteor-example](https://github.com/hackerwins/summernote-meteor-example){:target="\_blank"}
-
-### PHP
-
-Example for using Summernote with elFinder which uses a PHP Backend.
-
-- [summernote-elfinder-example](https://github.com/Studio-42/elFinder/wiki/Integration-with-Multiple-Summernote-%28fixed-functions%29){:target="\_blank"}
+- [react-summernote](https://github.com/easylogic/react-summernote){:target="\_blank"}
