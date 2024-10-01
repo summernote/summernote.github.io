@@ -91,7 +91,7 @@ Run the script below when document is ready!
 
 {% highlight javascript %}
 $(document).ready(function() {
-$('#summernote').summernote();
+  $('#summernote').summernote();
 });
 {% endhighlight %}
 
@@ -192,10 +192,10 @@ If you set focus option, cursor will focus editable area after initialize Summer
 
 {% highlight javascript %}
 $('#summernote').summernote({
-height: 300, // set editor height
-minHeight: null, // set minimum height of editor
-maxHeight: null, // set maximum height of editor
-focus: true // set focus to editable area after initializing summernote
+  height: 300, // set editor height
+  minHeight: null, // set minimum height of editor
+  maxHeight: null, // set maximum height of editor
+  focus: true // set focus to editable area after initializing summernote
 });
 {% endhighlight %}
 

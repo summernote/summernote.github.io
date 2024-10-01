@@ -13,7 +13,7 @@ Air-mode give an interface without the Toolbar. To reveal popover Toolbar, selec
 
 {% highlight javascript %}
 $('.summernote').summernote({
-airMode: true
+  airMode: true
 });
 {% endhighlight %}
 
@@ -59,7 +59,7 @@ Then run summernote with jQuery selector.
 
 {% highlight javascript %}
 $(document).ready(function() {
-$('.summernote').summernote();
+  $('.summernote').summernote();
 });
 {% endhighlight %}
 
@@ -88,12 +88,12 @@ Javascript:
 
 {% highlight javascript %}
 var edit = function() {
-$('.click2edit').summernote({focus: true});
+  $('.click2edit').summernote({focus: true});
 };
 
 var save = function() {
-var markup = $('.click2edit').summernote('code');
-$('.click2edit').summernote('destroy');
+  var markup = $('.click2edit').summernote('code');
+  $('.click2edit').summernote('destroy');
 };
 {% endhighlight %}
 
@@ -138,10 +138,10 @@ Initialize Summernote with codemirror options
 
 {% highlight javascript %}
 $('.summernote').summernote({
-height: 150, //set editable area's height
-codemirror: { // codemirror options
-theme: 'monokai'
-}
+  height: 150, //set editable area's height
+  codemirror: { // codemirror options
+    theme: 'monokai'
+  }
 });
 {% endhighlight %}
 
@@ -280,12 +280,12 @@ $(".hint2basic").summernote({
   hint: {
     words: ['apple', 'orange', 'watermelon', 'lemon'],
     match: /\b(\w{1,})$/,
-search: function (keyword, callback) {
-callback($.grep(this.words, function (item) {
-return item.indexOf(keyword) === 0;
-}));
-}
-}
+    search: function (keyword, callback) {
+      callback($.grep(this.words, function (item) {
+        return item.indexOf(keyword) === 0;
+      }));
+    }
+  }
 });
 {% endhighlight %}
 
@@ -308,23 +308,23 @@ $(".hint2emoji").summernote({
   placeholder: 'type starting with : and any alphabet',
   hint: {
     match: /\B:([\-+\w]+)$/,
-search: function (keyword, callback) {
-callback($.grep(emojis, function (item) {
-return item.indexOf(keyword) === 0;
-}));
-},
-template: function (item) {
-var content = emojiUrls[item];
-return '<img src="' + content + '" width="20" /> :' + item + ':';
-},
-content: function (item) {
-var url = emojiUrls[item];
-if (url) {
-return $('<img />').attr('src', url).css('width', 20)[0];
-}
-return '';
-}
-}
+    search: function (keyword, callback) {
+      callback($.grep(emojis, function (item) {
+        return item.indexOf(keyword) === 0;
+      }));
+    },
+    template: function (item) {
+      var content = emojiUrls[item];
+      return '<img src="' + content + '" width="20" /> :' + item + ':';
+    },
+    content: function (item) {
+      var url = emojiUrls[item];
+      if (url) {
+        return $('<img />').attr('src', url).css('width', 20)[0];
+      }
+      return '';
+    }
+  }
 });
 </script>
 {% highlight javascript %}
@@ -343,29 +343,29 @@ $(".hint2emoji").summernote({
   placeholder: 'type starting with : and any alphabet',
   hint: {
     match: /:([\-+\w]+)$/,
-search: function (keyword, callback) {
-callback($.grep(emojis, function (item) {
-return item.indexOf(keyword) === 0;
-}));
-},
-template: function (item) {
-var content = emojiUrls[item];
-return '<img src="' + content + '" width="20" /> :' + item + ':';
-},
-content: function (item) {
-var url = emojiUrls[item];
-if (url) {
-return $('<img />').attr('src', url).css('width', 20)[0];
-}
-return '';
-}
-}
+    search: function (keyword, callback) {
+      callback($.grep(emojis, function (item) {
+        return item.indexOf(keyword) === 0;
+      }));
+    },
+    template: function (item) {
+      var content = emojiUrls[item];
+      return '<img src="' + content + '" width="20" /> :' + item + ':';
+    },
+    content: function (item) {
+      var url = emojiUrls[item];
+      if (url) {
+        return $('<img />').attr('src', url).css('width', 20)[0];
+      }
+      return '';
+    }
+  }
 });
 {% endhighlight %}
 
 ### Hint for mentions
 
-For Mentions: [jayden, sam, alvin, david]
+For Mentions: [hackerwins, lqez, easylogic, dennis]
 
 <div class="hint2mention"></div>
 <script type="text/javascript">
@@ -374,7 +374,7 @@ $(".hint2mention").summernote({
   toolbar: false,
   placeholder: 'type starting with @',
   hint: {
-    mentions: ['jayden', 'sam', 'alvin', 'david'],
+    mentions: ['hackerwins', 'lqez', 'easylogic', 'dennis'],
     match: /@(\w*)$/,
     search: function (keyword, callback) {
       callback($.grep(this.mentions, function (item) {
@@ -392,7 +392,7 @@ $(".hint2mention").summernote({
   height: 100,
   toolbar: false,
   hint: {
-    mentions: ['jayden', 'sam', 'alvin', 'david'],
+    mentions: ['hackerwins', 'lqez', 'easylogic', 'dennis'],
     match: /\B@(\w*)$/,
     search: function (keyword, callback) {
       callback($.grep(this.mentions, function (item) {

@@ -17,15 +17,15 @@ Summernote allows you to customise the toolbar.
 
 {% highlight javascript %}
 $('#summernote').summernote({
-toolbar: [
-// [groupName, [list of button]]
-['style', ['bold', 'italic', 'underline', 'clear']],
-['font', ['strikethrough', 'superscript', 'subscript']],
-['fontsize', ['fontsize']],
-['color', ['color']],
-['para', ['ul', 'ol', 'paragraph']],
-['height', ['height']]
-]
+  toolbar: [
+    // [groupName, [list of button]]
+    ['style', ['bold', 'italic', 'underline', 'clear']],
+    ['font', ['strikethrough', 'superscript', 'subscript']],
+    ['fontsize', ['fontsize']],
+    ['color', ['color']],
+    ['para', ['ul', 'ol', 'paragraph']],
+    ['height', ['height']]
+  ]
 });
 {% endhighlight %}
 
@@ -87,14 +87,14 @@ The following settings are default options for toolbar buttons.
 
 {% highlight javascript %}
 toolbar: [
-['style', ['style']],
-['font', ['bold', 'underline', 'clear']],
-['fontname', ['fontname']],
-['color', ['color']],
-['para', ['ul', 'ol', 'paragraph']],
-['table', ['table']],
-['insert', ['link', 'picture', 'video']],
-['view', ['fullscreen', 'codeview', 'help']],
+  ['style', ['style']],
+  ['font', ['bold', 'underline', 'clear']],
+  ['fontname', ['fontname']],
+  ['color', ['color']],
+  ['para', ['ul', 'ol', 'paragraph']],
+  ['table', ['table']],
+  ['insert', ['link', 'picture', 'video']],
+  ['view', ['fullscreen', 'codeview', 'help']],
 ],
 {% endhighlight %}
 
@@ -102,12 +102,12 @@ Air-mode has its own popover, not toolbar. You can customize it with <code>popov
 
 {% highlight javascript %}
 $('#summernote').summernote({
-popover: {
-air: [
-['color', ['color']],
-['font', ['bold', 'underline', 'clear']]
-]
-}
+  popover: {
+    air: [
+      ['color', ['color']],
+      ['font', ['bold', 'underline', 'clear']]
+    ]
+  }
 });
 {% endhighlight %}
 
@@ -115,25 +115,25 @@ You can also setup buttons of the other popovers in the same way. The below sett
 
 {% highlight javascript %}
 popover: {
-image: [
-['image', ['resizeFull', 'resizeHalf', 'resizeQuarter', 'resizeNone']],
-['float', ['floatLeft', 'floatRight', 'floatNone']],
-['remove', ['removeMedia']]
-],
-link: [
-['link', ['linkDialogShow', 'unlink']]
-],
-table: [
-['add', ['addRowDown', 'addRowUp', 'addColLeft', 'addColRight']],
-['delete', ['deleteRow', 'deleteCol', 'deleteTable']],
-],
-air: [
-['color', ['color']],
-['font', ['bold', 'underline', 'clear']],
-['para', ['ul', 'paragraph']],
-['table', ['table']],
-['insert', ['link', 'picture']]
-]
+  image: [
+    ['image', ['resizeFull', 'resizeHalf', 'resizeQuarter', 'resizeNone']],
+    ['float', ['floatLeft', 'floatRight', 'floatNone']],
+    ['remove', ['removeMedia']]
+  ],
+  link: [
+    ['link', ['linkDialogShow', 'unlink']]
+  ],
+  table: [
+    ['add', ['addRowDown', 'addRowUp', 'addColLeft', 'addColRight']],
+    ['delete', ['deleteRow', 'deleteCol', 'deleteTable']],
+  ],
+  air: [
+    ['color', ['color']],
+    ['font', ['bold', 'underline', 'clear']],
+    ['para', ['ul', 'paragraph']],
+    ['table', ['table']],
+    ['insert', ['link', 'picture']]
+  ]
 }
 {% endhighlight %}
 
@@ -149,7 +149,7 @@ Each configurable breaking level means:
 
 {% highlight javascript %}
 $('#summernote').summernote({
-blockquoteBreakingLevel: 2
+  blockquoteBreakingLevel: 2
 });
 {% endhighlight %}
 
@@ -159,11 +159,11 @@ You can set your own selection of styles with the `styleTags` option.
 
 {% highlight javascript %}
 $('#summernote').summernote({
-styleTags: [
-'p',
-{ title: 'Blockquote', tag: 'blockquote', className: 'blockquote', value: 'blockquote' },
-'pre', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'
-],
+  styleTags: [
+    'p',
+    { title: 'Blockquote', tag: 'blockquote', className: 'blockquote', value: 'blockquote' },
+    'pre', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'
+  ],
 });
 {% endhighlight %}
 
@@ -172,11 +172,11 @@ possible to customize the style in more detail by providing an object looking li
 
 {% highlight javascript %}
 {
-tag : 'tag name ',
-title : 'dropdown item title',
-style : 'dropdown item style',
-className : 'applyed element class name and dropdown item className',
-value : 'Value to apply when clicked'
+  tag : 'tag name ',
+  title : 'dropdown item title',
+  style : 'dropdown item style',
+  className : 'applyed element class name and dropdown item className',
+  value : 'Value to apply when clicked'
 }
 {% endhighlight %}
 
@@ -186,7 +186,7 @@ You can define fontNames items with the `fontNames` option.
 
 {% highlight javascript %}
 $('#summernote').summernote({
-fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New']
+  fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New']
 });
 {% endhighlight %}
 
@@ -194,8 +194,8 @@ Summernote tests for fonts in fontNames before adding them to dropdown. This is 
 
 {% highlight javascript %}
 $('#summernote').summernote({
-fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Merriweather'],
-fontNamesIgnoreCheck: ['Merriweather']
+  fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Merriweather'],
+  fontNamesIgnoreCheck: ['Merriweather']
 });
 {% endhighlight %}
 
@@ -203,8 +203,8 @@ Summernote automatically populates the font dropdown with the available fonts th
 
 {% highlight javascript %}
 $('#summernote').summernote({
-fontNames: ['Arial', 'Arial Black'],
-addDefaultFonts: false
+  fontNames: ['Arial', 'Arial Black'],
+  addDefaultFonts: false
 });
 {% endhighlight %}
 
@@ -214,7 +214,7 @@ You can set the available font size units with the `fontSizeUnits` option.
 
 {% highlight javascript %}
 $('#summernote').summernote({
-fontSizeUnits: ['px', 'pt']
+  fontSizeUnits: ['px', 'pt']
 });
 {% endhighlight %}
 
@@ -224,7 +224,7 @@ You can override the default list and specify a custom one.
 
 {% highlight javascript %}
 $('#summernote').summernote({
-lineHeights: ['0.2', '0.3', '0.4', '0.5', '0.6', '0.8', '1.0', '1.2', '1.4', '1.5', '2.0', '3.0']
+  lineHeights: ['0.2', '0.3', '0.4', '0.5', '0.6', '0.8', '1.0', '1.2', '1.4', '1.5', '2.0', '3.0']
 });
 {% endhighlight %}
 
@@ -234,7 +234,7 @@ You can define a placeholder with the `placeholder` option.
 
 {% highlight javascript %}
 $('#summernote').summernote({
-placeholder: 'write here...'
+  placeholder: 'write here...'
 });
 {% endhighlight %}
 
@@ -250,7 +250,7 @@ And then set the `inheritPlaceholder` option as `true` during initialization.
 
 {% highlight javascript %}
 $('.summernote').summernote({
-inheritPlaceholder: true
+  inheritPlaceholder: true
 });
 {% endhighlight %}
 
@@ -259,7 +259,7 @@ inheritPlaceholder: true
 Dialogs can be placed in `body`, not within Summernote. If you're using Summernote within a modal dialog, please set this option as `true`.
 {% highlight javascript %}
 $('#summernote').summernote({
-dialogsInBody: true
+  dialogsInBody: true
 });
 {% endhighlight %}
 
@@ -267,7 +267,7 @@ By default, dialogs are shown and hidden without a fading effect. But you can tu
 
 {% highlight javascript %}
 $('#summernote').summernote({
-dialogsFade: true // Add fade effect on dialogs
+  dialogsFade: true // Add fade effect on dialogs
 });
 {% endhighlight %}
 
@@ -276,7 +276,7 @@ dialogsFade: true // Add fade effect on dialogs
 You can disable drag and drop with the `disableDragAndDrop` option.
 {% highlight javascript %}
 $('#summernote').summernote({
-disableDragAndDrop: true
+  disableDragAndDrop: true
 });
 {% endhighlight %}
 
@@ -285,7 +285,7 @@ disableDragAndDrop: true
 You can disable custom shortcuts with the `shortcuts` option.
 {% highlight javascript %}
 $('#summernote').summernote({
-shortcuts: false
+  shortcuts: false
 });
 {% endhighlight %}
 
@@ -295,7 +295,7 @@ You can disable TAB/Shift+Tab intereaction with the `tabDisable` option.
 This will allow tabbing through fields in Forms.
 {% highlight javascript %}
 $('#summernote').summernote({
-tabDisable: false
+  tabDisable: false
 });
 {% endhighlight %}
 
@@ -306,16 +306,16 @@ Summernote provides a XSS protection for CodeView. It consists of filtering tags
 Whitelist filter is turned on by default, but filtering tags is not. You can turn them on and off by options like below.
 {% highlight javascript %}
 $('#summernote').summernote({
-codeviewFilter: false,
-codeviewIframeFilter: true
+  codeviewFilter: false,
+  codeviewIframeFilter: true
 });
 {% endhighlight %}
 
 And, you can also add your own whitelist domains and use custom tag filters. Please check the [default filter](https://github.com/summernote/summernote/blob/a9512de7f2e20db866ba02708fb7209147f5dedf/src/js/base/settings.js#L209) before customizing.
 {% highlight javascript %}
 $('#summernote').summernote({
-codeviewFilterRegex: 'custom-regex',
-codeviewIframeWhitelistSrc: ['my-own-domainname']
+  codeviewFilterRegex: 'custom-regex',
+  codeviewIframeWhitelistSrc: ['my-own-domainname']
 });
 {% endhighlight %}
 
@@ -380,7 +380,7 @@ $('#summernote').summernote('enable');
 You can disable Spellchecking in the Editing area with the `spellCheck` option.
 {% highlight javascript %}
 $('#summernote').summernote({
-spellCheck: true
+  spellCheck: true
 });
 {% endhighlight %}
 
@@ -389,7 +389,7 @@ spellCheck: true
 You can disable the Grammarly Browser Addon (currently researching other Grammar Addons for their disabling options) by using the `disableGrammar` option.
 {% highlight javascript %}
 $('#summernote').summernote({
-disableGrammar: false
+  disableGrammar: false
 });
 {% endhighlight %}
 
@@ -433,7 +433,7 @@ The editing area needs `<p><br></p>` for focus, even if the editor content is em
 
 {% highlight javascript %}
 if ($('#summernote').summernote('isEmpty')) {
-alert('editor content is empty');
+  alert('editor content is empty');
 }
 {% endhighlight %}
 
@@ -618,9 +618,9 @@ Create link and unlink.
 // @param {String} url - link url
 // @param {Boolean} isNewWindow - whether link's target is new window or not
 $('#summernote').summernote('createLink', {
-text: "This is the Summernote's Official Site",
-url: 'http://summernote.org',
-isNewWindow: true
+  text: "This is the Summernote's Official Site",
+  url: 'http://summernote.org',
+  isNewWindow: true
 });
 
 $('#summernote').summernote('unlink');
@@ -639,8 +639,8 @@ $('#summernote').summernote('insertImage', url, filename);
 You can modify image with passing callback as second argument.
 {% highlight javascript %}
 $('#summernote').summernote('insertImage', url, function ($image) {
-$image.css('width', $image.width() / 3);
-$image.attr('data-filename', 'retriever');
+  $image.css('width', $image.width() / 3);
+  $image.attr('data-filename', 'retriever');
 });
 {% endhighlight %}
 
@@ -892,7 +892,7 @@ Summernote support initialize callbacks and jquery's custom event style callback
 
 #### onBeforeCommand
 
-WIP: Need to work on an explanation
+`onBeforeCommand` callback is called before command is executed. 
 
 ### onChange
 
@@ -902,16 +902,16 @@ WIP: Need to work on an explanation
 {% highlight javascript %}
 // onChange callback
 $('#summernote').summernote({
-callbacks: {
-onChange: function(contents, $editable) {
-console.log('onChange:', contents, $editable);
-}
-}
+  callbacks: {
+    onChange: function(contents, $editable) {
+      console.log('onChange:', contents, $editable);
+    }
+  }
 });
 
 // summernote.change
 $('#summernote').on('summernote.change', function(we, contents, $editable) {
-console.log('summernote\'s content is changed.');
+  console.log('summernote\'s content is changed.');
 });
 {% endhighlight %}
 
@@ -928,16 +928,16 @@ WIP: Need to work on an explanation
 {% highlight javascript %}
 // onEnter callback
 $('#summernote').summernote({
-callbacks: {
-onEnter: function() {
-console.log('Enter/Return key pressed');
-}
-}
+  callbacks: {
+    onEnter: function() {
+      console.log('Enter/Return key pressed');
+    }
+  }
 });
 
 // summernote.enter
 $('#summernote').on('summernote.enter', function() {
-console.log('Enter/Return key pressed');
+  console.log('Enter/Return key pressed');
 });
 {% endhighlight %}
 
@@ -946,48 +946,48 @@ console.log('Enter/Return key pressed');
 {% highlight javascript %}
 // onFocus callback
 $('#summernote').summernote({
-callbacks: {
-onFocus: function() {
-console.log('Editable area is focused');
-}
-}
+  callbacks: {
+    onFocus: function() {
+      console.log('Editable area is focused');
+    }
+  }
 });
 
 // summernote.focus
 $('#summernote').on('summernote.focus', function() {
-console.log('Editable area is focused');
+  console.log('Editable area is focused');
 });
 {% endhighlight %}
 
 {% highlight javascript %}
 // onBlur callback
 $('#summernote').summernote({
-callbacks: {
-onBlur: function() {
-console.log('Editable area loses focus');
-}
-}
+  callbacks: {
+    onBlur: function() {
+      console.log('Editable area loses focus');
+    }
+  }
 });
 
 // summernote.blur
 $('#summernote').on('summernote.blur', function() {
-console.log('Editable area loses focus');
+  console.log('Editable area loses focus');
 });
 {% endhighlight %}
 
 {% highlight javascript %}
 // onBlurCodeview callback
 $('#summernote').summernote({
-callbacks: {
-onBlurCodeview: function() {
-console.log('Codeview area loses focus');
-}
-}
+  callbacks: {
+    onBlurCodeview: function() {
+      console.log('Codeview area loses focus');
+    }
+  }
 });
 
 // summernote.blur.codeview
 $('#summernote').on('summernote.blur.codeview', function() {
-console.log('Codeview area loses focus');
+  console.log('Codeview area loses focus');
 });
 {% endhighlight %}
 
@@ -998,20 +998,20 @@ Override insertion of image by url
 {% highlight javascript %}
 // onImageLinkInsert callback
 $('#summernote').summernote({
-callbacks: {
-onImageLinkInsert: function(url) {
-// url is the image url from the dialog
-$img = $('<img>').attr({ src: url })
-$summernote.summernote('insertNode', $img[0]);
-}
-}
+  callbacks: {
+    onImageLinkInsert: function(url) {
+      // url is the image url from the dialog
+      $img = $('<img>').attr({ src: url })
+      $summernote.summernote('insertNode', $img[0]);
+    }
+  }
 });
 
 // summernote.image.link.insert
 $('#summernote').on('summernote.image.link.insert', function(we, url) {
-// url is the image url from the dialog
-$img = $('<img>').attr({ src: url })
-$summernote.summernote('insertNode', $img[0]);
+  // url is the image url from the dialog
+  $img = $('<img>').attr({ src: url })
+  $summernote.summernote('insertNode', $img[0]);
 });
 {% endhighlight %}
 
@@ -1023,12 +1023,12 @@ You can upload image to server or AWS S3: [more...]({{ site.repository }}/issues
 {% highlight javascript %}
 // onImageUpload callback
 $('#summernote').summernote({
-callbacks: {
-onImageUpload: function(files) {
-// upload image to server and create imgNode...
-$summernote.summernote('insertNode', imgNode);
-}
-}
+  callbacks: {
+    onImageUpload: function(files) {
+      // upload image to server and create imgNode...
+      $summernote.summernote('insertNode', imgNode);
+    }
+  }
 });
 
 // summernote.image.upload
@@ -1047,16 +1047,16 @@ WIP: Need to work on an explanation
 {% highlight javascript %}
 // onInit callback
 $('#summernote').summernote({
-callbacks: {
-onInit: function() {
-console.log('Summernote is launched');
-}
-}
+  callbacks: {
+    onInit: function() {
+      console.log('Summernote is launched');
+    }
+  }
 });
 
 // summernote.init
 $('#summernote').on('summernote.init', function() {
-console.log('Summernote is launched');
+  console.log('Summernote is launched');
 });
 {% endhighlight %}
 
@@ -1065,32 +1065,32 @@ console.log('Summernote is launched');
 {% highlight javascript %}
 // onKeyup callback
 $('#summernote').summernote({
-callbacks: {
-onKeyup: function(e) {
-console.log('Key is released:', e.keyCode);
-}
-}
+  callbacks: {
+    onKeyup: function(e) {
+      console.log('Key is released:', e.keyCode);
+    }
+  }
 });
 
 // summernote.keyup
 $('#summernote').on('summernote.keyup', function(we, e) {
-console.log('Key is released:', e.keyCode);
+  console.log('Key is released:', e.keyCode);
 });
 {% endhighlight %}
 
 {% highlight javascript %}
 // onKeydown callback
 $('#summernote').summernote({
-callbacks: {
-onKeydown: function(e) {
-console.log('Key is downed:', e.keyCode);
-}
-}
+  callbacks: {
+    onKeydown: function(e) {
+      console.log('Key is downed:', e.keyCode);
+    }
+  }
 });
 
 // summernote.keydown
 $('#summernote').on('summernote.keydown', function(we, e) {
-console.log('Key is downed:', e.keyCode);
+  console.log('Key is downed:', e.keyCode);
 });
 {% endhighlight %}
 
@@ -1101,16 +1101,16 @@ console.log('Key is downed:', e.keyCode);
 {% highlight javascript %}
 // onPaste callback
 $('#summernote').summernote({
-callbacks: {
-onPaste: function(e) {
-console.log('Called event paste');
-}
-}
+  callbacks: {
+    onPaste: function(e) {
+      console.log('Called event paste');
+    }
+  }
 });
 
 // summernote.paste
 $('#summernote').on('summernote.paste', function(e) {
-console.log('Called event paste');
+  console.log('Called event paste');
 });
 {% endhighlight %}
 
@@ -1134,19 +1134,19 @@ Below codes is about simple button for inserting text 'hello'.
 
 {% highlight javascript %}
 var HelloButton = function (context) {
-var ui = $.summernote.ui;
+  var ui = $.summernote.ui;
 
-// create button
-var button = ui.button({
-contents: '<i class="fa fa-child"/> Hello',
-tooltip: 'hello',
-click: function () {
-// invoke insertText method with 'hello' on editor module.
-context.invoke('editor.insertText', 'hello');
-}
-});
+  // create button
+  var button = ui.button({
+    contents: '<i class="fa fa-child"/> Hello',
+    tooltip: 'hello',
+    click: function () {
+      // invoke insertText method with 'hello' on editor module.
+      context.invoke('editor.insertText', 'hello');
+    }
+  });
 
-return button.render(); // return button as jquery object
+  return button.render(); // return button as jquery object
 }
 {% endhighlight %}
 
@@ -1182,10 +1182,10 @@ If you want to override the default icons, configure summernote like this:
 
 {% highlight javascript %}
 $('.summernote').summernote({
-icons: {
-align: '<svg [...]>[...]</svg>',
-// [...]
-}
+  icons: {
+  align: '<svg [...]>[...]</svg>',
+  // [...]
+  }
 });
 {% endhighlight %}
 
@@ -1210,17 +1210,17 @@ This method will be called when editor is initialized by $('..').summernote();. 
 
 {% highlight javascript %}
 this.initialize = function () {
-// create button
-var button = ui.button({
-className: 'note-btn-bold',
-contents: '<i class="fa fa-bold">',
-click: function (e) {
-context.invoke('editor.bold'); // invoke bold method of a module named editor
-}
-});
+  // create button
+  var button = ui.button({
+    className: 'note-btn-bold',
+    contents: '<i class="fa fa-bold">',
+    click: function (e) {
+      context.invoke('editor.bold'); // invoke bold method of a module named editor
+    }
+  });
 
-// generate jQuery element from button instance.
-this.$button = button.render();
+  // generate jQuery element from button instance.
+  this.$button = button.render();
   $toolbar.append(this.$button);
 }
 {% endhighlight %}
@@ -1231,7 +1231,7 @@ This method will be called when editor is destroyed by $('..').summernote('destr
 
 {% highlight javascript %}
 this.destroy = function () {
-this.$button.remove();
+  this.$button.remove();
   this.$button = null;
 }
 {% endhighlight %}
@@ -1243,7 +1243,7 @@ This method is used for deciding whether module will be initialized or not.
 {% highlight javascript %}
 // AirPopover's shouldInitialize
 this.shouldInitialize = function () {
-return options.airMode && !list.isEmpty(options.popover.air);
+  return options.airMode && !list.isEmpty(options.popover.air);
 };
 {% endhighlight %}
 
@@ -1266,28 +1266,27 @@ var ui = $.summernote.ui;
 // this method will be called when editor is initialized by $('..').summernote();
 // You can attach events and created elements on editor elements(eg, editable, ...).
 this.initialize = function () {
-// create button
-var button = ui.button({
-className: 'note-btn-bold',
-contents: '<i class="fa fa-bold">',
-click: function (e) {
-// invoke bold method of a module named editor
-context.invoke('editor.bold');
+  // create button
+  var button = ui.button({
+    className: 'note-btn-bold',
+    contents: '<i class="fa fa-bold">',
+    click: function (e) {
+      // invoke bold method of a module named editor
+      context.invoke('editor.bold');
+    }
+  });
+
+  // generate jQuery element from button instance.
+  this.$button = button.render();
+  $toolbar.append(this.$button);
 }
-});
 
-    // generate jQuery element from button instance.
-    this.$button = button.render();
-    $toolbar.append(this.$button);
-
-}
-
-// this method will be called when editor is destroyed by $('..').summernote('destroy');
+  // this method will be called when editor is destroyed by $('..').summernote('destroy');
   // You should detach events and remove elements on `initialize`.
   this.destroy = function () {
     this.$button.remove();
-this.$button = null;
-}
+    this.$button = null;
+  }
 };
 {% endhighlight %}
 
@@ -1299,9 +1298,9 @@ You can define custom module with options.
 
 {% highlight javascript %}
 $(".summernote").summernote({
-modules: {
-myModule: MyModule
-}
+  modules: {
+    myModule: MyModule
+  }
 });
 {% endhighlight %}
 
@@ -1318,10 +1317,10 @@ Plugin is a kind of external module. You can also define your own module with pl
 {% highlight javascript %}
 // src/mymodule.js
 $.extend($.summernote.plugins, {
-myModule: function (context) {
-// define module
-...
-}
+  myModule: function (context) {
+    // define module
+    // ...
+  }
 });
 {% endhighlight %}
 
@@ -1349,9 +1348,9 @@ You can add the above message using jQuery or other Javascript method by targett
 
 {% highlight javascript %}
 $('.note-status-output').html(
-'<div class="alert alert-danger">' +
-'This is an error using a Bootstrap alert that has been restyled to fit here.' +
-'</div>'
+  '<div class="alert alert-danger">' +
+  'This is an error using a Bootstrap alert that has been restyled to fit here.' +
+  '</div>'
 );
 {% endhighlight %}
 
@@ -1359,7 +1358,7 @@ If you want to display just Informational Text, you can also add Text without th
 
 {% highlight javascript %}
 $('.note-status-output').html(
-'Text Information'
+  'Text Information'
 );
 {% endhighlight %}
 
