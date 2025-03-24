@@ -292,7 +292,7 @@ lang: 'ko-KR' // default: 'en-US'
   });
 </script>
 
-More Summernote languages: [languages]({{ site.repository }}/tree/main/src/lang)
+More Summernote languages: [languages]({{ site.repository }}/tree/main/public/lang)
 
 ## Integration
 
