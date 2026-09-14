@@ -163,6 +163,10 @@ bs4_frame.innerHTML = '';
 
 You can use Summernote without Bootstrap using `summernote-lite.js` and `summernote-lite.css`.
 
+When hosting these files locally, also copy the `font` directory and its contents from the compiled distribution. Keep `font` next to `summernote-lite.css`: the stylesheet loads the toolbar's icon fonts using relative URLs such as `font/summernote.woff2`. Copying only the JavaScript and CSS files will leave the icons missing.
+
+For example, if the stylesheet is at `/assets/summernote/summernote-lite.css`, the fonts should be at `/assets/summernote/font/`. Use the JavaScript, CSS, and fonts from the same Summernote version. Lite still requires jQuery.
+
 <iframe id="lite-frame" width="100%" height="200" frameborder="0">
 {% include lite.html %}
 </iframe>
