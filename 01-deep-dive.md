@@ -208,6 +208,21 @@ $('#summernote').summernote({
 });
 {% endhighlight %}
 
+### Custom font sizes
+
+You can set the values in the font size dropdown with the `fontSizes` option. Include the `fontsize` button in your toolbar to display the dropdown.
+
+{% highlight javascript %}
+$('#summernote').summernote({
+  toolbar: [
+    ['fontsize', ['fontsize']]
+  ],
+  fontSizes: ['8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '20', '24', '36', '48']
+});
+{% endhighlight %}
+
+This example shows only the font size control. Add `fontsize` to your existing toolbar configuration to keep your other controls.
+
 ### Custom font size units
 
 You can set the available font size units with the `fontSizeUnits` option.
